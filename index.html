@@ -1219,7 +1219,10 @@
         <p>عناصر خطية غير مكانية زي خيط الفايبر نفسه، جوه كابل.</p>
       </div>
     </div>
-
+        <div class="example-box" style="margin-top:16px; border-right-color:var(--accent);">
+      <span class="label en" style="color:var(--accent);">توضيح: ليه Splitter تحت Assembly مش Device؟</span>
+      <p>حدسيًا الـ <span class="en">Splitter</span> غريب إنه <span class="en">Assembly</span> مش <span class="en">Device</span>، لأنه بيوجّه الإشارة زي أي <span class="en">Device</span>. لكن الفارق عند <span class="en">Esri</span> مش "بيوجّه ولا لأ" — الفارق إن الـ <span class="en">Assembly</span> بيحتوي أجهزة تانية جواه (زي كارت الـ <span class="en">Splitter</span> اللي فيه أكتر من بورت خروج بيتمثلوا كـ <span class="en">JunctionObjects</span> جواه)، بينما الـ <span class="en">Device</span> عنصر واحد مدمج من غير محتوى داخلي منمذج بشكل منفصل. ونفس المنطق بيفرّق <span class="en">Switch</span> أو <span class="en">ONT</span> (المثالين الرسميين لـ Device) عن الـ <span class="en">OLT</span>: الـ <span class="en">ONT</span> عنصر مدمج بيحوّل الإشارة عند نقطة واحدة، أما الـ <span class="en">OLT</span> فبيشتغل كـ <span class="en">Subnetwork Controller</span> ومصدر للشبكة الفرعية — أعمق من مجرد Device بسيط، ولذلك مش من أمثلة Esri الرسمية للفئة دي.</p>
+    </div>
     <div class="card" style="margin-top:18px;">
       <h3><span class="en">Circuit / CircuitSection / Subcircuit</span></h3>
       <p>بدل ما تدير الدائرة بالـ <span class="en">Subnetwork</span> التقليدية، شبكة الاتصالات بتدير مسار الإشارة كـ <span class="en">Circuit</span> كامل، ممكن ينقسم لـ <span class="en">Sections</span> (أجزاء بينها نقطة بداية ونهاية)، وممكن يتقسم لـ <span class="en">Subcircuits</span> لو محتاج تشارك سعة أو <span class="en">Bandwidth</span> الدائرة مع دوائر تانية.</p>
