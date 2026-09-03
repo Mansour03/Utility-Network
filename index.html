@@ -1298,36 +1298,70 @@
     </div>
   </section>
 
-  <section id="sec17">
+<section id="sec17">
     <span class="num">17</span>
     <h2>تحليل الشبكات الفرعية <span class="en">(Subnetwork Analysis)</span></h2>
+    
     <p>
-      كل مرفق بيعمل نفس الحاجة في جوهرها: بيجمع أو يولّد مورد، ينقله عبر شبكة وسيطة، ويوصله لنقطة الاستهلاك. الفكرة دي هي أساس كل الـ <span class="en">Subnetworks</span> في الشبكة.
+      جوهر أي شبكة مرافق هو إدارة تدفق المورد من نقطة البداية لنقطة الاستهلاك؛ وبناءً على اتجاه التدفق بيتم تعريف نقطة التحكم الأساسية (<span class="en">Subnetwork Controller</span>):
     </p>
+
     <div class="grid2" style="margin-top:24px;">
       <div class="card">
         <h3><span class="en">Source</span> — نقطة المصدر</h3>
-        <p>الجهاز اللي المورد بيبدأ يتدفق منه، ومحدد كـ <span class="en">Subnetwork Controller</span>.</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>الـ <span class="en">OLT Port</span> هو الـ <span class="en">Subnetwork Controller</span> اللي منه بتبدأ كل الإشارة لعملاء <span class="en">Splitter</span> معين.</p></div>
+        <p>النقطة التي يتدفق منها المورد للشبكة (زي الكهرباء والماء والاتصالات).</p>
+        <div class="example-box">
+          <span class="label en">FTTH</span>
+          <p>بورت الـ <span class="en">OLT</span> بالسنترال هو الـ <span class="en">Controller</span> اللي بيبدأ منه تدفق الضوء للشبكة.</p>
+        </div>
       </div>
+
       <div class="card">
         <h3><span class="en">Sink</span> — نقطة الاستقبال</h3>
-        <p>بالنسبة لأنظمة تجميع (زي الصرف بالجاذبية)، الجهاز اللي المورد بيتجمع عنده بيكون هو الـ <span class="en">Controller</span> بدل المصدر.</p>
+        <p>النقطة التي يتجمع عنده المورد في الأنظمة التجميعية (زي شبكات الصرف بالجاذبية).</p>
+        <div class="example-box">
+          <span class="label en">Gravity Network</span>
+          <p>محطة المعالجة أو الخزان هو الـ <span class="en">Controller</span> اللي بتصب فيه كل الشبكة.</p>
+        </div>
       </div>
     </div>
-    <p style="margin-top:22px;">
-      مساحة تدفق المورد مش ثابتة — بتتغير ديناميكيًا مع فتح أو قفل أي جهاز تحكم (صمام أو مفتاح). الشبكة بتتقسم لـ <span class="en">Subnetworks</span> (دوائر أو مناطق ضغط)، وكل واحدة منهم بتتحدد بمصدر أو أكتر.
-    </p>
-    <div class="card" style="margin-top:16px;">
-      <h3><span class="en">IsConnected Attribute</span></h3>
-      <p>خاصية على فئات الخط والجهاز والوصلة بتقولك هل العنصر دا "قابل للوصول" من أي <span class="en">Subnetwork Controller</span> ولا لأ — بتساعدك تكتشف معدات معزولة قصدًا، أو أخطاء تعديل غير مقصودة.</p>
-      <div class="example-box"><span class="label en">FTTH</span><p><span class="en">ONT</span> جديد اتحط في الخريطة بس اتنسي يتوصل صح بالـ <span class="en">Splitter</span> — الخاصية دي هتظهره كـ <span class="en">Not Connected</span> فورًا قبل ما العميل يبلّغ إنه مالوش خدمة.</p></div>
+
+    <!-- كارت التغير الديناميكي مع الصورة المباشرة -->
+    <div class="card" style="margin-top:20px;">
+      <h3>الديناميكية وتغير حدود الشبكة الفرعية</h3>
+      <p>
+        حدود الـ <span class="en">Subnetwork</span> مش خطوط ثابته على الخريطة؛ هي مساحة حية بتتمدد وتنكمش مع فتح وقفل أجهزة التحكم ميدانياً (زي المفاتيح والصمامات).
+      </p>
+      
+      <!-- بداية كود إدراج الصورة المباشر -->
+      <div style="text-align: center; margin: 20px 0; background: #111; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+        <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Subnetwork-changing-7DD27.png" alt="Dynamic Subnetwork Boundary Changes" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 0 auto;">
+      </div>
+      <!-- نهاية كود إدراج الصورة -->
+
+      <p style="font-size: 0.9em; color: #aaa; line-height: 1.6;">
+        <strong style="color: #fff;">شرح الشكل:</strong> في الجزء العلوي، المفتاح المغلق (<span class="en">Normal open tie-switch</span>) يفصل بين منطقتي تغذية (<span class="en">Subnetwork A & B</span>). عند فتح المفتاح واختيار مسار بديلاً (الجزء السفلي)، تتمدد مساحة التغذية للمصدر <span class="en">A</span> لتغطي القطاع الجديد ديناميكياً وتتغير ألوان الخريطة تلقائياً.
+      </p>
     </div>
+
     <div class="card" style="margin-top:16px;">
-      <h3>إزاي الشبكات الفرعية بتتحدّث؟</h3>
-      <p>مش بتتعدل يدويًا زي باقي العناصر — بتتولد بأمر <span class="en">Update Subnetwork</span> اللي بيشغّل تتبع فعلي من كل <span class="en">Subnetwork Controllers</span>، وبيحدّث جدول الشبكات الفرعية وفئة <span class="en">SubnetLine</span> اللي بترسم بألوان مميزة تحدد بصريًا مدى كل دائرة أو منطقة.</p>
+      <h3><span class="en">IsConnected Attribute</span> — مؤشر الاتصالية الحية</h3>
+      <p>
+        خاصية ذكية بتعمل تقييم لحظي لكل عنصر على الخريطة (كابل، جهاز، وصلة): هل يوجد مسار توصيل حي بينه وبين الـ <span class="en">Subnetwork Controller</span>؟ لو المسار مقطوع بتتحول قيمتها فوراً لـ <span class="en">False</span>.
+      </p>
+      <div class="example-box">
+        <span class="label en">FTTH</span>
+        <p>لو أضفت <span class="en">ONT</span> جديد ورسمت كابل الـ <span class="en">Drop</span> بس نسيت تربطه بـ <span class="en">Port</span> الـ <span class="en">Splitter</span> في الموديل، خاصية <span class="en">IsConnected</span> هتديلك <span class="en">False (Not Connected)</span> فوراً — فتعرف إن فيه كسر في الاتصالية قبل ما العميل يشتكي من انقطاع الخدمة.</p>
+      </div>
     </div>
-  </section>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>إزاي الشبكات الفرعية بتتحدّث؟ <span class="en">(Update Subnetwork)</span></h3>
+      <p>
+        الشبكات الفرعية مش أشكال بترسمها يدويًا — هي نتائج تتبع هندسي (<span class="en">Trace</span>). عند تشغيل أمر <span class="en">Update Subnetwork</span>، السيستم بيعمل تتبع حي بداية من الـ <span class="en">Subnetwork Controllers</span>، وبيحدث جدول الدوائر ويُعيد رسم خطوط فئة <span class="en">SubnetLine</span> بألوان مختلفة لتكشف نطاق كل دائرة بصرياً على الخريطة.
+      </p>
+    </div>
+</section>
 
   <section id="sec18">
     <span class="num">18</span>
