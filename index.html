@@ -1455,11 +1455,11 @@
 
       <ul style="font-size: 0.9em; line-height: 1.7; color: var(--text-dim);">
         <li>
-          <strong>Radial Topology (الطبقات A و B):</strong> تعتمد على مصدر تغذية واحد (مثل <span class="en">A1 & B1</span>) أو مصدرين منفصلين بدون وجود حلقات مغلقة (<span class="en">No loops</span> مثل <span class="en">B2</span>). وهى النمط الأساسي المعتمد في شبكات التوزيع والوصول لخدمات الـ <span class="en">FTTH</span>.
+          <strong>Radial Topology (الطبقات A و B):</strong> تعتمد على مصدر تغذية واحد (مثل <span class="en">A1 & B1</span>) أو مصدرين منفصلين بدون وجود حلقات مغلقة (<span class="en">No loops</span> مثل <span class="en">B2</span>). وهى النمط الأساسي المعتمد في شبكات التوزيع والوصول لخدمات الـ <span class="en">FTTH</span> (من بورتات الـ <span class="en">PON</span> بالـ <span class="en">OLT</span> وحتى منازل المشتركين).
         </li>
         <li>
           <strong>Mesh Topology (الطبقة C):</strong> تحتوي على عدة مصادر وحلقات مغلقة متداخلة (<span class="en">Multiple sources & loops</span> مثل <span class="en">C1</span>) لتوفير مسارات بديلة لضمان استمرارية الخدمة (<span class="en">Redundancy</span>)؛ 
-          <strong>مثل:</strong> شبكات الربط الرئيسية بين السنترالات ومراكز البيانات (<span class="en">Core & Backbone Networks</span>)، وحلقات الربط لأبراج الجوال (<span class="en">5G Mobile Backhaul</span>)، وحلقات الحماية المزدوجة لكبائن الـ <span class="en">OLT</span>.
+          <strong>مثل:</strong> شبكات الربط الرئيسية بين السنترالات ومراكز البيانات (<span class="en">Core & Backbone Networks</span>)، وحلقات تغذية الـ <span class="en">Uplink</span> للـ <span class="en">OLT</span> لضمان عدم خروج السنترال من الخدمة، وحلقات أبراج الجوال (<span class="en">5G Mobile Backhaul</span>).
         </li>
       </ul>
 
