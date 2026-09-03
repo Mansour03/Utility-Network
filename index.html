@@ -1391,30 +1391,58 @@
 
   <section id="sec18">
     <span class="num">18</span>
-    <h2>التسلسل الهرمي عبر <span class="en">Tiers</span></h2>
+    <h2>التسلسل الهرمي عبر المستويات <span class="en">(Tiers)</span></h2>
+    
     <p>
-      الـ <span class="en">Tiers</span> هي الطبقة الهرمية اللي بتنظم الشبكات الفرعية جوه كل شبكة نطاقية — وغالبًا بتمثل مستوى جهد أو ضغط أو أي خاصية تدرجية تانية.
+      الـ <span class="en">Tiers</span> هي النواة الهيكلية التي تُنظم الشبكات الفرعية (<span class="en">Subnetworks</span>) داخل شبكة النطاق (<span class="en">Domain Network</span>). بتمثل مستويات التدرج الهندسي في الشبكة (زي درجات الفولتية في الكهرباء، أو مستويات التوزيع <span class="en">Feeder / Distribution</span> في الفايبر).
     </p>
-    <div class="compare" style="margin-top:24px;">
+
+    <!-- تنبيه خاص بالـ Telecom -->
+    <div style="background: rgba(0, 229, 255, 0.05); border-right: 4px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.9em;">
+      <strong style="color: var(--accent);">ملاحظة معمارية للاتصالات (Telecom):</strong> تعتمد شبكات الاتصالات والـ <span class="en">FTTH</span> بشكل حصرى على نظام الـ <span class="en">Partitioned Tier Definition</span>؛ حيث ينتمي كل كابل أو عنصر لطبقة واحدة محددة حصرياً (مثل كابلات التغذية أو كابلات التوزيع).
+    </div>
+
+    <div class="compare" style="margin-top:20px;">
       <div>
         <h3><span class="en">Partitioned Tier Definition</span></h3>
-        <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">شائعة في أنظمة الكهرباء والاتصالات</p>
+        <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">شائعة ومُعتمدة في الاتصالات والكهرباء</p>
         <ul>
-          <li>كل عنصر ينتمي لـ <span class="en">Tier</span> واحدة بس، مفيش تداخل</li>
-          <li>ترتيب خطي متتابع (نقل → توزيع → مستوى منخفض)</li>
-          <li>مثال من الدوك: <span class="en">Transmission (Rank 1) → Medium Voltage (Rank 2) → Low Voltage (Rank 3)</span></li>
+          <li>كل عنصر ينتمي لـ <span class="en">Tier</span> واحدة فقط، وممنوع التداخل الحصري.</li>
+          <li>ترتيب خطي متتابع تسلسلي (نقل ← توزيع ← خدمات منزلية).</li>
+          <li>تسمح بطوبولوجيا شعاعية (<span class="en">Radial</span>) أو شبكية (<span class="en">Mesh</span>).</li>
         </ul>
       </div>
       <div>
         <h3><span class="en">Hierarchical Tier Definition</span></h3>
         <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">شائعة في أنظمة الغاز والمياه</p>
         <ul>
-          <li>نفس العنصر ممكن ينتمي لأكتر من <span class="en">Tier</span> في نفس <span class="en">Tier Group</span></li>
-          <li>مثال: منطقة ضغط <span class="en">(Pressure Tier)</span> فيها كذا منطقة عزل <span class="en">(Isolation Tier)</span> متداخلة جواها</li>
+          <li>نفس العنصر ممكن ينتمي لأكثر من <span class="en">Tier</span> داخل نفس المجموعة.</li>
+          <li>تستخدم للمناطق المتداخلة (مثل منطقة ضغط هيدروليكي تحتوي منطقتي عزل صمامات).</li>
+          <li>تدعم الطوبولوجيا الشبكية (<span class="en">Mesh</span>) فقط.</li>
         </ul>
       </div>
     </div>
 
+    <!-- كارت الصور الرسمية للتدرج والـ Tiers -->
+    <div class="card" style="margin-top:24px;">
+      <h3>التدرج الهرمي ونقل التغذية بين الـ <span class="en">Tiers</span></h3>
+      <p>
+        تُصنف الـ <span class="en">Tiers</span> برتب متدرجة (<span class="en">Tier Rank</span>)، حيث تمثل الرتبة 1 المستوى الأعلى (المصدر الرئيسي). الصورة التالية توضح الفكرة العامة للتسلسل الهرمي وكيفية انتقال المورد من مستويات النقل للكبائن الفرعية:
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin: 20px 0;">
+        <div style="background: #111; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+          <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Network-hierarchies-with-tiers---overview-A5908.png" alt="Tiers Overview Hierarchy" style="max-width: 100%; height: auto; border-radius: 6px;">
+          <p style="font-size: 0.85em; color: #aaa; margin-top: 8px;">مفهوم الهيكلية العامة وانتقال التغذية بين مستويات الـ <span class="en">Tiers</span></p>
+        </div>
+        <div style="background: #111; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); text-align: center;">
+          <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Electric-tiers-15AE7.png" alt="Partitioned Tiers Example" style="max-width: 100%; height: auto; border-radius: 6px;">
+          <p style="font-size: 0.85em; color: #aaa; margin-top: 8px;">نموذج الـ <span class="en">Partitioned Tiers</span> (تدرج مستويات غير متداخلة حصرياً)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- مخطط الطوبولوجيا المرفق -->
     <div class="diagram-card" style="margin-top:26px;">
       <svg viewBox="0 0 820 230" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="مخطط يقارن بين طوبولوجيا شعاعية بمصدر واحد وطوبولوجيا شبكية بمصادر متعددة وحلقات">
         <text x="200" y="30" text-anchor="middle" class="pulse-label en">Radial Topology</text>
@@ -1427,7 +1455,7 @@
         <circle cx="130" cy="168" r="6" class="pulse-node"/>
         <circle cx="200" cy="168" r="6" class="pulse-node"/>
         <circle cx="270" cy="168" r="6" class="pulse-node"/>
-        <text x="200" y="200" text-anchor="middle" class="pulse-sub">مصدر واحد، من غير حلقات</text>
+        <text x="200" y="200" text-anchor="middle" class="pulse-sub">مصدر واحد، من غير حلقات (النمط السائد في الـ FTTH)</text>
 
         <text x="620" y="30" text-anchor="middle" class="pulse-label en">Mesh Topology</text>
         <circle cx="540" cy="60" r="10" class="pulse-node" stroke="var(--accent)"/>
@@ -1438,17 +1466,28 @@
         <line x1="540" y1="70" x2="700" y2="70" stroke="#3A4A6B" stroke-width="2"/>
         <circle cx="620" cy="190" r="6" class="pulse-node"/>
         <line x1="620" y1="150" x2="620" y2="184" stroke="#3A4A6B" stroke-width="2"/>
-        <text x="620" y="215" text-anchor="middle" class="pulse-sub">أكتر من مصدر، وحلقات اتصال</text>
+        <text x="620" y="215" text-anchor="middle" class="pulse-sub">أكثر من مصدر، وحلقات اتصال (شبكات الحماية Ring/Mesh)</text>
       </svg>
-      <div class="cap">نفس <span class="en">Tier</span> ممكن يتصنّف طوبولوجيًا كـ <span class="en">Radial</span> (شعاعي، غالبًا شبكات توزيع الفايبر والكهرباء) أو <span class="en">Mesh</span> (شبكي، بيتحمل تعدد المصادر والحلقات)</div>
+      <div class="cap">نفس الـ <span class="en">Tier</span> يمكن تصنيفه طوبولوجياً كـ <span class="en">Radial</span> (شجري شعاعي، وهو الأساس في توزيع الـ FTTH) أو <span class="en">Mesh</span> (شبكي حلقي للـ Core Networks للحماية من الانقطاع).</div>
     </div>
 
+    <!-- كارت الـ Tier Rank بتركيز اتصالات خالص -->
     <div class="card" style="margin-top:22px;">
-      <h3><span class="en">Tier Rank</span></h3>
-      <p>الرقم اللي بيحدد ترتيب التتبع بين المستويات المختلفة — الرتبة 1 هي الأعلى. في شبكة اتصالات بمستويين، ممكن يكون عندك <span class="en">Feeder Tier</span> برتبة 1، و<span class="en">Distribution Tier</span> برتبة 2.</p>
-      <div class="example-box"><span class="label en">FTTH EXAMPLE</span><p>الجزء من الـ <span class="en">OLT</span> للكابينة الرئيسية ممكن يتمثل كـ <span class="en">Feeder Tier</span> (رتبة أعلى)، والجزء من الكابينة للعميل يتمثل كـ <span class="en">Distribution Tier</span> (رتبة أقل) — كل مستوى له قواعد وقيود تتبع مختلفة.</p></div>
+      <h3>رتبة الطبقة <span class="en">(Tier Rank)</span> وترتيب التتبع</h3>
+      <p>
+        رقم يحدد أولوية وتسلسل التتبع الهندسي (<span class="en">Trace Direction</span>) عبر المستويات. الرتبة 1 هي الأعلى دائماً وتمثل بداية التغذية.
+      </p>
+      <div class="example-box">
+        <span class="label en">FTTH TELECOM EXAMPLE</span>
+        <p>
+          تُصمم شبكة الاتصالات عادة بـ 3 رتب متدرجة:
+          <br>• <strong>Feeder Tier (Rank 1):</strong> المسار الرئيسي من الـ <span class="en">OLT Port</span> حتى كابينة الـ <span class="en">FDT</span>.
+          <br>• <strong>Distribution Tier (Rank 2):</strong> المسار من كابينة الـ <span class="en">FDT</span> حتى علبة الخدمة <span class="en">FAT</span>.
+          <br>• <strong>Drop Tier (Rank 3):</strong> الوصلة الأخيرة من الـ <span class="en">FAT</span> حتى جهاز المشترك <span class="en">ONT</span>.
+        </p>
+      </div>
     </div>
-  </section>
+</section>
 
   <section id="sec19">
     <span class="num">19</span>
