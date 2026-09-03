@@ -1274,29 +1274,55 @@
 
   <section id="sec16">
     <span class="num">16</span>
-    <h2>الأطراف الطرفية <span class="en">(Terminals)</span></h2>
+    <h2>الأطراف والـ المنافذ المنطقية <span class="en">(Terminals)</span></h2>
+    
     <p>
-      مش كل جهاز في الشبكة بيحتاج تحديد نقاط دخول وخروج بدقة. لكن في حالات معينة، لازم تمثل "البورتات" الحقيقية على الجهاز — دي وظيفة الـ <span class="en">Terminals</span>.
+      الـ <span class="en">Terminals</span> هي منافذ اتصال منطقية (<span class="en">Logical Connection Points</span>) بتتعرّف على الأجهزة لتمثيل البورتات والوصلات الحقيقية بدقة (زي منافذ الضغط العالي والمنخفض في المحولات). هي مش عناصر مرئية على الخريطة، لكنها بتحدد القواعد اللي على أساسها بتتصل الخطوط بالأجهزة وتتحكم في مسارات تدفق المورد.
     </p>
-    <p style="margin-top:16px;">إمتى فعليًا محتاج تعرّف <span class="en">Terminals</span>؟</p>
-    <div class="grid2" style="margin-top:20px;">
-      <div class="card">
-        <h3>الحالة الأولى</h3>
-        <p>الجهاز هيشتغل كـ <span class="en">Subnetwork Controller</span> (نقطة بداية أو نهاية للمورد).</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>الـ <span class="en">OLT</span> بيحتاج <span class="en">Terminal</span> محدد يمثل نقطة بداية الإشارة — عشان يشتغل كنقطة انطلاق للتتبع.</p></div>
-      </div>
-      <div class="card">
-        <h3>الحالة الثانية</h3>
-        <p>الجهاز عنده 3 نقاط اتصال أو أكتر، أو نقطتين مختلفتين تمامًا عن بعض (مش قابلتين للتبديل).</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>الـ <span class="en">Splitter</span> بتاع 1:4 له بورت دخول واحد و4 بورتات خروج — كل بورت لازم يتمثل بـ <span class="en">Terminal</span> منفصل عشان تعرف بالظبط أي عميل واصل من أنهي بورت.</p></div>
+
+    <!-- تنبيه هام خاص بنموذج الاتصالات -->
+    <div style="background: rgba(255, 193, 7, 0.08); border-right: 4px solid #ffc107; padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.9em; color: #e0e0e0;">
+      <strong style="color: #ffc107;">ملاحظة معمارية:</strong> شبكات الاتصالات (<span class="en">Telecom Domain</span>) لا تستخدم الـ <span class="en">Terminals</span> المباشرة على الأجهزة كما في الكهرباء والمياه؛ بل تعتمد على نمذجة المنافذ كـ <span class="en">Junction Objects</span> داخلية ترتبط منطقياً عبر الـ <span class="en">Connectivity Associations</span>.
+    </div>
+
+    <!-- كارت الصورة التوضيحية للمحول -->
+    <div class="card" style="margin-top:20px;">
+      <h3>تمثيل الأطراف الميدانية <span class="en">(Real-World Fidelity)</span></h3>
+      <p>
+        المحول الكهربائي الميداني فيه 5 أطراف حقيقية (<span class="en">Bushings</span>): طرفين للضغط العالي (<span class="en">H1, H2</span>) وثلاثة للضغط المنخفض (<span class="en">X1, X2, X3</span>). الموديل بيسمحلك تمثله بـ <span class="en">2-Terminal</span> كنموذج بسيط، أو بـ <span class="en">5-Terminal Configuration</span> لنمذجة دقيقة تطابق الواقع الميداني وتحليلات هبوط الجهد.
+      </p>
+      
+      <!-- إدراج صورة المحول المباشرة -->
+      <div style="text-align: center; margin: 20px 0; background: #111; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+        <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Understanding-device-terminals---transformer-08993.png" alt="Transformer Terminal Configuration" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 0 auto;">
       </div>
     </div>
-    <p style="margin-top:20px;">أما لو الجهاز بسيط زي صمام بجانبين متبادلين (يعني مفيش فرق حقيقي بين الجهتين)، مش لازم تعرّفله <span class="en">Terminals</span> من الأساس.</p>
+
+    <p style="margin-top:20px; font-weight: 600;">متى تكون الـ <span class="en">Terminals</span> إجبارية أو مطلوبة؟</p>
+
+    <div class="grid2" style="margin-top:16px;">
+      <div class="card">
+        <h3>1. إدارة الدوائر والـ <span class="en">Controllers</span></h3>
+        <p>إجبارية لأي جهاز بيشتغل كـ <span class="en">Subnetwork Controller</span> (زي القاطع الرئيسي <span class="en">Circuit Breaker</span>) لتحديد بورت الانطلاق الفعلي للدائرة.</p>
+      </div>
+
+      <div class="card">
+        <h3>2. المنافذ غير المتماثلة والاتجاهية</h3>
+        <p>الأجهزة اللي ليها 3 نقاط اتصال أو أكثر، أو بورتات مختلفة الوظيفة (دخل/خرج أو ضغط عالي/منخفض)، أو الأجهزة أحادية الاتجاه (زي صمامات عدم الرجوع <span class="en">Check Valves</span>).</p>
+      </div>
+    </div>
+
+    <p style="margin-top:16px; font-size: 0.95em; color: #bbb;">
+      * للأجهزة البسيطة المتماثلة (زي المفاتيح الصريحة أو الصمامات العادية اللي الجانبين فيها متطابقين تماماً)، <strong>مش محتاج تعرّف <span class="en">Terminals</span></strong> والربط بيكون مباشر على الجهاز.
+    </p>
+
     <div class="card" style="margin-top:16px;">
-      <h3><span class="en">Terminal Configuration</span></h3>
-      <p>كل جهاز بيستخدم <span class="en">Terminals</span> بيتحدد له <span class="en">Terminal Configuration</span> بتحدد: عدد الأطراف، أسمائها، هل الاتجاه إجباري لجهة واحدة <span class="en">(Directional)</span> ولا في الاتجاهين <span class="en">(Bidirectional)</span>، والمسارات الصحيحة بين كل زوج أطراف.</p>
+      <h3>تكوين الأطراف <span class="en">(Terminal Configurations)</span></h3>
+      <p>
+        بيتم إعداد <span class="en">Configuration</span> خاص بكل نوع أصول (<span class="en">Asset Type</span>) يحدد: عدد الأطراف وأسمائها، اتجاه التدفق هل هو اتجاهي (<span class="en">Directional</span>) أم مزدوج (<span class="en">Bidirectional</span>)، والمسارات المسموحة (<span class="en">Valid Paths</span>) لمرور المورد بين الأطراف داخل الجهاز نفسه.
+      </p>
     </div>
-  </section>
+</section>
 
 <section id="sec17">
     <span class="num">17</span>
