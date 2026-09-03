@@ -1394,94 +1394,73 @@
     <h2>التسلسل الهرمي عبر المستويات <span class="en">(Tiers)</span></h2>
     
     <p>
-      الـ <span class="en">Tiers</span> هي النواة الهيكلية التي تُنظم الشبكات الفرعية (<span class="en">Subnetworks</span>) داخل شبكة النطاق (<span class="en">Domain Network</span>). بتمثل مستويات التدرج الهندسي في الشبكة (زي درجات الفولتية في الكهرباء، أو مستويات التوزيع <span class="en">Feeder / Distribution</span> في الفايبر).
+      الـ <span class="en">Tiers</span> هي النواة الهيكلية التي تُنظم الشبكات الفرعية (<span class="en">Subnetworks</span>) داخل شبكة النطاق (<span class="en">Domain Network</span>)، وتُمثل مستويات التدرج الهندسي في الشبكة (مثل مستويات الجهد في الكهرباء، أو مستويات <span class="en">Feeder / Distribution</span> في الـ FTTH).
     </p>
 
     <!-- تنبيه خاص بالـ Telecom -->
     <div style="background: rgba(0, 229, 255, 0.05); border-right: 4px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.9em;">
-      <strong style="color: var(--accent);">ملاحظة معمارية للاتصالات (Telecom):</strong> تعتمد شبكات الاتصالات والـ <span class="en">FTTH</span> بشكل حصرى على نظام الـ <span class="en">Partitioned Tier Definition</span>؛ حيث ينتمي كل كابل أو عنصر لطبقة واحدة محددة حصرياً (مثل كابلات التغذية أو كابلات التوزيع).
+      <strong style="color: var(--accent);">ملاحظة معمارية للاتصالات (Telecom):</strong> تعتمد شبكات الاتصالات والـ <span class="en">FTTH</span> على نظام الـ <span class="en">Partitioned Tier Definition</span>؛ حيث ينتمي كل كابل أو عنصر لطبقة واحدة محددة حصرياً (مثل كابلات التغذية Feeder أو كابلات التوزيع Distribution).
     </div>
 
+    <!-- مقارنة الـ Tier Definitions -->
     <div class="compare" style="margin-top:20px;">
       <div>
         <h3><span class="en">Partitioned Tier Definition</span></h3>
         <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">شائعة ومُعتمدة في الاتصالات والكهرباء</p>
         <ul>
-          <li>كل عنصر ينتمي لـ <span class="en">Tier</span> واحدة فقط، وممنوع التداخل الحصري.</li>
-          <li>ترتيب خطي متتابع تسلسلي (نقل ← توزيع ← خدمات منزلية).</li>
-          <li>تسمح بطوبولوجيا شعاعية (<span class="en">Radial</span>) أو شبكية (<span class="en">Mesh</span>).</li>
+          <li>كل عنصر ينتمي لـ <span class="en">Tier</span> واحدة فقط حصرياً.</li>
+          <li>تتابع خطي متدرج للمستويات (مثل: نقل ← توزيع ← خدمات).</li>
+          <li>تدعم الطوبولوجيا الشعاعية (<span class="en">Radial</span>) والشبكية (<span class="en">Mesh</span>).</li>
         </ul>
       </div>
       <div>
         <h3><span class="en">Hierarchical Tier Definition</span></h3>
         <p style="font-size:13.5px; color:var(--text-dim); margin-bottom:12px;">شائعة في أنظمة الغاز والمياه</p>
         <ul>
-          <li>نفس العنصر ممكن ينتمي لأكثر من <span class="en">Tier</span> داخل نفس المجموعة.</li>
-          <li>تستخدم للمناطق المتداخلة (مثل منطقة ضغط هيدروليكي تحتوي منطقتي عزل صمامات).</li>
+          <li>يمكن للعنصر أن ينتمي لأكثر من <span class="en">Tier</span> في نفس الوقت.</li>
+          <li>تُستخدم للمناطق المتداخلة (مثل منطقة ضغط تحتوي مناطق عزل).</li>
           <li>تدعم الطوبولوجيا الشبكية (<span class="en">Mesh</span>) فقط.</li>
         </ul>
       </div>
     </div>
 
-    <!-- كارت الصور الرسمية للتدرج والـ Tiers -->
-<div class="card" style="margin-top:24px;">
-  <h3>تتابع المستويات ونقل التغذية بين الـ <span class="en">Partitioned Tiers</span></h3>
-  <p>
-    تُصنف الـ <span class="en">Tiers</span> برتب متدرجة (<span class="en">Tier Rank</span>)، حيث تمثل الرتبة 1 المستوى الأعلى (المصدر الرئيسي). الصور التالية توضح التتابع الخطي للمستويات المنفصلة (<span class="en">Partitioned</span>) وكيفية انتقال المورد من مستويات التغذية الرئيسية إلى الكبائن والشبكات الفرعية:
-  </p>
-
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 20px 0;">
-    
-    <!-- المربع الأسود الأول (المخطط التجريدي) -->
-    <div style="background: #111; padding: 24px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 280px;">
-      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Network-hierarchies-with-tiers---overview-A5908.png" alt="Tiers Overview Hierarchy" style="max-width: 100%; height: auto; border-radius: 6px; display: block;">
-      <p style="font-size: 0.85em; color: #aaa; margin-top: 14px; margin-bottom: 0;">
-        مخطط التتابع الخطي للمستويات (<span class="en">Partitioned Tiers Progression</span>)
+    <!-- 1. كارت تنظيم الشبكة (مرتبط بصورة الكهرباء) -->
+    <div class="card" style="margin-top:24px;">
+      <h3>تنظيم الشبكة والـ <span class="en">Partitioned Tiers</span></h3>
+      <p>
+        تُصنع الـ <span class="en">Tiers</span> لتمثيل تدرج حقيقي ومُنفصل لمستويات الخدمة. الصورة التالية توضح نموذج الـ <span class="en">Partitioned</span> المطبق في الكهرباء والاتصالات، حيث تنتقل التغذية من مستوى <span class="en">Subtransmission</span> إلى مستوى <span class="en">Distribution</span> دون تشارك في العناصر:
       </p>
+
+      <div style="background: #111; padding: 24px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 280px; margin-top: 16px;">
+        <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Electric-tiers-15AE7.png" alt="Electric Partitioned Tiers Example" style="max-width: 100%; height: auto; border-radius: 6px; display: block;">
+        <p style="font-size: 0.85em; color: #aaa; margin-top: 14px; margin-bottom: 0;">
+          نموذج الـ <span class="en">Partitioned Tier Definition</span>: تدرج مستويات الخدمة المتباعدة حصرياً
+        </p>
+      </div>
     </div>
 
-    <!-- المربع الأسود الثاني (التطبيق الميداني) -->
-    <div style="background: #111; padding: 24px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 280px;">
-      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Electric-tiers-15AE7.png" alt="Partitioned Tiers Example" style="max-width: 100%; height: auto; border-radius: 6px; display: block;">
-      <p style="font-size: 0.85em; color: #aaa; margin-top: 14px; margin-bottom: 0;">
-        تمثيل ميداني للـ <span class="en">Partitioned Tiers</span> (تغذية متدرجة بدون تداخل عناصر)
+    <!-- 2. كارت نمذجة الطوبولوجيا (مرتبط بمخطط Tier A, B, C) -->
+    <div class="card" style="margin-top:24px;">
+      <h3>نمذجة الطوبولوجيا داخل الـ <span class="en">Tiers (Tier Topology Modeling)</span></h3>
+      <p>
+        يتم تحديد نوع الطوبولوجيا (<span class="en">Topology Type</span>) لكل <span class="en">Tier</span> عند إنشائه، وينطبق على جميع الشبكات الفرعية التابعة له:
       </p>
+
+      <div style="background: #111; padding: 24px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 280px; margin: 16px 0;">
+        <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Network-hierarchies-with-tiers---overview-A5908.png" alt="Tier Topology Modeling (Radial vs Mesh)" style="max-width: 100%; height: auto; border-radius: 6px; display: block;">
+        <p style="font-size: 0.85em; color: #aaa; margin-top: 14px; margin-bottom: 0;">
+          مخطط أنواع الطوبولوجيا: <span class="en">Tier A & B (Radial Topology)</span> بدون حلقات، و <span class="en">Tier C (Mesh Topology)</span> بحلقات متداخلة
+        </p>
+      </div>
+
+      <ul style="font-size: 0.9em; line-height: 1.7; color: var(--text-dim);">
+        <li><strong>Radial Topology (الطبقات A و B):</strong> تعتمد على مصدر تغذية (أو مصدرين) بدون وجود حلقات مغلقة (<span class="en">No loops</span>)، وهو النمط الأساسي في شبكات الـ FTTH.</li>
+        <li><strong>Mesh Topology (الطبقة C):</strong> تحتوي على عدة مصادر وحلقات مغلقة (<span class="en">Multiple sources & loops</span>) للحماية وتوفير مسارات بديلة.</li>
+      </ul>
     </div>
 
-  </div>
-</div>
-
-    <!-- مخطط الطوبولوجيا المرفق -->
-    <div class="diagram-card" style="margin-top:26px;">
-      <svg viewBox="0 0 820 230" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="مخطط يقارن بين طوبولوجيا شعاعية بمصدر واحد وطوبولوجيا شبكية بمصادر متعددة وحلقات">
-        <text x="200" y="30" text-anchor="middle" class="pulse-label en">Radial Topology</text>
-        <circle cx="200" cy="60" r="10" class="pulse-node" stroke="var(--accent)"/>
-        <line x1="200" y1="70" x2="200" y2="100" stroke="#3A4A6B" stroke-width="2"/>
-        <circle cx="200" cy="110" r="7" class="pulse-node"/>
-        <line x1="200" y1="117" x2="130" y2="160" stroke="#3A4A6B" stroke-width="2"/>
-        <line x1="200" y1="117" x2="200" y2="160" stroke="#3A4A6B" stroke-width="2"/>
-        <line x1="200" y1="117" x2="270" y2="160" stroke="#3A4A6B" stroke-width="2"/>
-        <circle cx="130" cy="168" r="6" class="pulse-node"/>
-        <circle cx="200" cy="168" r="6" class="pulse-node"/>
-        <circle cx="270" cy="168" r="6" class="pulse-node"/>
-        <text x="200" y="200" text-anchor="middle" class="pulse-sub">مصدر واحد، من غير حلقات (النمط السائد في الـ FTTH)</text>
-
-        <text x="620" y="30" text-anchor="middle" class="pulse-label en">Mesh Topology</text>
-        <circle cx="540" cy="60" r="10" class="pulse-node" stroke="var(--accent)"/>
-        <circle cx="700" cy="60" r="10" class="pulse-node" stroke="var(--accent)"/>
-        <circle cx="620" cy="140" r="10" class="pulse-node" stroke="var(--accent)"/>
-        <line x1="540" y1="70" x2="600" y2="130" stroke="#3A4A6B" stroke-width="2"/>
-        <line x1="700" y1="70" x2="640" y2="130" stroke="#3A4A6B" stroke-width="2"/>
-        <line x1="540" y1="70" x2="700" y2="70" stroke="#3A4A6B" stroke-width="2"/>
-        <circle cx="620" cy="190" r="6" class="pulse-node"/>
-        <line x1="620" y1="150" x2="620" y2="184" stroke="#3A4A6B" stroke-width="2"/>
-        <text x="620" y="215" text-anchor="middle" class="pulse-sub">أكثر من مصدر، وحلقات اتصال (شبكات الحماية Ring/Mesh)</text>
-      </svg>
-      <div class="cap">نفس الـ <span class="en">Tier</span> يمكن تصنيفه طوبولوجياً كـ <span class="en">Radial</span> (شجري شعاعي، وهو الأساس في توزيع الـ FTTH) أو <span class="en">Mesh</span> (شبكي حلقي للـ Core Networks للحماية من الانقطاع).</div>
-    </div>
-
-    <!-- كارت الـ Tier Rank بتركيز اتصالات خالص -->
-    <div class="card" style="margin-top:22px;">
+    <!-- 3. كارت الـ Tier Rank وترتيب التتبع -->
+    <div class="card" style="margin-top:24px;">
       <h3>رتبة الطبقة <span class="en">(Tier Rank)</span> وترتيب التتبع</h3>
       <p>
         رقم يحدد أولوية وتسلسل التتبع الهندسي (<span class="en">Trace Direction</span>) عبر المستويات. الرتبة 1 هي الأعلى دائماً وتمثل بداية التغذية.
