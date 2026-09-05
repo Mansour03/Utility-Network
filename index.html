@@ -1957,11 +1957,12 @@
   </section>
 
   <!-- SECTION 25: Manual Creation and Configuration Workflow -->
+<!-- SECTION 25: Manual Creation and Configuration Workflow -->
 <section id="sec25">
     <span class="num">25</span>
     <h2>خطوات التهيئة اليدوية العشر: من شبكة فارغة لشبكة متكاملة <span class="en">(Manual UN Creation & Configuration)</span></h2>
     <p>
-      تتيح حزمة أدوات **<span class="en">Utility Network Toolbox</span>** إنشاء وتهيئة الشبكة يدوياً بدلاً من النماذج الجاهزة (<span class="en">Foundations</span>)، مما يوفر مرونة كاملة لتخصيص الهيكلية وقواعد العمل. تتضمن هذه الخريطة العملية **10 خطوات رئيسية** تُغطي دورة دورة إنشاء الشبكة وإعداد خصائصها من الصفر حتى مرحلة التحميل والتفعيل.
+      تتيح حزمة أدوات **<span class="en">Utility Network Toolbox</span>** إنشاء وتهيئة الشبكة يدوياً بدلاً من النماذج الجاهزة (<span class="en">Foundations</span>)، مما يوفر مرونة كاملة لتخصيص الهيكلية وقواعد العمل. تتضمن هذه الخريطة العملية **10 خطوات رئيسية** تُغطي دورة إنشاء الشبكة وإعداد خصائصها من الصفر حتى مرحلة التحميل والتفعيل.
     </p>
 
     <!-- تحذير هيدرولوجي وطوبولوجي -->
@@ -1972,36 +1973,36 @@
       </p>
     </div>
 
-    <!-- الخطوات العشر المحدثة -->
+    <!-- الخطوات العشر المحدثة بدون تداخل الأرقام -->
     <ol class="steps" style="margin-top:26px;">
       <li>
         <h4>1) إنشاء الشبكة الهيكلية <span class="en">(Create Utility Network)</span></h4>
         <p>
-          يتم إنشاء كائن الشبكة داخل <span class="en">Feature Dataset</span> حالية باستخدام أداة **<span class="en">Create Utility Network</span>**. تُنشئ هذه الخطوة أداة الشبكة الجغرافية بالإضافة إلى الطبقات الهيكلية الافتراضية (<span class="en">Structure Domain Network</span>).
+          يتم إنشاء كائن الشبكة داخل <span class="en">Feature Dataset</span> حالية باستخدام أداة <span class="en"><b>Create Utility Network</b></span>. تُنشئ هذه الخطوة أداة الشبكة الجغرافية بالإضافة إلى الطبقات الهيكلية الافتراضية (<span class="en">Structure Domain Network</span>).
         </p>
       </li>
 
       <li>
         <h4>2) إضافة الشبكات النطاقية <span class="en">(Add Domain Networks)</span></h4>
         <p>
-          إضافة شبكة نطاقية واحدة أو أكثر حسب خدمات المؤسسة باستخدام **<span class="en">Add Domain Network</span>** (للشبكات التقليدية كالكهرباء والمياه) أو **<span class="en">Add Telecom Domain Network</span>** (لشبكات الاتصالات). تقوم الأداة بإنشاء الطبقات والجداول الخالية الخاصة بكل نطاق.
+          إضافة شبكة نطاقية واحدة أو أكثر حسب خدمات المؤسسة باستخدام <span class="en"><b>Add Domain Network</b></span> (للشبكات التقليدية كالكهرباء والمياه) أو <span class="en"><b>Add Telecom Domain Network</b></span> (لشبكات الاتصالات). تقوم الأداة بإنشاء الطبقات والجداول الخالية الخاصة بكل نطاق.
         </p>
       </li>
 
       <li>
         <h4>3) إعداد التصنيف الرئيسي والفرعي <span class="en">(Asset Group & Asset Type)</span></h4>
-        <p>
+        <p style="margin-bottom:8px;">
           تأمين التصنيف الثنائي إجباري لتفعيل الطوبولوجيا على كافة الفئات (عدا <span class="en">SubnetLine</span>):
         </p>
-        <ul style="font-size:0.83em; color:var(--text-dim); margin-top:6px; line-height:1.6;">
-          <li>**<span class="en">Asset Group</span>:** يُمثل التصنيف الرئيسي ويكون مُعرفاً كـ <span class="en">Subtype</span> (القيمة الافتراضية <span class="en">0 = Unknown</span>)، ويمكن إضافتها بتبويب <span class="en">Subtypes</span> أو أداة <span class="en">Add Subtype</span>.</li>
-          <li>**<span class="en">Asset Type</span>:** يُمثل التصنيف الفرعي المعتمد على حقل من نوع رقم صحيح قصير (<span class="en">Short Integer</span>) بـ <span class="en">Coded Value Domain</span> مُحدد لكل <span class="en">Subtype</span>.</li>
-          <li>**قيود الهيكلة:** يُوصى بتطبيق سياسة تقسيم دوال التجميع بـ **<span class="en">Duplicate Split Policy</span>**، ولا يجوز أن تتجاوز أشكال الأكواد للـ <span class="en">Subtype</span> أو الـ <span class="en">Domain</span> القيمة <strong>1023</strong>.</li>
-        </ul>
+        <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
+          • <b><span class="en">Asset Group</span>:</b> يُمثل التصنيف الرئيسي ويكون مُعرفاً كـ <span class="en">Subtype</span> (القيمة الافتراضية <span class="en">0 = Unknown</span>)، ويمكن إضافتها بتبويب <span class="en">Subtypes</span> أو أداة <span class="en">Add Subtype</span>.<br>
+          • <b><span class="en">Asset Type</span>:</b> يُمثل التصنيف الفرعي المعتمد على حقل من نوع رقم صحيح قصير (<span class="en">Short Integer</span>) بـ <span class="en">Coded Value Domain</span> مُحدد لكل <span class="en">Subtype</span>.<br>
+          • <b>قيود الهيكلة:</b> يُوصى بتطبيق سياسة تقسيم دوال التجميع بـ <b><span class="en">Duplicate Split Policy</span></b>، ولا يجوز أن تتجاوز أشكال الأكواد للـ <span class="en">Subtype</span> أو الـ <span class="en">Domain</span> القيمة <b>1023</b>.
+        </div>
         <div class="example-box" style="margin-top:10px;">
           <span class="label en">GAS / FTTH CLASSIFICATION EXAMPLE</span>
           <p style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
-            في شبكة الغاز: الفئة <span class="en">Device</span> -> المجموعة <span class="en">Asset Group = Valve</span> -> النطاق الفرعي <span class="en">GasDeviceValveAssetType</span> يحتوي (0: Unknown, 1: Main, 2: Shutoff, 3: Station).<br>
+            في شبكة الغاز: الفئة <span class="en">Device</span> &larr; المجموعة <span class="en">Asset Group = Valve</span> &larr; النطاق الفرعي <span class="en">GasDeviceValveAssetType</span> يحتوي (0: Unknown, 1: Main, 2: Shutoff, 3: Station).<br>
             في شبكة <span class="en">FTTH</span>: المجموعة <span class="en">Splitter</span> تحتوي أطراف فرعية مثل (1:4, 1:8, 1:16).
           </p>
         </div>
@@ -2009,76 +2010,66 @@
 
       <li>
         <h4>4) إنشاء وتعيين المنافذ <span class="en">(Terminal Configurations)</span></h4>
-        <p>
-          تُعرف المنافذ المتقدمة للأجهزة ذات المداخل والمخرجات المتعددة (مثل المحولات الكهربائية):
-        </p>
-        <ul style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
-          <li>يتم إنشاؤها على مستوى الشبكة بأداة **<span class="en">Add Terminal Configuration</span>**.</li>
-          <li>تُربط بالفئة المحددة على مستوى <span class="en">Asset Group</span> و <span class="en">Asset Type</span> بأداة **<span class="en">Set Terminal Configuration</span>**.</li>
-          <li>مطلوبة لشبكات التقسيم (<span class="en">Partitioned</span>) عند تحديد متحكمات الشبكات الفرعية (<span class="en">Subnetwork Controllers</span>)، بحيث تتطلب منفذين على الأقل أحدهما في الاتجاه الأعلى (<span class="en">Upstream</span>).</li>
-        </ul>
+        <p style="margin-bottom:8px;">تُعرف المنافذ المتقدمة للأجهزة ذات المداخل والمخرجات المتعددة (مثل المحولات الكهربائية):</p>
+        <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
+          • يتم إنشاؤها على مستوى الشبكة بأداة <span class="en"><b>Add Terminal Configuration</b></span>.<br>
+          • تُربط بالفئة المحددة على مستوى <span class="en">Asset Group</span> و <span class="en">Asset Type</span> بأداة <span class="en"><b>Set Terminal Configuration</b></span>.<br>
+          • مطلوبة لشبكات التقسيم (<span class="en">Partitioned</span>) عند تحديد متحكمات الشبكات الفرعية (<span class="en">Subnetwork Controllers</span>)، بحيث تتطلب منفذين على الأقل أحدهما في الاتجاه الأعلى (<span class="en">Upstream</span>).
+        </div>
       </li>
 
       <li>
         <h4>5) إعداد القواعد الشبكية والسلوكية <span class="en">(Network & Attribute Rules)</span></h4>
-        <p>
-          تحدد العلاقات المسموحة مكانياً وطوبولوجياً بين العناصر:
-        </p>
-        <ul style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
-          <li>**<span class="en">Network Rules</span>:** قواعد الاتصال، الاحتواء، والتعليق؛ تُضاف فردياً بأداة <span class="en">Add Rule</span> أو جماعياً عبر <span class="en">Import Rules</span> و <span class="en">Export Rules</span>.</li>
-          <li>**<span class="en">Attribute Rules</span>:** قواعد منطقية تُفرض أثناء التحرير لضمان جودة البيانات ودقة قيم الحقول والجغرافيا (مثل حظر كون القيمة في الحقل A أقل من المجموع B+C).</li>
-        </ul>
+        <p style="margin-bottom:8px;">تحدد العلاقات المسموحة مكانياً وطوبولوجياً بين العناصر:</p>
+        <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
+          • <b><span class="en">Network Rules</span>:</b> قواعد الاتصال، الاحتواء، والتعليق؛ تُضاف فردياً بأداة <span class="en">Add Rule</span> أو جماعياً عبر <span class="en">Import Rules</span> و <span class="en">Export Rules</span>.<br>
+          • <b><span class="en">Attribute Rules</span>:</b> قواعد منطقية تُفرض أثناء التحرير لضمان جودة البيانات ودقة قيم الحقول والجغرافيا (مثل حظر كون القيمة في الحقل A أقل من المجموع B+C).
+        </div>
       </li>
 
       <li>
         <h4>6) تحديد أدوار الارتباط <span class="en">(Assign Association Roles)</span></h4>
         <p>
-          استخدام أداة **<span class="en">Set Association Role</span>** لتحديد العناصر القادرة على أداء دور الحاوية (<span class="en">Container</span> - كالكابينة) أو الهيكل الداعم (<span class="en">Structure</span> - كالعمود أو الخندق) وفق قيود نمذجة الشبكة.
+          استخدام أداة <span class="en"><b>Set Association Role</b></span> لتحديد العناصر القادرة على أداء دور الحاوية (<span class="en">Container</span> - كالكابينة) أو الهيكل الداعم (<span class="en">Structure</span> - كالعمود أو الخندق) وفق قيود نمذجة الشبكة.
         </p>
       </li>
 
       <li>
         <h4>7) إنشاء وتعيين خصائص التتبع <span class="en">(Network Attributes)</span></h4>
-        <p>
-          خصائص مكانية تُخزن مباشرة داخل طوبولوجيا الشبكة للتحكم في التتبع (<span class="en">Tracing</span>):
-        </p>
-        <ul style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
-          <li>تُنشأ بأداة **<span class="en">Add Network Attribute</span>** وتُرتبط بالحقل بأداة **<span class="en">Set Network Attribute</span>**.</li>
-          <li>تُستخدم كفلتر حركة (<span class="en">Traversability Filter</span>) أو كحواجز توقف (<span class="en">Terminators</span>)، مثل خاصية حالة دورة الحياة (<span class="en">Lifecycle Status</span>) لتجاهل العناصر المصممة غير المنفذة (<span class="en">Proposed</span>).</li>
-        </ul>
+        <p style="margin-bottom:8px;">خصائص مكانية تُخزن مباشرة داخل طوبولوجيا الشبكة للتحكم في التتبع (<span class="en">Tracing</span>):</p>
+        <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
+          • تُنشأ بأداة <span class="en"><b>Add Network Attribute</b></span> وتُرتبط بالحقل بأداة <span class="en"><b>Set Network Attribute</b></span>.<br>
+          • تُستخدم كفلتر حركة (<span class="en">Traversability Filter</span>) أو كحواجز توقف (<span class="en">Terminators</span>)، مثل خاصية حالة دورة الحياة (<span class="en">Lifecycle Status</span>) لتجاهل العناصر المصممة غير المنفذة (<span class="en">Proposed</span>).
+        </div>
       </li>
 
       <li>
         <h4>8) تعيين فئات الشبكة <span class="en">(Network Categories)</span></h4>
-        <p>
-          وسوم وتصنيفات نظامية أو مخصصة تُسند للعناصر لتحديد أدوارها في التتبع والعمليات:
-        </p>
-        <ul style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
-          <li>**فئات نظامية:** مثل <span class="en">Subnetwork Controller</span> و <span class="en">Subnetwork Tap</span> للشبكات التقليدية، أو <span class="en">Unit Container</span> و <span class="en">Splitter</span> لشبكات الاتصالات لدعم تتبع المسار (<span class="en">Path Trace</span>).</li>
-          <li>**فئات مخصصة:** مثل وسم الحماية (<span class="en">Protective</span>) لإيقاف التتبع الهيدروليكي أو الكهربائي عند التوصل لأجهزة الحماية. تُدار عبر أداة <span class="en">Set Network Category</span>.</li>
-        </ul>
+        <p style="margin-bottom:8px;">وسوم وتصنيفات نظامية أو مخصصة تُسند للعناصر لتحديد أدوارها في التتبع والعمليات:</p>
+        <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
+          • <b>فئات نظامية:</b> مثل <span class="en">Subnetwork Controller</span> و <span class="en">Subnetwork Tap</span> للشبكات التقليدية، أو <span class="en">Unit Container</span> و <span class="en">Splitter</span> لشبكات الاتصالات لدعم تتبع المسار (<span class="en">Path Trace</span>).<br>
+          • <b>فئات مخصصة:</b> مثل وسم الحماية (<span class="en">Protective</span>) لإيقاف التتبع الهيدروليكي أو الكهربائي عند التوصل لأجهزة الحماية. تُدار عبر أداة <span class="en">Set Network Category</span>.
+        </div>
       </li>
 
       <li>
         <h4>9) ضبط سياسات اتصال الحواف <span class="en">(Set Edge Connectivity Policies)</span></h4>
         <p>
-          تحديد آلية التقاط وتوصيل الخطوط والكائنات الخطية بأداة **<span class="en">Set Edge Connectivity</span>** على مستوى التصنيف الفرعي:
+          تحديد آلية التقاط وتوصيل الخطوط والكائنات الخطية بأداة <span class="en"><b>Set Edge Connectivity</b></span> على مستوى التصنيف الفرعي:
         </p>
-        <p style="font-size:0.82em; color:var(--text-dim); margin-top:4px;">
-          • **<span class="en">Any Vertex</span>:** تسمح بالربط عند أي رأس على طول الخط.<br>
-          • **<span class="en">End Vertex</span>:** تقيد الربط بأطراف الخطوط والنهايات فقط.
-        </p>
+        <div style="font-size:0.83em; color:var(--text-dim); margin-top:4px; padding-right:10px;">
+          • <b><span class="en">Any Vertex</span>:</b> تسمح بالربط عند أي رأس على طول الخط.<br>
+          • <b><span class="en">End Vertex</span>:</b> تقيد الربط بأطراف الخطوط والنهايات فقط.
+        </div>
       </li>
 
       <li>
         <h4>10) ضبط خصائص النطاق التخصصية <span class="en">(Domain Properties)</span></h4>
-        <p>
-          تختلف الخصائص حسب نوع النطاق المستخدم:
-        </p>
-        <ul style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
-          <li>**الشبكات التقليدية:** إضافة المستويات (**<span class="en">Tiers</span>**) وتحديد تعريف الشبكات الفرعية (**<span class="en">Set Subnetwork Definition</span>**) لضبط الأجهزة المسموحة، خطوط التوصيل، وقوالب المخططات الهندسية (<span class="en">Diagram Templates</span>).</li>
-          <li>**شبكات الاتصالات:** ضبط خصائص الدوائر بـ **<span class="en">Set Circuit Properties</span>** للتحكم في عمليات التحقق، الاستيراد، وتتبع الدوائر الضوئية والنحاسية.</li>
-        </ul>
+        <p style="margin-bottom:8px;">تختلف الخصائص حسب نوع النطاق المستخدم:</p>
+        <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
+          • <b>الشبكات التقليدية:</b> إضافة المستويات (<b><span class="en">Tiers</span></b>) وتحديد تعريف الشبكات الفرعية (<b><span class="en">Set Subnetwork Definition</span></b>) لضبط الأجهزة المسموحة، خطوط التوصيل، وقوالب المخططات الهندسية (<span class="en">Diagram Templates</span>).<br>
+          • <b>شبكات الاتصالات:</b> ضبط خصائص الدوائر بـ <b><span class="en">Set Circuit Properties</span></b> للتحكم في عمليات التحقق، الاستيراد، وتتبع الدوائر الضوئية والنحاسية.
+        </div>
       </li>
     </ol>
 
@@ -2088,12 +2079,12 @@
       <p style="font-size:0.86em; color:var(--text-dim); margin-top:8px;">
         بعد اكتمال الخطوات العشر اليدوية على الهيكل الفارغ، يتم تنفيذ الخطوات الترتيبية التالية بالترتيب الدقيق:
       </p>
-      <ol style="font-size:0.83em; color:var(--text-dim); margin-top:8px; line-height:1.7; padding-right:20px;">
-        <li>**تحميل البيانات (<span class="en">Data Loading</span>):** استخدام أداة **<span class="en">Append</span>** لاستيراد العناصر مع ضرورة **تفعيل بيئة حفظ المعرفات الفرعية (<span class="en">Preserve Global IDs = True</span>)**. بعد استيراد الهندسة، يتم استيراد العلاقات (<span class="en">Associations</span>) ومتحكمات الشبكات (<span class="en">Subnetwork Controllers</span>).</li>
-        <li>**الفحص والجودة المسبقة (<span class="en">Optionally Review Errors</span>):** يمكن تفعيل الطوبولوجيا خيار **<span class="en">Only generate errors checked</span>** لإنشاء تقارير الأخطاء ومراجعتها وتصحيحها قبل تسجيل الإصدارات.</li>
-        <li>**التسجيل بفرع الإصدارات (<span class="en">Register as Branch Versioned</span>):** تحويل الاتصال بـ <span class="en">Enterprise GDB</span> إلى <span class="en">Branch Versioning</span> وتسجيل الفئات لدعم التحرير متعدد المستخدمين.</li>
-        <li>**تفعيل طوبولوجيا الشبكة (<span class="en">Enable Network Topology</span>):** الخطوة الأخيرة لتمثيل الشبكة طوبولوجياً والبدء الفعلي لعمليات التتبع والتحليل.</li>
-      </ol>
+      <div style="font-size:0.83em; color:var(--text-dim); margin-top:8px; line-height:1.8; padding-right:10px;">
+        1. <b>تحميل البيانات (<span class="en">Data Loading</span>):</b> استخدام أداة <span class="en"><b>Append</b></span> لاستيراد العناصر مع ضرورة <b>تفعيل بيئة حفظ المعرفات الفرعية (<span class="en">Preserve Global IDs = True</span>)</b>. بعد استيراد الهندسة، يتم استيراد العلاقات (<span class="en">Associations</span>) ومتحكمات الشبكات (<span class="en">Subnetwork Controllers</span>).<br>
+        2. <b>الفحص والجودة المسبقة (<span class="en">Optionally Review Errors</span>):</b> يمكن تفعيل الطوبولوجيا بخيار <b><span class="en">Only generate errors checked</span></b> لإنشاء تقارير الأخطاء ومراجعتها وتصحيحها قبل تسجيل الإصدارات.<br>
+        3. <b>التسجيل بفرع الإصدارات (<span class="en">Register as Branch Versioned</span>):</b> تحويل الاتصال بـ <span class="en">Enterprise GDB</span> إلى <span class="en">Branch Versioning</span> وتسجيل الفئات لدعم التحرير متعدد المستخدمين.<br>
+        4. <b>تفعيل طوبولوجيا الشبكة (<span class="en">Enable Network Topology</span>):</b> الخطوة الأخيرة لتمثيل الشبكة طوبولوجياً والبدء الفعلي لعمليات التتبع والتحليل.
+      </div>
     </div>
 
     <!-- جدول أدوات إدارة البيانات المساعدة -->
