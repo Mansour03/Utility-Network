@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة النسخ | ArcGIS Utility Network</title>
+    <!-- استدعاء ملف الـ CSS الخاص بمشروعك -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --text-main: #f3f4f6;
+            --text-dim: #9ca3af;
+            --accent: #3b82f6;
+            --gold: #e8a83d;
+            --gold-soft: rgba(232, 168, 61, 0.15);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .en { font-family: monospace; direction: ltr; display: inline-block; }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding: 10px 18px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 6px;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            transition: all 0.2s ease-in-out;
+        }
+        .back-btn:hover {
+            background: rgba(59, 130, 246, 0.25);
+            transform: translateX(-3px);
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .grid3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .steps {
+            padding-right: 20px;
+        }
+        .steps li {
+            margin-bottom: 18px;
+        }
+        .steps h4 {
+            margin: 0 0 6px 0;
+            color: var(--accent);
+        }
+        .tag {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 8px;
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- زر العودة للصفحة الرئيسية -->
+    <a href="index.html" class="back-btn">
+        ➔ العودة إلى الدليل الرئيسي (ArcGIS Utility Network)
+    </a>
+
+    <!-- محتوى صفحة إدارة النسخ -->
+    <section id="versioning-overview">
+        <span class="num" style="color: var(--accent); font-weight: bold; font-size: 1.1em;">وثائق ArcGIS Pro 3.7</span>
+        <h1 style="font-size: 2.2em; margin-top: 8px; margin-bottom: 12px;">نظرة عامة على إدارة النسخ <span class="en">(Overview of Versioning)</span></h1>
+        <p style="font-size: 1em; color: var(--text-dim); margin-bottom: 24px;">
+            ArcGIS Pro 3.7 &nbsp;|&nbsp; متوفر مع تراخيص <span class="en">Standard</span> أو <span class="en">Advanced</span>
+        </p>
+
+        <p>في بيئة <span class="en">Enterprise Geodatabase</span> التي تضم عدة محررين، تتيح النسخ للمستخدمين العمل على نفس البيانات في نفس الوقت دون التعارض أو قفل البيانات (<span class="en">Data Locking</span>) أو تكرارها. تمنح كل نسخة للمحرر بيئة معزولة تماماً لإنجاز التعديلات طويلة الأجل (<span class="en">Long Transactions</span>).</p>
+
+        <!-- بطاقة المفهوم الأساسي -->
+        <div style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 24px 0; border-radius: 4px;">
+            <h3 style="margin: 0 0 8px 0; color: var(--accent);">كيف تعمل النسخ؟ <span class="en">(How Versioning Works)</span></h3>
+            <p style="margin: 0; font-size: 0.95em; line-height: 1.7;">
+                النسخ ليست نسخاً مكررة من قاعدة البيانات، بل يتم تتبع التعديلات والتغييرات التي تجري داخلها عبر جداول النظام (<span class="en">System Tables</span>). هذا يتيح للمحررين التعديل دون قفل الطبقات في البيئة الحية أو التأثير المباشر على بقية المستخدمين. النسخة الأصلية والأم لكل النسخ في قاعدة البيانات تسمى النسخة الافتراضية (<span class="en">Default Version</span>).
+            </p>
+        </div>
+
+        <!-- أنواع النسخ Grid -->
+        <h2 style="margin-top:36px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">أنواع إدارة النسخ <span class="en">(Versioning Types)</span></h2>
+        <div class="grid3" style="margin-top:20px;">
+          
+          <div class="card">
+            <h3 style="color: var(--accent); margin-top: 0;"><span class="en">Branch Versioning</span></h3>
+            <p>مصممة خصيصاً لدعم نموذج الـ <span class="en">Web GIS</span>، وتتيح عمليات التحرير متعددة المستخدمين والمعاملات طويلة الأجل عبر طبقات الويب (<span class="en">Web Feature Layers</span>). <b>وهي النمط الإجباري والوحيد المعتمد مع الـ <span class="en">Utility Network</span>.</b></p>
+          </div>
+
+          <div class="card">
+            <h3 style="color: var(--accent); margin-top: 0;"><span class="en">Traditional Versioning</span></h3>
+            <p>توفر المرونة للمعاملات طويلة الأجل عند الاتصال المباشر بقاعدة البيانات الجغرافية (<span class="en">Direct Connection</span>)، مع تجربة تحرير مبسطة للمعاملات القصيرة عبر خدمات الـ Feature Services.</p>
+          </div>
+
+          <div class="card">
+            <h3 style="color: var(--accent); margin-top: 0;"><span class="en">Traditional with Move Edits to Base</span></h3>
+            <p>نمط اختياري من الـ Traditional يتيح لبعض التطبيقات الوصول المباشر للبيانات الأساسية (<span class="en">Base Data</span>) مع السماح لمحررين آخرين بالعمل في نسخهم المعزولة.</p>
+          </div>
+
+        </div>
+
+        <!-- خطوات وسير العمل -->
+        <h2 style="margin-top:40px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">دورة وسير العمل مع النسخ <span class="en">(Versioning Workflow)</span></h2>
+        <ol class="steps" style="margin-top:20px;">
+          <li>
+            <h4>1. تسجيل البيانات كـ <span class="en">Versioned</span></h4>
+            <p>بغض النظر عن نوع النسخ، يجب تسجيل البيانات لتتمكن من العمل خارج النسخة الافتراضية. عند التسجيل، يتم تتبع عمليات الإضافة (<span class="en">Insert</span>)، التحديث (<span class="en">Update</span>)، والحذف (<span class="en">Delete</span>).</p>
+          </li>
+          <li>
+            <h4>2. التعامل مع النسخة الافتراضية <span class="en">(Default Version)</span></h4>
+            <p>النسخة الافتراضية توجد دائماً ولا يمكن حذفها، وهي تعبر عن الحالة الحالية للبيئة الفعلية (<span class="en">Production State</span>). عند الاتصال بقاعدة البيانات، تتصل تلقائياً بالـ <span class="en">Default</span>، ويمكن حمايتها من التعديل العشوائي لتستقبل فقط التعديلات المعتمدة.</p>
+          </li>
+          <li>
+            <h4>3. إدارة وإنشاء النسخ الفرعية <span class="en">(Manage Versions)</span></h4>
+            <p>يتم إنشاء نسخ فرعية (<span class="en">Named Versions</span> في الـ Branch) متفرعة من الـ <span class="en">Default</span>. في الـ <span class="en">Branch Versioning</span>، تُنشأ كافة النسخ بمستوى فرعي واحد فقط (<span class="en">Single Level</span>) وتكون الـ Default هي الأصل المباشر لجميع النسخ للحفاظ على الأداء.</p>
+          </li>
+          <li>
+            <h4>4. التوفيق والترحيل <span class="en">(Reconcile & Post)</span></h4>
+            <p>عند الانتهاء من التعديلات، تُمكّنك عملية الـ <b>Reconcile</b> من مقارنة تعديلاتك بالنسخة الأصلية واكتشاف التعارضات (<span class="en">Conflicts</span>) وحلها. بعد التوفيق، يتم استخدام عملية الـ <b>Post</b> لدمج وتثبيت التعديلات نهائياً في النسخة الافتراضية (<span class="en">Default Version</span>).</p>
+          </li>
+        </ol>
+
+        <!-- ملاحظة طريقة الاتصال -->
+        <div class="card" style="margin-top:32px; border-color:var(--gold);">
+          <h3 style="margin-top: 0;"><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">تنبيه هـام</span> طريقة الاتصال بالنسخ في الـ <span class="en">Branch</span></h3>
+          <p>عند الاتصال المباشر بقاعدة البيانات الجغرافية في الـ <span class="en">Branch Versioning</span>، ستتصل دائماً بالنسخة الافتراضية (<span class="en">Default</span>). للوصول والتعديل على النسخ المسمّاة (<span class="en">Named Versions</span>)، يجب إضافة خدمة الويب (<span class="en">Web Feature Layer</span>) إلى الخريطة في <span class="en">ArcGIS Pro</span> ثم تغيير النسخة من خصائص الطبقة داخل الخريطة.</p>
+        </div>
+    </section>
+
+    <!-- زر الرجوع السفلي -->
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center;">
+        <a href="index.html" class="back-btn">
+            ➔ العودة إلى الدليل الرئيسي (ArcGIS Utility Network)
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
