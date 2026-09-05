@@ -527,100 +527,27 @@
 
 <div class="wrap">
 
-  <section class="hero" id="hero">
-  <div class="eyebrow"><span class="en">CHAPTER 01</span> — مقدمة إلى الإصدارات</div>
-  <h1>الإصدارات <span class="en">(Versioning)</span> في الـ <span class="en">Geodatabase</span>... إيه الحكاية؟</h1>
+ <section class="hero" id="hero">
 
-  <!-- الفقرة التمهيدية -->
-  <div class="intro-block my-4">
-    <h2 class="h4 font-weight-bold mb-3">ليه الإصدارات أصلاً؟</h2>
-    <p class="lead text-muted mb-3">
-      في أي <span class="en">enterprise geodatabase</span> فيها أكثر من محرر، الإصدارات بتديك القدرة تشتغل على نفس البيانات في نفس الوقت من غير أقفال <span class="en">(locks)</span> ومن غير تكرار البيانات[cite: 1]. كل إصدار بيدي كل محرر "نسخة" معزولة وفريدة من البيانات، وبتسمح بمعاملات طويلة <span class="en">(long transactions)</span> — يعني تفضل شغال على نفس الإصدار عبر أكثر من جلسة تحرير من غير ما تأثر على حد[cite: 1].
-    </p>
-    <p class="text-muted">
-      الإصدارات مش نسخ منفصلة من الـ <span class="en">geodatabase</span>[cite: 1]. بدل كده، الإصدارات والمعاملات اللي بتحصل جواها بتتراقب وتتسجل في جداول نظامية — وده اللي بيعزل شغل المحرر عبر جلسات متعددة من غير ما يقفل العناصر في نسخة الإنتاج أو يأثر فوراً على حد[cite: 1].
-    </p>
-  </div>
+    <div class="eyebrow"><span class="en">CHAPTER 01</span> — مقدمة إلى الإصدارات</div>
 
-  <!-- كروت المفاهيم الرئيسية (شبكة بجانب بعض) -->
-  <div class="row g-4 my-4">
-    <div class="col-md-6">
-      <div class="card h-100 bg-dark text-white border-secondary p-4 rounded-3">
-        <h3 class="h5 card-title text-primary mb-3">الإصدار الافتراضي <span class="en">(Default Version)</span></h3>
-        <p class="card-text text-light">
-          كل <span class="en">geodatabase</span> فيها إصدار افتراضي واحد — الأصل أو الجذر لكل الإصدارات الثانية[cite: 1]. مينفعش يتمسح، وغالباً هو "النسخة المنشورة" اللي بتمثل الحالة الحالية للنظام[cite: 1]. بتحدّثه بمرور الوقت عن طريق دمج التغييرات من الإصدارات الثانية عليه[cite: 1].
-        </p>
-      </div>
-    </div>
-    
-    <div class="col-md-6">
-      <div class="card h-100 bg-dark text-white border-secondary p-4 rounded-3">
-        <h3 class="h5 card-title text-info mb-3">شجرة الإصدار <span class="en">(Version Tree)</span></h3>
-        <p class="card-text text-light">
-          لما تنشئ إصدار، بيبقي مطابق تماماً لأصله وقت الإنشاء[cite: 1]. مع مرور الوقت، الإصدارات بتختلف عن بعضها مع كل تعديل، وبيتكوّن هيكل شبيه بالشجرة[cite: 1]. أفضل ممارسة: حافظ على شجرة إصدار "مسطحة" — الإصدار الافتراضي هو الأصل المباشر لكل الإصدارات الثانية[cite: 1].
-        </p>
-      </div>
-    </div>
-  </div>
+    <h1>الإصدارات <span class="en">(Versioning)</span> في الـ <span class="en">Geodatabase</span>... إيه الحكاية؟</h1>
 
-  <!-- بلوك مثال سير العمل (WORKFLOW EXAMPLE) -->
-  <div class="workflow-box bg-dark text-white border border-secondary rounded-3 p-4 my-4">
-    <div class="badge bg-warning text-dark font-monospace mb-3 px-3 py-1">WORKFLOW EXAMPLE</div>
-    <p class="mb-0 text-light">
-      تخيل قسم هندسة بيدير شبكة مياه. سير العمل بتقسم على مراحل — كل مرحلة ليها موارد وقواعد عمل مختلفة، وكل مرحلة بتمثل وحدة عمل واحدة زي أمر شغل <span class="en">(work order)</span>[cite: 1]. لإدارة كل أمر شغل، بتنشئ إصدار منفصل ومُعزول وتعدّل فيه[cite: 1]. لما تتأكد إن الشغل خلص، بتدمج التغييرات في النسخة المنشورة من قاعدة البيانات[cite: 1].
-    </p>
-  </div>
+    <p class="lead">
 
-  <!-- الصورة التوضيحية المدمجة بأسلوب بصرى مطابق -->
-  <div class="diagram-container text-center my-5 p-4 rounded-3 border border-secondary bg-dark">
-    <img src="image_01f2ec.png" alt="Versioned Enterprise Data Diagram" class="img-fluid mb-3" style="max-height: 220px;" />
-    <p class="small text-muted mb-0">آلية تبادل التعديلات والمطابقة والترحيل بين الإصدارات الفرعية والـ Default Version[cite: 1]</p>
-  </div>
+      لما أكتر من محرر محتاجين يشتغلوا على نفس البيانات في نفس اللحظة، من غير ما حد يقفل الطبقة في وش التاني ومن غير ما تعمل نسخ مكررة من الداتا — دي بالظبط المشكلة اللي الإصدارات <span class="en">(Versions)</span> جاية تحلها. كل محرر بياخد "نسخة معزولة" خاصة بيه من البيانات، يشتغل عليها براحته، وبعدين يدمج شغله مع باقي الفريق وقت ما يخلص.
 
-  <!-- سكشن المقارنة بين الأنواع -->
-  <div class="types-section my-5">
-    <div class="d-flex align-items-center mb-4">
-      <span class="badge bg-primary fs-6 me-3">02</span>
-      <h2 class="h3 font-weight-bold mb-0">نوعا الإصدار: <span class="en">Branch</span> مقابل <span class="en">Traditional</span></h2>
-    </div>
-    
-    <p class="text-muted mb-4">
-      فيه نوعان من الإصدارات متاحين، وكل واحد بيخدم سير عمل ونموذج نشر مختلف — وممكن الـ <span class="en">geodatabase</span> الواحدة تحتوي بيانات من النوعين مع بعض[cite: 1].
     </p>
 
-    <div class="row g-4">
-      <!-- كارت Branch Versioning -->
-      <div class="col-md-6">
-        <div class="card h-100 bg-dark text-white border-secondary p-4 rounded-3">
-          <h3 class="h5 card-title text-success border-bottom border-secondary pb-2 mb-3"><span class="en">Branch Versioning</span></h3>
-          <ul class="list-unstyled text-light small">
-            <li class="mb-2">• بتسهّل نموذج <span class="en">Web GIS</span> بالكامل — التحرير بيتم حصرياً عبر <span class="en">Web Feature Layers</span>[cite: 1].</li>
-            <li class="mb-2">• معمارية بيانات مبسطة، وسير عمل إدارة إصدار مبسط[cite: 1].</li>
-            <li class="mb-2">• بتدعم <span class="en">Undo/Redo</span> أثناء التحرير في إصدار مسمى[cite: 1].</li>
-            <li class="mb-2">• الشبكات المرافقية <span class="en">(Utility Networks)</span>، فسيفساء الأراضي، والطوبولوجيا كلها بتدعم <span class="en">Branch</span>[cite: 1].</li>
-          </ul>
-        </div>
-      </div>
+    <p class="lead">
 
-      <!-- كارت Traditional Versioning -->
-      <div class="col-md-6">
-        <div class="card h-100 bg-dark text-white border-secondary p-4 rounded-3">
-          <h3 class="h5 card-title text-warning border-bottom border-secondary pb-2 mb-3"><span class="en">Traditional Versioning</span></h3>
-          <ul class="list-unstyled text-light small">
-            <li class="mb-2">• مخصصة للمستخدمين اللي بيدخلوا الـ <span class="en">geodatabase</span> مباشرة عبر اتصال قاعدة بيانات[cite: 1].</li>
-            <li class="mb-2">• مفيش حد لعدد الإصدارات، وبتدعم هرميات متعددة المستويات (أحفاد، أحفاد الأحفاد...)[cite: 1].</li>
-            <li class="mb-2">• بتدعم التحرير المتقدم (شبكات، طوبولوجيا) مع <span class="en">Undo/Redo</span> للتعديلات الفردية[cite: 1].</li>
-            <li class="mb-2">• محتاجة عملية <span class="en">Compress</span> دورية لتنظيف جداول الفروق[cite: 1].</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+      في الدليل ده هنفكك المفهوم من الأساس، ونفرّق بين النوعين المتاحين — <span class="en">Branch</span> و<span class="en">Traditional</span> — ونشوف إزاي كل واحد فيهم بيتدار عمليًا من الإنشاء لحد الدمج والتنظيف الدوري.
 
-  <div class="source-link mt-4 pt-3 border-top border-secondary text-muted small">
-    المصدر: <a href="https://doc.esri.com/en/arcgis-pro/latest/help/data/geodatabases/overview/overview-of-versioning-in-arcgis-pro.html" target="_blank" rel="noopener" class="text-primary">Esri — Overview of versioning</a>[cite: 1]
-  </div>
-</section>
+    </p>
+
+    <div class="source-link">المصدر: <a href="https://doc.esri.com/en/arcgis-pro/latest/help/data/geodatabases/overview/overview-of-versioning-in-arcgis-pro.html" target="_blank" rel="noopener">Esri — Overview of versioning</a></div>
+
+  </section>
 
   <section id="sec1">
     <span class="num">01</span>
