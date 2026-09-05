@@ -1507,46 +1507,73 @@
     <p class="lead" style="font-size:16px;">المحاضرتين اللي فاتوا جاوبوا على "إيه هي" و"اتبنت إزاي من جوه". دلوقتي الجزء العملي البحت: إزاي فعليًا تنشئ الشبكة، تهيئها، تنشرها، وتصلّح أخطائها — بالأدوات والخطوات الحقيقية في <span class="en">ArcGIS Pro</span>.</p>
   </section>
 
-  <section id="sec20">
+ <section id="sec20">
     <span class="num">20</span>
     <h2>طرق الإنشاء الثلاث: اختار المسار الصح من الأول</h2>
-    <p>قبل ما تفتح أي أداة، لازم تحسم: هتبني الشبكة إزاي؟ <span class="en">Esri</span> بتوفر 3 مسارات، وكل واحد ليه سياق مختلف تمامًا.</p>
+    <p>قبل ما تفتح أي أداة، لازم تحسم: هتبني الشبكة إزاي؟ توفر <span class="en">Esri</span> في <span class="en">ArcGIS Pro 3.7</span> ثلاثة مسارات رئيسية للإنشاء والتكوين بناءً على احتياجات المؤسسة وطبيعة البيانات الحالية.</p>
+    
     <div class="grid3" style="margin-top:26px;">
+      
+      <!-- 1. Utility Network Foundations -->
       <div class="card">
         <h3><span class="en">Utility Network Foundations</span></h3>
-        <p>نماذج بيانات جاهزة لكل صناعة (كهرباء، مياه، صرف، <b>اتصالات</b>...) مبنية على أفضل ممارسات <span class="en">Esri</span>. الخيار الأمثل لو عايز تستخدم كل إمكانيات الشبكة (associations، nonspatial objects، diagrams) من غير ما تبني كل حاجة من الصفر.</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>موجود نموذج جاهز اسمه <span class="en">Communications Foundation</span> مبني مسبقًا على <span class="en">Telecom Domain Network</span> — نقطة بداية ممتازة بدل التصميم اليدوي الكامل.</p></div>
+        <p>نماذج بيانات جاهزة لكل صناعة (<span class="en">Electric, Gas, Water, Communications...</span>) مبنية على أفضل ممارسات <span class="en">Esri</span>. الخيار الموصى به للمؤسسات التي تسعى للاستفادة الكاملة من كافة القدرات المتقدمة للشبكة مثل الـ <span class="en">Associations</span> والـ <span class="en">Nonspatial Objects</span> والـ <span class="en">Network Diagrams</span>.</p>
+        <div class="example-box">
+          <span class="label en">FTTH TELECOM</span>
+          <p>يتم استخدام نموذج <span class="en">Communications Foundation</span> الجاهز مع أداة <span class="en">Utility Network Package Toolbox</span> لتقليل وقت الإعداد وبدء مطابقة البيانات مباشرة.</p>
+        </div>
       </div>
+
+      <!-- 2. Migration Toolset / Wizard -->
       <div class="card">
-        <h3><span class="en">Migration Toolset / Wizard</span></h3>
-        <p>لو عندك بيانات قديمة (زي <span class="en">Geometric Network</span> أو <span class="en">Feature Classes</span> عادية) وعايز تحولها بسرعة لشبكة تدعم التتبع الأساسي من غير تغيير جذري في الهيكلة الحالية.</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>عندك طبقات فايبر قديمة متفرقة (كابلات، صناديق) من غير أي منطق شبكي — الـ <span class="en">Migration Wizard</span> بيحولها لشبكة شغالة بأقل مجهود.</p></div>
+        <h3><span class="en">Migration Toolset & Wizard</span></h3>
+        <p>مصممة للمؤسسات التي تمتلك بيانات قديمة (مثل <span class="en">Geometric Network</span> أو طبقات عادية) وترغب في الانتقال للـ <span class="en">Utility Network</span> مع <b>الحفاظ على نفس الـ Schema الحالية</b>، وتدعم عمليات التتبع والتحرير الأساسية بأقل مجهود مع وجود أدوات آلية لمعالجة الأخطاء (<span class="en">Analyze & Apply Error Resolutions</span>).</p>
+        <div class="example-box">
+          <span class="label en">FTTH TELECOM</span>
+          <p>تستخدم أداة <span class="en">Migrate To Utility Network</span> لإنشاء <span class="en">Mobile Geodatabase</span> تحتوي على الشبكة الجديدة مع مطابقة الطبقات القديمة لكابينة ومسارات الفايبر تلقائياً.</p>
+        </div>
       </div>
+
+      <!-- 3. Manual Configuration -->
       <div class="card">
         <h3>الإنشاء اليدوي <span class="en">(Manual)</span></h3>
-        <p>باستخدام مجموعة أدوات <span class="en">Geoprocessing</span> الأساسية في صندوق أدوات <span class="en">Utility Network</span>. مرن بالكامل لكنه أطول، ومناسب لو محتاج تحكم دقيق جدًا في كل تفصيلة.</p>
+        <p>باستخدام أدوات الـ <span class="en">Geoprocessing</span> الأساسية في صندوق أدوات <span class="en">Utility Network Toolbox</span>. يتيح لك بناء السكيما والشبكة خطوة بخطوة للتحكم الدقيق في كل عنصر، ويمكن أتمتة هذه العملية عبر سكريبتات <span class="en">Python (ArcPy)</span>.</p>
       </div>
+
     </div>
-    <p style="margin-top:24px;">مهما كان المسار، أول قرار لازم تاخده هو <b>نوع النشر</b>:</p>
+
+    <!-- أنماط النشر Deployment Types -->
+    <h3 style="margin-top:32px;">أنماط النشر والترخيص <span class="en">(Deployment Types)</span></h3>
+    <p>نوع قاعدة البيانات الجغرافية (<span class="en">Geodatabase Type</span>) هو الذي يحدد نمط النشر، ويتوقف عليه عدد المحررين ونوع الترخيص المطلوبة:</p>
+
     <div class="compare" style="margin-top:16px;">
       <div>
         <h3><span class="en">Enterprise Deployment</span></h3>
+        <p style="font-size:0.85em; color:var(--text-dim);">النمط الرئيسي المعتمد للمؤسسات الكبيرة</p>
         <ul>
-          <li>عدد محررين غير محدود</li>
-          <li><span class="en">Enterprise Geodatabase</span></li>
-          <li>يتطلب رخصة <span class="en">ArcGIS Advanced Editing</span></li>
+          <li><b>عدد المحررين:</b> متعدد (<span class="en">Many Editors</span> عبر منصات Desktop و Mobile و Web).</li>
+          <li><b>نوع قاعدة البيانات:</b> <span class="en">Enterprise Geodatabase</span>.</li>
+          <li><b>مستوى ترخيص ArcGIS Pro:</b> <span class="en">Standard</span> أو <span class="en">Advanced</span>.</li>
+          <li><b>امتداد المستخدم:</b> يتطلب <span class="en">ArcGIS Advanced Editing User Type Extension</span>.</li>
         </ul>
       </div>
       <div>
         <h3><span class="en">Single-user Deployment</span></h3>
+        <p style="font-size:0.85em; color:var(--text-dim);">مناسب للتجارب والجاهزية أو المشاريع الفردية</p>
         <ul>
-          <li>محرر واحد بس وقت التعديل</li>
-          <li><span class="en">File</span> أو <span class="en">Mobile Geodatabase</span></li>
-          <li>مفيش رخصة إضافية مطلوبة</li>
+          <li><b>عدد المحررين:</b> محرر واحد فقط للتعديل (<span class="en">Single Editor</span>) مع إمكانية القراءة المتعددة.</li>
+          <li><b>نوع قاعدة البيانات:</b> <span class="en">File Geodatabase</span> أو <span class="en">Mobile Geodatabase</span>.</li>
+          <li><b>مستوى ترخيص ArcGIS Pro:</b> <span class="en">Standard</span> أو <span class="en">Advanced</span>.</li>
+          <li><b>امتداد المستخدم:</b> لا يتطلب أي ترخيص إضافي (<span class="en">N/A</span>).</li>
         </ul>
       </div>
     </div>
-  </section>
+
+    <!-- ملاحظة نقل الشبكة -->
+    <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); padding: 14px 18px; margin-top: 20px; border-radius: 6px; font-size: 0.88em; line-height: 1.6;">
+      <strong style="color: var(--accent);">ملاحظة هامة (Transferring Utility Network):</strong> يمكنك إنشاء واختبار الـ <span class="en">Utility Network</span> في بيئة فردية (<span class="en">Single-user</span>) أولاً للتحقق من جودة البيانات (<span class="en">QA/QC</span>)، ثم نقلها بسهولة إلى بيئة <span class="en">Enterprise Geodatabase</span> باستخدام أدوات <span class="en">Copy/Paste</span> أو <span class="en">Export/Import XML Workspace Document</span> أو مجموعة أدوات <span class="en">Utility Network Package</span>.
+    </div>
+</section>
 
   <section id="sec21">
     <span class="num">21</span>
