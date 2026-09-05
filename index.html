@@ -1578,36 +1578,63 @@
   <section id="sec21">
     <span class="num">21</span>
     <h2>نشر الشبكة كخدمة <span class="en">(Publish as a Feature Service)</span></h2>
-    <p>عشان أكتر من مستخدم يشتغل على الشبكة من الويب أو الموبايل، لازم تتنشر كـ <span class="en">Feature Service</span> — وده بيتطلب شوية تجهيزات قبلها.</p>
+    <p>عشان أكثر من مستخدم يقدر يحرر ويحلل الشبكة من الويب أو الموبايل أو <span class="en">ArcGIS Pro</span>، لازم تتنشر كـ <span class="en">Feature Service</span>. التوثيق الرسمي لـ <span class="en">ArcGIS Pro 3.7</span> بيحدد شروط متقدمة وإعدادات حاسمة لازم تطبقها بالترتيب لتفادي أخطاء الـ <span class="en">Analyzer</span>.</p>
+    
+    <!-- قسم متطلبات الملكية والترخيص -->
+    <div style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--accent, #3b82f6); padding: 14px 18px; margin: 20px 0; border-radius: 4px;">
+      <h4 style="margin: 0 0 8px 0; color: var(--accent, #3b82f6);">شروط وبنية الملكية والترخيص <span class="en">(Prerequisites)</span></h4>
+      <ul style="margin: 0; padding-left: 20px; font-size: 0.9em; line-height: 1.6;">
+        <li><b>مالك قاعدة البيانات:</b> يجب إجراء الاتصال بقاعدة البيانات عبر حساب مالك الشبكة (<span class="en">Database Utility Network Owner</span>).</li>
+        <li><b>مالك الـ Portal:</b> حساب البورتال المتصل والمُسجل دخوله يجب أن يكون هو مالك الشبكة على البورتال (<span class="en">Portal Utility Network Owner</span>).</li>
+        <li><b>الترخيص:</b> يلزم توفر ترخيص <span class="en">ArcGIS Advanced Editing User Type Extension</span> للحساب النشط لإنشاء ونشر وتحرير الشبكة (عمليات الاستعلام والتتبع لا تتطلب هذا الامتداد).</li>
+      </ul>
+    </div>
+
     <ol class="steps" style="margin-top:28px;">
       <li>
-        <h4>خلي الاتصال بقاعدة البيانات <span class="en">Branch Versioned</span></h4>
-        <p>من خصائص اتصال الـ <span class="en">Geodatabase</span>، اختار <span class="en">Branch</span> كنوع الإصدار قبل ما تضيف الشبكة للخريطة — من غير كده مش هتقدر تنشر أصلًا.</p>
+        <h4>تضبط نوع الاصدار للاتصال بقاعدة البيانات على <span class="en">Branch</span></h4>
+        <p>من خصائص اتصال الـ <span class="en">Geodatabase Connection Properties</span>، اختر <span class="en">Branch</span> كنوع إصدار قبل إضافة الشبكة للخريطة — التحرير والنشر لا يعملان بدون الـ <span class="en">Branch Versioning</span>.</p>
       </li>
       <li>
-        <h4>سجّل الـ <span class="en">Feature Dataset</span> بنفس النوع</h4>
-        <p>فعّل خانة <span class="en">Versioning</span> على الـ <span class="en">Feature Dataset</span> وتأكد إن النوع <span class="en">Branch</span>.</p>
+        <h4>تسجيل الـ <span class="en">Feature Dataset</span> كـ <span class="en">Branch Versioned</span></h4>
+        <p>انقر بزر الماوس الأيمن على الـ <span class="en">Feature Dataset</span> ثم <span class="en">Manage</span>، وفعل خيار <span class="en">Versioning</span> مع التأكد من اختيار <span class="en">Branch</span> (سيتم تسجيل كافة الفئات والجداول غير المكانية <span class="en">Nonspatial Objects</span> تلقائياً).</p>
       </li>
       <li>
-        <h4>ضيف كل طبقات الشبكة للخريطة</h4>
-        <p>لازم تضيف <b>كل</b> الفئات المشاركة في الشبكة، مش بس اللي محتاجها — وإلا هيرجعلك تحذير <span class="en">Analyzer Warning 24099</span> لو حد هيستخدمها في <span class="en">ArcGIS Pro</span>.</p>
+        <h4>تجهيز الخريطة ومراعاة القيود البرمجية للـ <span class="en">Analyzer</span></h4>
+        <p>أضف جميع الفئات المشاركة في الشبكة بالكامل لتفادي تحذير <span class="en">Analyzer Warning 24099</span>. <b>تنبيه هام:</b> يمنع استخدام الـ <span class="en">Definition Queries</span> أو إخفاء الحقول (<span class="en">Hidden Fields</span>) أو إضافة <span class="en">Subtype Group Layers</span> في خريطة النشر الأساسية حتى لا يظهر الخطأ <span class="en">Analyzer Error 00270</span>.</p>
       </li>
       <li>
-        <h4>انشر كـ <span class="en">Map Image + Feature</span></h4>
-        <p>من تبويب <span class="en">Share</span>، اختار <span class="en">Publish Web Layer</span>، وفعّل خيار <span class="en">Feature</span> تحت <span class="en">Reference registered data</span> — ده اللي بيخلي <span class="en">Version Management</span> يشتغل تلقائيًا.</p>
+        <h4>تفعيل المعرفات الرقمية الفريدة للطبقات <span class="en">(Unique Layer IDs)</span></h4>
+        <p>من خصائص الخريطة (<span class="en">Map Properties -> General</span>)، فعّل خيار <span class="en">Allow assignment of unique numeric IDs</span> لحماية المعرفات عند إعادة النشر أو تحديث الخدمة مستقبلاً.</p>
       </li>
       <li>
-        <h4>حلل قبل النشر</h4>
-        <p>اضغط <span class="en">Analyze</span> لاكتشاف الأخطاء (لازم تتصلح قبل النشر) والتحذيرات (تقدر تتجاهلها لو عارف تأثيرها).</p>
+        <h4>إعدادات التحرير العالي والمنحنيات الحقيقية <span class="en">(True Curves)</span></h4>
+        <p>عند اختيار <span class="en">Publish Web Layer</span> واختيار <span class="en">Map Image</span> مع تفعيل <span class="en">Feature</span> تحت <span class="en">Reference registered data</span>، انتقل لخواص الـ <span class="en">Feature Properties</span> وتأكد من تفعيل <span class="en">Allow update of true curves</span> وتأكد أن خدمة إدارة النسخ <span class="en">Version Management</span> مفعّلة تلقائياً.</p>
+      </li>
+      <li>
+        <h4>التحليل والنشر <span class="en">(Analyze & Publish)</span></h4>
+        <p>اضغط على <span class="en">Analyze</span> للتأكد من تسجيل قاعدة البيانات كـ <span class="en">Data Store</span> ومعالجة الأخطاء والتحذيرات، ثم انقر على <span class="en">Publish</span>.</p>
       </li>
     </ol>
+
+    <!-- بطاقة العمل أوفلاين المحدثة -->
     <div class="card" style="margin-top:24px; border-color:var(--gold);">
-      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">مهم</span>لو عايز الشبكة تشتغل أوفلاين</h3>
-      <p>فعّل <span class="en">Enable Sync</span> وقت النشر، ولازم يكون عندك <span class="en">Service Territory Feature Class</span> موجودة في الخدمة المنشورة — من غيرها التزامن الأوفلاين مش هيشتغل.</p>
+      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">متطلب حاسم</span> لو عايز الشبكة تشتغل أوفلاين <span class="en">(Offline Sync)</span></h3>
+      <p>لتشغيل الشبكة والتتبع أوفلاين في بيئة الميدان، يجب تفعيل <span class="en">Enable Sync</span> و <span class="en">Enable Editing</span>. اشترط التوثيق وجود طبقة نطاق الخدمة <span class="en">Service Territory Feature Class</span> داخل الخدمة المنشورة، مع إعداد خيار إنشاء النسخ عند التزامن على: <span class="en">Create a version for each downloaded map</span>.</p>
     </div>
-    <p style="margin-top:22px;"><b>سيناريو عملي من الدوك:</b> شركة كهرباء عندها فريق تحرير للتوزيع وفريق تحرير للنقل — كل فريق بيشتغل على مشروع منفصل فيه بس الشبكة النطاقية بتاعته + شبكة الهيكل + طبقة الشبكة، بينما المحلل اللي بيشتغل على الاتنين مع بعض بيحتاج مشروع فيه الشبكتين النطاقيتين سوا.</p>
-    <div class="example-box"><span class="label en">FTTH</span><p>بنفس المنطق: مهندس صيانة الفايبر محتاج مشروع فيه بس <span class="en">Telecom Domain Network</span> + شبكة الهيكل، بينما مهندس التخطيط اللي بيراجع البنية التحتية المشتركة (فايبر + كهرباء على نفس الأعمدة) محتاج الاتنين مع بعض.</p></div>
-  </section>
+
+    <!-- سيناريو العمل الاستراتيجي -->
+    <p style="margin-top:22px;"><b>سيناريو العمل المؤسسي (مثل شبكات الكهرباء أو الاتصالات):</b></p>
+    <ul>
+      <li><b>فرق التحرير والتحليل المتقدم:</b> تستخدم خدمات تحتوي على طبقة الشبكة كاملة (<span class="en">Utility Network Layer</span>) لمتابعة المناطق المعدلة (<span class="en">Dirty Areas</span>) والأخطاء وإجراء التتبع (<span class="en">Tracing</span>).</li>
+      <li><b>المستخدم العادي / فنيو الميدان (عرض واستعلام فقط):</b> يمكن نشر خدمات <span class="en">Feature Class</span> بدون طبقة الـ <span class="en">Utility Network</span> نفسها؛ لتسهيل العرض وتطبيق الفلاتر (<span class="en">Definition Queries</span>) وإخفاء الحقول غير المهمة دون التأثير على قواعد قواعد الشبكة الخلفية.</li>
+    </ul>
+
+    <div class="example-box">
+      <span class="label en">FTTH TELECOM EXAMPLE</span>
+      <p>مهندس التخطيط والـ GIS الرئيسي يفتح مشروع يحتوي على الـ <span class="en">Telecom Domain Network</span> وطبقة الـ <span class="en">Utility Network</span> لمتابعة جودة البيانات والـ <span class="en">Dirty Areas</span>، بينما الفني الميداني يفتح خريطة مبسطة تحتوي فقط على الكوابل والـ <span class="en">FAT/FDT</span> بدون طبقة المحرك للتركيز على مهمة الصيانة بسرعة.</p>
+    </div>
+</section>
 
   <section id="sec22">
     <span class="num">22</span>
