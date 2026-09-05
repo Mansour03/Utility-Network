@@ -1580,7 +1580,7 @@
     <h2>نشر الشبكة كخدمة <span class="en">(Publish as a Feature Service)</span></h2>
     <p>عشان أكثر من مستخدم يقدر يحرر ويحلل الشبكة من الويب أو الموبايل أو <span class="en">ArcGIS Pro</span>، لازم تتنشر كـ <span class="en">Feature Service</span>. التوثيق الرسمي لـ <span class="en">ArcGIS Pro 3.7</span> بيحدد شروط متقدمة وإعدادات حاسمة لازم تطبقها بالترتيب لتفادي أخطاء الـ <span class="en">Analyzer</span>.</p>
     
-    <!-- قسم متطلبات الملكية والترخيص -->
+    <!-- شروط وبنية الملكية والترخيص -->
     <div style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--accent, #3b82f6); padding: 14px 18px; margin: 20px 0; border-radius: 4px;">
       <h4 style="margin: 0 0 8px 0; color: var(--accent, #3b82f6);">شروط وبنية الملكية والترخيص <span class="en">(Prerequisites)</span></h4>
       <ul style="margin: 0; padding-left: 20px; font-size: 0.9em; line-height: 1.6;">
@@ -1594,6 +1594,13 @@
       <li>
         <h4>تضبط نوع الاصدار للاتصال بقاعدة البيانات على <span class="en">Branch</span></h4>
         <p>من خصائص اتصال الـ <span class="en">Geodatabase Connection Properties</span>، اختر <span class="en">Branch</span> كنوع إصدار قبل إضافة الشبكة للخريطة — التحرير والنشر لا يعملان بدون الـ <span class="en">Branch Versioning</span>.</p>
+        
+        <!-- الرابط التفاعلي المطلوب بالعربي -->
+        <p style="margin-top: 10px; font-size: 0.9em;">
+          <a href="#sec22" style="color: var(--accent, #60a5fa); text-decoration: underline; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+            ← معرفة المزيد حول إدارة النسخ (Learn more about versioning)
+          </a>
+        </p>
       </li>
       <li>
         <h4>تسجيل الـ <span class="en">Feature Dataset</span> كـ <span class="en">Branch Versioned</span></h4>
@@ -1617,22 +1624,87 @@
       </li>
     </ol>
 
-    <!-- بطاقة العمل أوفلاين المحدثة -->
+    <!-- متطلب التزامن أوفلاين -->
     <div class="card" style="margin-top:24px; border-color:var(--gold);">
       <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">متطلب حاسم</span> لو عايز الشبكة تشتغل أوفلاين <span class="en">(Offline Sync)</span></h3>
       <p>لتشغيل الشبكة والتتبع أوفلاين في بيئة الميدان، يجب تفعيل <span class="en">Enable Sync</span> و <span class="en">Enable Editing</span>. اشترط التوثيق وجود طبقة نطاق الخدمة <span class="en">Service Territory Feature Class</span> داخل الخدمة المنشورة، مع إعداد خيار إنشاء النسخ عند التزامن على: <span class="en">Create a version for each downloaded map</span>.</p>
     </div>
 
-    <!-- سيناريو العمل الاستراتيجي -->
+    <!-- سيناريو العمل المؤسسي -->
     <p style="margin-top:22px;"><b>سيناريو العمل المؤسسي (مثل شبكات الكهرباء أو الاتصالات):</b></p>
     <ul>
       <li><b>فرق التحرير والتحليل المتقدم:</b> تستخدم خدمات تحتوي على طبقة الشبكة كاملة (<span class="en">Utility Network Layer</span>) لمتابعة المناطق المعدلة (<span class="en">Dirty Areas</span>) والأخطاء وإجراء التتبع (<span class="en">Tracing</span>).</li>
-      <li><b>المستخدم العادي / فنيو الميدان (عرض واستعلام فقط):</b> يمكن نشر خدمات <span class="en">Feature Class</span> بدون طبقة الـ <span class="en">Utility Network</span> نفسها؛ لتسهيل العرض وتطبيق الفلاتر (<span class="en">Definition Queries</span>) وإخفاء الحقول غير المهمة دون التأثير على قواعد قواعد الشبكة الخلفية.</li>
+      <li><b>المستخدم العادي / فنيو الميدان (عرض واستعلام فقط):</b> يمكن نشر خدمات <span class="en">Feature Class</span> بدون طبقة الـ <span class="en">Utility Network</span> نفسها؛ لتسهيل العرض وتطبيق الفلاتر (<span class="en">Definition Queries</span>) وإخفاء الحقول غير المهمة دون التأثير على قواعد الشبكة الخلفية.</li>
     </ul>
 
     <div class="example-box">
       <span class="label en">FTTH TELECOM EXAMPLE</span>
       <p>مهندس التخطيط والـ GIS الرئيسي يفتح مشروع يحتوي على الـ <span class="en">Telecom Domain Network</span> وطبقة الـ <span class="en">Utility Network</span> لمتابعة جودة البيانات والـ <span class="en">Dirty Areas</span>، بينما الفني الميداني يفتح خريطة مبسطة تحتوي فقط على الكوابل والـ <span class="en">FAT/FDT</span> بدون طبقة المحرك للتركيز على مهمة الصيانة بسرعة.</p>
+    </div>
+</section>
+
+<!-- ========================================== -->
+<!-- SECTION 22: OVERVIEW OF VERSIONING        -->
+<!-- ========================================== -->
+<section id="sec22">
+    <span class="num">22</span>
+    <h2>نظرة عامة على إدارة النسخ <span class="en">(Overview of Versioning)</span></h2>
+    <p>تتوفر هذه الخاصية مع تراخيص <span class="en">Standard</span> أو <span class="en">Advanced</span>. في بيئة <span class="en">Enterprise Geodatabase</span> التي تضم عدة محررين، تتيح النسخ للمستخدمين العمل على نفس البيانات في نفس الوقت دون التعارض أو قفل البيانات (<span class="en">Data Locking</span>) أو تكرارها.</p>
+
+    <!-- بطاقة المفهوم الأساسي -->
+    <div style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--accent, #3b82f6); padding: 14px 18px; margin: 20px 0; border-radius: 4px;">
+      <h4 style="margin: 0 0 8px 0; color: var(--accent, #3b82f6);">كيف تعمل النسخ؟ <span class="en">(How Versioning Works)</span></h4>
+      <p style="margin: 0; font-size: 0.92em; line-height: 1.6;">
+        النسخ ليست نسخاً مكررة من قاعدة البيانات، بل يتم تتبع التعديلات والتغييرات التي تجري داخلها عبر جداول النظام (<span class="en">System Tables</span>). تمنح كل نسخة للمحرر رؤية معزولة تماماً للبيانات، مما يتيح إنجاز المعاملات طويلة الأجل (<span class="en">Long Transactions</span>) دون التأثير على البيئة الفعلية للمؤسسة. النسخة الأصلية لكل النسخ في قاعدة البيانات تسمى النسخة الافتراضية (<span class="en">Default Version</span>).
+      </p>
+    </div>
+
+    <!-- أنواع النسخ Grid -->
+    <h3 style="margin-top:28px;">أنواع إدارة النسخ <span class="en">(Versioning Types)</span></h3>
+    <div class="grid3" style="margin-top:16px;">
+      
+      <div class="card">
+        <h3><span class="en">Branch Versioning</span></h3>
+        <p>مصممة لدعم نموذج الـ <span class="en">Web GIS</span>، وتتيح عمليات التحرير متعددة المستخدمين والمعاملات طويلة الأجل عبر طبقات الويب (<span class="en">Web Feature Layers</span>). وهي النمط الإجباري والوحيد المعتمد مع الـ <span class="en">Utility Network</span>.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="en">Traditional Versioning</span></h3>
+        <p>توفر المرونة للمعاملات طويلة الأجل عند الاتصال المباشر بقاعدة البيانات الجغرافية (<span class="en">Direct Connection</span>)، مع تجربة تحرير مبسطة للمعاملات القصيرة عبر خدمات الـ Feature Services.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="en">Traditional with Move Edits to Base</span></h3>
+        <p>نمط اختياري من الـ Traditional يتيح لبعض التطبيقات الوصول المباشر للبيانات الأساسية (<span class="en">Base Data</span>) مع السماح لمحررين آخرين بالعمل في نسخهم المعزولة.</p>
+      </div>
+
+    </div>
+
+    <!-- خطوات العمل الرئيسية -->
+    <h3 style="margin-top:32px;">خطوات وسير العمل مع النسخ <span class="en">(Versioning Workflow)</span></h3>
+    <ol class="steps" style="margin-top:16px;">
+      <li>
+        <h4>تسجيل البيانات كـ <span class="en">Versioned</span></h4>
+        <p>بغض النظر عن نوع النسخ، يجب تسجيل البيانات لتتمكن من العمل خارج النسخة الافتراضية. عند التسجيل، يتم تتبع عمليات الإضافة (<span class="en">Insert</span>)، التحديث (<span class="en">Update</span>)، والحذف (<span class="en">Delete</span>).</p>
+      </li>
+      <li>
+        <h4>التعامل مع النسخة الافتراضية <span class="en">(Default Version)</span></h4>
+        <p>النسخة الافتراضية توجد دائماً ولا يمكن حذفها، وهي تعبر عن الحالة الحالية للنظام (<span class="en">Production State</span>). عند الاتصال بقاعدة البيانات، تتصل تلقائياً بالـ <span class="en">Default</span>، ويمكن حمايتها من التعديل العشوائي لتستقبل فقط التعديلات المعتمدة من النسخ الفرعية.</p>
+      </li>
+      <li>
+        <h4>إدارة وإنشاء النسخ <span class="en">(Manage Versions)</span></h4>
+        <p>يتم إنشاء نسخ فرعية (<span class="en">Named Versions</span> في الـ Branch) متفرعة من الـ <span class="en">Default</span>. في الـ <span class="en">Branch Versioning</span>، تسمح Esri بمستوى فرعي واحد فقط (<span class="en">Single Level</span>) حيث تكون الـ Default هي الأصل لجميع النسخ للحفاظ على الأداء.</p>
+      </li>
+      <li>
+        <h4>التوفيق والترحيل <span class="en">(Reconcile and Post)</span></h4>
+        <p>عند الانتهاء من التعديلات، تُمكّنك عملية الـ <b>Reconcile</b> من مقارنة تعديلاتك بالنسخة الأصلية واكتشاف التعارضات (<span class="en">Conflicts</span>) وحلها. بعد التوفيق، يتم استخدام عملية الـ <b>Post</b> لدمج وتثبيت التعديلات نهائياً في النسخة الافتراضية (<span class="en">Default Version</span>).</p>
+      </li>
+    </ol>
+
+    <!-- ملاحظة التنسيق والاتصال -->
+    <div class="card" style="margin-top:24px; border-color:var(--gold);">
+      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">طريقة الاتصال بالنسخ</span></h3>
+      <p>في الـ <span class="en">Branch Versioning</span>، عند الاتصال المباشر بقاعدة البيانات ستتصل دائماً بـ <span class="en">Default</span>. للوصول إلى النسخ المسمّاة (<span class="en">Named Versions</span>)، يجب إضافة خدمة الويب (<span class="en">Web Feature Layer</span>) إلى الخريطة ثم تغيير النسخة من خصائص الطبقة داخل الخريطة.</p>
     </div>
 </section>
 
