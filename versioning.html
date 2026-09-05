@@ -528,16 +528,68 @@
 <div class="wrap">
 
   <section class="hero" id="hero">
-    <div class="eyebrow"><span class="en">CHAPTER 01</span> — مقدمة إلى الإصدارات</div>
-    <h1>الإصدارات <span class="en">(Versioning)</span> في الـ <span class="en">Geodatabase</span>... إيه الحكاية؟</h1>
-    <p class="lead">
-      لما أكتر من محرر محتاجين يشتغلوا على نفس البيانات في نفس اللحظة، من غير ما حد يقفل الطبقة في وش التاني ومن غير ما تعمل نسخ مكررة من الداتا — دي بالظبط المشكلة اللي الإصدارات <span class="en">(Versions)</span> جاية تحلها. كل محرر بياخد "نسخة معزولة" خاصة بيه من البيانات، يشتغل عليها براحته، وبعدين يدمج شغله مع باقي الفريق وقت ما يخلص.
+  <div class="eyebrow"><span class="en">CHAPTER 01</span> — مقدمة إلى الإصدارات</div>
+  <h1>الإصدارات <span class="en">(Versioning)</span> في الـ <span class="en">Geodatabase</span>... إيه الحكاية؟</h1>
+  
+  <p class="lead">
+    لما يكون عندك فريق عمل كامل شغال على قواعد البيانات الجغرافية المؤسسية <span class="en">(Enterprise Geodatabase)</span>، والكل محتاج يعدل في نفس الوقت — من غير ما حد يقفل الطبقة في وش التاني <span class="en">(Locks)</span>، ومن غير ما تضطر تعمل نسخ مكررة وتتوه في دمجها — دي بالظبط المشكلة اللي الإصدارات <span class="en">(Versions)</span> جاية تحلها[cite: 1].
+  </p>
+
+  <p class="lead">
+    الـ <span class="en">Versioning</span> بيدي لكل محرر "بيئة معزولة" وview خاص بيه تمامًا على البيانات[cite: 1]. بيسمح بالـ <span class="en">Long Transactions</span> (يعني تعدل على مدار أيام وأسابيع عبر جلسات عمل متعددة)[cite: 1]، ولما تخلص شغلك وتتأكد منه، تقدر تدمج تعديلاتك بسلاسة مع النسخة الرئيسية[cite: 1].
+  </p>
+
+  <!-- سكشن: فك تشفير آلية العمل والرسم التوضيحي -->
+  <div class="concept-block my-4 p-4 rounded border">
+    <h3>إزاي البيانات بتتحرك بين الإصدارات؟ <span class="en">(How It Works)</span></h3>
+    <p>
+      مهم جدًا تفهم إن الـ <span class="en">Version</span> مش ملف مضاعف أو نسخة منفصلة من قاعدة البيانات[cite: 1]! الداتا الأصلية بتفضل زي ما هي، وكل عمليات الإضافة، التعديل، والحذف <span class="en">(Inserts, Updates, Deletes)</span> بتتراقب وتتسجل جوه <span class="en">System Tables</span>[cite: 1].
     </p>
-    <p class="lead">
-      في الدليل ده هنفكك المفهوم من الأساس، ونفرّق بين النوعين المتاحين — <span class="en">Branch</span> و<span class="en">Traditional</span> — ونشوف إزاي كل واحد فيهم بيتدار عمليًا من الإنشاء لحد الدمج والتنظيف الدوري.
+
+    <!-- توضيح حركة الأسهم بالرسم -->
+    <div class="workflow-diagram-explanation my-3">
+      <ul class="list-unstyled">
+        <li class="mb-2">
+          <strong>1. النسخة الأصلية <span class="en">(Default Version):</span></strong> دي جذر وشجرة البيانات كلها[cite: 1]، وبتعبر عن حالة البيانات الحالية في بيئة الإنتاج <span class="en">(Production)</span>[cite: 1].
+        </li>
+        <li class="mb-2">
+          <strong>2. المطابقة <span class="en">(Reconcile - السهم النازل):</span></strong> قبل ما ترحل تعديلاتك، النظام بيجيب أحدث التغييرات اللي حصلت في الـ <span class="en">Default</span> وينزلها لنسختك الخاصة عشان يكتشف أي تعارضات <span class="en">(Conflicts)</span> بين المحررين ويخليك تحلها الأول[cite: 1].
+        </li>
+        <li class="mb-2">
+          <strong>3. الترحيل <span class="en">(Post - السهم الصاعد):</span></strong> بعد ما تتأكد إن شغلك مظبوط ومفيش تعارض، بتدفع <span class="en">(Post)</span> التعديلات للنسخة الرئيسية <span class="en">(Default)</span> لتصبح جزءًا من البيانات المعتمدة[cite: 1].
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- سكشن: أنواع الـ Versioning -->
+  <div class="types-block my-4">
+    <h3>أنواع الـ <span class="en">Versioning</span> المتاحة</h3>
+    <p>علشان تبدأ تشتغل، لازم تسجل البيانات الأول كـ <span class="en">Register as Versioned</span>[cite: 1]، وعندك نوعين رئيسيين حسب بيئة العمل الخاصة بيك[cite: 1]:</p>
+    
+    <ul class="styled-list">
+      <li>
+        <strong>Branch Versioning:</strong> ده النوع الحديث المخصص لبيئة الـ <span class="en">Web GIS</span> والـ <span class="en">Web Feature Layers</span>[cite: 1]. بيعتمد على شجرة إصدارات مسطحة <span class="en">(Flat Tree)</span> بمستوى واحد فقط تابعة للـ <span class="en">Default</span>[cite: 1].
+      </li>
+      <li>
+        <strong>Traditional Versioning:</strong> ده النوع الكلاسيكي للاتصال المباشر بقواعد البيانات المؤسسية <span class="en">(Direct DB Connection)</span>[cite: 1]، وبيتتيح مرونة عمل شجرة إصدارات متعددة المستويات <span class="en">(Version Tree)</span>[cite: 1].
+      </li>
+      <li>
+        <strong>Traditional with Move Edits to Base:</strong> خيار فرعي بيسمح للتطبيقات والمحررين بالوصول المباشر للبيانات الأساسية مع إمكانية استخدام الإصدارات المعزولة في نفس الوقت[cite: 1].
+      </li>
+    </ul>
+  </div>
+
+  <!-- سكشن: نصيحة معمارية بأفضل الممارسات -->
+  <div class="tip-box p-3 rounded border-start border-4 border-warning my-3">
+    <strong>💡 أفضل الممارسات <span class="en">(Best Practices):</span></strong>
+    <p class="mb-0">
+      يُفضل دائمًا حماية الـ <span class="en">Default Version</span> وتغيير صلاحياته إلى <span class="en">Protected</span> لمنع التعديل المباشر عليه بالخطأ[cite: 1]. كما يُوصى بالحفاظ على شجرة إصدارات مسطحة <span class="en">(Flat Version Tree)</span> لسهولة الإدارة وتحسين أداء قاعدة البيانات[cite: 1].
     </p>
-    <div class="source-link">المصدر: <a href="https://doc.esri.com/en/arcgis-pro/latest/help/data/geodatabases/overview/overview-of-versioning-in-arcgis-pro.html" target="_blank" rel="noopener">Esri — Overview of versioning</a></div>
-  </section>
+  </div>
+
+  <div class="source-link">المصدر: <a href="https://doc.esri.com/en/arcgis-pro/latest/help/data/geodatabases/overview/overview-of-versioning-in-arcgis-pro.html" target="_blank" rel="noopener">Esri — Overview of versioning</a>[cite: 1]</div>
+</section>
 
   <section id="sec1">
     <span class="num">01</span>
