@@ -1,169 +1,1183 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إدارة النسخ | ArcGIS Utility Network</title>
-    <!-- استدعاء ملف الـ CSS الخاص بمشروعك -->
-    <link rel="stylesheet" href="style.css">
-    <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: #111827;
-            --text-main: #f3f4f6;
-            --text-dim: #9ca3af;
-            --accent: #3b82f6;
-            --gold: #e8a83d;
-            --gold-soft: rgba(232, 168, 61, 0.15);
-            --border: rgba(255, 255, 255, 0.1);
-        }
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .en { font-family: monospace; direction: ltr; display: inline-block; }
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 24px;
-            padding: 10px 18px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 6px;
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            transition: all 0.2s ease-in-out;
-        }
-        .back-btn:hover {
-            background: rgba(59, 130, 246, 0.25);
-            transform: translateX(-3px);
-        }
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-        .grid3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-        }
-        .steps {
-            padding-right: 20px;
-        }
-        .steps li {
-            margin-bottom: 18px;
-        }
-        .steps h4 {
-            margin: 0 0 6px 0;
-            color: var(--accent);
-        }
-        .tag {
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            font-weight: bold;
-            margin-left: 8px;
-            border: 1px solid;
-        }
-    </style>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إصدارات الـ Geodatabase (Versioning) في ArcGIS Pro — دليل تأسيسي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  :root{
+    --bg:#0A0B0D;
+    --bg-elev:#131418;
+    --panel:#16171C;
+    --panel-2:#1D1F25;
+    --line:#2A2C33;
+    --line-soft:#1E2026;
+    --text:#FFFFFF;
+    --text-body:#E9EAED;
+    --text-muted:#B7BBC4;
+    --text-dim:#7B808A;
+    --accent:#4F8CFF;
+    --accent-soft:rgba(79,140,255,0.10);
+    --accent-line:rgba(79,140,255,0.35);
+    --gold:#E8A83D;
+    --gold-soft:rgba(232,168,61,0.10);
+    --radius:14px;
+    --radius-sm:8px;
+    --fiber-blue:#3D7DF0;
+    --fiber-orange:#F5892B;
+    --fiber-green:#3FB24C;
+    --fiber-brown:#8A5A34;
+    --fiber-slate:#7C8CA3;
+    --fiber-white:#EDEFF3;
+    --fiber-red:#E24B4A;
+    --fiber-black:#20242E;
+    --fiber-yellow:#F0CB3A;
+    --fiber-violet:#8A63E8;
+    --fiber-rose:#F084AA;
+    --fiber-aqua:#39C7C0;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1100px 620px at 78% -8%, rgba(79,140,255,0.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 12%, rgba(232,168,61,0.05), transparent 55%),
+      var(--bg);
+    color:var(--text-body);
+    font-family:'Noto Naskh Arabic', 'IBM Plex Sans Arabic', serif;
+    line-height:1.8;
+    font-size:16.5px;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .en{
+    font-family:'JetBrains Mono', monospace;
+    direction:ltr;
+    unicode-bidi:isolate;
+    font-size:0.88em;
+    color:var(--text);
+    background:rgba(255,255,255,0.055);
+    border:1px solid rgba(255,255,255,0.09);
+    border-radius:5px;
+    padding:1px 6px;
+    letter-spacing:0.1px;
+    white-space:normal;
+    overflow-wrap:break-word;
+    box-decoration-break:clone;
+    -webkit-box-decoration-break:clone;
+  }
+  h1,h2,h3{
+    font-family:'Cairo', sans-serif;
+    color:var(--text);
+    margin:0;
+    line-height:1.45;
+    letter-spacing:-0.01em;
+  }
+
+
+  /* ===== page frame: sidebar + content ===== */
+  .page{
+    display:flex;
+    align-items:flex-start;
+    min-height:100vh;
+  }
+  .sidebar{
+    width:260px;
+    flex:0 0 260px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--bg-elev);
+    border-left:1px solid var(--line);
+    padding:20px 16px;
+    scrollbar-width:thin;
+  }
+  .sidebar .brand{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-muted);
+    letter-spacing:0.5px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+  }
+  .sidebar .doc-path{
+    height:0;
+    margin:18px 0 20px;
+    border-bottom:1px solid var(--line);
+  }
+  .sidebar nav{display:flex; flex-direction:column; gap:4px;}
+  .lec-group{border-bottom:1px solid var(--line-soft); padding-bottom:6px; margin-bottom:2px;}
+  .lec-group:last-child{border-bottom:none;}
+  .lec-toggle{
+    width:100%;
+    display:flex; align-items:center; gap:8px;
+    background:none; border:none;
+    color:var(--text); font-family:'IBM Plex Sans Arabic', sans-serif;
+    font-size:13.5px; font-weight:600;
+    padding:10px 10px;
+    cursor:pointer;
+    border-radius:8px;
+    text-align:right;
+  }
+  .lec-toggle:hover{background:var(--panel-2);}
+  .lec-toggle .chev{
+    display:inline-block;
+    font-size:10px;
+    color:var(--text-dim);
+    transition:transform 0.25s;
+    transform:rotate(-90deg);
+  }
+  .lec-group.open .lec-toggle .chev{transform:rotate(0deg);}
+  .lec-items{
+    max-height:0;
+    overflow:hidden;
+    display:flex; flex-direction:column; gap:2px;
+    transition:max-height 0.3s ease;
+    padding-right:4px;
+  }
+  .sidebar nav a{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    text-decoration:none;
+    color:var(--text-muted);
+    font-size:14px;
+    padding:9px 12px;
+    border-radius:9px;
+    transition:background 0.2s, color 0.2s;
+  }
+  .sidebar nav a .dot{
+    width:5px;height:5px;border-radius:50%;
+    background:var(--line);
+    flex:0 0 5px;
+    margin-top:8px;
+    transition:background 0.2s, box-shadow 0.2s;
+  }
+  .nav-text{display:flex; flex-direction:column; gap:2px;}
+  .nav-ar{font-size:13.5px; color:inherit; line-height:1.5;}
+  .nav-en{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--text-dim);
+    direction:ltr;
+    unicode-bidi:isolate;
+    text-align:right;
+    line-height:1.4;
+  }
+  .sidebar nav a.active .nav-en{color:var(--accent);}
+  .sidebar nav a:hover{background:var(--panel-2); color:var(--text-body);}
+  .sidebar nav a.active{color:var(--text); background:var(--accent-soft); border-inline-start:2px solid var(--accent); padding-inline-start:10px;}
+  .sidebar nav a.active .dot{background:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+  .sidebar .src{
+    margin-top:26px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:12.5px;
+  }
+  .sidebar .src a{color:var(--text-muted); text-decoration:none;}
+  .sidebar .src a:hover{color:var(--accent);}
+  @media (max-width:980px){
+    .sidebar{display:none;}
+  }
+
+  .content{flex:1 1 auto; min-width:0;}
+
+  .wrap{max-width:1380px; margin:0 auto; padding:0 36px;}
+  @media (max-width:700px){ .wrap{padding:0 5vw;} }
+
+  /* ===== top bar ===== */
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(10,11,13,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:12px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  @media (min-width:981px){ .topbar{display:none;} }
+  .topbar .brand{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-muted);
+  }
+  .topbar .brand b{color:var(--accent);}
+  .topbar a{
+    color:var(--text-muted);
+    font-size:13px;
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:7px 16px;
+    border-radius:100px;
+    transition:border-color 0.2s, color 0.2s;
+  }
+  .topbar a:hover{border-color:var(--accent); color:var(--accent);}
+
+  /* ===== hero ===== */
+  .hero{
+    padding:48px 0 24px;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--accent);
+    font-size:13px;
+    letter-spacing:2px;
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-transform:uppercase;
+  }
+  .eyebrow::before{
+    content:"";
+    width:30px;height:1px;
+    background:var(--accent);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(24px,2.8vw,34px);
+    font-weight:800;
+    margin-bottom:16px;
+  }
+  .hero .lead{
+    color:var(--text-body);
+    font-size:16.5px;
+    max-width:100%;
+    margin-bottom:12px;
+  }
+  .hero .source-link{
+    display:inline-block;
+    margin-top:12px;
+    font-size:12.5px;
+    color:var(--text-dim);
+  }
+  .hero .source-link a{color:var(--text-muted);}
+
+  /* ===== hero diagram ===== */
+  .diagram-card{
+    margin-top:28px;
+    background:linear-gradient(180deg, var(--panel), var(--bg-elev));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px 20px 16px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 1px 0 rgba(255,255,255,0.04) inset, 0 30px 60px -35px rgba(0,0,0,0.7);
+  }
+  .diagram-card .cap{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--text-dim);
+    margin-top:12px;
+    text-align:center;
+    line-height:1.6;
+  }
+  svg text{font-family:'IBM Plex Sans Arabic','JetBrains Mono', sans-serif;}
+
+  /* ===== sections ===== */
+  section{padding:42px 0;}
+  .num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--accent);
+    font-size:13px;
+    margin-bottom:8px;
+    display:block;
+    letter-spacing:1px;
+  }
+  section h2{
+    font-size:clamp(19px,1.8vw,24px);
+    font-weight:700;
+    margin-bottom:18px;
+    max-width:900px;
+  }
+  p{color:var(--text-body); margin:0 0 14px;}
+  p b, li b{color:var(--text); font-weight:600;}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 22px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.03) inset;
+    transition:border-color 0.2s, transform 0.2s;
+  }
+  .card:hover{border-color:#3A3D45; transform:translateY(-2px);}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  .grid3{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; align-items:start;}
+  @media (max-width:760px){ .grid2, .grid3{grid-template-columns:1fr;} }
+
+  .card h3{font-size:16px; margin-bottom:8px; font-weight:700; color:var(--text);}
+  .card h3 .tag{
+    display:inline-block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--accent);
+    background:var(--accent-soft);
+    border:1px solid var(--accent-line);
+    padding:1px 7px;
+    border-radius:100px;
+    margin-left:6px;
+    vertical-align:middle;
+    font-weight:500;
+  }
+  .card p{margin-bottom:0; font-size:14px; color:var(--text-muted);}
+
+  .example-box{
+    border-right:2px solid var(--gold);
+    background:var(--panel-2);
+    padding:12px 16px;
+    border-radius:0 8px 8px 0;
+    margin-top:12px;
+  }
+  .example-box .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--gold);
+    letter-spacing:0.8px;
+    margin-bottom:6px;
+    display:block;
+    font-weight:600;
+  }
+  .example-box p{margin-bottom:0; font-size:13.5px; color:var(--text-body);}
+
+  .compare{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .compare > div{background:var(--panel); padding:20px;}
+  .compare h3{font-size:15.5px; margin-bottom:10px; color:var(--text);}
+  .compare ul{margin:0; padding-right:16px; color:var(--text-muted); font-size:14px;}
+  .compare li{margin-bottom:8px;}
+  @media (max-width:760px){ .compare{grid-template-columns:1fr;} }
+
+  ol.steps{list-style:none; margin:0; padding:0; counter-reset:step;}
+  ol.steps li{
+    counter-increment:step;
+    position:relative;
+    padding:0 0 22px 0;
+    padding-right:48px;
+    border-right:1px solid var(--line);
+    margin-right:14px;
+  }
+  ol.steps li:last-child{border-color:transparent; padding-bottom:0;}
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute;
+    right:-15px;
+    top:0;
+    width:30px;height:30px;
+    background:var(--panel-2);
+    border:1px solid var(--accent-line);
+    color:var(--accent);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    font-weight:600;
+  }
+  ol.steps h4{font-size:15px; color:var(--text); margin:0 0 6px; font-weight:700;}
+  ol.steps p{font-size:14px; margin:0; color:var(--text-muted);}
+
+  /* Compact step list — used inside narrow grid cards. No absolute-positioned
+     circle/line (which collides with text at narrow widths); the step
+     number already lives in the h4 text, styled as a small accent label. */
+  ol.steps-compact{list-style:none; margin:0; padding:0; counter-reset:none;}
+  ol.steps-compact li{
+    padding:12px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  ol.steps-compact li:first-child{padding-top:0;}
+  ol.steps-compact li:last-child{border-bottom:none; padding-bottom:0;}
+  ol.steps-compact li::before{content:none;}
+  ol.steps-compact h4{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    font-weight:700;
+    color:var(--accent);
+    letter-spacing:0.3px;
+    margin:0 0 5px;
+  }
+  ol.steps-compact p{font-size:14px; margin:0; color:var(--text-muted);}
+
+  /* Definition list — replaces dense run-on paragraphs of "term — description"
+     crammed together with <br>. Each entry gets its own line, clear spacing,
+     and a marker, so terms don't visually blend into one another. */
+  ul.deflist{list-style:none; margin:0; padding:0;}
+  ul.deflist li{
+    position:relative;
+    padding:7px 0 7px 0;
+    padding-right:18px;
+    color:var(--text-muted);
+    font-size:14px;
+    line-height:1.7;
+  }
+  ul.deflist li::before{
+    content:"";
+    position:absolute;
+    right:0;
+    top:16px;
+    width:5px;height:5px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+  ul.deflist b{color:var(--text); font-weight:600;}
+  ul.deflist b.en{color:var(--text); background:rgba(255,255,255,0.07);}
+
+  .glossary{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 24px;
+  }
+  @media (max-width:760px){ .glossary{grid-template-columns:1fr;} }
+  .gterm{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1px solid var(--line-soft);
+    padding:10px 0;
+    gap:12px;
+  }
+  .gterm .en{font-size:12.5px;}
+  .gterm .ar{color:var(--text-muted); font-size:13.5px; text-align:left;}
+
+  footer{
+    padding:36px 0 60px;
+    border-top:1px solid var(--line);
+    margin-top:40px;
+  }
+  footer p{font-size:13.5px; color:var(--text-dim);}
+  footer a{color:var(--accent);}
+
+  .pulse-node{fill:var(--panel-2); stroke:var(--line); stroke-width:1.5;}
+  .pulse-label{fill:var(--text); font-size:12px; font-weight:600;}
+  .pulse-sub{fill:var(--text-dim); font-size:9.5px;}
+</style>
+
 <body>
 
-<div class="container">
-    
-    <!-- زر العودة للصفحة الرئيسية -->
-    <a href="index.html" class="back-btn">
-        ➔ العودة إلى الدليل الرئيسي (ArcGIS Utility Network)
-    </a>
+<div class="page">
 
-    <!-- محتوى صفحة إدارة النسخ -->
-    <section id="versioning-overview">
-        <span class="num" style="color: var(--accent); font-weight: bold; font-size: 1.1em;">وثائق ArcGIS Pro 3.7</span>
-        <h1 style="font-size: 2.2em; margin-top: 8px; margin-bottom: 12px;">نظرة عامة على إدارة النسخ <span class="en">(Overview of Versioning)</span></h1>
-        <p style="font-size: 1em; color: var(--text-dim); margin-bottom: 24px;">
-            ArcGIS Pro 3.7 &nbsp;|&nbsp; متوفر مع تراخيص <span class="en">Standard</span> أو <span class="en">Advanced</span>
-        </p>
+<aside class="sidebar">
+  <div class="brand"><img src="favicon.png" alt="logo" class="mark-img"><span class="en" style="border:none;background:none;padding:0;">ArcGIS Geodatabase Versioning</span></div>
+  <div class="doc-path"></div>
+  <nav id="railLinks">
+    <div class="lec-group open" data-lec="lec1">
+      <button class="lec-toggle" type="button"><span class="chev">▾</span>الفصل الأول — أساسيات الإصدارات</button>
+      <div class="lec-items">
+        <a href="#hero"><span class="dot"></span><span class="nav-text"><span class="nav-ar">المقدمة</span><span class="nav-en">Introduction</span></span></a>
+        <a href="#sec1"><span class="dot"></span><span class="nav-text"><span class="nav-ar">ليه الإصدارات أصلًا؟</span><span class="nav-en">Overview of Versioning</span></span></a>
+        <a href="#sec2"><span class="dot"></span><span class="nav-text"><span class="nav-ar">نوعا الإصدار: Branch وTraditional</span><span class="nav-en">Versioning Types</span></span></a>
+        <a href="#sec3"><span class="dot"></span><span class="nav-text"><span class="nav-ar">مفردات لازم تعرفها</span><span class="nav-en">Versioning Vocabulary</span></span></a>
+        <a href="#sec4"><span class="dot"></span><span class="nav-text"><span class="nav-ar">تسجيل البيانات كـ Versioned</span><span class="nav-en">Registering Data</span></span></a>
+        <a href="#sec5"><span class="dot"></span><span class="nav-text"><span class="nav-ar">تبويب Versioning وإعداداته</span><span class="nav-en">Versioning Tab & Options</span></span></a>
+        <a href="#sec6"><span class="dot"></span><span class="nav-text"><span class="nav-ar">مصطلحات (1)</span><span class="nav-en">Glossary</span></span></a>
+      </div>
+    </div>
+    <div class="lec-group" data-lec="lec2">
+      <button class="lec-toggle" type="button"><span class="chev">▾</span>الفصل الثاني — Branch Versioning</button>
+      <div class="lec-items">
+        <a href="#sec7"><span class="dot"></span><span class="nav-text"><span class="nav-ar">سيناريوهات Branch Versioning</span><span class="nav-en">Branch Version Scenarios</span></span></a>
+        <a href="#sec8"><span class="dot"></span><span class="nav-text"><span class="nav-ar">تسجيل ونشر البيانات</span><span class="nav-en">Register & Publish</span></span></a>
+        <a href="#sec9"><span class="dot"></span><span class="nav-text"><span class="nav-ar">إنشاء وإدارة الإصدارات المسماة</span><span class="nav-en">Create & Manage Versions</span></span></a>
+        <a href="#sec10"><span class="dot"></span><span class="nav-text"><span class="nav-ar">التوفيق والدمج</span><span class="nav-en">Reconcile & Post</span></span></a>
+        <a href="#sec11"><span class="dot"></span><span class="nav-text"><span class="nav-ar">إدارة التعارضات</span><span class="nav-en">Manage Conflicts</span></span></a>
+        <a href="#sec12"><span class="dot"></span><span class="nav-text"><span class="nav-ar">السجل التاريخي والتقليم</span><span class="nav-en">Branch History & Pruning</span></span></a>
+        <a href="#sec13"><span class="dot"></span><span class="nav-text"><span class="nav-ar">مصطلحات (2)</span><span class="nav-en">Glossary</span></span></a>
+      </div>
+    </div>
+    <div class="lec-group" data-lec="lec3">
+      <button class="lec-toggle" type="button"><span class="chev">▾</span>الفصل الثالث — Traditional Versioning</button>
+      <div class="lec-items">
+        <a href="#sec14"><span class="dot"></span><span class="nav-text"><span class="nav-ar">سيناريوهات Traditional Versioning</span><span class="nav-en">Traditional Version Scenarios</span></span></a>
+        <a href="#sec15"><span class="dot"></span><span class="nav-text"><span class="nav-ar">تسجيل البيانات كـ Traditional</span><span class="nav-en">Register Traditional</span></span></a>
+        <a href="#sec16"><span class="dot"></span><span class="nav-text"><span class="nav-ar">إنشاء وإدارة الإصدارات</span><span class="nav-en">Manage Versions</span></span></a>
+        <a href="#sec17"><span class="dot"></span><span class="nav-text"><span class="nav-ar">عملية التحرير الكاملة</span><span class="nav-en">The Editing Process</span></span></a>
+        <a href="#sec18"><span class="dot"></span><span class="nav-text"><span class="nav-ar">التوفيق والدمج والتعارضات</span><span class="nav-en">Reconcile, Post & Conflicts</span></span></a>
+        <a href="#sec19"><span class="dot"></span><span class="nav-text"><span class="nav-ar">الإدارة الدورية للأداء</span><span class="nav-en">Version Administration</span></span></a>
+        <a href="#sec20"><span class="dot"></span><span class="nav-text"><span class="nav-ar">مصطلحات (3)</span><span class="nav-en">Glossary</span></span></a>
+      </div>
+    </div>
+  </nav>
+  <div class="src">
+    <a href="https://doc.esri.com/en/arcgis-pro/latest/help/data/geodatabases/overview/overview-of-versioning-in-arcgis-pro.html" target="_blank" rel="noopener">المصدر الأصلي ↗</a>
+  </div>
+</aside>
 
-        <p>في بيئة <span class="en">Enterprise Geodatabase</span> التي تضم عدة محررين، تتيح النسخ للمستخدمين العمل على نفس البيانات في نفس الوقت دون التعارض أو قفل البيانات (<span class="en">Data Locking</span>) أو تكرارها. تمنح كل نسخة للمحرر بيئة معزولة تماماً لإنجاز التعديلات طويلة الأجل (<span class="en">Long Transactions</span>).</p>
+<main class="content">
 
-        <!-- بطاقة المفهوم الأساسي -->
-        <div style="background: rgba(255, 255, 255, 0.02); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 24px 0; border-radius: 4px;">
-            <h3 style="margin: 0 0 8px 0; color: var(--accent);">كيف تعمل النسخ؟ <span class="en">(How Versioning Works)</span></h3>
-            <p style="margin: 0; font-size: 0.95em; line-height: 1.7;">
-                النسخ ليست نسخاً مكررة من قاعدة البيانات، بل يتم تتبع التعديلات والتغييرات التي تجري داخلها عبر جداول النظام (<span class="en">System Tables</span>). هذا يتيح للمحررين التعديل دون قفل الطبقات في البيئة الحية أو التأثير المباشر على بقية المستخدمين. النسخة الأصلية والأم لكل النسخ في قاعدة البيانات تسمى النسخة الافتراضية (<span class="en">Default Version</span>).
-            </p>
-        </div>
+<div class="topbar">
+  <div class="brand"><img src="favicon.png" alt="logo" class="mark-img"><span class="en" style="border:none;background:none;padding:0;">ArcGIS Geodatabase Versioning</span></div>
+  <a href="https://doc.esri.com/en/arcgis-pro/latest/help/data/geodatabases/overview/overview-of-versioning-in-arcgis-pro.html" target="_blank" rel="noopener">المصدر الأصلي ↗</a>
+</div>
 
-        <!-- أنواع النسخ Grid -->
-        <h2 style="margin-top:36px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">أنواع إدارة النسخ <span class="en">(Versioning Types)</span></h2>
-        <div class="grid3" style="margin-top:20px;">
-          
-          <div class="card">
-            <h3 style="color: var(--accent); margin-top: 0;"><span class="en">Branch Versioning</span></h3>
-            <p>مصممة خصيصاً لدعم نموذج الـ <span class="en">Web GIS</span>، وتتيح عمليات التحرير متعددة المستخدمين والمعاملات طويلة الأجل عبر طبقات الويب (<span class="en">Web Feature Layers</span>). <b>وهي النمط الإجباري والوحيد المعتمد مع الـ <span class="en">Utility Network</span>.</b></p>
-          </div>
+<div class="wrap">
 
-          <div class="card">
-            <h3 style="color: var(--accent); margin-top: 0;"><span class="en">Traditional Versioning</span></h3>
-            <p>توفر المرونة للمعاملات طويلة الأجل عند الاتصال المباشر بقاعدة البيانات الجغرافية (<span class="en">Direct Connection</span>)، مع تجربة تحرير مبسطة للمعاملات القصيرة عبر خدمات الـ Feature Services.</p>
-          </div>
+  <section class="hero" id="hero">
+    <div class="eyebrow"><span class="en">CHAPTER 01</span> — مقدمة إلى الإصدارات</div>
+    <h1>الإصدارات <span class="en">(Versioning)</span> في الـ <span class="en">Geodatabase</span>... إيه الحكاية؟</h1>
+    <p class="lead">
+      لما أكتر من محرر محتاجين يشتغلوا على نفس البيانات في نفس اللحظة، من غير ما حد يقفل الطبقة في وش التاني ومن غير ما تعمل نسخ مكررة من الداتا — دي بالظبط المشكلة اللي الإصدارات <span class="en">(Versions)</span> جاية تحلها. كل محرر بياخد "نسخة معزولة" خاصة بيه من البيانات، يشتغل عليها براحته، وبعدين يدمج شغله مع باقي الفريق وقت ما يخلص.
+    </p>
+    <p class="lead">
+      في الدليل ده هنفكك المفهوم من الأساس، ونفرّق بين النوعين المتاحين — <span class="en">Branch</span> و<span class="en">Traditional</span> — ونشوف إزاي كل واحد فيهم بيتدار عمليًا من الإنشاء لحد الدمج والتنظيف الدوري.
+    </p>
+    <div class="source-link">المصدر: <a href="https://doc.esri.com/en/arcgis-pro/latest/help/data/geodatabases/overview/overview-of-versioning-in-arcgis-pro.html" target="_blank" rel="noopener">Esri — Overview of versioning</a></div>
+  </section>
 
-          <div class="card">
-            <h3 style="color: var(--accent); margin-top: 0;"><span class="en">Traditional with Move Edits to Base</span></h3>
-            <p>نمط اختياري من الـ Traditional يتيح لبعض التطبيقات الوصول المباشر للبيانات الأساسية (<span class="en">Base Data</span>) مع السماح لمحررين آخرين بالعمل في نسخهم المعزولة.</p>
-          </div>
+  <section id="sec1">
+    <span class="num">01</span>
+    <h2>ليه الإصدارات أصلًا؟</h2>
+    <p>
+      في أي <span class="en">enterprise geodatabase</span> فيها أكتر من محرر، الإصدارات بتديك القدرة تشتغل على نفس البيانات في نفس الوقت من غير أقفال <span class="en">(locks)</span> ومن غير تكرار البيانات. كل إصدار بيدّي كل محرر "نسخة" معزولة وفريدة من البيانات، وبتسمح بمعاملات طويلة <span class="en">(long transactions)</span> — يعني تفضل شغال على نفس الإصدار عبر أكتر من جلسة تحرير من غير ما تأثر على حد.
+    </p>
+    <p>
+      الإصدارات <b>مش نسخ منفصلة</b> من الـ <span class="en">geodatabase</span>. بدل كده، الإصدارات والمعاملات اللي بتحصل جواها بتتسجل في جداول نظامية — وده اللي بيعزل شغل المحرر عبر جلسات متعددة من غير ما يقفل العناصر في نسخة الإنتاج أو يأثر فورًا على حد.
+    </p>
 
-        </div>
-
-        <!-- خطوات وسير العمل -->
-        <h2 style="margin-top:40px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">دورة وسير العمل مع النسخ <span class="en">(Versioning Workflow)</span></h2>
-        <ol class="steps" style="margin-top:20px;">
-          <li>
-            <h4>1. تسجيل البيانات كـ <span class="en">Versioned</span></h4>
-            <p>بغض النظر عن نوع النسخ، يجب تسجيل البيانات لتتمكن من العمل خارج النسخة الافتراضية. عند التسجيل، يتم تتبع عمليات الإضافة (<span class="en">Insert</span>)، التحديث (<span class="en">Update</span>)، والحذف (<span class="en">Delete</span>).</p>
-          </li>
-          <li>
-            <h4>2. التعامل مع النسخة الافتراضية <span class="en">(Default Version)</span></h4>
-            <p>النسخة الافتراضية توجد دائماً ولا يمكن حذفها، وهي تعبر عن الحالة الحالية للبيئة الفعلية (<span class="en">Production State</span>). عند الاتصال بقاعدة البيانات، تتصل تلقائياً بالـ <span class="en">Default</span>، ويمكن حمايتها من التعديل العشوائي لتستقبل فقط التعديلات المعتمدة.</p>
-          </li>
-          <li>
-            <h4>3. إدارة وإنشاء النسخ الفرعية <span class="en">(Manage Versions)</span></h4>
-            <p>يتم إنشاء نسخ فرعية (<span class="en">Named Versions</span> في الـ Branch) متفرعة من الـ <span class="en">Default</span>. في الـ <span class="en">Branch Versioning</span>، تُنشأ كافة النسخ بمستوى فرعي واحد فقط (<span class="en">Single Level</span>) وتكون الـ Default هي الأصل المباشر لجميع النسخ للحفاظ على الأداء.</p>
-          </li>
-          <li>
-            <h4>4. التوفيق والترحيل <span class="en">(Reconcile & Post)</span></h4>
-            <p>عند الانتهاء من التعديلات، تُمكّنك عملية الـ <b>Reconcile</b> من مقارنة تعديلاتك بالنسخة الأصلية واكتشاف التعارضات (<span class="en">Conflicts</span>) وحلها. بعد التوفيق، يتم استخدام عملية الـ <b>Post</b> لدمج وتثبيت التعديلات نهائياً في النسخة الافتراضية (<span class="en">Default Version</span>).</p>
-          </li>
-        </ol>
-
-        <!-- ملاحظة طريقة الاتصال -->
-        <div class="card" style="margin-top:32px; border-color:var(--gold);">
-          <h3 style="margin-top: 0;"><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">تنبيه هـام</span> طريقة الاتصال بالنسخ في الـ <span class="en">Branch</span></h3>
-          <p>عند الاتصال المباشر بقاعدة البيانات الجغرافية في الـ <span class="en">Branch Versioning</span>، ستتصل دائماً بالنسخة الافتراضية (<span class="en">Default</span>). للوصول والتعديل على النسخ المسمّاة (<span class="en">Named Versions</span>)، يجب إضافة خدمة الويب (<span class="en">Web Feature Layer</span>) إلى الخريطة في <span class="en">ArcGIS Pro</span> ثم تغيير النسخة من خصائص الطبقة داخل الخريطة.</p>
-        </div>
-    </section>
-
-    <!-- زر الرجوع السفلي -->
-    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center;">
-        <a href="index.html" class="back-btn">
-            ➔ العودة إلى الدليل الرئيسي (ArcGIS Utility Network)
-        </a>
+    <div class="grid2" style="margin-top:20px;">
+      <div class="card">
+        <h3>الإصدار الافتراضي <span class="en">(Default Version)</span></h3>
+        <p>كل <span class="en">geodatabase</span> فيها إصدار افتراضي واحد — الأصل أو الجذر لكل الإصدارات التانية. مينفعش يتمسح، وغالبًا هو "النسخة المنشورة" اللي بتمثل الحالة الحالية للنظام. بتحدّثه بمرور الوقت عن طريق دمج التغييرات من الإصدارات التانية عليه.</p>
+      </div>
+      <div class="card">
+        <h3>شجرة الإصدار <span class="en">(Version Tree)</span></h3>
+        <p>لما تنشئ إصدار، بيبقى مطابق تمامًا لأصله وقت الإنشاء. مع مرور الوقت، الإصدارات بتختلف عن بعضها مع كل تعديل، وبيتكوّن هيكل شبيه بالشجرة. أفضل ممارسة: حافظ على شجرة إصدار "مسطّحة" — الإصدار الافتراضي هو الأصل المباشر لكل الإصدارات التانية.</p>
+      </div>
     </div>
 
+    <div class="example-box" style="margin-top:16px;">
+      <span class="label en">WORKFLOW EXAMPLE</span>
+      <p>تخيل قسم هندسة بيدير شبكة مياه. سير العمل بيتقسم على مراحل — كل مرحلة ليها موارد وقواعد عمل مختلفة، وكل مرحلة بتمثل وحدة عمل واحدة زي أمر شغل <span class="en">(work order)</span>. لإدارة كل أمر شغل، بتنشئ إصدار منفصل ومعزول وتعدّل فيه. لما تتأكد إن الشغل خلص، بتدمج التغييرات في النسخة المنشورة من قاعدة البيانات.</p>
+    </div>
+  </section>
+
+  <section id="sec2">
+    <span class="num">02</span>
+    <h2>نوعا الإصدار: <span class="en">Branch</span> مقابل <span class="en">Traditional</span></h2>
+    <p>فيه نوعان من الإصدارات متاحين، وكل واحد بيخدم سير عمل ونموذج نشر مختلف — وممكن الـ <span class="en">geodatabase</span> الواحدة تحتوي بيانات من النوعين مع بعض.</p>
+
+    <div class="compare" style="margin-top:18px;">
+      <div>
+        <h3><span class="en">Branch Versioning</span></h3>
+        <ul>
+          <li>بتسهّل نموذج <span class="en">Web GIS</span> بالكامل — التحرير بيتم حصريًا عبر <span class="en">Web Feature Layers</span>.</li>
+          <li>معمارية بيانات مبسّطة، وسير عمل إدارة إصدار مبسّط.</li>
+          <li>بتدعم <span class="en">Undo/Redo</span> أثناء التحرير في إصدار مسمّى.</li>
+          <li>الشبكات المرافقية <span class="en">(Utility Networks)</span>، فسيفساء الأراضي، والطوبولوجيا كلها بتدعم Branch.</li>
+          <li>محرر واحد بس لكل إصدار مسمّى (أو عدة قراء).</li>
+          <li>هرمية مبسّطة: مستوى واحد بس من الإصدارات المسماة فوق الافتراضي.</li>
+        </ul>
+      </div>
+      <div>
+        <h3><span class="en">Traditional Versioning</span></h3>
+        <ul>
+          <li>مخصصة للمستخدمين اللي بيدخلوا الـ <span class="en">geodatabase</span> مباشرة عبر اتصال قاعدة بيانات.</li>
+          <li>مفيش حد لعدد الإصدارات، وبتدعم هرميات متعددة المستويات (أحفاد، أحفاد الأحفاد...).</li>
+          <li>بتدعم التحرير المتقدم (شبكات، طوبولوجيا) مع <span class="en">Undo/Redo</span> للتعديلات الفردية.</li>
+          <li>محتاجة عملية <span class="en">Compress</span> دورية لتنظيف الجداول الفرعية.</li>
+          <li>لو نشرتها كـ <span class="en">Web Feature Layer</span>، مفيش نفس قدرات إدارة الإصدار (مفيش Undo/Redo، ومحدود بإصدار واحد بس).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3><span class="en">Traditional Versioning</span> مع خيار <span class="en">Move Edits to Base</span></h3>
+      <p>نسخة هجينة من الإصدار التقليدي — مفيدة لما عندك تطبيقات خارجية (غير ArcGIS) بتحتاج توصل لنفس القاعدة. التعديلات على الإصدار الافتراضي بتتنفذ كمعاملات قصيرة وبتوصل فورًا لكل التطبيقات، بينما تقدر لسه تنشئ إصدارات للمعاملات الطويلة والتحرير متعدد المستخدمين. القيد الأساسي: بتقدر تعدّل بس الأشكال البسيطة (نقط، خطوط، بوليجونات)، مش عناصر مشاركة في شبكة أو طوبولوجيا.</p>
+    </div>
+  </section>
+
+  <section id="sec3">
+    <span class="num">03</span>
+    <h2>مفردات لازم تعرفها</h2>
+    <p>قبل ما نغوص في التفاصيل، خلّينا نتفق على المصطلحات الأساسية اللي هتتكرر في كل الدليل.</p>
+
+    <div class="grid3" style="margin-top:18px;">
+      <div class="card">
+        <h3><span class="en">Parent / Child Version</span></h3>
+        <p>الإصدار الأب هو اللي اتولد منه إصدار تاني (الابن). وقت الإنشاء، الابن بيكون مطابق للأب تمامًا — وبعد التعديل، تعديلاته بترجع تُدمج في الأب.</p>
+      </div>
+      <div class="card">
+        <h3><span class="en">Reconcile</span></h3>
+        <p>عملية مقارنة بين الإصدار اللي بتشتغل عليه <span class="en">(edit version)</span> والإصدار المستهدف <span class="en">(target version)</span> لاكتشاف أي تعارضات بينهم. التوفيق بيحدّث إصدارك بس، مش بيدمج التغييرات فعليًا.</p>
+      </div>
+      <div class="card">
+        <h3><span class="en">Post</span></h3>
+        <p>عملية الدمج الفعلية — بتدفع التغييرات من إصدارك للإصدار المستهدف بعد ما تخلص التوفيق ومراجعة أي تعارضات.</p>
+      </div>
+      <div class="card">
+        <h3><span class="en">Common Ancestor</span></h3>
+        <p>تمثيل للبيانات في اللحظة اللي كان فيها إصدارك وأبوه متطابقين تمامًا — قبل ما أي منهم يتعدّل.</p>
+      </div>
+      <div class="card">
+        <h3><span class="en">Delta Tables (A/D Tables)</span></h3>
+        <p>خاصة بالإصدار التقليدي — جدول <span class="en">Adds</span> بيسجل كل الإضافات والتعديلات، وجدول <span class="en">Deletes</span> بيسجل الحذف (وأي تعديل، لأن التعديل = حذف القديم + إضافة الجديد).</p>
+      </div>
+      <div class="card">
+        <h3><span class="en">Compress</span></h3>
+        <p>خاصة بالإصدار التقليدي بس — عملية بتشيل الحالات <span class="en">(states)</span> غير المرجعية وتدمج صفوف الجداول الفرعية المشتركة بين كل الإصدارات في الجدول الأساسي، عشان تحسّن أداء الاستعلامات.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec4">
+    <span class="num">04</span>
+    <h2>تسجيل البيانات كـ <span class="en">Versioned</span></h2>
+    <p>بغض النظر عن النوع، أي مجموعة بيانات لازم تتسجل كـ <span class="en">Versioned</span> قبل ما تشارك في أي إصدار غير الافتراضي — وده اللي بيسمح للمحررين يشتغلوا بمعزل عن بعض.</p>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>متطلبات <span class="en">Branch</span></h3>
+        <ul class="deflist">
+          <li>قاعدة بيانات إصدار 10.6 فأعلى (Db2، SQL Server، Oracle، PostgreSQL، SAP HANA).</li>
+          <li>لازم يكون فيها حقل <span class="en">Global ID</span>.</li>
+          <li><span class="en">Editor Tracking</span> بتوقيت UTC لازم يكون مفعّل.</li>
+          <li>مينفعش لو البيانات مسجّلة Versioned بالفعل، أو عندها فهارس فريدة، أو Raster.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>متطلبات <span class="en">Traditional</span></h3>
+        <ul class="deflist">
+          <li>مفيش متطلبات إصدار قاعدة بيانات خاصة.</li>
+          <li>مينفعش لو البيانات مسجّلة Versioned بالفعل، أو Archiving مفعّل عليها، أو فيها فهارس فريدة.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px; border-color:var(--gold);">
+      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">نصيحة</span>حمّل بياناتك الأول</h3>
+      <p>مهما كان النوع، الأفضل إنك تحمّل كل بياناتك في الفئة أو الجدول <b>قبل</b> ما تسجّله كـ Versioned. النوعين بيضيفوا عدد من الجداول والفهارس والخصائص المُدارة نظاميًا اللي ممكن تزوّد وقت عمليات تحميل البيانات الضخمة.</p>
+    </div>
+
+    <div class="grid2" style="margin-top:16px;">
+      <div class="card">
+        <h3>خطوات التسجيل (النوعان متشابهان)</h3>
+        <ol class="steps-compact" style="margin-top:12px;">
+          <li><h4>1</h4><p>اتصل بالـ <span class="en">geodatabase</span> كمالك مجموعة البيانات.</p></li>
+          <li><h4>2</h4><p>كليك يمين على مجموعة البيانات ← <span class="en">Manage</span>.</p></li>
+          <li><h4>3</h4><p>فعّل <span class="en">Versioning</span> واختار النوع (<span class="en">Branch</span> أو <span class="en">Traditional</span>).</p></li>
+          <li><h4>4</h4><p><span class="en">OK</span> — لو Branch، الـ Archiving وGlobal IDs وEditor Tracking بتتفعّل تلقائيًا لو مش مفعّلة.</p></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>إلغاء التسجيل <span class="en">(Unregister)</span></h3>
+        <p>محتاج قفل حصري <span class="en">(Exclusive Lock)</span>. تحذير مهم: أي تعديلات في إصدارات لسه ما اتدمجتش على الافتراضي (ومش متضغوطة في حالة Traditional) هتتمسح نهائيًا. تأكد إن كل الإصدارات اتوفّقت واتدمجت الأول.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec5">
+    <span class="num">05</span>
+    <h2>تبويب <span class="en">Versioning</span> وإعداداته</h2>
+    <p>تبويب سياقي بيظهر في الشريط لما الخريطة الشغالة فيها طبقات من مصدر بيانات مدعوم (اتصال <span class="en">enterprise geodatabase</span>، أو <span class="en">Web Feature Layer</span> بخاصية <span class="en">Version Management</span> مفعّلة).</p>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>مجموعة <span class="en">Versioning</span></h3>
+        <ul class="deflist">
+          <li><b class="en">New Version</b> — إنشاء إصدار جديد.</li>
+          <li><b class="en">Change Version / Change To Default</b> — تغيير مصدر البيانات النشط في الخريطة.</li>
+          <li><b class="en">Manage Versions</b> — فتح عرض <span class="en">Versions</span> الكامل.</li>
+          <li><b class="en">Reconcile / Post</b> — تنفيذ عمليتي التوفيق والدمج.</li>
+          <li><b class="en">Conflict Manager</b> — فتح عرض <span class="en">Conflicts</span> لمراجعة التعارضات.</li>
+          <li><b class="en">Version Changes</b> — فتح عرض <span class="en">Differences</span> لمقارنة إصدارين.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>إعدادات <span class="en">Versioning</span> في خيارات المشروع</h3>
+        <ul class="deflist">
+          <li><b class="en">Default Versioning Type</b> — النوع الافتراضي لاتصالات قاعدة البيانات الجديدة (Traditional هو الافتراضي).</li>
+          <li><b class="en">Define Conflicts</b> — بالسمة (عمود) أو بالكائن (صف كامل).</li>
+          <li><b class="en">Resolve Conflicts</b> — لصالح إصدار التحرير أو الإصدار المستهدف (ملحوظة: في Branch، التعارضات بتتحل لصالح إصدار التحرير دايمًا).</li>
+          <li>خيارات عرض تنبيهات التوفيق ونافذة <span class="en">Conflict Manager</span> تلقائيًا.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec6">
+    <span class="num">06</span>
+    <h2>مصطلحات الفصل الأول</h2>
+    <div class="glossary" style="margin-top:20px;">
+      <div class="gterm"><span class="en">Version</span><span class="ar">لقطة زمنية معزولة من الـ geodatabase لتحرير آمن متعدد المستخدمين</span></div>
+      <div class="gterm"><span class="en">Default Version</span><span class="ar">الإصدار الجذري الذي لا يُحذف أبدًا وتُدمج عليه كل التعديلات</span></div>
+      <div class="gterm"><span class="en">Version Tree</span><span class="ar">الهيكل الهرمي الذي يوضح علاقات الأصل والابن بين الإصدارات</span></div>
+      <div class="gterm"><span class="en">Branch Versioning</span><span class="ar">إصدار مبني على خدمات الويب لمعاملات طويلة عبر طبقات الميزات</span></div>
+      <div class="gterm"><span class="en">Traditional Versioning</span><span class="ar">إصدار يُدار عبر اتصال قاعدة بيانات مباشر بمرونة أكبر</span></div>
+      <div class="gterm"><span class="en">Reconcile</span><span class="ar">مقارنة إصدارك بإصدار آخر لاكتشاف التعارضات</span></div>
+      <div class="gterm"><span class="en">Post</span><span class="ar">دمج التغييرات فعليًا في الإصدار المستهدف</span></div>
+      <div class="gterm"><span class="en">Register as Versioned</span><span class="ar">تفعيل تتبع التعديلات على مجموعة بيانات لتشارك في الإصدارات</span></div>
+      <div class="gterm"><span class="en">Compress</span><span class="ar">عملية تنظيف دورية خاصة بالإصدار التقليدي لتحسين الأداء</span></div>
+    </div>
+  </section>
+
+  <section style="padding-bottom:0;">
+    <div class="eyebrow"><span class="en">CHAPTER 02</span> — Branch Versioning</div>
+    <h1 style="font-size:clamp(20px,2.2vw,25px); font-weight:800;">النموذج الخدمي: تحرير طويل المدى عبر الويب</h1>
+    <p class="lead" style="font-size:15px;">Branch Versioning هي الآلية اللي بتشغّل التحرير طويل المعاملات على طبقات الميزات (Feature Services). الفصل ده بيغطي دورة حياتها كاملة — من التسجيل والنشر، للإنشاء والإدارة، للتوفيق والدمج، وحتى تنظيف السجل التاريخي.</p>
+  </section>
+
+  <section id="sec7">
+    <span class="num">07</span>
+    <h2>سيناريوهات <span class="en">Branch Versioning</span></h2>
+    <p>Branch Versioning بتشتغل مع نموذج <span class="en">ArcGIS Enterprise Web GIS</span> بمعمارية خدمية — تدعم فئات بسيطة وكمان مجموعات بيانات معقدة زي الشبكات المرافقية وفسيفساء الأراضي.</p>
+
+    <div class="card" style="margin-top:16px; border-color:var(--gold);">
+      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">قيد أساسي</span>التحرير عبر طبقة الويب بس</h3>
+      <p>المحررون لازم يعدّلوا البيانات المسجّلة Branch عبر <span class="en">Web Feature Layer</span> — مينفعش يتصلوا بالـ geodatabase مباشرة ويعدّلوا. الاستثناء الوحيد: مالك البيانات يقدر يتصل مباشرة عشان يشغّل أدوات جيوبروسيسنج لتحميل بيانات بالجملة (زي <span class="en">Append</span> أو <span class="en">Copy Features</span>).</p>
+    </div>
+
+    <div class="grid2" style="margin-top:16px;">
+      <div class="card">
+        <h3>التحرير على الإصدار الافتراضي</h3>
+        <p>لو الوصول للإصدار الافتراضي <b class="en">Public</b>، أي مستخدم عنده صلاحية تحرير يقدر يعدّل مباشرة. التعديلات بتتحفظ فورًا (معاملة قصيرة) وبتبقى متاحة فورًا لكل المستخدمين. لا يوجد Undo/Redo، ولا كشف تعارضات — آخر تعديل بيكتب فوق اللي قبله.</p>
+      </div>
+      <div class="card">
+        <h3>التحرير على إصدار مسمّى</h3>
+        <p>لو الوصول للإصدار الافتراضي <b class="en">Protected</b>، أي محرر لازم ينشئ إصدار مسمّى خاص بيه. بيقدر يعمل Undo/Redo للتعديلات الفردية، ويحفظ أو يتجاهل مجموعات التعديلات. لما يخلص، يوفّق ويدمج على الافتراضي.</p>
+      </div>
+    </div>
+
+    <div class="example-box" style="margin-top:16px;">
+      <span class="label en">PROJECT STAGES EXAMPLE</span>
+      <p>مشروع بيمر بمراحل: تصميم مقترح <span class="en">(Proposed)</span>، تنفيذ <span class="en">(Constructed)</span>، مكتمل. المهندس بينشئ إصدار مسمّى "Proposed" من الافتراضي، يعدّل فيه، وبعد ما يخلص يغيّر ملكية الإصدار لمسؤول الإصدار <span class="en">(Version Administrator)</span>. المسؤول بيراجع جودة البيانات (QA/QC) ويوفّق ويدمج على الافتراضي المحمي. بعدها يتحذف إصدار "Proposed"، وتتكرر نفس الدورة لمرحلة "Constructed".</p>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h3>دعم محررين وقرّاء مع بعض</h3>
+      <p>لو محتاج تدعم مستويات مستخدمين مختلفة، انشر طبقتي ويب من نفس الفئة: واحدة قابلة للتحرير بخاصية <span class="en">Version Management</span> مفعّلة تشاركها مع فريق التحرير، وواحدة للقراءة بس (خاصية <span class="en">Query</span> فقط) تشاركها مع الجمهور الأوسع — القراء بيشوفوا بس الإصدار الافتراضي.</p>
+    </div>
+  </section>
+
+  <section id="sec8">
+    <span class="num">08</span>
+    <h2>تسجيل ونشر البيانات كـ <span class="en">Branch Versioned</span></h2>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>خطوات التسجيل</h3>
+        <ol class="steps-compact" style="margin-top:12px;">
+          <li><h4>1</h4><p>اتصل بالـ geodatabase كمالك البيانات.</p></li>
+          <li><h4>2</h4><p>كليك يمين ← <span class="en">Manage</span>.</p></li>
+          <li><h4>3</h4><p>فعّل <span class="en">Versioning</span> واختار <span class="en">Branch</span> — Archiving وGlobal IDs وEditor Tracking بيتفعّلوا تلقائيًا.</p></li>
+        </ol>
+        <p style="margin-top:8px; font-size:13.5px; color:var(--text-dim);">4 حقول نظامية بتتضاف: <span class="en">GDB_FROM_DATE</span>، <span class="en">GDB_IS_DELETE</span>، <span class="en">GDB_BRANCH_ID</span>، <span class="en">GDB_ARCHIVE_OID</span>، بالإضافة لـ <span class="en">GDB_DELETED_AT/BY</span> لتتبع الحذف.</p>
+      </div>
+      <div class="card">
+        <h3>النشر كـ <span class="en">Web Feature Layer</span></h3>
+        <p>كل البيانات Branch بتتنشر من الإصدار الافتراضي. لازم تفعّل خاصية <span class="en">Version Management</span> وقت النشر عشان الإصدارات المسماة تشتغل. لازم كل الطبقات في الخريطة تكون Branch (مينفعش تخلط Branch وTraditional في نفس الطبقة)، ولازم تكون بيانات مسجّلة في مخزن بيانات <span class="en">(Registered Data Store)</span>.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px; border-color:var(--gold);">
+      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">تنبيه</span>قفل النسخة عند التحرير</h3>
+      <p>الإصدار المسمّى بيدعم محرر واحد بس (أو عدة قراء). أول ما محرر يبدأ التحرير، بياخد قفل حصري — بداية من <span class="en">ArcGIS Enterprise 12.0</span>، مستخدمين تانيين يقدروا يتصلوا ويقروا طول ما المحرر ما وفّقش لسه؛ في 11.5 وأقدم، محرر واحد بس مسموح له بالاتصال من الأساس.</p>
+    </div>
+  </section>
+
+  <section id="sec9">
+    <span class="num">09</span>
+    <h2>إنشاء وإدارة الإصدارات المسماة</h2>
+    <p>تقدر تنشئ إصدار من عرض <span class="en">Versions</span>، تبويب <span class="en">Versioning</span>، أو أداة <span class="en">Create Version</span> الجيوبروسيسنج.</p>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>قيود اسم الإصدار</h3>
+        <p>حتى 62 حرف، وممنوع الرموز: النقطة (.)، الفاصلة المنقوطة (؛)، علامة الاقتباس المفردة ('), المزدوجة ("). الأب <span class="en">(Parent Version)</span> دايمًا الإصدار الافتراضي في Branch — مفيش تعدد مستويات.</p>
+      </div>
+      <div class="card">
+        <h3>مستويات الوصول <span class="en">(Access Permission)</span></h3>
+        <ul class="deflist">
+          <li><b class="en">Private</b> — بس المالك أو مسؤول الإصدار يشوفه ويعدّله.</li>
+          <li><b class="en">Protected</b> — أي حد يشوفه، بس المالك أو المسؤول يعدّله.</li>
+          <li><b class="en">Public</b> — أي حد عنده صلاحية تحرير يقدر يعدّل فيه.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>مسؤول الإصدار <span class="en">(Version Administrator)</span></h3>
+      <p style="margin-bottom:10px;">صلاحيات أعلى مش مرتبطة بملكية إصدار معين — يقدر يشوف ويعدّل كل الإصدارات، ويدمج على الافتراضي حتى لو محمي. 3 فئات تتأهل لده:</p>
+      <ul class="deflist">
+        <li>مالك طبقة الويب (اللي نشرها).</li>
+        <li>مستخدم بورتال بدور <span class="en">Default Administrator</span>.</li>
+        <li>مستخدم بدور مخصص فيه صلاحية <span class="en">Manage all version management</span>.</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h3>حماية الإصدار الافتراضي</h3>
+      <p>بس مسؤول الـ geodatabase (عبر اتصال قاعدة بيانات مباشر، مش عبر طبقة الويب) يقدر يغيّر خاصية الوصول للإصدار الافتراضي — باستخدام أداة <span class="en">Alter Version</span> أو من عرض <span class="en">Versions</span> بعد ضبط نوع الاتصال على Branch.</p>
+    </div>
+  </section>
+
+  <section id="sec10">
+    <span class="num">10</span>
+    <h2>التوفيق والدمج <span class="en">(Reconcile & Post)</span></h2>
+    <p>الإصدار المستهدف في Branch دايمًا هو الافتراضي — ومختلف عن التقليدي، Branch بتدعم توفيق ودمج متزامن من أكتر من جلسة من غير الحاجة لأقفال حصرية.</p>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3><span class="en">Reconcile</span></h3>
+        <ul class="deflist">
+          <li>حدد كيفية تعريف التعارض: بالسمة (عمود) أو بالكائن (صف).</li>
+          <li>التعارضات في Branch بتتحل دايمًا لصالح إصدار التحرير.</li>
+          <li>تحذير بيظهر لو فيه تعارضات لسه ما اتراجعتش من مرة سابقة.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="en">Post</span></h3>
+        <p>لازم يكون عندك صلاحية تعديل الإصدار الافتراضي (يبقى Public، أو تكون مسؤول إصدار). لو حصل تعديل على الافتراضي بعد التوفيق وقبل الدمج، هترجّع رسالة خطأ ولازم توفّق تاني. بعد الدمج، التغييرات مينفعش تترجع.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px; border-color:var(--gold);">
+      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">فلترة التعارضات</span><span class="en">Field Conflict Filter</span></h3>
+      <p>لو حقل معين بيتحدّث بشكل دوري (زي حقل "آخر تعديل") في أكتر من إصدار، تقدر تستخدم أداة <span class="en">Add Field Conflict Filter</span> عشان الحقل ده ميتحسبش كتعارض أصلًا — القيمة النهائية بتاخد نسخة إصدار التحرير دايمًا. بعد التشغيل لازم تعيد تشغيل الخدمة.</p>
+    </div>
+  </section>
+
+  <section id="sec11">
+    <span class="num">11</span>
+    <h2>إدارة التعارضات</h2>
+    <p>التعارضات بتتسجل في جدول نظامي، وده بيديك مرونة تراجعها على أكتر من جلسة — تقدر تحفظ مشروعك وترجع تكمل المراجعة بعدين.</p>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>حالات ظهور التعارض</h3>
+        <ul class="deflist">
+          <li>نفس العنصر اتعدّل في الإصدار الحالي والافتراضي.</li>
+          <li>عنصر اتعدّل في إصدار واتحذف في التاني.</li>
+          <li>عنصر مرتبط بعلاقة طوبولوجية اتعدّل في الاتنين.</li>
+          <li>هرمية احتواء لكائن مجمّع في شبكة اتصالات اختلفت بين الإصدارات (بدون تعديل صريح على الصفوف).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>مستويات الحل</h3>
+        <ul class="deflist">
+          <li><b class="en">Attribute</b> — استبدال قيمة حقل واحد بس.</li>
+          <li><b class="en">Feature</b> — استبدال الصف كامل (بالهندسة).</li>
+          <li><b class="en">Layer</b> — استبدال كل عناصر الطبقة الفرعية المتعارضة دفعة واحدة.</li>
+          <li><b class="en">Merge Geometries</b> — دمج تعديلين هندسيين على مناطق مختلفة من نفس العنصر.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>عرض <span class="en">Conflicts</span></h3>
+      <p>بيوريك 3 تمثيلات لأي عنصر متعارض: <b class="en">Current</b> (نسختك)، <b class="en">Target</b> (الافتراضي وقت التوفيق)، و<b class="en">Common Ancestor</b> (قبل ما أي حد يعدّل). تقدر تعلّم أي تعارض "تمت مراجعته" — لكن احذر: أي توفيق أو دمج تاني بيمسح سجل المراجعة القديم ويحل أي تعارض متبقي لصالح نسختك تلقائيًا.</p>
+    </div>
+  </section>
+
+  <section id="sec12">
+    <span class="num">12</span>
+    <h2>السجل التاريخي والتقليم</h2>
+    <p>Branch Versioning بتشتغل بنموذج زمني "إضافة فقط" <span class="en">(insert-only)</span> — كل تعديل بيتسجل كصف جديد بختم زمني في نفس الجدول الأساسي، بدل جداول فرعية منفصلة زي التقليدي.</p>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>ليه مفيش Compress هنا؟</h3>
+        <p>بما إن كل التعديلات متسجلة في جدول العمل <span class="en">(business table)</span> نفسه عبر أرشفة تلقائية، مفيش حاجة لعملية ضغط دورية زي التقليدي. لكن الجدول ده بيكبر بمرور الوقت، فمحتاج تدير حجمه بأداة تانية.</p>
+      </div>
+      <div class="card">
+        <h3><span class="en">Prune Branch History</span></h3>
+        <p>أداة جيوبروسيسنج (من إصدار Pro 3.5) بتمسح السجلات القديمة المتقاعدة قبل تاريخ معين <span class="en">(Prune Before Date)</span> — من غير ما تلمس أي صف نشط حاليًا أو مُشار إليه من إصدار أو نسخة مطابقة <span class="en">(replica)</span> لسه شغالة.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>اللحظات المرجعية <span class="en">(Referenced Moments)</span></h3>
+      <p>لو الأداة رفضت تقليم سجلات معينة، السبب غالبًا إن فيه إصدار أو نسخة مطابقة <span class="en">(replica)</span> لسه بيشير للحظة قديمة قبل تاريخ التقليم اللي حددته. الحل: وفّق الإصدارات المعنية، أو زامن النسخ المطابقة، أو اختار تاريخ تقليم أقدم.</p>
+    </div>
+
+    <div class="example-box" style="margin-top:14px;">
+      <span class="label en">EXAMPLE</span>
+      <p>عندك خيار <span class="en">Report Only</span> في الأداة عشان تشوف عدد السجلات المؤهلة للتقليم من غير ما تنفّذ فعليًا — استخدمه دايمًا أول مرة قبل التقليم الفعلي، وخد نسخة احتياطية من السجلات القديمة (بتصديرها) لو محتاجها للأرشفة القانونية بعدين.</p>
+    </div>
+  </section>
+
+  <section id="sec13">
+    <span class="num">13</span>
+    <h2>مصطلحات الفصل الثاني</h2>
+    <div class="glossary" style="margin-top:20px;">
+      <div class="gterm"><span class="en">Named Version</span><span class="ar">إصدار Branch ينشئه مستخدم كإصدار ابن من الافتراضي</span></div>
+      <div class="gterm"><span class="en">Version Management Capability</span><span class="ar">خاصية على طبقة الويب تفعّل إنشاء وإدارة الإصدارات المسماة</span></div>
+      <div class="gterm"><span class="en">Version Administrator</span><span class="ar">مستخدم بصلاحيات لإدارة كل الإصدارات بغض النظر عن الملكية</span></div>
+      <div class="gterm"><span class="en">Access Permission</span><span class="ar">Private / Protected / Public — يحدد من يرى ويعدّل الإصدار</span></div>
+      <div class="gterm"><span class="en">Conflicts View</span><span class="ar">العرض التفاعلي لمراجعة وحل تعارضات التوفيق</span></div>
+      <div class="gterm"><span class="en">Field Conflict Filter</span><span class="ar">استبعاد حقل معين من كشف التعارضات</span></div>
+      <div class="gterm"><span class="en">Branch History</span><span class="ar">السجل الكامل لكل تعديل مخزّن في جدول العمل نفسه</span></div>
+      <div class="gterm"><span class="en">Prune Branch History</span><span class="ar">أداة لحذف السجلات التاريخية المتقاعدة القديمة</span></div>
+      <div class="gterm"><span class="en">Referenced Moment</span><span class="ar">لحظة زمنية يشير لها إصدار أو نسخة مطابقة تمنع التقليم</span></div>
+    </div>
+  </section>
+
+  <section style="padding-bottom:0;">
+    <div class="eyebrow"><span class="en">CHAPTER 03</span> — Traditional Versioning</div>
+    <h1 style="font-size:clamp(20px,2.2vw,25px); font-weight:800;">النموذج المباشر: مرونة أكبر، مسؤولية إدارية أكبر</h1>
+    <p class="lead" style="font-size:15px;">Traditional Versioning بتُدار عبر اتصال قاعدة بيانات مباشر بدل الخدمات — وده بيديها مرونة أكتر (هرميات متعددة، دعم الشبكات والطوبولوجيا) لكن بيحمّلك مسؤولية صيانة دورية (Compress، إعادة بناء الفهارس) ملهاش وجود في Branch.</p>
+  </section>
+
+  <section id="sec14">
+    <span class="num">14</span>
+    <h2>سيناريوهات <span class="en">Traditional Versioning</span></h2>
+    <p>لو مش محتاج طبقات ويب بمعاملات طويلة، لكن عايز فوائد التحرير متعدد المستخدمين، Traditional هي استراتيجية إدارة البيانات المناسبة.</p>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>التحرير على الإصدار الافتراضي</h3>
+        <p>لو الوصول Public، أكتر من محرر يقدروا يعدّلوا في نفس الوقت. كل محرر بياخد إصدار مؤقت غير مسمّى تلقائيًا وقت التحرير، وبيتدمج في الافتراضي وقت الحفظ. لو حد تاني عدّل الافتراضي في نفس الوقت، ArcGIS بيوفّق ويدمج تلقائيًا (توفيق ضمني) وبيبلّغك لو فيه تعارض.</p>
+      </div>
+      <div class="card">
+        <h3>التحرير على إصدار ابن <span class="en">(Child Version)</span></h3>
+        <p>لإدارة وحدات عمل منفصلة (أوامر شغل، مشاريع) بتمتد عبر جلسات وأيام كتير. لما الشغل يخلص، بتوفّق وتدمج على الافتراضي، وبعدها ممكن تحذف الإصدار الابن. تدعم تحديدًا هرميات متعددة المستويات (أحفاد، أحفاد الأحفاد).</p>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:16px;">
+      <div class="card">
+        <h3>دعم محررين وقرّاء</h3>
+        <p>الفريق المحرر بيشتغل بنمط "إصدار ابن"، والقرّاء بياخدوا إصدار محمي ثابت <span class="en">(static, read-only)</span> بيتولد بعد كل عملية Compress — عشان استعلامات القراءة تفضل سريعة ومستقرة من غير أي فروقات إصدار تتحسب.</p>
+      </div>
+      <div class="card">
+        <h3>إدارة البيانات الموزّعة</h3>
+        <p>Traditional بتدعم <span class="en">Geodatabase Replication</span> بين مكاتب بعيدة (كل مكتب بنسخة محلية بتتزامن دوريًا)، وكمان النشر كخدمات ميزات قابلة للمزامنة <span class="en">(sync-enabled)</span> لمحرري الميدان اللي بياخدوا الخريطة أوفلاين.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec15">
+    <span class="num">15</span>
+    <h2>تسجيل البيانات كـ <span class="en">Traditional Versioned</span></h2>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>خطوات التسجيل</h3>
+        <ol class="steps-compact" style="margin-top:12px;">
+          <li><h4>1</h4><p>اتصل بالـ geodatabase كمالك البيانات.</p></li>
+          <li><h4>2</h4><p>كليك يمين ← <span class="en">Manage</span>.</p></li>
+          <li><h4>3</h4><p>فعّل <span class="en">Versioning</span> واختار <span class="en">Traditional</span>.</p></li>
+        </ol>
+        <p style="margin-top:8px; font-size:13.5px; color:var(--text-dim);">جدولين فرعيين بيتولدوا: <span class="en">Adds (A)</span> و<span class="en">Deletes (D)</span> — دول من أكتر الجداول نشاطًا في الـ geodatabase، وبيكبروا بسرعة مع أي تحرير فعّال.</p>
+      </div>
+      <div class="card">
+        <h3>خيار <span class="en">Move Edits to Base</span></h3>
+        <p>لدعم تطبيقات خارجية بتحتاج قيود DBMS (زي triggers) ومش عارفة تتعامل مع جداول versioned. التعديلات على الافتراضي بتتحرك فورًا للجدول الأساسي، بينما إصدارات تانية بتفضل تستخدم الجداول الفرعية. متاح للأشكال البسيطة بس — مش للشبكات أو الطوبولوجيا.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sec16">
+    <span class="num">16</span>
+    <h2>إنشاء وإدارة الإصدارات التقليدية</h2>
+    <p>عرض <span class="en">Versions</span> هنا بيتفلتر حسب مستخدم قاعدة البيانات المتصل والصلاحيات المضبوطة على كل إصدار.</p>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>الوصول للإصدار</h3>
+        <ul class="deflist">
+          <li>أي مستخدم يشوف إصداراته الخاصة وكل الإصدارات Public وProtected.</li>
+          <li>أي مستخدم يقدر يدير (يعدّل خصائص) بس الإصدارات اللي هو مالكها.</li>
+          <li>مسؤول الـ geodatabase يشوف ويدير كل الإصدارات من غير استثناء.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>مستويات الوصول</h3>
+        <ul class="deflist">
+          <li><b class="en">Private</b> — بس المالك أو مسؤول الـ geodatabase.</li>
+          <li><b class="en">Protected</b> — أي حد يشوف، بس المالك أو المسؤول يعدّل.</li>
+          <li><b class="en">Public</b> — أي مستخدم عنده صلاحية قراءة/كتابة على الجداول يقدر يعدّل.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>خصائص إصدار في العرض</h3>
+      <p>Name، Owner، Parent، Description، Access، Created، Modified — كلها متاحة للتعديل المباشر (ما عدا Created) لصاحب الإصدار أو مسؤول الـ geodatabase. تعديل الاسم يتطلب عدم وجود اتصالات نشطة على الإصدار وقت التعديل.</p>
+    </div>
+  </section>
+
+  <section id="sec17">
+    <span class="num">17</span>
+    <h2>عملية التحرير الكاملة</h2>
+    <p>التحرير جوه إصدار تقليدي بيمر بـ 4 مراحل متتابعة.</p>
+
+    <ol class="steps" style="margin-top:20px;">
+      <li>
+        <h4>تحرير الإصدار <span class="en">(Version Editing)</span></h4>
+        <p>على عكس Branch (محرر واحد بس)، الإصدار التقليدي بيدعم عدة محررين وقرّاء في نفس الوقت — أي حد متصل بنفس الإصدار مش هيشوف تعديلاتك لحد ما تحفظ.</p>
+      </li>
+      <li>
+        <h4>التوفيق <span class="en">(Reconcile)</span></h4>
+        <p>بيقارن إصدارك بالإصدار المستهدف (الأب، الافتراضي، أو أي سلف مباشر — على عكس Branch اللي دايمًا الافتراضي بس). لو حصل تعديل عالإصدار المستهدف من وقت ما بدأت، هيظهر في عرضك.</p>
+      </li>
+      <li>
+        <h4>مراجعة التعارضات <span class="en">(Conflicts Review)</span></h4>
+        <p>فيه نوعان: توفيق ضمني (بين جلستين على نفس الإصدار) وتوفيق صريح (بين إصدار وأبوه). في الحالتين، تقدر تراجع كل تعارض لوحده وتقرر تحتفظ بنسختك، ولا تستبدلها بنسخة الإصدار التاني، ولا ترجعها لحالة السلف المشترك.</p>
+      </li>
+      <li>
+        <h4>الدمج <span class="en">(Post)</span></h4>
+        <p>بيحفظ جلستك الحالية أولًا ثم يطبّق تعديلاتك على الإصدار المستهدف. لو الإصدار المستهدف اتعدّل بعد التوفيق وقبل الدمج، هترجّع خطأ ولازم توفّق تاني. الدمج مينفعش يترجع.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="sec18">
+    <span class="num">18</span>
+    <h2>التوفيق والدمج والتعارضات عمليًا</h2>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>شروط التوفيق</h3>
+        <ul class="deflist">
+          <li>لازم تكون المستخدم الوحيد اللي بيعدّل الإصدار اللي بتوفّقه.</li>
+          <li>مفيش حد تاني يعدّل الإصدار المستهدف (استثناء: الإصدار الافتراضي، تقدر توفّق ضده حتى لو حد تاني بيعدّله).</li>
+          <li>لازم تقدر تشوف الإصدار المستهدف — لو Private، لازم تكون المالك أو مسؤول الـ geodatabase.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>خيارات تعريف وحل التعارض</h3>
+        <ul class="deflist">
+          <li><b class="en">By Attribute</b> — تعارض بس لو نفس العمود اتعدّل في الاتنين (الافتراضي).</li>
+          <li><b class="en">By Object</b> — أي تعديل على نفس الصف يُعتبر تعارض.</li>
+          <li>الحل: لصالح إصدار التحرير، أو لصالح الإصدار المستهدف.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px; border-color:var(--gold);">
+      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">تنبيه</span>التوفيق مقفول لمعاملة واحدة بالنسبة للـ geodatabase</h3>
+      <p>مينفعش أكتر من عملية توفيق تشتغل في نفس اللحظة على مستوى الـ geodatabase كله. في بيئة فيها محررين كتير، تجنّب إن الكل يوفّق على نفس الإصدار المشترك بكثافة — عملية التوفيق بتاخد قفل حصري بيمنع باقي المستخدمين من إكمال شغلهم لحد ما تخلص.</p>
+    </div>
+  </section>
+
+  <section id="sec19">
+    <span class="num">19</span>
+    <h2>الإدارة الدورية للأداء</h2>
+    <p>على عكس Branch، الإصدار التقليدي محتاج مهام صيانة دورية عشان يفضل الأداء كويس — وده سير عمل موصى بيه رسميًا من Esri للمسؤولين.</p>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card">
+        <h3>1) التوفيق والدمج أولًا</h3>
+        <p>قبل أي عملية ضغط، لازم توفّق وتدمج الإصدارات النشطة — أداة <span class="en">Reconcile Versions</span> الجيوبروسيسنج هي الأنسب هنا لأنها بتشتغل جوه <span class="en">ModelBuilder</span>. الخيارات <span class="en">Post Versions After Reconcile</span> و<span class="en">Delete Versions After Post</span> بتساعدك تنضّف الإصدارات القديمة تلقائيًا.</p>
+      </div>
+      <div class="card">
+        <h3>2) ضغط الـ <span class="en">geodatabase</span></h3>
+        <p>أداة <span class="en">Compress</span> بتشيل التعديلات مش المُشار إليها من أي إصدار، وبتدمج التعديلات المشتركة بين كل الإصدارات في الجدول الأساسي — وده بيحسّن الأداء بشكل مباشر لأن جداول Adds/Deletes بترجع لحجم أصغر.</p>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:16px;">
+      <div class="card">
+        <h3>3) إعادة بناء الفهارس</h3>
+        <p>أداة <span class="en">Rebuild Indexes</span> — الفهارس ممكن تتفتت بعد عملية الضغط، وإعادة بنائها بتديك تحسّن أداء إضافي بسيط.</p>
+      </div>
+      <div class="card">
+        <h3>4) تحليل مجموعات البيانات</h3>
+        <p>أداة <span class="en">Analyze Datasets</span> بتحدّث إحصائيات الجداول الأساسية والفرعية والأرشيفية وفهارسها — لازم تشغّلها دايمًا بعد كل عملية ضغط.</p>
+      </div>
+    </div>
+
+    <div class="example-box" style="margin-top:16px;">
+      <span class="label en">AUTOMATION EXAMPLE</span>
+      <p>الأدوات الأربعة دي (Reconcile Versions ← Compress ← Rebuild Indexes ← Analyze Datasets) بتتحط مع بعضها في نموذج <span class="en">ModelBuilder</span> واحد، وبعدين تتحوّل لسكريبت Python بيتشغّل تلقائيًا كل ليلة عبر مهمة مجدولة في نظام التشغيل — أفضل ممارسة موصى بيها رسميًا لأي geodatabase فيها تحرير نشط يوميًا.</p>
+    </div>
+  </section>
+
+  <section id="sec20">
+    <span class="num">20</span>
+    <h2>مصطلحات الفصل الثالث</h2>
+    <div class="glossary" style="margin-top:20px;">
+      <div class="gterm"><span class="en">Child Version</span><span class="ar">إصدار تقليدي يُنشأ من إصدار أب ويمكن أن يتفرع لمستويات متعددة</span></div>
+      <div class="gterm"><span class="en">Implicit Reconcile</span><span class="ar">توفيق تلقائي بين جلستين على نفس الإصدار عند الحفظ</span></div>
+      <div class="gterm"><span class="en">Explicit Reconcile</span><span class="ar">توفيق يدوي صريح بين إصدار وسلفه عبر زر Reconcile</span></div>
+      <div class="gterm"><span class="en">Adds / Deletes Table</span><span class="ar">الجداول الفرعية التي تسجل الإضافات والحذف في الإصدار التقليدي</span></div>
+      <div class="gterm"><span class="en">Compress</span><span class="ar">عملية دورية لتنظيف الجداول الفرعية ودمجها في الجدول الأساسي</span></div>
+      <div class="gterm"><span class="en">Rebuild Indexes</span><span class="ar">إعادة بناء الفهارس بعد الضغط لتحسين الأداء</span></div>
+      <div class="gterm"><span class="en">Analyze Datasets</span><span class="ar">تحديث إحصائيات الجداول والفهارس بعد الضغط</span></div>
+      <div class="gterm"><span class="en">Geodatabase Replication</span><span class="ar">مزامنة نسخ من قاعدة البيانات بين مواقع متعددة</span></div>
+      <div class="gterm"><span class="en">Move Edits to Base</span><span class="ar">خيار لنقل تعديلات الإصدار الافتراضي فورًا للجدول الأساسي</span></div>
+    </div>
+  </section>
+
 </div>
+
+<footer>
+  <div class="wrap">
+    <p>دليل تأسيسي شامـل لإصدارات الـ Geodatabase في ArcGIS Pro — تم التنسيق والمعالجة لتناسب العرض والتطبيقات العملية.</p>
+  </div>
+</footer>
+
+</main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('#railLinks a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  const groups = Array.from(document.querySelectorAll('.lec-group'));
+
+  function openGroup(group, animate){
+    group.classList.add('open');
+    const items = group.querySelector('.lec-items');
+    items.style.maxHeight = items.scrollHeight + 'px';
+  }
+  function closeGroup(group){
+    group.classList.remove('open');
+    const items = group.querySelector('.lec-items');
+    items.style.maxHeight = '0px';
+  }
+
+  // initial state: open the group marked "open" in the markup
+  groups.forEach(g => { if(g.classList.contains('open')) openGroup(g); else closeGroup(g); });
+
+  // manual toggle — independent of scroll position
+  groups.forEach(g => {
+    const btn = g.querySelector('.lec-toggle');
+    btn.addEventListener('click', () => {
+      if(g.classList.contains('open')) closeGroup(g);
+      else openGroup(g);
+    });
+  });
+
+  // scroll-sync: highlight active link, auto-expand its group, collapse the others
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = '#' + entry.target.id;
+        const activeLink = Array.from(links).find(l => l.getAttribute('href') === id);
+        links.forEach(l => l.classList.toggle('active', l === activeLink));
+        if(activeLink){
+          const activeGroup = activeLink.closest('.lec-group');
+          groups.forEach(g => {
+            if(g === activeGroup) openGroup(g);
+            else closeGroup(g);
+          });
+        }
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(s => { if(s) io.observe(s); });
+
+  // keep open group's max-height correct if window resizes (content reflow)
+  window.addEventListener('resize', () => {
+    groups.forEach(g => { if(g.classList.contains('open')) openGroup(g); });
+  });
+</script>
 
 </body>
 </html>
