@@ -1644,55 +1644,54 @@
   <!-- SECTION 22: Utility Network Data Migration & Schema Mapping -->
 <section id="sec22">
     <span class="num">22</span>
-    <h2>ترحيل البيانات وبناء شبكات المرافق <span class="en">(Utility Network Migration)</span></h2>
+    <h2>ترحيل البيانات وبناء شبكة المرافق <span class="en">(Utility Network Migration)</span></h2>
     <p>
-      توفر Esri أسلوبين رئيسيين لبناء وتهيئة شبكة المرافق وفقاً لأفضل الممارسات المعتمدة: الأول هو استخدام نماذج <span class="en">Utility Network Foundations</span> الجاهزة لمجالات محددة (كالكهرباء والماء والاتصالات)، والثاني هو استخدام معالج ومجموعة أدوات الترحيل <span class="en">Utility Network Migration Wizard / Toolset</span>. كما يمكن أيضاً بناء الشبكة يدوياً باستخدام الأدوات الأساسية داخل <span class="en">ArcGIS Pro</span>.
+      لما نيجي نبني شبكة مرافق جديدة (<span class="en">Utility Network</span>)، شركة Esri مديانا طريقين أساسيين للغلابة والمحترفين: 
+      الأول هو إننا نستخدم <b>النماذج الجاهزة (<span class="en">Utility Network Foundations</span>)</b> ودي بتكون أشكال وجداول جاهزة ومصممة لكل مجال (زي الاتصالات والكهرباء والمية). 
+      والثاني هو إننا نستخدم <b>معالج وأدوات الترحيل (<span class="en">Migration Wizard / Toolset</span>)</b> لو عندنا بيانات قديمة وعايزين ننقلها لشكل الـ UN الجديد. وطبعاً فيه طريق ثالث وهو إننا نبني كل حاجة بإيدينا على نضاف من الصفر جوة <span class="en">ArcGIS Pro</span>.
     </p>
 
-    <!-- مقارنة الأساليب -->
+    <!-- مقارنة الأساليب ببلدي كده -->
     <div class="grid2" style="margin-top:18px;">
       <div class="card">
-        <h3>معالج وأدوات الترحيل <span class="en">(Migration Wizard & Toolset)</span></h3>
+        <h3>1. معالج وأدوات الترحيل <span class="en">(Migration Wizard)</span></h3>
         <p style="font-size:0.88em; color:var(--text-dim);">
-          تعتمد على أداة <span class="en">Migrate To Utility Network</span>، وتُعد خياراً مثالياً للمؤسسات التي تبحث عن مسار مباشر لبناء شبكة مرافق عامة ترث الهيكلة وسير العمل الحالي (<span class="en">Legacy Schema</span>). تناسب المؤسسات ذات المتطلبات المحدودة التي ترغب في تطوير إمكانيات الشبكة تدريجياً مع الوقت، خصوصاً مستخدمي شبكات الهندسة القديمة (<span class="en">Geometric Networks</span>).
+          <b>صاحب الطريقة:</b> أداة <span class="en">Migrate To Utility Network</span>.<br>
+          <b>الفكرة ببساطة:</b> دي حلالة العقد للمؤسسات اللي عندها شبكات قديمة (<span class="en">Geometric Networks</span>) وعايزة تنقل شغلها بنفس الهيكل القديم من غير ما تهد كل حاجة وتبني من جديد. طريقة ممتازة لو محتاج تنقل بياناتك بسرعة وتطور فيها بالتدريج.
         </p>
       </div>
 
       <div class="card">
-        <h3>النماذج الأساسية المعتمدة <span class="en">(Utility Network Foundations)</span></h3>
+        <h3>2. النماذج الجاهزة المعتمدة <span class="en">(UN Foundations)</span></h3>
         <p style="font-size:0.88em; color:var(--text-dim);">
-          توفر نماذج بيانات متخصصة ومصممة خصيصاً لكل قطاع صناعي. استراتيجية ممتازة للعملاء الراغبين في الاستفادة القصوى من كافة الميزات المتقدمة لشبكات المرافق فوراً، مثل العلاقات المكانية وغير المكانية (<span class="en">Associations</span>)، العناصر غير المكانية (<span class="en">Nonspatial Objects</span>)، والرسوم التوضيحية للشبكة (<span class="en">Network Diagrams</span>).
+          <b>الفكرة ببساطة:</b> دي قالب جاهز من Esri مبني على أعلى معايير السوق. خيار ممتاز لو بتعمل شبكة جديدة تماماً أو عايز تستغل كل إمكانيات الـ UN المتقدمة من أول يوم؛ زي العلاقات غير المكانية (<span class="en">Nonspatial Objects</span>) للفرعات والكوابل جوة المواسير، والرسوم الهندسية التلقائية (<span class="en">Network Diagrams</span>).
         </p>
       </div>
     </div>
 
     <!-- المفاهيم الأساسية في عملية الترحيل -->
-    <h3 style="margin-top:28px;">المفاهيم الفنية لعملية الترحيل <span class="en">(Migration Concepts)</span></h3>
+    <h3 style="margin-top:28px;">أهم المفاهيم الفنية في الترحيل <span class="en">(Migration Concepts)</span></h3>
     <div class="grid2" style="margin-top:14px;">
       
       <div class="card">
-        <h3>1) دمج البيانات والحقول <span class="en">(Data Mapping & Field Merging)</span></h3>
+        <h3>1) دمج البيانات والحقول <span class="en">(Data Mapping)</span></h3>
         <p style="font-size:0.88em; color:var(--text-dim);">
-          تتيح الأداة دمج أكثر من فئة عناصر مصدرية (<span class="en">Source Classes</span>) داخل فئة واحدة ناتجة في شبكة المرافق (<span class="en">Target Class</span>).
+          زمان كان عندنا طبقة لكل حاجة، في الـ UN بنجمع الطبقات القريبة من بعضها في طبقة واحدة رئيسية:
         </p>
         <p style="font-size:0.82em; color:var(--text-dim); margin-top:6px;">
-          • توحيد الحقول: الحقول التي تحمل نفس الاسم ونوع البيانات تُدمج في حقل واحد. أما الحقول المختلفة فتُجمع كلياً في الفئة الناتجة (مثلاً: دمج مضخة مياه وصمام بنظام 10 حقول لكل منهما ينتج فئة بها 20 حقل بيانات).
-        </p>
-        <p style="font-size:0.82em; color:var(--text-dim); margin-top:4px;">
-          • دمج الأنواع الفرعية: يتم دمج القيم والنطاقات (<span class="en">Domains</span>) التابعة للأنواع الفرعية (<span class="en">Subtypes</span>) تلقائياً.
+          • <b>توحيد الحقول:</b> لو بتدمج كذا طبقة، الحقول اللي بنفس الاسم والنوع هيندمجوا مع بعض تلقائياً. والحقول المختلفة هيتجمعوا كلهم في الطبقة الجديدة (يعني لو دمجت طبقة كوابل ضوئية وطبقة نحاسية، الحقول الزيادة هنا وهنا هتتسجل في الجدول الجديد عادي).<br>
+          • <b>دمج الأنواع الفرعية (<span class="en">Subtypes</span>):</b> القوائم والنطاقات المحددة (<span class="en">Domains</span>) لكل نوع هتنتقل وتتدمج أوتوماتيك.
         </p>
       </div>
 
       <div class="card">
-        <h3>2) تصنيف العناصر والأصناف <span class="en">(Defining Asset Types)</span></h3>
+        <h3>2) تصنيف الأصول هرمياً <span class="en">(Defining Asset Types)</span></h3>
         <p style="font-size:0.88em; color:var(--text-dim);">
-          تُصنف العناصر في شبكة المرافق هرمياً بناءً على ثلاثية: الفئة (<span class="en">Class</span>)، مجموعة الأصول (<span class="en">Asset Group</span>)، ونوع الأصل (<span class="en">Asset Type</span>).
+          أي عنصر في الـ UN بيتصنف بـ 3 مستويات: <b>الفئة (<span class="en">Class</span>)</b> &larr; <b>مجموعة الأصول (<span class="en">Asset Group</span>)</b> &larr; <b>نوع الأصل (<span class="en">Asset Type</span>)</b>.
         </p>
         <p style="font-size:0.82em; color:var(--text-dim); margin-top:6px;">
-          • قواعد الاتصال: يُسمح لجميع أنواع أصول الأجهزة (<span class="en">Device</span>) والوصلات (<span class="en">Junction</span>) بالاتصال بجميع الخطوط كإعداد افتراضي شبيه بـ <span class="en">Geometric Network</span>.
-        </p>
-        <p style="font-size:0.82em; color:var(--text-dim); margin-top:4px;">
-          • توليد الأكواد: تعتمد أنواع الأصول على حقول الأنواع الفرعية أو نطاقات القيم المرمزة (<span class="en">Coded Value Domains</span>). يتم الحفاظ على الأكواد الأصلية إذا كانت بين 1 و1023، أو إنشاء كود يبدأ من 1 تلقائياً.
+          • <b>قواعد التوصيل المبدئية:</b> الأداة بتسيب التوصيل مفتوح بشكل افتراضي بين النقط والخطوط زي زمان لحد ما تظبط قواعدك.<br>
+          • <b>توليد أكواد الترقيم:</b> الأنواع بتتحدد بأكواد (<span class="en">Coded Values</span>). لو كودك القديم من 1 لـ 1023 هيحافظ عليه، غير كده هيبدأ يرقملك من 1 جديد أوتوماتيك.
         </p>
       </div>
 
@@ -1700,20 +1699,21 @@
 
     <!-- إعداد الشبكات الفرعية وضوابط التحكم -->
     <div class="card" style="margin-top:16px;">
-      <h3>3) تهيئة الشبكات الفرعية ومتحكمات النطاق <span class="en">(Configuring Subnetworks)</span></h3>
+      <h3>3) ضبط المصادر والشبكات الفرعية <span class="en">(Configuring Subnetworks)</span></h3>
       <p style="font-size:0.88em; color:var(--text-dim);">
-        تحدد متحكمات الشبكة الفرعية (<span class="en">Subnetwork Controllers</span>) نقطة تدفق أو تغذية المصدر أو المصب (<span class="en">Source / Sink</span>).
+        الشبكة عشان تشتغل لازم يعرف مين نقطة التغذية أو المصدر اللي بيغذي المنطقة (<span class="en">Subnetwork Controller</span>).
       </p>
       <ul style="font-size:0.84em; color:var(--text-dim); margin-top:8px; line-height:1.6;">
-        <li>عند تفعيل خيار <span class="en">Is Controller</span> لأي نوع أصل، يتم إسناد فئة <span class="en">Subnetwork Controller</span> له تلقائياً وتعيين التهيئة الخاصة بالأطراف (<span class="en">Terminal Configuration</span>).</li>
-        <li>تنشئ الأداة طبقة (<span class="en">Tier</span>) واحدة أساسية باسم شبكة النطاق، برتبة (<span class="en">Tier Rank = 1</span>) ودعم للشبكات المنفصلة (<span class="en">Support Disjoint Subnetworks = True</span>).</li>
-        <li>إذا كانت البيانات المصدرية تتضمن حقل الدور الإضافي (<span class="en">Ancillary Role</span>) بقيم (<span class="en">Source</span> أو <span class="en">Sink</span>)، يتم تصدير العناصر كملف <span class="en">controllers.csv</span> تلقائياً في مجلد الإخراج للاستفادة منه عبر أداة <span class="en">Import Subnetwork Controllers</span>.</li>
+        <li>لما تقول للأداة إن النقطة دي **<span class="en">Is Controller</span>**، بتحدد إنها مصدر تغذية وتبدأ تجهز المنافذ بتعتها (<span class="en">Terminals</span>).</li>
+        <li>الأداة بتعملك مستوى واحد افتراضي للشبكة (<span class="en">Tier</span>) برتبة 1، وبتسمح بوجود شبكات منفصلة مش واصلة ببعض عادي (<span class="en">Support Disjoint Subnetworks</span>).</li>
+        <li>لو بياناتك القديمة فيها تحديد لدور العنصر (مصدر تغذية ولا مصب)، الأداة بتخرجلك ملف اسمه <span class="en">controllers.csv</span> عشان تستورده بنقرة واحدة بعدين.</li>
       </ul>
       
+      <!-- مثال عملي يركز على الاتصالات -->
       <div class="example-box" style="margin-top:12px;">
-        <span class="label en">PRACTICAL EXAMPLE (FTTH / WATER)</span>
+        <span class="label en">مثال عملي في الاتصالات (FTTH Network)</span>
         <p style="font-size:0.85em; color:var(--text-dim); margin-top:4px;">
-          في شبكات الاتصالات الألياف الضوئية (FTTH)، يمكنك تحديد منفذ <span class="en">OLT Port</span> كـ <span class="en">Controller</span>، بينما في شبكات المياه يتم تحديد محطات الضخ (<span class="en">Pumping Stations</span>) أو الخزانات كـ <span class="en">Source</span> لتحديد نطاق تدفق الشبكة الفرعية.
+          في شبكات الألياف الضوئية للمنازل (<span class="en">FTTH</span>)، بنحدد منفذ كارت الـ <span class="en">OLT</span> جوة سنترال المقسم الرئيسي كـ <b><span class="en">Subnetwork Controller</span> (مصدر التغذية الضوئية)</b>. ومنه تبدأ الشبكة الفرعية لتتبع المسار الإشاري لحد ما يوصل للمشترك عند كابينة الـ <span class="en">FAT</span> أو جهاز الـ <span class="en">ONT</span> في البيت.
         </p>
       </div>
     </div>
@@ -1722,53 +1722,52 @@
     <div class="grid2" style="margin-top:16px;">
       
       <div class="card" style="border-color:rgba(220,53,69,0.3);">
-        <h3 style="color:#ff6b6b;">متطلبات التشغيل الأساسية <span class="en">(Migration Requirements)</span></h3>
+        <h3 style="color:#ff6b6b;">شروط واحتياجات قبل ما تبدأ <span class="en">(Requirements)</span></h3>
         <ul style="font-size:0.82em; color:var(--text-dim); margin-top:6px; line-height:1.5;">
-          <li>جميع الطبقات المصدرية والمنفصلة يجب أن تكون داخل قواعد بيانات جغرافية (<span class="en">Geodatabase Classes</span>).</li>
-          <li>لتضمين الجداول المرتبطة والمرفقات (<span class="en">Attachments</span>)، يُشترط وجود مفتاح رئيسي قائم على المرفق العالمي <span class="en">Global ID</span> (العلاقات المبنية على الملاحظات الوصفية غير مدعومة).</li>
-          <li>ضرورة تحديد فئة نطاق الخدمة الجغرافية (<span class="en">Service Territory Feature Class</span>) كحدود مضلعة (<span class="en">Polygon</span>) لتقييد عمليات التحرير داخل نطاق الشبكة.</li>
+          <li>لازم كل طبقاتك القديمة تكون محطوطة جوة قاعدة بيانات جغرافية (<span class="en">Geodatabase</span>) مش ملفات شيب فايل عادي.</li>
+          <li>عشان تنقل الصور والجداول المرتبطة، لازم تكون العلاقات مبنية على الـ <span class="en">Global ID</span>.</li>
+          <li>لازم تجهز مضلع بيمثل نطاق الخدمة الجغرافية بتعتك (<span class="en">Service Territory Boundary</span>) عشان الشبكة تترسم جواه.</li>
         </ul>
       </div>
 
       <div class="card" style="border-color:rgba(40,167,69,0.3);">
-        <h3 style="color:#51cf66;">مخرجات أداة الترحيل <span class="en">(Generated Tool Outputs)</span></h3>
+        <h3 style="color:#51cf66;">المخرجات اللي هتاخدها في ايدك <span class="en">(Output Data)</span></h3>
         <ul style="font-size:0.82em; color:var(--text-dim); margin-top:6px; line-height:1.5;">
-          <li>قاعدة بيانات جوالة (<span class="en">Mobile Geodatabase</span>): تحتوي على شبكة المرافق والطبقات المستقلة بالاسم المحدد.</li>
-          <li>ملف <span class="en">controllers.csv</span>: يتضمن تفاصيل ومواقع متحكمات الشبكة لتفعيلها لاحقاً.</li>
-          <li>طبقة مجموعات رمزيّة (<span class="en">Group Layer</span>): تحتوي على طبقات مجالات فرعية جاهزة للتصور البصري داخل الخريطة.</li>
-          <li>بيئة تحميل البيانات (<span class="en">Data Loading Workspace</span>): تُستخدم لإعادة تنفيذ عملية الترحيل بنفس التهيئة عند الحاجة دون إعادة إنشائها من الصفر.</li>
+          <li><b>قاعدة بيانات جغرافية محمولة (<span class="en">Mobile GDB</span>):</b> فيها شبكة المرافق وطبقاتها جاهزة.</li>
+          <li><b>ملف <span class="en">controllers.csv</span>:</b> فيه لستة كل المصادر (زي أجهزة الـ OLT) لتفعيلهم.</li>
+          <li><b>طبقة خريطة جاهزة (<span class="en">Group Layer</span>):</b> متقسمة وملونة وجاهزة للعرض على الخريطة مباشرة.</li>
+          <li><b>مساحة عمل للتحميل (<span class="en">Data Loading Workspace</span>):</b> عشان لو حبيت تعيد نفس الترحيل تاني بنقرة واحدة من غير ما تعيد الضبط من الأول.</li>
         </ul>
       </div>
 
     </div>
 
     <!-- خطوات العمل عبر Migration Wizard -->
-    <h3 style="margin-top:28px;">خطوات الترحيل العمليّة عبر المعالج <span class="en">(Migration Wizard Steps)</span></h3>
+    <h3 style="margin-top:28px;">خطوات الترحيل العملي خطوة بخطوة <span class="en">(Migration Steps)</span></h3>
     <ol class="steps" style="margin-top:16px;">
       <li>
-        <h4>البدء من الخريطة أو قاعدة البيانات</h4>
-        <p>من نافذة <span class="en">Catalog</span>، اضغط بزر الفأرة الأيمن على <span class="en">Geometric Network</span> الحالية واختر <span class="en">To Utility Network</span> للبدء، أو افتح أداة <span class="en">Migrate To Utility Network</span> مباشرة من قائمة أدوات الجيوبروسيسنج.</p>
+        <h4>1) البدء واختيار البيانات المصدر</h4>
+        <p>من قائمة <span class="en">Catalog</span>، اضغط كليك يمين على الـ <span class="en">Geometric Network</span> القديمة واختار <span class="en">To Utility Network</span>، أو افتح أداة <span class="en">Migrate To Utility Network</span> من أدوات الجيوبروسيسنج.</p>
       </li>
       <li>
-        <h4>تحديد شبكات النطاق <span class="en">(Domain Networks)</span></h4>
-        <p>قم بإدخال اسم شبكة النطاق، حدد نوع المتحكم <span class="en">Controller Type</span> (<span class="en">Source</span> للشبكات التغذوية كالكهرباء والماء، أو <span class="en">Sink</span> لشبكات التجميع كالصرف الصحي)، ثم اختر نوع الطبقة <span class="en">Tier Definition</span> (<span class="en">Partitioned</span> أو <span class="en">Hierarchical</span>).</p>
+        <h4>2) تحديد نطاق الشبكة ونوع التغذية <span class="en">(Domain Networks)</span></h4>
+        <p>اكتب اسم شبكة النطاق (مثلاً: <span class="en">TelecomDomain</span>)، وحدد نوع التغذية <span class="en">Controller Type = Source</span> (لأن السنترال هو اللي بيبث الإشارة الضوئية في شبكات الاتصالات).</p>
       </li>
       <li>
-        <h4>ضبط خيارات قاعدة البيانات الجغرافية <span class="en">(Geodatabase Options)</span></h4>
-        <p>حدد طبقة نطاق الخدمة <span class="en">Service Territory</span>، مجلد الإخراج، اسم قاعدة البيانات الجغرافية المحمولة (افتراضياً <span class="en">MigrationDatabase</span>)، اسم مجموعة البيانات (<span class="en">UtilityNetwork</span>)، وإصدار الشبكة المطلوبة. حدد خيارات دمج الحقول، المرفقات، والجداول المرتبطة.</p>
+        <h4>3) ضبط إعدادات قاعدة البيانات الناتجة <span class="en">(Geodatabase Options)</span></h4>
+        <p>اختار حد نطاق الخدمة (<span class="en">Service Territory</span>)، ومكان الحفظ، واسم قاعدة البيانات المحمولة الناتجة، وعلم على خيارات دمج المرفقات والجداول المرتبطة.</p>
       </li>
       <li>
-        <h4>ربط الفئات وتحديد المتحكمات <span class="en">(Utility Network Mapping)</span></h4>
-        <p>ربط كل فئة عنصر مصدري (<span class="en">Source Class</span>) بالفئة الهدف (<span class="en">Target Class</span>) وبـ <span class="en">Asset Group/Type</span> المناظر لها. قم بتفعيل خيار <span class="en">Is Controller</span> للفئات التي تمثل نقاط التحكم والتغذية للشبكة.</p>
+        <h4>4) ربط الطبقات القديمة بالجديدة <span class="en">(Mapping)</span></h4>
+        <p>اربط كل طبقة قديمة بالفئة المناسبة ليها في الـ UN (مثلاً: ربط طبقة كوابل الألياف الضوئية الفردية بـ <span class="en">TelecomLine</span>)، وحدد مين الأجهزة اللي بتشتغل كمصادر تغذية (<span class="en">Is Controller</span>) زي السنترالات ومعدات الـ OLT.</p>
       </li>
       <li>
-        <h4>المراجعة والتنفيذ ومعالجة الأخطاء <span class="en">(Summary & Error Resolution)</span></h4>
-        <p>راجع ملخص عملية الترحيل واضغط <span class="en">Finish / Run</span>. عقب الترحيل، يُنصح بتشغيل أداة <span class="en">Analyze Network Data</span> لاكتشاف أخطاء جودة البيانات وتحديد التعديلات المطلوبة، ثم استخدام أداة <span class="en">Apply Error Resolutions</span> لأتمتة إصلاح الأخطاء الشائعة في الشبكة.</p>
+        <h4>5) التشغيل واكتشاف الأخطاء وتصحيحها <span class="en">(Run & Fix Errors)</span></h4>
+        <p>راجع الملخص واضغط <span class="en">Run</span>. أول ما تخلص، شغل أداة <span class="en">Analyze Network Data</span> عشان تطلعلك أي أخطاء في البيانات، وبعدها استخدم أداة <span class="en">Apply Error Resolutions</span> عشان تظبط الأخطاء دي أوتوماتيك.</p>
       </li>
     </ol>
 
 </section>
-
 <section id="sec23">
     <span class="num">23</span>
     <h2>تحليل ومعالجة أخطاء الشبكة بعد الترحيل <span class="en">(Analyze Network Data & Apply Error Resolutions)</span></h2>
