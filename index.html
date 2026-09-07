@@ -2039,7 +2039,9 @@
       <li>
         <h4>3) إعداد التصنيف الرئيسي والفرعي <span class="en">(Asset Group & Asset Type)</span></h4>
         <p style="margin-bottom:8px;">
-          تأمين التصنيف الثنائي إجباري لتفعيل الطوبولوجيا على كافة الفئات (عدا <span class="en">SubnetLine</span>):
+        <b>شرط إجباري لتفعيل الطوبولوجيا:</b> يجب تصنيف كافة العناصر بوضوح عبر تحديد 
+        <b>مجموعة الأصول (<span class="en">Asset Group</span>)</b> و<b>نوع الأصل (<span class="en">Asset Type</span>)</b> 
+        لكل عنصر قبل تفعيل الطوبولوجيا، ويُستثنى من ذلك طبقة <b><span class="en">SubnetLine</span></b> لأن النظام يديرها تلقائياً.
         </p>
         <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
           • <b><span class="en">Asset Group</span>:</b> يُمثل التصنيف الرئيسي ويكون مُعرفاً كـ <span class="en">Subtype</span> (القيمة الافتراضية <span class="en">0 = Unknown</span>)، ويمكن إضافتها بتبويب <span class="en">Subtypes</span> أو أداة <span class="en">Add Subtype</span>.<br>
@@ -2047,10 +2049,9 @@
           • <b>قيود الهيكلة:</b> يُوصى بتطبيق سياسة تقسيم دوال التجميع بـ <b><span class="en">Duplicate Split Policy</span></b>، ولا يجوز أن تتجاوز أشكال الأكواد للـ <span class="en">Subtype</span> أو الـ <span class="en">Domain</span> القيمة <b>1023</b>.
         </div>
         <div class="example-box" style="margin-top:10px;">
-          <span class="label en">GAS / FTTH CLASSIFICATION EXAMPLE</span>
+          <span class="label en">FTTH CLASSIFICATION EXAMPLE</span>
           <p style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
-            في شبكة الغاز: الفئة <span class="en">Device</span> &larr; المجموعة <span class="en">Asset Group = Valve</span> &larr; النطاق الفرعي <span class="en">GasDeviceValveAssetType</span> يحتوي (0: Unknown, 1: Main, 2: Shutoff, 3: Station).<br>
-            في شبكة <span class="en">FTTH</span>: المجموعة <span class="en">Splitter</span> تحتوي أطراف فرعية مثل (1:4, 1:8, 1:16).
+          في شبكة <span class="en">FTTH</span>: الفئة <span class="en">Device</span> &larr; المجموعة <span class="en">Asset Group = Optical Splitter</span> &larr; النطاق الفرعي <span class="en">SplitterAssetType</span> يحتوي أنواع نسب تقسيم الإشارة الضوئية مثل (0: Unknown, 1: 1:4 Splitter, 2: 1:8 Splitter, 3: 1:16 Splitter, 4: 1:32 Splitter).
           </p>
         </div>
       </li>
