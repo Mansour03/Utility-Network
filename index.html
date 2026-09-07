@@ -1944,16 +1944,64 @@
 
   <section id="sec24">
     <span class="num">24</span>
-    <h2>إنشاء الشبكة يدويًا <span class="en">(Create Utility Network)</span></h2>
-    <p>لو مفيش <span class="en">Foundation</span> جاهزة لصناعتك، أو عايز تحكم كامل، بتبدأ بأداة <span class="en">Create Utility Network</span> اللي بتنشئ الشبكة + شبكة الهيكل الداعم في خطوة واحدة.</p>
-    <ol class="steps" style="margin-top:28px;">
-      <li><h4>جهّز المتطلبات الأساسية</h4><p><span class="en">Feature Dataset</span> موجود بالفعل، وطبقة <span class="en">Service Territory</span> (بوليجون مفعّل m/z) بتحدد النطاق الجغرافي للشبكة.</p></li>
-      <li><h4>افتح الأداة من Geoprocessing</h4><p>تبويب <span class="en">Analysis</span> → <span class="en">Tools</span> → دور على <span class="en">Create Utility Network</span>.</p></li>
-      <li><h4>حدد المدخلات</h4><p><span class="en">Input Feature Dataset</span>، اسم للشبكة، وطبقة الـ <span class="en">Service Territory</span>.</p></li>
-      <li><h4>اختار نسخة الشبكة</h4><p><span class="en">Compatible</span> غالبًا الخيار الأنسب — بتختار تلقائيًا أحدث نسخة متوافقة مع بيئة <span class="en">Pro/Enterprise</span> بتاعتك.</p></li>
-      <li><h4>شغّل الأداة</h4><p>الناتج: الـ <span class="en">Feature Dataset</span> بقى فيه شبكة مرافق + فئات شبكة الهيكل الداعم جاهزة. الخطوة الجاية: تضيف شبكة نطاقية واحدة أو أكتر.</p></li>
+    <h2>إنشاء شبكة المرافق يدويًا <span class="en">(Create Utility Network)</span></h2>
+    <p>
+      إذا لم تكن تريد الاعتماد على النماذج الجاهزة (<span class="en">Foundations</span>) وتفضل بناء الشبكة وفقًا لمتطلبات مؤسستك الخاصة، يمكنك التأسيس يدويًا باستخدام أداة **<span class="en">Create Utility Network</span>**. تُنشئ هذه الأداة شبكة المرافق الأساسية إلى جانب شبكة الهيكل الداعم (<span class="en">Structure Network</span>) داخل مجموعة البيانات المكانية (<span class="en">Feature Dataset</span>)، والتي تُعتبر البنية التحتية الموحدة والمشتركة لكافة شبكات النطاق (<span class="en">Domain Networks</span>) التي ستضيفها لاحقًا.
+    </p>
+
+    <!-- متطلبات واشتراطات الإنشاء اليدوي -->
+    <div class="card" style="margin-top:18px; border-color:rgba(255, 193, 7, 0.4);">
+      <h3 style="color:#ffc107;">المتطلبات والاشتراطات القبلية <span class="en">(Requirements & Prerequisites)</span></h3>
+      <ul style="font-size:0.84em; color:var(--text-dim); margin-top:8px; line-height:1.6;">
+        <li><b>مجموعة البيانات المكانية (<span class="en">Input Feature Dataset</span>):</b> يجب وجود <span class="en">Feature Dataset</span> جاهزة داخل قاعدة البيانات لتكون حاضنة للشبكة.</li>
+        <li><b>نطاق الخدمة الجغرافية (<span class="en">Service Territory</span>):</b> وجود طبقة مضلعات (<span class="en">Polygon Feature Class</span>) مُفعل بها القيم الرأسية والقياسية (<span class="en">M- and Z-enabled</span>) وتكون موجودة داخل نفس الـ <span class="en">Feature Dataset</span>. يُحدد هذا النطاق الحد الأقصى المسموح فيه بالتحرير والترسيم للشبكة.</li>
+        <li><b>نوع قاعدة البيانات (<span class="en">Supported Geodatabases</span>):</b> يُمكن الإنشاء في قاعدة بيانات جغرافية محمولة (<span class="en">Mobile</span>)، أو ملفية (<span class="en">File GDB</span>)، أو مؤسسية (<span class="en">Enterprise GDB</span>) تعمل على قواعد بيانات مثل SQL Server, Oracle, PostgreSQL, أو SAP HANA.</li>
+        <li><b>اشتراطات قواعد البيانات المؤسسية (<span class="en">Enterprise Deployments</span>):</b>
+          <ul style="margin-top:4px; padding-right:16px;">
+            <li>أن يكون حساب الاتصال بقاعدة البيانات حسابًا معرفًا كـ <span class="en">Database User</span> يمتلك صلاحية إنشاء الجداول (وليس مدير قاعدة البيانات OS/dbo) ليصبح هو المالك للشبكة على مستوى قاعدة البيانات.</li>
+            <li>تسجيل الدخول إلى Portal for ArcGIS بحساب يمتلك صلاحيات النشر (مثل دور <span class="en">Publisher</span>) ليُسجل كـ مالك للشبكة على مستوى البوابة الإلكترونية.</li>
+            <li>ترخيص الحساب بإضافة **<span class="en">ArcGIS Advanced Editing</span>** المخصصة لإنشاء ونشر وتعديل شبكات المرافق.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- مثال تطبيقي في شبكات الاتصالات -->
+    <div class="example-box" style="margin-top:16px;">
+      <span class="label en">مثال تطبيقي في شبكات الاتصالات (FTTH Structures)</span>
+      <p style="font-size:0.85em; color:var(--text-dim); margin-top:4px;">
+        في شبكات الاتصالات، تُستخدم شبكة الهيكل الداعم (<span class="en">Structure Network</span>) التي ينشئها النظام تلقائيًا لتصميم البنية التحتية التي تحتوي كوابل الألياف الضوئية؛ مثل **المواسير والأنابيب الضوئية (<span class="en">Ducts & Conduits</span>)، غرف التفتيش المناهل (<span class="en">Manholes/Handholes</span>)، والأعمدة الخشبية أو الخرسانية (<span class="en">Poles</span>)**. هذا الهيكل الفيزيائي هو الذي يحمل ويدعم خطوط وأجهزة شبكة الاتصالات النطاقية لاحقًا.
+      </p>
+    </div>
+
+    <!-- الخطوات التنفيذية للأداة -->
+    <h3 style="margin-top:28px;">خطوات الإنشاء عبر ArcGIS Pro <span class="en">(Execution Steps)</span></h3>
+    <ol class="steps" style="margin-top:16px;">
+      <li>
+        <h4>1) فتح الأداة من لوحة أدوات المعالجة الجغرافية</h4>
+        <p>من تبويب **<span class="en">Analysis</span>** &larr; اضغط على **<span class="en">Tools</span>** لفتح لوحة <span class="en">Geoprocessing</span>، ثم ابحث عن أداة **<span class="en">Create Utility Network</span>** وافتحها.</p>
+      </li>
+      <li>
+        <h4>2) تحديد مجموعة البيانات المصدرية والاسم</h4>
+        <p>في خانة **<span class="en">Input Feature Dataset</span>**، حدد مجموعة البيانات المكانية الجاهزة داخل قاعدة البيانات. ثم أدخل اسمًا فريدًا للشبكة في معلمة **<span class="en">Utility Network Name</span>**.</p>
+      </li>
+      <li>
+        <h4>3) إسناد طبقة نطاق الخدمة <span class="en">(Service Territory)</span></h4>
+        <p>حدد طبقة المضلعات المجهزة مسبقاً في معلمة **<span class="en">Service Territory Feature Class</span>**. تذكر أن هذه الطبقة يجب أن تكون داخل نفس الـ <span class="en">Feature Dataset</span> المختار في الخطوة السابقة لتحديد الحدود المسموح بالتحرير داخلها.</p>
+      </li>
+      <li>
+        <h4>4) اختيار إصدار الشبكة <span class="en">(Utility Network Version)</span></h4>
+        <p>اختر الإصدار المناسب لبيئة العمل:
+          <br>• **<span class="en">Compatible</span> (الخيار الأوصى به):** ينشئ أحدث إصدار متوافق تلقائيًا مع بيئة <span class="en">ArcGIS Pro</span> و <span class="en">ArcGIS Enterprise</span> الحالية لديك.
+          <br>• **<span class="en">Current</span>:** ينشئ أحدث إصدار يدعمه تطبيق <span class="en">ArcGIS Pro</span> الحالي بصرف النظر عن السيرفر.
+        </p>
+      </li>
+      <li>
+        <h4>5) التنفيذ والتهيئة التالية</h4>
+        <p>اضغط على **<span class="en">Run</span>**. عند التصدير، ستجد أنه تم إنشاء كائن شبكة المرافق وفئات شبكة الهيكل الداعم (<span class="en">Structure Network</span>) بنجاح داخل مجموعة البيانات. الخطوة التالية هي البدء في إضافة شبكة النطاق (<span class="en">Domain Network</span>) الخاصة بالاتصالات.</p>
+      </li>
     </ol>
-  </section>
+</section>
 
   <!-- SECTION 25: Manual Creation and Configuration Workflow -->
 <!-- SECTION 25: Manual Creation and Configuration Workflow -->
