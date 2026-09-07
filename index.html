@@ -2056,15 +2056,23 @@
         </div>
       </li>
 
-      <li>
-        <h4>4) إنشاء وتعيين المنافذ <span class="en">(Terminal Configurations)</span></h4>
-        <p style="margin-bottom:8px;">تُعرف المنافذ المتقدمة للأجهزة ذات المداخل والمخرجات المتعددة (مثل المحولات الكهربائية):</p>
-        <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
-          • يتم إنشاؤها على مستوى الشبكة بأداة <span class="en"><b>Add Terminal Configuration</b></span>.<br>
-          • تُربط بالفئة المحددة على مستوى <span class="en">Asset Group</span> و <span class="en">Asset Type</span> بأداة <span class="en"><b>Set Terminal Configuration</b></span>.<br>
-          • مطلوبة لشبكات التقسيم (<span class="en">Partitioned</span>) عند تحديد متحكمات الشبكات الفرعية (<span class="en">Subnetwork Controllers</span>)، بحيث تتطلب منفذين على الأقل أحدهما في الاتجاه الأعلى (<span class="en">Upstream</span>).
-        </div>
-      </li>
+     <li>
+  <h4>4) إنشاء وتعيين المنافذ <span class="en">(Terminal Configurations)</span></h4>
+  <p style="margin-bottom:8px;">تُعرف المنافذ المتقدمة للأجهزة ذات المداخل والمخرجات المتعددة (مثل أجهزة ومقسمات الاتصالات الضوئية):</p>
+  <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
+    • <b>إنشاء التهيئة العامة:</b> يتم تعريف إعدادات المنافذ على مستوى الشبكة ككل باستخدام أداة <span class="en"><b>Add Terminal Configuration</b></span>.<br>
+    • <b>الربط بالأصول:</b> تُربط هذه الإعدادات بالفئة المحددة بناءً على <span class="en">Asset Group</span> و <span class="en">Asset Type</span> باستخدام أداة <span class="en"><b>Set Terminal Configuration</b></span>.<br>
+    • <b>الاشتراط الفني لشبكات التقسيم (<span class="en">Partitioned</span>):</b> عند تعيين جهاز كمُتحكم للشبكة الفرعية (<span class="en">Subnetwork Controller</span>)، يلزم وجود منفذين على الأقل بالجهاز؛ أحدهما لاستقبال الضوء/الإشارة من الجهة الأعلى <b>(<span class="en">Upstream</span>)</b>، والآخر لتمريرها للجهة الأدنى <b>(<span class="en">Downstream</span>)</b> لتحديد اتجاه التدفق بدقة.
+  </div>
+
+  <!-- مثال تطبيقي متخصص في شبكات FTTH -->
+  <div class="example-box" style="margin-top:10px; background:rgba(255,255,255,0.03); padding:10px; border-radius:6px; border-right:3px solid var(--accent-color, #007bff);">
+    <span class="label en" style="font-weight:bold; color:var(--accent-color, #007bff);">مثال تطبيقي (FTTH):</span>
+    <p style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
+      في جهاز المقسم الضوئي (<span class="en">Optical Splitter</span>)؛ يُمثل منفذ الدخل (<span class="en">IN Port</span>) طرف الـ <b><span class="en">Upstream</span></b> الذي يستقبل الكابل الرئيسي القادم من السنترال، بينما تُمثل منافذ الخرج (<span class="en">OUT Ports</span>) أطراف الـ <b><span class="en">Downstream</span></b> التي تتجه لتغذية كبائن التوزيع (<span class="en">FAT</span>).
+    </p>
+  </div>
+</li>
 
       <li>
         <h4>5) إعداد القواعد الشبكية والسلوكية <span class="en">(Network & Attribute Rules)</span></h4>
