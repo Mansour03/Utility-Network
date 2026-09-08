@@ -2106,8 +2106,10 @@
 </li>
 <li>
   <h4>8) تعيين فئات الشبكة <span class="en">(Network Categories)</span></h4>
-  <p style="margin-bottom:8px;">هي وسوم (<span class="en">Tags</span>) بنلزقها على الأجهزة عشان نفهم السيستم وظيفة الجهاز إيه في الشارع أثناء التتبع المكانية:</p>
-  
+  <p style="margin-bottom:8px;">
+    البرنامج (<span class="en">ArcGIS Pro</span>) بالنسبة له أي نقطة ترسمها على الخريطة هي مجرد "دائرة أو نقطة". هو ما يفهمش يعني إيه "كبينة في الشارع" ولا يعني إيه "مقسم ضوئي". الـ <span class="en">Network Category</span> دي مجرد <b>"شارة / استيكر (<span class="en">Tag</span>)"</b> بنلزقها على النقطة عشان نقول للبرنامج: <i>"النقطة دي مش نقطة عادية، دي بتشتغل كذا في الحقيقة!"</i>
+  </p>
+
   <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
     • <b>فئات نظامية (<span class="en">System Categories</span>):</b> استيكرات جاهزة بالبرنامج زي <span class="en">Splitter</span> لتوزيع الخدمة، أو <span class="en">Unit Container</span> للكبائن اللي جواها أجزاء فرعية.<br>
     • <b>فئات مخصصة (<span class="en">Custom Categories</span>):</b> استيكرات بنعملها بنفسنا عشان نوقف التتبع عند نقاط معينة زي وسم الحماية (<span class="en">Protective</span>). تُدار وتُسند هذه الفئات عبر أداة <span class="en"><b>Set Network Category</b></span>.
@@ -2115,11 +2117,30 @@
 
   <div class="example-box" style="margin-top:10px;">
     <span class="label en">FTTH NETWORK CATEGORY SCENARIOS</span>
-    <p style="font-size:0.83em; color:var(--text-dim); margin-top:4px; line-height:1.6;">
-      <b>1) تتبع شكوى عميل (<span class="en">Splitter</span>):</b> عند تتبع الخدمة، أول ما يصل التتبع للمقسم الضوئي بيشوف الاستيكر فيتفرع أوتوماتيك لـ 8 مشتركين يفحصهم مع بعض.<br>
-      <b>2) حادث كابينة (<span class="en">Unit Container</span>):</b> بضغطة واحدة على الكابينة المكسورة (<span class="en">FDH</span>)، الاستيكر بيخلي النظام يعرض كل المقسمات واللحامات اللي جواها مرة واحدة.<br>
-      <b>3) عطل كهربائي (<span class="en">Protective</span>):</b> التتبع بيقف فوراً أول ما يلمس جهاز الحماية والتأريض في الكابينة، عشان يؤكد لك إن أجهزة السنترال الرئيسي (<span class="en">OLT</span>) محمية ولم تتأثر.
-    </p>
+    <div style="font-size:0.83em; color:var(--text-dim); margin-top:6px; line-height:1.6;">
+      
+      <!-- 1) Splitter -->
+      <p style="margin:0 0 8px 0;">
+        <b>1) استيكر الموزع (<span class="en">Splitter</span>):</b><br>
+        • <u>الوضع في الشارع:</u> كابل الألياف بيدخل للـ <span class="en">Splitter</span> في شعيرة واحدة، وبيخرج منه 8 شعيرات رايحة للبيوت.<br>
+        • <u>السيناريو وفائدة الاستيكر:</u> لو عميل اشتكى إن النت قاطع ودوست عشان تعمل تتبع (<span class="en">Trace</span>)؛ البرنامج أول ما بيوصل عند الـ <span class="en">Splitter</span> وبيشوف الاستيكر ده، بيعرف إن الإشارة اتجزأت، فيقوم ماشي تلقائياً في الـ 8 خطوط مع بعض عشان يقولك: <i>"على فكرة، المشكلة مش عند العميل ده بس، ده الـ 7 عملاء التانيين اللي معاه على نفس الـ <span class="en">Splitter</span> الخدمة قاطعة عندهم هم كمان!"</i>
+      </p>
+
+      <!-- 2) Unit Container -->
+      <p style="margin:0 0 8px 0;">
+        <b>2) استيكر الحاوية (<span class="en">Unit Container</span>):</b><br>
+        • <u>الوضع في الشارع:</u> الكبينة الكبيرة اللي في الشارع (<span class="en">FDH</span>) جواها كاسيتات ولحامات ومقسمات.<br>
+        • <u>السيناريو وفائدة الاستيكر:</u> لو خبطت عربية الكبينة دي واتكسرت وعاوز تطلع تقرير سريع بالأجهزة اللي اتدمرت جواها؛ مجرد ما تضغط بلمسة واحدة على الكبينة من برة، البرنامج بيفهم إنها "صندوق محتوي" بسبب الاستيكر، فيطلعلك فوراً قائمة بكل قطع اللحام والمقسمات اللي جواها من غير ما تقعد تختار قطعة قطعة.
+      </p>
+
+      <!-- 3) Protective -->
+      <p style="margin:0;">
+        <b>3) استيكر الحماية والحدود (<span class="en">Protective</span>):</b><br>
+        • <u>الوضع في الشارع:</u> الكابينة أو المقسم بيكون راكب فيه جهاز حماية ضد الكهرباء الزائدة والتأريض (<span class="en">Surge Protector</span>) عشان لو حصلت مشكلة كهرباء في الشارع، التيار العالي ما يوصلش للسنترال الرئيسي (<span class="en">OLT</span>) ويحرقه.<br>
+        • <u>السيناريو وفائدة الاستيكر:</u> حصل عطل كهربائي وأنت بتعمل تتبع لمعرفة حدود الخطر؛ أداة التتبع وهي ماشية أول ما تلمس الجهاز اللي عليه استيكر <span class="en">Protective</span> بتقف فوراً وما بتكملش، بتفهم إن المكان ده هو "جدار الحماية" وأن الأجهزة اللي وراه جوة السنترال آمنة وسليمة وما وصلهاش العطل.
+      </p>
+
+    </div>
   </div>
 </li>
 
