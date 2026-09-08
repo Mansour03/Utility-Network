@@ -2090,22 +2090,35 @@
       </li>
 
       <li>
-        <h4>7) إنشاء وتعيين خصائص التتبع <span class="en">(Network Attributes)</span></h4>
-        <p style="margin-bottom:8px;">خصائص مكانية تُخزن مباشرة داخل طوبولوجيا الشبكة للتحكم في التتبع (<span class="en">Tracing</span>):</p>
-        <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
-          • تُنشأ بأداة <span class="en"><b>Add Network Attribute</b></span> وتُرتبط بالحقل بأداة <span class="en"><b>Set Network Attribute</b></span>.<br>
-          • تُستخدم كفلتر حركة (<span class="en">Traversability Filter</span>) أو كحواجز توقف (<span class="en">Terminators</span>)، مثل خاصية حالة دورة الحياة (<span class="en">Lifecycle Status</span>) لتجاهل العناصر المصممة غير المنفذة (<span class="en">Proposed</span>).
-        </div>
-      </li>
+  <h4>7) إنشاء وتعيين خصائص التتبع <span class="en">(Network Attributes)</span></h4>
+  <p style="margin-bottom:8px;">خصائص مكانية تُخزن مباشرة داخل طوبولوجيا الشبكة للتحكم في التتبع (<span class="en">Tracing</span>):</p>
+  <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
+    • تُنشأ بأداة <span class="en"><b>Add Network Attribute</b></span> وتُرتبط بالحقل بأداة <span class="en"><b>Set Network Attribute</b></span>.<br>
+    • تُستخدم كفلتر حركة (<span class="en">Traversability Filter</span>) أو كحواجز توقف (<span class="en">Terminators</span>)، مثل خاصية حالة دورة الحياة (<span class="en">Lifecycle Status</span>) لتجاهل العناصر المصممة غير المنفذة (<span class="en">Proposed</span>).
+  </div>
 
+  <div class="example-box" style="margin-top:10px;">
+    <span class="label en">FTTH NETWORK ATTRIBUTE EXAMPLE</span>
+    <p style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
+      في شبكات <span class="en">FTTH</span>: يُربط حقل حالة دورة الحياة بخاصية الشبكة، لتقوم أداة التتبع باستثناء كوابل الألياف الضوئية المقترحة (<span class="en">Proposed</span>) وتتبع المسار عبر الكوابل المنفذة والملغومة بالخدمة فعلياً (<span class="en">In Service</span>) فقط.
+    </p>
+  </div>
+</li>
       <li>
-        <h4>8) تعيين فئات الشبكة <span class="en">(Network Categories)</span></h4>
-        <p style="margin-bottom:8px;">وسوم وتصنيفات نظامية أو مخصصة تُسند للعناصر لتحديد أدوارها في التتبع والعمليات:</p>
-        <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
-          • <b>فئات نظامية:</b> مثل <span class="en">Subnetwork Controller</span> و <span class="en">Subnetwork Tap</span> للشبكات التقليدية، أو <span class="en">Unit Container</span> و <span class="en">Splitter</span> لشبكات الاتصالات لدعم تتبع المسار (<span class="en">Path Trace</span>).<br>
-          • <b>فئات مخصصة:</b> مثل وسم الحماية (<span class="en">Protective</span>) لإيقاف التتبع الهيدروليكي أو الكهربائي عند التوصل لأجهزة الحماية. تُدار عبر أداة <span class="en">Set Network Category</span>.
-        </div>
-      </li>
+  <h4>8) تعيين فئات الشبكة <span class="en">(Network Categories)</span></h4>
+  <p style="margin-bottom:8px;">وسوم وتصنيفات نظامية أو مخصصة تُسند للعناصر لتحديد أدوارها الوظيفية في التتبع والعمليات:</p>
+  <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
+    • <b>فئات نظامية:</b> وسوم افتراضية بالنظام مثل <span class="en">Subnetwork Controller</span> للتحكم في الشبكة الفرعية، أو <span class="en">Splitter</span> و <span class="en">Unit Container</span> لشبكات الاتصالات لدعم خوارزميات تتبع المسار (<span class="en">Path Trace</span>) واحتواء الأصول.<br>
+    • <b>فئات مخصصة:</b> وسوم يُنشئها المستخدم لتحديد سلوك خاص عند التتبع، مثل وسم أجهزة الحماية (<span class="en">Protective</span>). تُدار وتُسند هذه الفئات عبر أداة <span class="en"><b>Set Network Category</b></span>.
+  </div>
+
+  <div class="example-box" style="margin-top:10px;">
+    <span class="label en">FTTH NETWORK CATEGORY EXAMPLE</span>
+    <p style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
+      في شبكة <span class="en">FTTH</span>: يُسند الوسم النظامي <span class="en">Splitter</span> لعائلة المقسمات الضوئية، والوسم <span class="en">Unit Container</span> لكبائن التوزيع (<span class="en">FDH</span>) وصناديق التجميع (<span class="en">FAT</span>)؛ لتفعيل التتبع التلقائي للشعيرات الضوئية والعلاقات المكانية للحاويات.
+    </p>
+  </div>
+</li>
 
       <li>
         <h4>9) ضبط سياسات اتصال الحواف <span class="en">(Set Edge Connectivity Policies)</span></h4>
