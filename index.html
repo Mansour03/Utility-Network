@@ -2106,15 +2106,19 @@
 </li>
 <li>
   <h4>8) تعيين فئات الشبكة <span class="en">(Network Categories)</span></h4>
+  
+  <!-- 1. التعريف الفني والمفهوم -->
   <p style="margin-bottom:8px;">
     البرنامج (<span class="en">ArcGIS Pro</span>) بالنسبة له أي نقطة ترسمها على الخريطة هي مجرد "دائرة أو نقطة". هو ما يفهمش يعني إيه "كبينة في الشارع" ولا يعني إيه "مقسم ضوئي". الـ <span class="en">Network Category</span> دي مجرد <b>"شارة / استيكر (<span class="en">Tag</span>)"</b> بنلزقها على النقطة عشان نقول للبرنامج: <i>"النقطة دي مش نقطة عادية، دي بتشتغل كذا في الحقيقة!"</i>
   </p>
 
-  <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
-    • <b>فئات نظامية (<span class="en">System Categories</span>):</b> استيكرات جاهزة بالبرنامج زي <span class="en">Splitter</span> لتوزيع الخدمة، أو <span class="en">Unit Container</span> للكبائن اللي جواها أجزاء فرعية.<br>
-    • <b>فئات مخصصة (<span class="en">Custom Categories</span>):</b> استيكرات بنعملها بنفسنا عشان نوقف التتبع عند نقاط معينة زي وسم الحماية (<span class="en">Protective</span>). تُدار وتُسند هذه الفئات عبر أداة <span class="en"><b>Set Network Category</b></span>.
+  <!-- 2. أدوات التطبيق في ArcGIS Pro -->
+  <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px; margin-bottom:10px;">
+    • <b>تحديد الأدوار الفئوية:</b> تُدار وتُسند هذه الفئات للأصول (<span class="en">Asset Groups & Asset Types</span>) باستخدام أداة <span class="en"><b>Set Network Category</b></span>.<br>
+    • <b>أنواع الفئات:</b> فئات نظامية (<span class="en">System Categories</span>) مثل <span class="en">Splitter</span> و <span class="en">Unit Container</span> لخدمة التتبع التلقائي، أو فئات مخصصة (<span class="en">Custom Categories</span>) كفئة الحماية <span class="en">Protective</span> التي يُنشئها المستخدم بأداة <span class="en"><b>Add Network Category</b></span> لإيقاف أو تغيير سلوك التتبع.
   </div>
 
+  <!-- 3. السيناريوهات العملية FTTH -->
   <div class="example-box" style="margin-top:10px;">
     <span class="label en">FTTH NETWORK CATEGORY SCENARIOS</span>
     <div style="font-size:0.83em; color:var(--text-dim); margin-top:6px; line-height:1.6;">
@@ -2143,7 +2147,6 @@
     </div>
   </div>
 </li>
-
       <li>
         <h4>9) ضبط سياسات اتصال الحواف <span class="en">(Set Edge Connectivity Policies)</span></h4>
         <p>
