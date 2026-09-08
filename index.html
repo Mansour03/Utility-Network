@@ -2106,19 +2106,19 @@
 </li>
 <li>
   <h4>8) تعيين فئات الشبكة <span class="en">(Network Categories)</span></h4>
-  <p style="margin-bottom:8px;">وسوم (Tags) تُضاف للأجهزة لتحديد وظيفتها وسلوكها أثناء التتبع المكاني:</p>
+  <p style="margin-bottom:8px;">وسوم (<span class="en">Tags</span>) تُضاف للأجهزة لتحديد وظيفتها وسلوكها أثناء التتبع المكاني والتحليل:</p>
   <div style="font-size:0.85em; color:var(--text-dim); line-height:1.7; padding-right:10px;">
-    • <b>فئات نظامية (System):</b> وسوم أساسية بالبرنامج زي <span class="en">Splitter</span> لتوزيع الإشارة، أو <span class="en">Unit Container</span> للأجهزة الحاوية.<br>
-    • <b>فئات مخصصة (Custom):</b> وسوم بنعملها بنفسنا لإيقاف أو تغيير مسار التتبع، مثل وسم الحماية (<span class="en">Protective</span>) لإيقاف التتبع عند نقاط الأمان والعزل. تُسند بأداة <span class="en"><b>Set Network Category</b></span>.
+    • <b>فئات نظامية (<span class="en">System</span>):</b> وسوم أساسية بالبرنامج زي <span class="en">Splitter</span> لتوزيع الإشارة، أو <span class="en">Unit Container</span> للأجهزة الحاوية.<br>
+    • <b>فئات مخصصة (<span class="en">Custom</span>):</b> وسوم بنعملها بنفسنا لإيقاف أو تغيير مسار التتبع، مثل وسم الحماية (<span class="en">Protective</span>) لتحديد حدود الأمان والعزل. تُسند بأداة <span class="en"><b>Set Network Category</b></span>.
   </div>
 
+  <!-- كارت المثال سيناريوهات عملية FTTH -->
   <div class="example-box" style="margin-top:10px;">
-    <span class="label en">FTTH NETWORK CATEGORY EXAMPLE</span>
-    <p style="font-size:0.83em; color:var(--text-dim); margin-top:4px;">
-      في شبكة <span class="en">FTTH</span>:<br>
-      • <b><span class="en">Splitter</span>:</b> ليفهم النظام إن الشعيرة الضوئية تتوزع لأكثر من مسار.<br>
-      • <b><span class="en">Unit Container</span>:</b> لكبائن (<span class="en">FDH / FAT</span>) ليفهم السيستم أنها حاويات تحوي أصولاً داخلها.<br>
-      • <b><span class="en">Protective</span>:</b> لوحدات حماية التأريض أو أجهزة العزل بالمقاسم؛ ليتوقف عندها التتبع فوراً ولا يعبرها عند تحليل الأعطال.
+    <span class="label en">FTTH NETWORK CATEGORY SCENARIOS</span>
+    <p style="font-size:0.83em; color:var(--text-dim); margin-top:4px; line-height:1.6;">
+      <b>1) سيناريو شكوى عميل (<span class="en">Splitter</span>):</b> عند تتبع انقطاع خدمة عن عميل، يصل التتبع للمقسم الضوئي فيتفرع تلقائياً لكل المشتركين الـ 8 المربوطين معه لفحص تأثير الخدمة عليهم جميعاً.<br>
+      <b>2) سيناريو حادث كابينة (<span class="en">Unit Container</span>):</b> عند تضرر كابينة (<span class="en">FDH</span>)، يحدد المهندس الكابينة ليتعرف النظام فوراً على كل اللحامات والمقسمات الداخليّة المترابطة معها كحاوية بضغطة واحدة.<br>
+      <b>3) سيناريو عطل كهربائي (<span class="en">Protective</span>):</b> عند حدوث قفزة جهد، يتوقف تتبع تحليل الأعطال فوراً عند وحدة التأريض (<span class="en">Surge Protector</span>) كحاجز أمان، لتحديد نطاق العزل وتأكيد حماية أجهزة السنترال (<span class="en">OLT</span>).
     </p>
   </div>
 </li>
