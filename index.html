@@ -2308,40 +2308,78 @@
     </div>
 </section>
 
-  <section id="sec27">
-    <span class="num">27</span>
-    <h2>إعدادات دقيقة خاصة بشبكات الاتصالات</h2>
-    <p>شبكة الاتصالات فيها إعدادين إضافيين مش موجودين في الشبكات التقليدية، بيتحكموا في سلوك دقيق جدًا مهم في بيئة الفايبر الكثيفة.</p>
-    <div class="grid2" style="margin-top:24px;">
-      <div class="card">
-        <h3><span class="en">Edge Connectivity Policy</span></h3>
-        <p>تتحدد بأداة <span class="en">Set Edge Connectivity</span> على مستوى <span class="en">Asset Group/Type</span>: هل يُسمح بالاتصال في أي نقطة على الخط (<span class="en">Any Vertex</span>)، أو في الأطراف بس (<span class="en">End Vertex</span> — الافتراضي).</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>كابل فايبر رئيسي غالبًا <span class="en">End Vertex</span> (محدد الأطراف)، بينما <span class="en">Microduct</span> ممكن تحتاجه <span class="en">Any Vertex</span> عشان تسمح بتوصيل عملاء جدد في أي نقطة على طول مساره من غير قطعه.</p></div>
-      </div>
-      <div class="card">
-        <h3><span class="en">Divide / Combine Policy</span></h3>
-        <p>خاصة بالكائنات المُجمّعة <span class="en">(Grouped Objects)</span> في شبكة الاتصالات — بتحدد إيه اللي يحصل للحقول الرقمية لما كائن ينقسم لاتنين أو يندمج مع غيره.</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>خيوط فايبر مُجمّعة <span class="en">(Grouped Edge Object)</span> بسعة معينة، لو اتقسمت لمجموعتين — سياسة <span class="en">Unit apportioned</span> بتوزع السعة نسبيًا على المجموعتين الجديدتين بدل ما تكررها في الاتنين.</p></div>
-      </div>
-    </div>
-    <p style="margin-top:22px;">الخيارات المتاحة لكل سياسة:</p>
-    <div class="grid2">
-      <div class="card">
-        <h3><span class="en">Divide Policy</span></h3>
-        <ul class="deflist">
-          <li><b class="en">Unit apportioned</b> — توزيع القيمة على عدد الوحدات في كل مجموعة ناتجة (حقول رقمية بس).</li>
-          <li><b class="en">Default value</b> — القيمة الافتراضية للحقل تتحط في الاتنين.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3><span class="en">Combine Policy</span></h3>
-        <ul class="deflist">
-          <li><b class="en">Sum of values</b> — جمع القيم الرقمية من كل الكائنات المندمجة.</li>
-          <li><b class="en">Default value</b> — القيمة الافتراضية للحقل الناتج.</li>
-        </ul>
+ <section id="sec27">
+  <span class="num">27</span>
+  <h2>إعدادات دقيقة خاصة بشبكات الاتصالات (Telecom Network Policies)</h2>
+  <p>تتميز شبكة الاتصالات بإعدادات وتدفقات عمل دقيقة للتحكم في سلوك الربط المكاني (<span class="en">Connectivity</span>) وتحديث البيانات الوصفية (<span class="en">Attributes</span>) أثناء عمليات التعديل كالقَطع الدمج على الكائنات المجمعة.</p>
+  
+  <div class="grid2" style="margin-top:24px;">
+    <!-- Edge Connectivity Policy Card -->
+    <div class="card">
+      <h3><span class="en">Edge Connectivity Policy</span></h3>
+      <p>تتحدد بأداة <span class="en">Set Edge Connectivity</span> على مستوى <span class="en">Asset Group/Type</span>: لتحديد كيفية ربط النقط بالتسهيلات الخطية؛ هل يُسمح بالاتصال في أي نقطة منتصف على الخط (<span class="en">Any Vertex</span>)، أم في الأطراف فقط (<span class="en">End Vertex</span> — الافتراضي).</p>
+      
+      <div class="example-box">
+        <span class="label en">FTTH MICRODUCT BUNDLE DIVERSION</span>
+        <p style="font-size:0.85em; margin-top:4px; line-height:1.6;">
+          <b>سيناريو تفريع حزمة المواسير:</b><br>
+          • <b>حاوية الحزمة الخارجية (<span class="en">Bundle Outer Shell</span>):</b> تظل خطاً واحداً مستمراً في الـ GIS وسياساتها <span class="en"><b>Any Vertex</b></span> لربط غرف التفتيش أو نقاط التفريع بمنتصفها دون قص الحزمة.<br>
+          • <b>المواسير الداخلية (<span class="en">Individual Microducts</span>):</b> عند قص 3 مواسير فقط لتغذية شارع جانبي، تُقطع هذه المواسير الـ 3 في قاعدة البيانات وتُضبط كـ <span class="en"><b>End Vertex</b></span> مع الـ <span class="en">Couplers</span>، بينما تُترك المواسير الـ 4 المتبقية مستمرة دون قَطع.
+        </p>
       </div>
     </div>
-  </section>
+
+    <!-- Grouped Object Policies Card -->
+    <div class="card">
+      <h3><span class="en">Grouped Object Divide / Combine Policy</span></h3>
+      <p>خاصة بالكائنات المجمعة غير المكانية <span class="en">(Grouped Junction & Edge Objects)</span> داخل جدول الاتصالات. تُحدد كيفية التعامل مع قيم الحقول الوصفية تلقائياً عند تقسيم كائن مجمع أو دمج عدة كائنات ببعضها أثناء تطبيق التعديلات (<span class="en">applyEdits</span>).</p>
+      
+      <div class="example-box">
+        <span class="label en">FTTH APPLICATION</span>
+        <p style="font-size:0.85em; margin-top:4px; line-height:1.6;">
+          عند تقسيم مجموعة شعيرات أو قنوات مجمعة (<span class="en">Grouped Edge Objects</span>)، تتيح سياسة التقسيم توزيع السعة أو التكلفة نسبياً على المجموعات الناتجة بدل تكرار القيمة القديمة بالكامل.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:26px;">تفاصيل الخيارات المتاحة وأدوات الجيوبروسيسنج الخاصة بها:</p>
+
+  <div class="grid2">
+    <!-- Divide Policy Details -->
+    <div class="card">
+      <h3><span class="en">Set Telecom Object Divide Policy</span></h3>
+      <p style="font-size:0.88em; color:var(--text-dim);">تتحكم في سلوك قيم الحقول عند تقسيم كائن مجمع إلى كائنين أو أكثر:</p>
+      <ul class="deflist">
+        <li><b class="en">Unit apportioned</b> — تقسيم القيمة وتوزيعها نسبياً بناءً على عدد الوحدات (<span class="en">Units</span>) في المجموعات الجديدة (للحقول الرقمية فقط).</li>
+        <li><b class="en">Default value</b> — إسناد القيمة الافتراضية (<span class="en">Default Value</span>) الخاصة بالحقل لجميع الكائنات الناتجة.</li>
+      </ul>
+      <p style="font-size:0.8em; margin-top:10px; color:var(--text-dim);">* <i>في حالة عدم تحديد سياسة للحقل، يتم نسخ نفس القيمة الأصلية وتكرارها في الكائنات الجديدة افتراضياً.</i></p>
+    </div>
+
+    <!-- Combine Policy Details -->
+    <div class="card">
+      <h3><span class="en">Set Telecom Object Combine Policy</span></h3>
+      <p style="font-size:0.88em; color:var(--text-dim);">تتحكم في سلوك قيم الحقول عند دمج عدة كائنات مجمعة في كائن واحد:</p>
+      <ul class="deflist">
+        <li><b class="en">Sum of values</b> — جمع القيم الرقمية للكائنات المندمجة ووضع المجموع في الكائن الجديد (للحقول الرقمية فقط).</li>
+        <li><b class="en">Default value</b> — إسناد القيمة الافتراضية المحددة للحقل في الكائن الناتج.</li>
+      </ul>
+      <p style="font-size:0.8em; margin-top:10px; color:var(--text-dim);">* <i>في حالة عدم تحديد سياسة وكان للكائنات المندمجة نفس Class وتتطابق قيم الحقول، تُنسخ القيمة تلقائياً للكائن الناتج.</i></p>
+    </div>
+  </div>
+
+  <!-- Requirements & Technical Notes -->
+  <div style="margin-top:20px; padding:15px; background:rgba(255,255,255,0.03); border-right:4px solid var(--accent-color, #007acc); border-radius:4px;">
+    <h4 style="margin:0 0 8px 0; font-size:0.95em;"><span class="en">System Requirements for Telecom Object Policies</span></h4>
+    <ul style="margin:0; padding-right:18px; font-size:0.85em; line-height:1.7; color:var(--text-dim);">
+      <li>تتطلب وجود **Utility Network Version 8** أو أحدث.</li>
+      <li>تتطلب أن يكون الـ Domain Network من نوع **Telecom Domain Network**.</li>
+      <li>في بيئة الـ Enterprise Geodatabase: يجب الاتصال بقاعدة البيانات كمالك للشبكة (<span class="en">Database UN Owner</span>)، وأن يكون حساب البورتال المستخدَم هو المالك أيضاً (<span class="en">Portal UN Owner</span>).</li>
+      <li>يمكن مراجعة السياسات المطبقة دائماً من خواص الطبقة $\rightarrow$ تبويب **Network Properties**.</li>
+    </ul>
+  </div>
+</section>
 
   <section id="sec28">
     <span class="num">28</span>
