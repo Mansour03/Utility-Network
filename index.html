@@ -2423,13 +2423,19 @@
     <li><h4>3. حدد الطبقة والـ Asset Class</h4><p>اختر الجدول/الفئة في <span class="en">Input Table</span>، ثم حدد الـ <span class="en">Asset Group</span> والـ <span class="en">Asset Type</span> المستهدفين.</p></li>
     <li><h4>4. اختر نوع الدور (Role Type)</h4><p>حدد النوع: <span class="en">Container</span>، أو <span class="en">Structure</span>، أو <span class="en">None</span> لإلغاء أي دور سابق. (أي دور قائم سيُعرض تلقائياً).</p></li>
     <li>
-      <h4>5. إعدادات الحاوي (عند اختيار Container)</h4>
-      <ul class="deflist">
-        <li><b class="en">Deletion Semantics</b> — يحدد سلوك مسح الحاوي على محتوياته (مشروح أدناه).</li>
-        <li><b class="en">View Scale</b> — مقياس الرسم التلقائي للدخول في وضع تحرير المحتويات (<span class="en">Containment Edit Mode</span>) للنقاط (مثلاً قيمة 5 تعني مقياس 1:5). تعتمد الوحدة على الوحدات الرأسية للشبكة، ولا ينطبق هذا الخيار على الـ <span class="en">Junction/Edge Objects</span>.</li>
-        <li><b class="en">Split Policy</b> — عند تفعيل الخيار (<span class="en">Checked</span>)، فإن قص الحاوي (خط أو بوليجون) سيؤدي لقص محتوياته تلقائياً مع قصّه.</li>
-      </ul>
+  <h4>5. إعدادات الحاوي (عند اختيار Container)</h4>
+  <ul class="deflist">
+    <li>
+      <b class="en">Deletion Semantics</b> — يحدد ماذا يحدث للمحتويات الداخلية لو مسحت الحاوي نفسه (هل تتسمح معاه، أم تمنع مسحه، أم تترجم كعناصر مستقلة؟ مشروحة بالتفصيل بالأسفل).
     </li>
+    <li>
+      <b class="en">View Scale</b> — درجة التقريب (<span class="en">Zoom Level</span>) التلقائية التي تفتح بها الخريطة بمجرد الدخول لوضع تحرير المحتويات الداخلية (<span class="en">Containment Edit Mode</span>) للعناصر النقاطية كالكبائن (مثلاً: كتابة رقم 5 تجعل الخريطة تقرب تلقائياً بمقياس 1:5 لترسم الـ Splitters بسهولة). تعتمد وحدته على الوحدات الرأسية للشبكة، ولا ينطبق على الجداول والأجسام غير المكانية (<span class="en">Junction/Edge Objects</span>) لأنها بلا موقع جغرافي.
+    </li>
+    <li>
+      <b class="en">Split Policy</b> — يحدد سلوك المحتويات عند قص أو تقسيم الحاوي الخطي أو المساحي (مثلاً: حزمة مواسير تحتوي على مجاري هوائية)؛ إذا تم تفعيل الخيار (<span class="en">Checked</span>)، فإن قص الحاوي الخارجي لنصفين يؤدي لقص المواسير والمحتويات الداخلية معه تلقائياً، وإذا لم يُفعل تظل المحتويات كما هي دون قص.
+    </li>
+  </ul>
+</li>
     <li><h4>6. إعدادات الهيكل الداعم (عند اختيار Structure)</h4><p>يتم ضبط خيار <span class="en">Deletion Semantics</span> فقط، ولا تتوافر خيارات <span class="en">View Scale</span> أو <span class="en">Split Policy</span> للهياكل.</p></li>
     <li><h4>7. التنفيذ</h4><p>اضغط <span class="en">Run</span> لتطبيق الدور فوراً.</p></li>
   </ol>
