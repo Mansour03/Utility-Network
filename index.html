@@ -2381,99 +2381,121 @@
 </section>
 
   <section id="sec28">
-    <span class="num">28</span>
-    <h2>الارتباطات: تحديد الأدوار، والاستيراد والتصدير بالجملة</h2>
-    <p>الـ <span class="en">Associations</span> هي الأساس اللي بيخلي الاحتواء والتعليق الهيكلي ممكن أصلًا. قبل ما تقدر تستخدمهم، لازم تحدد "مين ليه الحق يبقى حاوي أو هيكل داعم" — وده دور <span class="en">Association Role</span>، وده بيتحدد على مستوى الفئة (<span class="en">Feature Class/Table</span>) لكل <span class="en">Asset Group</span> و<span class="en">Asset Type</span> بعينه.</p>
+  <span class="num">28</span>
+  <h2>الارتباطات: تحديد الأدوار، والاستيراد والتصدير بالجملة (Associations Management)</h2>
+  <p>الـ <span class="en">Associations</span> هي الأساس الذي يتيح الاحتواء والتعليق الهيكلي في الشبكة. وقبل إمكانية استخدامها، يجب أولاً تحديد المكونات ذات الصلاحية للعمل كـ "حاوي" أو "هيكل داعم" — وهو دور <span class="en">Association Role</span>، والذي يتحدد على مستوى الفئة (<span class="en">Feature Class / Table</span>) لكل <span class="en">Asset Group</span> و <span class="en">Asset Type</span>.</p>
 
-    <div class="grid2" style="margin-top:24px;">
-      <div class="card">
-        <h3><span class="en">Container</span></h3>
-        <p>بيسمح للعنصر إنه يحتوي عناصر تانية جواه.</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>كابينة توزيع فايبر <span class="en">= Container</span>.</p></div>
-      </div>
-      <div class="card">
-        <h3><span class="en">Structure</span></h3>
-        <p>بيسمح للعنصر إنه يشتغل كهيكل داعم يتعلّق بيه عناصر تانية.</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>عمود يحمل كابل فايبر معلّق عليه <span class="en">= Structure</span>.</p></div>
-      </div>
+  <div class="grid2" style="margin-top:24px;">
+    <div class="card">
+      <h3><span class="en">Container</span></h3>
+      <p>يسمح للعنصر باحتواء عناصر أخرى بداخله مكانياً أو منطقياً.</p>
+      <div class="example-box"><span class="label en">FTTH EXAMPLE</span><p>كابينة توزيع فايبر (<span class="en">FDH Cabinet</span>) تحتوي على Splitters و Tray = <span class="en">Container</span>.</p></div>
     </div>
-
-    <p style="margin-top:22px;">شرط أساسي: <b>ارتباط دور واحد بس مسموح لكل <span class="en">Asset Group</span> و<span class="en">Asset Type</span></b> — يعني الفئة إما <span class="en">Container</span> أو <span class="en">Structure</span> أو ولا حاجة، مش الاتنين مع بعض.</p>
-
-    <p style="margin-top:22px;"><b>متطلبات لازم تتحقق قبل تحديد أو تعديل أي دور:</b></p>
-    <div class="grid2" style="margin-top:14px;">
-      <div class="card"><h3>الطوبولوجيا معطّلة</h3><p>الطوبولوجيا لازم تكون <span class="en">Disabled</span> وقت تحديد أو تعديل أي <span class="en">Association Role</span>.</p></div>
-      <div class="card"><h3>إلغاء الدور له قيد زمني</h3><p><b>إلغاء</b> دور <span class="en">Container</span> أو <span class="en">Structure</span> (رجوعه لـ <span class="en">None</span>) ممكن بس قبل أول تفعيل للطوبولوجيا — بعد كده مينفعش تتراجع.</p></div>
+    <div class="card">
+      <h3><span class="en">Structure</span></h3>
+      <p>يسمح للعنصر بالعمل كهيكل داعم تُعلّق عليه عناصر الشبكة المختلفة.</p>
+      <div class="example-box"><span class="label en">FTTH EXAMPLE</span><p>عمود خشب/خرساني يُعلّق عليه كابل فايبر هوائي أو صندوق = <span class="en">Structure</span>.</p></div>
     </div>
+  </div>
 
-    <p style="margin-top:26px;">خطوات أداة <span class="en">Set Association Role</span> بالكامل:</p>
-    <ol class="steps" style="margin-top:26px;">
-      <li><h4>1. افتح الأداة</h4><p>تبويب <span class="en">Analysis</span> ← <span class="en">Tools</span> ← دور على <span class="en">Set Association Role</span>.</p></li>
-      <li><h4>2. حدد الشبكة والشبكة النطاقية</h4><p><span class="en">Input Utility Network</span> ثم <span class="en">Domain Network</span> اللي فيها الفئة المطلوبة.</p></li>
-      <li><h4>3. حدد الفئة والتصنيف</h4><p><span class="en">Input Table</span> (الفئة أو الجدول)، ثم <span class="en">Asset Group</span> و<span class="en">Asset Type</span> المستهدفين بالتحديد.</p></li>
-      <li><h4>4. اختار نوع الدور</h4><p><span class="en">Role Type</span>: <span class="en">Container</span>، أو <span class="en">Structure</span>، أو <span class="en">None</span> لإلغاء أي دور سابق. أي دور محدد فعليًا هيظهر تلقائيًا في الحقل.</p></li>
-      <li>
-        <h4>5. لو اخترت Container، ظبط 3 إعدادات إضافية</h4>
-        <ul class="deflist">
-          <li><b class="en">Deletion Semantics</b> — تفصيلها تحت.</li>
-          <li><b class="en">View Scale</b> — المقياس اللي هتدخل بيه لوضع تحرير المحتويات <span class="en">(Containment Edit Mode)</span>؛ مثلًا لو حطيت القيمة 5 يبقى وقت الدخول للتحرير الداخلي، مقياس الخريطة هيبقى 1:5. الوحدة مبنية على الوحدات الرأسية للشبكة. الخاصية دي مش بتتطبق على <span class="en">Junction/Edge Objects</span>.</li>
-          <li><b class="en">Split Policy</b> — لو مفعّلة، تقسيم عنصر الحاوي (خط أو بوليجون) هيقسم محتوياته معاه؛ لو مش مفعّلة، المحتويات بتفضل زي ما هي بدون تقسيم.</li>
-        </ul>
-      </li>
-      <li><h4>6. لو اخترت Structure، ظبط إعداد واحد بس</h4><p><span class="en">Deletion Semantics</span> فقط — مفيش <span class="en">View Scale</span> ولا <span class="en">Split Policy</span> للـ <span class="en">Structure</span>.</p></li>
-      <li><h4>7. نفّذ</h4><p>اضغط <span class="en">Run</span>. الدور بيتحدد أو يتغيّر فورًا حسب الخيارات المدخلة.</p></li>
-    </ol>
+  <p style="margin-top:22px;"><b>قاعدة أساسية:</b> يُسمح بتحديد <b>دور واحد فقط</b> لكل زوج من (<span class="en">Asset Group & Asset Type</span>) — فإما أن تصنف الفئة كـ <span class="en">Container</span> أو <span class="en">Structure</span> أو بدون دور (<span class="en">None</span>).</p>
 
-    <div class="card" style="margin-top:24px;">
-      <h3><span class="en">Deletion Semantics</span> — إيه اللي يحصل لو اتمسح الحاوي/الهيكل؟</h3>
+  <p style="margin-top:22px;"><b>متطلبات شروط ضبط أو تعديل الأدوار (Set Association Role Requirements):</b></p>
+  <div class="grid3" style="margin-top:14px;">
+    <div class="card">
+      <h3>تعطيل الطوبولوجيا</h3>
+      <p>يجب أن تكون طوبولوجيا الشبكة معطلة بالكامل (<span class="en">Network Topology Disabled</span>) وقت الأداة.</p>
+    </div>
+    <div class="card">
+      <h3>القيد الزمني للإلغاء</h3>
+      <p>إلغاء دور محدد (<span class="en">Unassigning to None</span>) متاح فقط **قبل تفعيل الطوبولوجيا للمرة الأولى** على الشبكة.</p>
+    </div>
+    <div class="card">
+      <h3>ملكيات Enterprise</h3>
+      <p>في قواعد بيانات المؤسسات، يجب الاتصال كمالك الشبكة (<span class="en">Database UN Owner</span>) وبحساب البورتال المالك (<span class="en">Portal Owner</span>).</p>
+    </div>
+  </div>
+
+  <p style="margin-top:26px;">خطوات أداة <span class="en">Set Association Role</span> بالتفصيل:</p>
+  <ol class="steps" style="margin-top:20px;">
+    <li><h4>1. افتح الأداة</h4><p>من تبويب <span class="en">Analysis</span> ← مجموعة <span class="en">Geoprocessing</span> ← ابحث عن أداة <span class="en">Set Association Role</span>.</p></li>
+    <li><h4>2. حدد الشبكة والـ Domain Network</h4><p>اختر الـ <span class="en">Input Utility Network</span> ثم الـ <span class="en">Domain Network</span> المعنية.</p></li>
+    <li><h4>3. حدد الطبقة والـ Asset Class</h4><p>اختر الجدول/الفئة في <span class="en">Input Table</span>، ثم حدد الـ <span class="en">Asset Group</span> والـ <span class="en">Asset Type</span> المستهدفين.</p></li>
+    <li><h4>4. اختر نوع الدور (Role Type)</h4><p>حدد النوع: <span class="en">Container</span>، أو <span class="en">Structure</span>، أو <span class="en">None</span> لإلغاء أي دور سابق. (أي دور قائم سيُعرض تلقائياً).</p></li>
+    <li>
+      <h4>5. إعدادات الحاوي (عند اختيار Container)</h4>
       <ul class="deflist">
-        <li><b class="en">None</b> — محتوياته أو العناصر المتعلقة بيه تفضل زي ما هي من غير أي تأثير.</li>
-        <li><b class="en">Cascade</b> — تتمسح كل العناصر المرتبطة بيه تلقائيًا معاه.</li>
-        <li><b class="en">Restricted</b> — يمنعك من مسحه أصلًا طالما لسه فيه محتويات أو عناصر مرتبطة — أأمن خيار لمنع مسح عرضي لكابينة فيها عملاء فعليين.</li>
+        <li><b class="en">Deletion Semantics</b> — يحدد سلوك مسح الحاوي على محتوياته (مشروح أدناه).</li>
+        <li><b class="en">View Scale</b> — مقياس الرسم التلقائي للدخول في وضع تحرير المحتويات (<span class="en">Containment Edit Mode</span>) للنقاط (مثلاً قيمة 5 تعني مقياس 1:5). تعتمد الوحدة على الوحدات الرأسية للشبكة، ولا ينطبق هذا الخيار على الـ <span class="en">Junction/Edge Objects</span>.</li>
+        <li><b class="en">Split Policy</b> — عند تفعيل الخيار (<span class="en">Checked</span>)، فإن قص الحاوي (خط أو بوليجون) سيؤدي لقص محتوياته تلقائياً مع قصّه.</li>
       </ul>
+    </li>
+    <li><h4>6. إعدادات الهيكل الداعم (عند اختيار Structure)</h4><p>يتم ضبط خيار <span class="en">Deletion Semantics</span> فقط، ولا تتوافر خيارات <span class="en">View Scale</span> أو <span class="en">Split Policy</span> للهياكل.</p></li>
+    <li><h4>7. التنفيذ</h4><p>اضغط <span class="en">Run</span> لتطبيق الدور فوراً.</p></li>
+  </ol>
+
+  <div class="card" style="margin-top:24px;">
+    <h3><span class="en">Deletion Semantics</span> — سلوك المحتويات عند مسح الحاوي أو الهيكل الداعم</h3>
+    <ul class="deflist">
+      <li><b class="en">None</b> — عند مسح الحاوي أو الهيكل، تظل العناصر المحتواة أو المعلقة كما هي دون التأثر أو المسح.</li>
+      <li><b class="en">Cascade</b> — عند مسح الحاوي/الهيكل، تُحذف جميع العناصر المرتبطة به تلقائياً وبشكل متتابع.</li>
+      <li><b class="en">Restricted</b> — يمنع النظام مسح الحاوي/الهيكل نهائياً إذا كان يحتوي على عناصر أو معلقات قيد الارتباط (الخيار الآمن لمنع مسح الكبائن أو الأعضاء النشطة بالخطأ).</li>
+    </ul>
+  </div>
+
+  <p style="margin-top:28px;">لإدارة مجموعات البيانات الضخمة ونقل الارتباطات بين الأنظمة بدون إدخال يدوي، تُستخدم أدوات التصدير والاستيراد عبر ملفات المطبوعات المجدولة (<span class="en">CSV</span>).</p>
+
+  <p style="margin-top:22px;"><b>أنواع الارتباطات المدعومة في أداة التصدير الاستيراد (Association Types):</b></p>
+  <div class="grid3" style="margin-top:14px;">
+    <div class="card"><h3><span class="en">All</span></h3><p>تصدير/استيراد جميع الأنواع المتاحة دفعة واحدة.</p></div>
+    <div class="card"><h3><span class="en">Junction-junction connectivity</span></h3><p>ربط منطقي محدد بين نقطة ونقطة.</p></div>
+    <div class="card"><h3><span class="en">Containment</span></h3><p>روابط احتواء العناصر داخل الحاويات.</p></div>
+    <div class="card"><h3><span class="en">Attachment</span></h3><p>روابط تعليق العناصر على الهياكل الداعمة.</p></div>
+    <div class="card"><h3><span class="en">Junction-edge connectivity (from side)</span></h3><p>ربط نقطة بطرف بداية العنصر الخطي.</p></div>
+    <div class="card"><h3><span class="en">Junction-edge connectivity (midspan)</span></h3><p>ربط نقطة بمنتصف العنصر الخطي.</p></div>
+    <div class="card"><h3><span class="en">Junction-edge connectivity (to side)</span></h3><p>ربط نقطة بطرف نهاية العنصر الخطي.</p></div>
+  </div>
+
+  <div class="grid2" style="margin-top:24px;">
+    <!-- Import Associations -->
+    <div class="card">
+      <h3><span class="en">Import Associations</span> — استيراد الارتباطات</h3>
+      <ol class="steps-compact" style="margin-top:16px;">
+        <li><h4>1. افتح الأداة</h4><p>من أدوات <span class="en">Geoprocessing</span> ابحث عن <span class="en">Import Associations</span>.</p></li>
+        <li><h4>2. اختر الشبكة Target</h4><p>حدد الـ <span class="en">Input Utility Network</span> المُستقبلة للارتباطات.</p></li>
+        <li><h4>3. اختر نوع الارتباط</h4><p>حدد النوع من القائمة (<span class="en">Association Type</span>) أو اختر <span class="en">All</span>.</p></li>
+        <li><h4>4. اختر ملف الـ CSV</h4><p>حدد مسار ملف المدخلات المُنسق في <span class="en">Input File</span>.</p></li>
+        <li><h4>5. نفذ الأداة</h4><p>اضغط <span class="en">Run</span>.</p></li>
+      </ol>
+      <p style="font-size:0.85em; margin-top:12px; color:var(--text-dim); line-height:1.6;">
+        <b>ملاحظات هامة:</b><br>
+        • يتم فحص ملف الـ CSV وتأكيد وجود القواعد (<span class="en">Network Rules</span>) التي تسمح بتلك الارتباطات.<br>
+        • عند حدوث أي خطأ بسيط في الملف أو غياب قاعدة واحدة، تُجهض العملية بالكامل ويتم عمل <b><span class="en">Rollback</span></b> لمنع تلوث البيانات.<br>
+        • <b>نصيحة الأداء:</b> يُوصى بتعطيل الطوبولوجيا (<span class="en">Disable Network Topology</span>) قبل الاستيراد الضخم لتسريع معالجة البيانات ثم إعادة تفعيلها عند الانتهاء.
+      </p>
     </div>
 
-    <p style="margin-top:28px;">بعد ما تحدد الأدوار والقواعد، ممكن تحتاج تنقل كمية كبيرة من الارتباطات دفعة واحدة (مثلًا من نظام قديم) — هنا بييجي دور الاستيراد والتصدير عبر ملفات <span class="en">CSV</span>.</p>
-
-    <p style="margin-top:22px;"><b>أنواع الارتباطات المدعومة</b> في الاستيراد والتصدير (نفس القائمة بالظبط للأداتين):</p>
-    <div class="grid3" style="margin-top:14px;">
-      <div class="card"><h3><span class="en">All</span></h3><p>كل الأنواع مع بعض.</p></div>
-      <div class="card"><h3><span class="en">Junction-junction connectivity</span></h3><p>اتصال منطقي بين نقطتين.</p></div>
-      <div class="card"><h3><span class="en">Containment</span></h3><p>احتواء عنصر جوه حاوي.</p></div>
-      <div class="card"><h3><span class="en">Attachment</span></h3><p>تعليق هيكلي على هيكل داعم.</p></div>
-      <div class="card"><h3><span class="en">Junction-edge (from side)</span></h3><p>اتصال نقطة بطرف بداية خط.</p></div>
-      <div class="card"><h3><span class="en">Junction-edge (midspan)</span></h3><p>اتصال نقطة بمنتصف خط.</p></div>
+    <!-- Export Associations -->
+    <div class="card">
+      <h3><span class="en">Export Associations</span> — تصدير الارتباطات</h3>
+      <ol class="steps-compact" style="margin-top:16px;">
+        <li><h4>1. افتح الأداة</h4><p>من أدوات <span class="en">Geoprocessing</span> ابحث عن <span class="en">Export Associations</span>.</p></li>
+        <li><h4>2. اختر الشبكة Source</h4><p>حدد الـ <span class="en">Input Utility Network</span> المراد التصدير منها.</p></li>
+        <li><h4>3. اختر نوع الارتباط</h4><p>حدد نوع الارتباط المطلوب تصديره أو <span class="en">All</span> لتصدير كل شيء.</p></li>
+        <li><h4>4. حدد ملف الخرج</h4><p>اختر اسم ومسار حفظ ملف الـ CSV في <span class="en">Output File</span>.</p></li>
+        <li><h4>5. نفذ الأداة</h4><p>اضغط <span class="en">Run</span> لتثبيت البيانات بالتنسيق القياسي.</p></li>
+      </ol>
+      <p style="font-size:0.85em; margin-top:12px; color:var(--text-dim); line-height:1.6;">
+        تُستخدم بغرض النسخ الاحتياطي، توثيق الشبكة خارجياً، أو نقل الارتباطات الفعلية بين بيئات العمل المختلفة (<span class="en">Staging to Production</span>).
+      </p>
     </div>
-    <p style="margin-top:10px; font-size:13.5px; color:var(--text-dim);">(النوع السادس <span class="en">Junction-edge (to side)</span> بيغطي اتصال نقطة بطرف نهاية الخط — نفس منطق <span class="en">from side</span> بس من الاتجاه التاني.)</p>
+  </div>
 
-    <div class="grid2" style="margin-top:24px;">
-      <div class="card">
-        <h3><span class="en">Import Associations</span> — الخطوات كاملة</h3>
-        <ol class="steps-compact" style="margin-top:16px;">
-          <li><h4>1. افتح الأداة</h4><p>من <span class="en">Geoprocessing</span>، دور على <span class="en">Import Associations</span>.</p></li>
-          <li><h4>2. حدد الشبكة</h4><p><span class="en">Input Utility Network</span> — الشبكة اللي هتستقبل الارتباطات.</p></li>
-          <li><h4>3. اختار نوع الارتباط</h4><p>من القائمة المنسدلة <span class="en">Association Type</span> (الأنواع الستة فوق).</p></li>
-          <li><h4>4. حدد ملف الـ CSV</h4><p><span class="en">Input File</span> — لازم يكون منسّق بالضبط حسب متطلبات الأداة.</p></li>
-          <li><h4>5. نفّذ</h4><p>اضغط <span class="en">Run</span>.</p></li>
-        </ol>
-        <p style="font-size:14px; margin-top:14px;"><b>متطلبات:</b> ملف الـ <span class="en">CSV</span> لازم يكون مُنسّق صح، ولازم تكون <span class="en">Rules</span> موجودة أصلًا تسمح بالارتباطات دي — لو قاعدة ناقصة، العملية <b>كلها</b> بترجع للخلف <span class="en">(rollback)</span> ومفيش أي جزء بيتنفذ. الملف ممكن يحتوي نوع واحد أو خليط من الأنواع مع بعض.</p>
-        <p style="font-size:14px; margin-top:10px;"><b>نصيحة أداء:</b> لو الملف كبير، عطّل الطوبولوجيا الأول لتسريع الاستيراد، وفعّلها تاني بعد ما يخلص.</p>
-      </div>
-      <div class="card">
-        <h3><span class="en">Export Associations</span> — الخطوات كاملة</h3>
-        <ol class="steps-compact" style="margin-top:16px;">
-          <li><h4>1. افتح الأداة</h4><p>من <span class="en">Geoprocessing</span>، دور على <span class="en">Export Associations</span>.</p></li>
-          <li><h4>2. حدد الشبكة</h4><p><span class="en">Input Utility Network</span> — الشبكة اللي هتصدّر منها.</p></li>
-          <li><h4>3. اختار نوع الارتباط</h4><p>من القائمة المنسدلة <span class="en">Association Type</span> (نفس الأنواع الستة).</p></li>
-          <li><h4>4. حدد مكان الحفظ</h4><p><span class="en">Output File</span> — اسم ومكان ملف الـ <span class="en">CSV</span> الناتج.</p></li>
-          <li><h4>5. نفّذ</h4><p>اضغط <span class="en">Run</span> — الأنواع المختارة بتتصدّر لملف واحد.</p></li>
-        </ol>
-        <p style="font-size:14px; margin-top:14px;">مفيدة للتوثيق، النسخ الاحتياطي، أو نقل نفس الارتباطات لبيئة تانية.</p>
-      </div>
-    </div>
-
-    <div class="example-box" style="margin-top:24px;"><span class="label en">FTTH EXAMPLE</span><p>عندك ملف <span class="en">Excel</span> قديم فيه توثيق يدوي لأي <span class="en">ONT</span> متوصل بأنهي بورت في أي <span class="en">Splitter</span> عبر آلاف العملاء. تحوله لملف <span class="en">CSV</span> بالصيغة المطلوبة، وتتأكد الأول إن قواعد الاتصال بين <span class="en">ONT</span> والـ <span class="en">Splitter</span> موجودة فعلًا في الشبكة، وبعدين تستورده دفعة واحدة بـ <span class="en">Import Associations</span> بدل ما تربط كل عميل يدويًا على الخريطة.</p></div>
-  </section>
+  <div class="example-box" style="margin-top:24px;">
+    <span class="label en">FTTH REAL-WORLD APPLICATION</span>
+    <p>عند حصر وتنفيذ مشروع FTTH يحتوي على آلاف المشتركين الموثقين سابقاً في ملفات <span class="en">Excel</span> (توضح أي منافذ Splitter ترتبط بـ ONT): يتم تحويل الملف إلى <span class="en">CSV</span> بالهيكل المطلوب، والتحقق من وجود القواعد (<span class="en">Rules</span>)، ثم تشغيل أداة <span class="en">Import Associations</span> لاستيراد آلاف روابط التوصيل دفعة واحدة دون الحاجة للربط اليدوي على الخريطة.</p>
+  </div>
+</section>
 
   <section id="sec29">
     <span class="num">29</span>
