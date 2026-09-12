@@ -2656,42 +2656,71 @@
   </section>
 
   <section id="sec33">
-    <span class="num">33</span>
-    <h2>إضافة قواعد الاتصال <span class="en">(Connectivity Rules)</span></h2>
-    <p>3 أنواع، كلهم بيتضافوا من نفس أداة <span class="en">Add Rule</span> بس باختيار <span class="en">Rule Type</span> مختلف.</p>
+  <span class="num">33</span>
+  <h2>إضافة قواعد الاتصال <span class="en">(Connectivity Rules)</span></h2>
+  <p>تحكم قواعد الاتصال أي أنواع العناصر والأجسام يمكنها الاتصال ببعضها. تُحفظ هذه القواعد على مستوى الـ <span class="en">Utility Network</span> وتُضاف فردياً عبر أداة <span class="en">Add Rule</span> أو بالجملة عبر أداة <span class="en">Import Rules</span>.</p>
 
-    <div class="grid3" style="margin-top:24px;">
-      <div class="card">
-        <h3><span class="en">Junction-junction</span></h3>
-        <p>اتصال بين نقطتين (أو بين <span class="en">Junction Objects</span>) حتى لو مش متلاصقين جغرافيًا.</p>
-        <ol class="steps-compact" style="margin-top:14px;">
-          <li><h4>1-4</h4><p>افتح <span class="en">Add Rule</span>، حدد الشبكة، اختار <span class="en">Rule Type = Junction-junction connectivity</span>، حدد <span class="en">From Table/Group/Type</span>.</p></li>
-          <li><h4>5</h4><p>لو فيه <span class="en">Terminals</span>، حدد <span class="en">From Terminal</span>.</p></li>
-          <li><h4>6-8</h4><p>كرر نفس التحديد لـ <span class="en">To Table/Group/Type</span> و<span class="en">To Terminal</span> لو موجود.</p></li>
-          <li><h4>9</h4><p><span class="en">Run</span>.</p></li>
-        </ol>
-      </div>
-      <div class="card">
-        <h3><span class="en">Junction-edge</span></h3>
-        <p>اتصال نقطة وخط متلاصقين جغرافيًا (أو بين <span class="en">Edge/Junction Objects</span>).</p>
-        <ol class="steps-compact" style="margin-top:14px;">
-          <li><h4>1-4</h4><p>نفس الخطوات، <span class="en">Rule Type = Junction-edge connectivity</span>.</p></li>
-          <li><h4>5</h4><p>حدد <span class="en">From Terminal</span> لو موجود، وحدد الخط في <span class="en">To Table/Group/Type</span>.</p></li>
-          <li><h4>6</h4><p><span class="en">Run</span>.</p></li>
-        </ol>
-      </div>
-      <div class="card">
-        <h3><span class="en">Edge-junction-edge</span></h3>
-        <p>اتصال خطين متلاصقين عبر نقطة وسيطة <span class="en">(Via)</span>.</p>
-        <ol class="steps-compact" style="margin-top:14px;">
-          <li><h4>1-4</h4><p><span class="en">Rule Type = Edge-junction-edge connectivity</span>، حدد <span class="en">From</span> و<span class="en">To</span> (الخطين).</p></li>
-          <li><h4>5</h4><p>حدد <span class="en">Via Table/Group/Type</span> (النقطة الوسيطة) و<span class="en">Via Terminal</span> لو موجود.</p></li>
-          <li><h4>6</h4><p><span class="en">Run</span>.</p></li>
-        </ol>
-      </div>
+  <p style="margin-top:18px;"><b>متطلبات وإرشادات إضافة القواعد (Requirements):</b></p>
+  <div class="grid3" style="margin-top:12px;">
+    <div class="card">
+      <h3>تعطيل الطوبولوجيا</h3>
+      <p>يجب أن تكون طوبولوجيا الشبكة معطلة بالكامل (<span class="en">Network Topology Disabled</span>) وقت إضافة القواعد.</p>
     </div>
-    <div class="example-box" style="margin-top:20px;"><span class="label en">FTTH EXAMPLE</span><p>قاعدة <span class="en">Junction-edge</span> بتسمح لـ <span class="en">ONT</span> (نقطة) إنه يتصل بخط <span class="en">Drop Cable</span> — من غير القاعدة دي، أي محاولة توصيل هتترفض وقت تفعيل الطوبولوجيا.</p></div>
-  </section>
+    <div class="card">
+      <h3>ملكية Enterprise</h3>
+      <p>يجب الاتصال كمالك قاعدة البيانات (<span class="en">Database UN Owner</span>) وبحساب البورتال المالك (<span class="en">Portal Owner</span>) عبر نسخة <span class="en">Default</span>.</p>
+    </div>
+    <div class="card">
+      <h3>إيقاف الخدمة</h3>
+      <p>في بيئة المؤسسات، يجب إيقاف خدمة الـ <span class="en">Utility Network Service</span> قبل التعديل وإعادة تشغيلها ليعكس التغيير.</p>
+    </div>
+  </div>
+
+  <p style="margin-top:24px;">يدعم النظام 3 أنواع رئيسية لقواعد الاتصال تُدار جميعها عبر أداة <span class="en">Add Rule</span> باختيار الـ <span class="en">Rule Type</span> المناسب:</p>
+
+  <div class="grid3" style="margin-top:16px;">
+    <!-- Junction-Junction -->
+    <div class="card">
+      <h3><span class="en">Junction-junction</span></h3>
+      <p>اتصال بين نقطتين أو جسمين (<span class="en">Junction Objects</span>) حتى لو لم يتلاصقا جغرافياً.</p>
+      <ol class="steps-compact" style="margin-top:14px;">
+        <li><h4>1-4</h4><p>افتح <span class="en">Add Rule</span>، اختر الشبكة، حدد <span class="en">Rule Type = Junction-junction connectivity</span>.</p></li>
+        <li><h4>5-9</h4><p>حدد الطرف الأول <span class="en">From Table/Asset Group/Asset Type</span> والـ <span class="en">From Terminal</span> (إن وجد).</p></li>
+        <li><h4>10-14</h4><p>حدد الطرف الثاني <span class="en">To Table/Asset Group/Asset Type</span> والـ <span class="en">To Terminal</span> (إن وجد).</p></li>
+        <li><h4>15</h4><p>اضغط <span class="en">Run</span>، ثم فعّل الطوبولوجيا لإنشاء الروابط.</p></li>
+      </ol>
+    </div>
+
+    <!-- Junction-Edge -->
+    <div class="card">
+      <h3><span class="en">Junction-edge</span></h3>
+      <p>اتصال نقطة وجدول/خط متلاصقين جغرافياً (أو بين <span class="en">Edge & Junction Objects</span>).</p>
+      <ol class="steps-compact" style="margin-top:14px;">
+        <li><h4>1-4</h4><p>افتح الأداة واختر <span class="en">Rule Type = Junction-edge connectivity</span>.</p></li>
+        <li><h4>5-9</h4><p>حدد النقطة/العنصر في <span class="en">From Table/Group/Type</span> والـ <span class="en">From Terminal</span> المخصص للتوصيل.</p></li>
+        <li><h4>10-12</h4><p>حدد الطبقة الخطية في <span class="en">To Table/Group/Type</span>.</p></li>
+        <li><h4>13</h4><p>اضغط <span class="en">Run</span>، ثم فعّل الطوبولوجيا.</p></li>
+      </ol>
+    </div>
+
+    <!-- Edge-Junction-Edge -->
+    <div class="card">
+      <h3><span class="en">Edge-junction-edge</span></h3>
+      <p>ربط خطين (أو عنصرين خطيين) عبر نقطة/عنصر وسيط (<span class="en">Via Feature/Object</span>).</p>
+      <ol class="steps-compact" style="margin-top:14px;">
+        <li><h4>1-4</h4><p>اختر <span class="en">Rule Type = Edge-junction-edge connectivity</span>.</p></li>
+        <li><h4>5-10</h4><p>حدد الخط الأول (<span class="en">From</span>) والخط الثاني (<span class="en">To</span>) بضبط الـ <span class="en">Table/Group/Type</span> لكل منهما.</p></li>
+        <li><h4>11-15</h4><p>حدد النقطة الوسيطة في <span class="en">Via Table/Group/Type</span> والـ <span class="en">Via Terminal</span> (إن وجد).</p></li>
+        <li><h4>16</h4><p>اضغط <span class="en">Run</span>، ثم فعّل الطوبولوجيا لتطبيق القاعدة.</p></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="example-box" style="margin-top:22px;">
+    <span class="label en">FTTH EXAMPLE</span>
+    <p>قاعدة الـ <span class="en">Junction-edge</span> تسمح لـ جهاز الـ <span class="en">ONT</span> (نقطة) بالاتصال بكابل التوصيل <span class="en">Drop Cable</span> (خط). وبدون هذه القاعدة، سيعتبر النظام هذا الاتصال خطأ طوبولوجياً (<span class="en">Dirty Area / Error</span>) فور تفعيل الطوبولوجيا.</p>
+  </div>
+</section>
 
   <section id="sec34">
     <span class="num">34</span>
