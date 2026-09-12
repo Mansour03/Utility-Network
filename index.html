@@ -2723,33 +2723,62 @@
 </section>
 
   <section id="sec34">
-    <span class="num">34</span>
-    <h2>قواعد الاحتواء والتعليق الهيكلي</h2>
-    <div class="grid2" style="margin-top:24px;">
-      <div class="card">
-        <h3><span class="en">Containment Association Rule</span></h3>
-        <p>بتحدد مين مسموحله يتحط جوه حاوي معين. بما إن القواعد مخزنة على مستوى الشبكة كلها (مش الشبكة النطاقية)، تقدر تحط أصول من شبكات نطاقية مختلفة في نفس الحاوي.</p>
-        <ol class="steps-compact" style="margin-top:14px;">
-          <li><h4>1-4</h4><p>افتح <span class="en">Add Rule</span>، <span class="en">Rule Type = Containment</span>، حدد <span class="en">From Table/Group/Type</span> (الحاوي).</p></li>
-          <li><h4>5-7</h4><p>حدد <span class="en">To Table/Group/Type</span> (المحتوى).</p></li>
-          <li><h4>8</h4><p><span class="en">Run</span>.</p></li>
-        </ol>
-        <p style="font-size:13px; color:var(--text-dim); margin-top:10px;">شرط: الفئة الحاوية لازم يكون متعين لها دور <span class="en">Container</span> مسبقًا. القواعد دي مش بتدعم <span class="en">Terminals</span>.</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>خندق واحد ممكن يحتوي كابل فايبر وكابل كهرباء مع بعض — نفس منطق مثال الدوك (أنبوب غاز ومياه في نفس الخندق).</p></div>
-      </div>
-      <div class="card">
-        <h3><span class="en">Structural Attachment Rule</span></h3>
-        <p>بتحدد مين مسموحله يتعلّق على هيكل داعم معين. بنفس المنطق، عناصر من شبكات نطاقية مختلفة ممكن تتعلق على نفس الهيكل.</p>
-        <ol class="steps-compact" style="margin-top:14px;">
-          <li><h4>1-4</h4><p><span class="en">Rule Type = Structural attachment</span>، حدد <span class="en">From Table/Group/Type</span> (الهيكل).</p></li>
-          <li><h4>5-7</h4><p>حدد <span class="en">To Table/Group/Type</span> (العنصر المُعلَّق).</p></li>
-          <li><h4>8</h4><p><span class="en">Run</span>.</p></li>
-        </ol>
-        <p style="font-size:13px; color:var(--text-dim); margin-top:10px;">شرط: الفئة الهيكلية لازم يكون متعين لها دور <span class="en">Structure</span> مسبقًا. برضو مش بتدعم <span class="en">Terminals</span>.</p>
-        <div class="example-box"><span class="label en">FTTH</span><p>عمود واحد ممكن يحمل محول كهرباء وكابل فايبر مع بعض — نفس منطق مثال الدوك (محول كهرباء وخط تليفون على نفس العمود).</p></div>
+  <span class="num">34</span>
+  <h2>قواعد الاحتواء والتعليق الهيكلي <span class="en">(Containment & Structural Attachment Rules)</span></h2>
+  <p>تحدد هذه القواعد العناصر والأجسام المسموح باحتوائها داخل حاوي معين أو تثبيتها على هيكل داعم. نظراً لتخزين القواعد على مستوى الـ <span class="en">Utility Network</span> ككل، يمكنك تجميع أصول من شبكات نطاقية مختلفة (<span class="en">Domain Networks</span>) في نفس الحاوي أو على نفس الهيكل.</p>
+
+  <p style="margin-top:18px;"><b>متطلبات أساسية قبل إضافة القواعد (Requirements):</b></p>
+  <div class="grid3" style="margin-top:12px;">
+    <div class="card">
+      <h3>تعطيل الطوبولوجيا</h3>
+      <p>يجب إيقاف طوبولوجيا الشبكة (<span class="en">Disable Network Topology</span>) قبل إضافة أو حذف القواعد.</p>
+    </div>
+    <div class="card">
+      <h3>تعيين الأدوار مسبقاً</h3>
+      <p>يجب تخصيص دور <span class="en">Container</span> أو <span class="en">Structure</span> للفئة المستقبلة أولاً (راجع الخطوة 32).</p>
+    </div>
+    <div class="card">
+      <h3>إيقاف الخدمة (Enterprise)</h3>
+      <p>في البيئات المؤسسية، يلزم الاتصال كـ <span class="en">UN Owner</span> وإيقاف الخدمة قبل التعديل وإعادة تشغيلها لتعكس القواعد.</p>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:24px;">
+    <!-- Containment Rule -->
+    <div class="card">
+      <h3><span class="en">Containment Association Rule</span></h3>
+      <p>تحدد الفئات المسموح باحتوائها داخل حاوي محدد (مثل الكبائن والأنابيب والخنادق).</p>
+      <ol class="steps-compact" style="margin-top:14px;">
+        <li><h4>1-4</h4><p>افتح أداة <span class="en">Add Rule</span> اختر الشبكة، وحدد <span class="en">Rule Type = Containment</span>.</p></li>
+        <li><h4>5-7</h4><p>حدد الحاوي في <span class="en">From Table / Asset Group / Asset Type</span>.</p></li>
+        <li><h4>8-10</h4><p>حدد المحتوى الداخلي في <span class="en">To Table / Asset Group / Asset Type</span>.</p></li>
+        <li><h4>11</h4><p>اضغط <span class="en">Run</span>، ثم فعّل الطوبولوجيا للتحقق من سلامة البيانات.</p></li>
+      </ol>
+      <p style="font-size:13px; color:var(--text-dim); margin-top:10px;"><b>ملاحظة:</b> قواعد الاحتواء لا تدعم المنافذ (<span class="en">Terminals</span>).</p>
+      <div class="example-box" style="margin-top:12px;">
+        <span class="label en">FTTH EXAMPLE</span>
+        <p>خندق أرضي واحد (<span class="en">Trench</span>) يمكنه احتواء كابل فايبر للاتصالات وكابل كهرباء من شبكة أخرى في نفس المسار المكاني.</p>
       </div>
     </div>
-  </section>
+
+    <!-- Structural Attachment Rule -->
+    <div class="card">
+      <h3><span class="en">Structural Attachment Rule</span></h3>
+      <p>تحدد الأصول المسموح بتثبيتها أو تعليقها على هيكل داعم (مثل الأبراج والأعمدة والغرف الأرضية).</p>
+      <ol class="steps-compact" style="margin-top:14px;">
+        <li><h4>1-4</h4><p>افتح أداة <span class="en">Add Rule</span> واختر <span class="en">Rule Type = Structural attachment</span>.</p></li>
+        <li><h4>5-7</h4><p>حدد الهيكل الداعم في <span class="en">From Table / Asset Group / Asset Type</span>.</p></li>
+        <li><h4>8-10</h4><p>حدد الأصل المُراد تعليقه في <span class="en">To Table / Asset Group / Asset Type</span>.</p></li>
+        <li><h4>11</h4><p>اضغط <span class="en">Run</span>، ثم فعّل الطوبولوجيا لتطبيق القاعدة.</p></li>
+      </ol>
+      <p style="font-size:13px; color:var(--text-dim); margin-top:10px;"><b>ملاحظة:</b> قواعد التعليق الهيكلي لا تدعم المنافذ (<span class="en">Terminals</span>).</p>
+      <div class="example-box" style="margin-top:12px;">
+        <span class="label en">FTTH EXAMPLE</span>
+        <p>عمود خرساني (<span class="en">Pole</span>) يمكن تخصيصه كـ <span class="en">Structure</span> لتعليق صندوق توزيع فايبر (<span class="en">FAT</span>) ومحول كهرباء هوائي معاً.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
   <section id="sec35">
     <span class="num">35</span>
