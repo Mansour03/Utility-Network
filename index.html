@@ -2796,41 +2796,99 @@
   </section>
 
   <section id="sec36">
-    <span class="num">36</span>
-    <h2>إدارة <span class="en">Terminal Configurations</span> الكاملة</h2>
-    <p>الأطراف بتحدد نقاط الدخول/الخروج المنطقية على جهاز واحد، وبتُستخدم أساسًا لتحديد بداية ونهاية تتبع الشبكات الفرعية، وكمان لتحديد المسارات الصحيحة اللي المورد يعدّي منها جوه الجهاز نفسه.</p>
+  <span class="num">36</span>
+  <h2>إدارة تكوينات المنافذ والأطراف <span class="en">(Terminal Configurations)</span></h2>
+  <p>تمثل الأطراف نقاط الاتصال المنطقية على مستوى الأجهزة والجدوال المكانية واللامكانية. تُستخدم أساساً لتحديد بدايات ونهايات تتبع الشبكات الفرعية (<span class="en">Subnetwork Tracing</span>)، ولدعم المسارات الداخلية الداعمة لسريان المورد داخل الجهاز نفسه.</p>
 
-    <p style="margin-top:24px;">خطوات <span class="en">Add Terminal Configuration</span>:</p>
-    <ol class="steps" style="margin-top:16px;">
-      <li><h4>1-3</h4><p>افتح الأداة، حدد <span class="en">Input Utility Network</span>، اكتب <span class="en">Name</span> (حد أقصى 32 حرف).</p></li>
-      <li><h4>4. اختار الاتجاهية</h4><p><span class="en">Directional</span> — أطراف <span class="en">Upstream/Downstream</span> منفصلة، المورد بيتحرك في اتجاه واحد بس.<br><span class="en">Bidirectional</span> — مفيش تفرقة اتجاه، المورد يدخل ويخرج من أي طرف.</p></li>
-      <li><h4>5. سمّي الأطراف</h4><p>من طرفين لحد 8 أطراف، كل اسم حد أقصى 32 حرف (من غير فاصلة أو شرطة). للأطراف الاتجاهية، حدد أيهم <span class="en">Upstream</span>.</p></li>
-      <li><h4>6. المسارات الصحيحة (لو 3 أو 4 أطراف)</h4><p><span class="en">Valid Paths</span>: قيمة <span class="en">All</span> (كل المسارات صحيحة)، أو <span class="en">None</span> (ولا مسار صحيح)، أو أزواج أطراف محددة زي <span class="en">A-B, A-C</span>.</p></li>
-      <li><h4>7. المسار الافتراضي</h4><p><span class="en">Default Path</span> — المسار اللي هيتطبق تلقائيًا على أي عنصر جديد بنفس الإعداد دا.</p></li>
-      <li><h4>8. نفّذ</h4><p><span class="en">Run</span>.</p></li>
-    </ol>
-
-    <div class="example-box" style="margin-top:20px;"><span class="label en">FTTH EXAMPLE</span><p>إعداد <span class="en">Splitter 1:4</span>: طرف واحد <span class="en">Directional</span> اتجاهه <span class="en">Upstream</span> (دخول الإشارة)، وأربع أطراف <span class="en">Downstream</span> (لكل عميل). أكتر من طرفين يعني لازم تحدد <span class="en">Valid Paths</span>.</p></div>
-
-    <p style="margin-top:26px;">خطوات <span class="en">Set Terminal Configuration</span> (تعيينها لجهاز فعلي):</p>
-    <ol class="steps" style="margin-top:16px;">
-      <li><h4>1-2</h4><p>افتح الأداة، حدد <span class="en">Input Utility Network</span>.</p></li>
-      <li><h4>3-6</h4><p>حدد <span class="en">Domain Network</span>، <span class="en">Input Table</span>، <span class="en">Asset Group</span>، <span class="en">Asset Type</span>.</p></li>
-      <li><h4>7</h4><p>اختار <span class="en">Terminal Configuration</span> المطلوبة.</p></li>
-      <li><h4>8</h4><p><span class="en">Run</span>.</p></li>
-    </ol>
-    <div class="card" style="margin-top:16px; border-color:var(--gold);">
-      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">تحذير</span>قرار نهائي</h3>
-      <p>الإعداد الافتراضي لكل الأصول هو <span class="en">Single Terminal</span>. تعيين إعداد أطراف لنوع أصل معين قرار <b>نهائي</b> — مينفعش يتغير بعد أول تفعيل للطوبولوجيا، حتى لو رجّعتها بعدين لحالة <span class="en">Disabled</span>.</p>
+  <p style="margin-top:18px;"><b>متطلبات تشغيل أداة إدارة الأطراف (Requirements):</b></p>
+  <div class="grid3" style="margin-top:12px;">
+    <div class="card">
+      <h3>تعطيل الطوبولوجيا</h3>
+      <p>يجب إيقاف طوبولوجيا الشبكة (<span class="en">Disable Network Topology</span>) قبل إضافة، تعيين، أو حذف أي <span class="en">Terminal Configuration</span>.</p>
     </div>
+    <div class="card">
+      <h3>ملكية المؤسسة</h3>
+      <p>في بيئة المؤسسات (<span class="en">Enterprise</span>)، يلزم الاتصال المباشر كـ <span class="en">Database UN Owner</span> وبحساب <span class="en">Portal Owner</span>.</p>
+    </div>
+    <div class="card">
+      <h3>المنفذ الافتراضي</h3>
+      <p>الإعداد القياسي لجميع الأصول هو <span class="en">Single Terminal</span> ما لم يتم تخصيص تكوين مخصص قبل التفعيل الأول.</p>
+    </div>
+  </div>
 
-    <p style="margin-top:26px;">خطوات <span class="en">Delete Terminal Configuration</span>:</p>
-    <ol class="steps" style="margin-top:16px;">
-      <li><h4>1-3</h4><p>افتح الأداة، حدد الشبكة، اختار <span class="en">Name</span> من القائمة.</p></li>
-      <li><h4>4</h4><p><span class="en">Run</span>.</p></li>
-    </ol>
-    <p style="font-size:13.5px; color:var(--text-dim); margin-top:10px;">شرط صارم: الطوبولوجيا ميكونش اتفعّلت أبدًا من قبل، والإعداد ميكونش متعين لأي <span class="en">Asset Type</span>.</p>
-  </section>
+  <!-- Add Terminal Configuration -->
+  <p style="margin-top:26px;"><b>1. إنشاء تكوين أطراف جديد (<span class="en">Add Terminal Configuration</span>):</b></p>
+  <ol class="steps" style="margin-top:14px;">
+    <li>
+      <h4>1. افتح الأداة وحدد الاسم</h4>
+      <p>من مجموعة <span class="en">Geoprocessing</span>، افتح أداة <span class="en">Add Terminal Configuration</span>، حدد الـ <span class="en">Utility Network</span>، واكتب اسماً للتكوين في معامل <span class="en">Name</span> (بحد أقصى 32 حرفاً).</p>
+    </li>
+    <li>
+      <h4>2. حدد الاتجاهية (Directionality)</h4>
+      <p>اختر إما <span class="en">Directional</span> (لتحديد منافذ دخول <span class="en">Upstream</span> ومنافذ خروج <span class="en">Downstream</span> صريحة يسير المورد بينها باتجاه واحد)، أو <span class="en">Bidirectional</span> (حيث يسير المورد في الاتجاهين عبر أي منفذ).</p>
+    </li>
+    <li>
+      <h4>3. عرف الأطراف (Terminals)</h4>
+      <p>أضف أسماء الأطراف (من 2 إلى 8 أطراف كحد أقصى، بحد أقصى 32 حرفاً لكل اسم وبدون فاصلة أو شرطة). في حالة اختيار <span class="en">Directional</span>، ضع علامة صح أمام المنفذ المخصص كـ <span class="en">Upstream</span>.</p>
+    </li>
+    <li>
+      <h4>4. ضبط المسارات المتاحة (Valid Paths)</h4>
+      <p>إذا احتوى التكوين على 3 أو 4 أطراف، يجب تحديد مسارات الحركة المسموحة داخل الجهاز عبر إدخال أسماء وقيم المسارات: إما <span class="en">All</span> (جميع المسارات متاحة)، أو <span class="en">None</span> (لا توجد مسارات مسموحة)، أو أزواج محددة تفصل بينها شرطة وفواصل (مثل: <span class="en">A-B, A-C</span>).</p>
+    </li>
+    <li>
+      <h4>5. المسار الافتراضي (Default Path)</h4>
+      <p>حدد المسار التلقائي في معامل <span class="en">Default Path</span> من بين المسارات المحددة في الخطوة السابقة (أو اختر <span class="en">All</span> / <span class="en">None</span>) ليتم تعيينه تلقائياً للعناصر الجديدة.</p>
+    </li>
+    <li>
+      <h4>6. التنفيذ</h4>
+      <p>اضغط <span class="en">Run</span> لإنشاء التكوين على مستوى الشبكة.</p>
+    </li>
+  </ol>
+
+  <div class="example-box" style="margin-top:18px;">
+    <span class="label en">FTTH EXAMPLE</span>
+    <p>تكوين الـ <span class="en">Splitter 1:4</span>: يتكون من منفذ واحد <span class="en">Upstream</span> (منفذ دخول كابل التغذية الرئيسي) و4 منافذ <span class="en">Downstream</span> (منافذ التوزيع للعملاء). وجود أكثر من طرفين يتطلب تحديد الـ <span class="en">Valid Paths</span> لضمان عدم توجيه الإشارة بين منافذ الخروج وبعضها.</p>
+  </div>
+
+  <!-- Set Terminal Configuration -->
+  <p style="margin-top:28px;"><b>2. تعيين التكوين لفئة أصول (<span class="en">Set Terminal Configuration</span>):</b></p>
+  <ol class="steps" style="margin-top:14px;">
+    <li>
+      <h4>1-2. افتح الأداة</h4>
+      <p>ابحث عن أداة <span class="en">Set Terminal Configuration</span> وحدد الـ <span class="en">Input Utility Network</span>.</p>
+    </li>
+    <li>
+      <h4>3-7. حدد الفئة والتكوين</h4>
+      <p>اختر الـ <span class="en">Domain Network</span>، ثم الجدول/الفئة في <span class="en">Input Table</span>، ثم حدد الـ <span class="en">Asset Group</span> والـ <span class="en">Asset Type</span>، وأخيراً اختر الـ <span class="en">Terminal Configuration</span> المراد ربطه بالنوع.</p>
+    </li>
+    <li>
+      <h4>8. التنفيذ</h4>
+      <p>اضغط <span class="en">Run</span> لتطبيق التكوين على نوع الأصل المضلل.</p>
+    </li>
+  </ol>
+
+  <div class="card" style="margin-top:16px; border-color:var(--gold);">
+    <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">تحذير صارم</span>قرار تعيين دائم</h3>
+    <p>تعيين تكوين منافذ مخصص (<span class="en">Terminal Configuration</span>) لنوع أصل معين هو إجراء <b>نهائي ولا يمكن إلغاؤه أو تغييره بعد تفعيل طوبولوجيا الشبكة لأول مرة</b> (<span class="en">Enable Network Topology</span>)، حتى لو قمت بتعطيل الطوبولوجيا لاحقاً.</p>
+  </div>
+
+  <!-- Delete Terminal Configuration -->
+  <p style="margin-top:28px;"><b>3. حذف تكوين أطراف (<span class="en">Delete Terminal Configuration</span>):</b></p>
+  <ol class="steps" style="margin-top:14px;">
+    <li>
+      <h4>1-3. افتح الأداة واقتطع التكوين</h4>
+      <p>افتح أداة <span class="en">Delete Terminal Configuration</span>، حدد الشبكة، واختر اسم التكوين المراد إزالته من القائمة المنسدلة <span class="en">Name</span>.</p>
+    </li>
+    <li>
+      <h4>4. التنفيذ</h4>
+      <p>اضغط <span class="en">Run</span> لحذف التكوين من قواعد بيانات الشبكة.</p>
+    </li>
+  </ol>
+
+  <p style="font-size:13.5px; color:var(--text-dim); margin-top:12px;">
+    <b>شروط الحذف الصارمة:</b> يشترط لحذف التكوين ألا تكون طوبولوجيا الشبكة قد قُدم تفعيلها مطلقاً في تاريخ قاعدة البيانات (<span class="en">Never Been Enabled</span>)، وأن تكون الطوبولوجيا معطلة حالياً، وألا يكون التكوين مخصصاً أو مرتبطة بأي <span class="en">Asset Type</span>.
+  </p>
+</section>
 
   <section id="sec37">
     <span class="num">37</span>
