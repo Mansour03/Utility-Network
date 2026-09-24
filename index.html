@@ -2833,7 +2833,7 @@
     </li>
     <li>
       <h4>4. ضبط المسارات المتاحة (Valid Paths)</h4>
-      <p>إذا احتوى التكوين على 3 أو 4 أطراف، يجب تحديد مسارات الحركة المسموحة داخل الجهاز عبر إدخال أسماء وقيم المسارات: إما <span class="en">All</span> (جميع المسارات متاحة)، أو <span class="en">None</span> (لا توجد مسارات مسموحة)، أو أزواج محددة تفصل بينها شرطة وفواصل (مثل: <span class="en">A-B, A-C</span>).</p>
+      <p>إذا احتوى التكوين على 3 أو 4 أطراف أو أكثر، يجب تحديد مسارات الحركة المسموحة داخل الجهاز عبر إدخال أسماء وقيم المسارات: إما <span class="en">All</span> (جميع المسارات متاحة)، أو <span class="en">None</span> (لا توجد مسارات مسموحة)، أو أزواج محددة تفصل بينها شرطة وفواصل (مثل: <span class="en">A-B, A-C</span>).</p>
     </li>
     <li>
       <h4>5. المسار الافتراضي (Default Path)</h4>
@@ -2845,9 +2845,33 @@
     </li>
   </ol>
 
-  <div class="example-box" style="margin-top:18px;">
-    <span class="label en">FTTH EXAMPLE</span>
-    <p>تكوين الـ <span class="en">Splitter 1:4</span>: يتكون من منفذ واحد <span class="en">Upstream</span> (منفذ دخول كابل التغذية الرئيسي) و4 منافذ <span class="en">Downstream</span> (منافذ التوزيع للعملاء). وجود أكثر من طرفين يتطلب تحديد الـ <span class="en">Valid Paths</span> لضمان عدم توجيه الإشارة بين منافذ الخروج وبعضها.</p>
+  <!-- التطبيق العملي المدمج -->
+  <div class="example-box" style="margin-top:20px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 16px; border-radius: 6px;">
+    <span class="label en" style="font-weight: bold; color: var(--gold);">مثال تطبيقي عملي: Splitter 1:4 (FTTH)</span>
+    <p style="margin-top: 8px;"><b>الهدف:</b> إنشاء تكوين لموزع ألياف ضوئية يحتوي على منفذ دخول واحد و4 منافذ خروج، مع منع تسرب الإشارة أو تتبعها بين منافذ الخروج وبعضها.</p>
+
+    <div style="margin-top: 10px; font-size: 14px;">
+      <p><b>أولاً: إعداد البيانات بأداة <span class="en">Add Terminal Configuration</span>:</b></p>
+      <ul style="padding-right: 20px; margin-top: 5px;">
+        <li><b><span class="en">Name</span>:</b> <code class="en">Splitter 1x4</code> | <b><span class="en">Directionality</span>:</b> <code class="en">Directional</code></li>
+        <li><b>تعريف الأطراف (<span class="en">Terminals</span>):</b>
+          <ul style="padding-right: 15px; margin-top: 4px;">
+            <li>منفذ الدخول: <code class="en">In</code> &leftarrow; ضع علامة صح عند <span class="en">Upstream</span>.</li>
+            <li>منافذ الخروج: <code class="en">Out_1, Out_2, Out_3, Out_4</code> &leftarrow; اترك <span class="en">Upstream</span> فارغاً.</li>
+          </ul>
+        </li>
+        <li><b>المسارات المتاحة (<span class="en">Valid Paths</span>):</b> 
+          <br>اكتب القيم التالية لمنع التوصل بين الخروج والخروج: <br>
+          <code class="en" style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 4px;">In-Out_1, In-Out_2, In-Out_3, In-Out_4</code>
+        </li>
+        <li><b>المسار الافتراضي (<span class="en">Default Path</span>):</b> اختر اسم المسار المعرّف أعلاه.</li>
+      </ul>
+
+      <p style="margin-top: 10px;"><b>ثانياً: الربط المباشر بجدول الأصول (<span class="en">Set Terminal Configuration</span>):</b></p>
+      <p style="margin-top: 4px;">اختر الجدول <code class="en">CommunicationsDevice</code>، ثم المجموعة <code class="en">Splitter</code>، والنوع <code class="en">Optical Splitter 1:4</code>، وربطها بالتكوين <code class="en">Splitter 1x4</code>.</p>
+      
+      <p style="margin-top: 8px; color: var(--text-dim); font-size: 13px;"><b>النتيجة الميدانية:</b> عند التوصيل رسمياً، يطالبك ArcGIS Pro بتحديد رقم المنفذ بالضبط (<code class="en">In</code> أم <code class="en">Out_3</code>)، وعند تشغيل التتبع <span class="en">Downstream Trace</span> تمر الإشارة تلقائياً من <code class="en">In</code> وتتفرع إلى كافة منافذ المشتركين <code class="en">Out_1..4</code> دون حدوث تداخل بين خطوط المشتركين.</p>
+    </div>
   </div>
 
   <!-- Set Terminal Configuration -->
@@ -2863,7 +2887,7 @@
     </li>
     <li>
       <h4>8. التنفيذ</h4>
-      <p>اضغط <span class="en">Run</span> لتطبيق التكوين على نوع الأصل المضلل.</p>
+      <p>اضغط <span class="en">Run</span> لتطبيق التكوين على نوع الأصل المحدد.</p>
     </li>
   </ol>
 
@@ -2886,7 +2910,7 @@
   </ol>
 
   <p style="font-size:13.5px; color:var(--text-dim); margin-top:12px;">
-    <b>شروط الحذف الصارمة:</b> يشترط لحذف التكوين ألا تكون طوبولوجيا الشبكة قد قُدم تفعيلها مطلقاً في تاريخ قاعدة البيانات (<span class="en">Never Been Enabled</span>)، وأن تكون الطوبولوجيا معطلة حالياً، وألا يكون التكوين مخصصاً أو مرتبطة بأي <span class="en">Asset Type</span>.
+    <b>شروط الحذف الصارمة:</b> يشترط لحذف التكوين ألا تكون طوبولوجيا الشبكة قد تم تفعيلها مطلقاً في تاريخ قاعدة البيانات (<span class="en">Never Been Enabled</span>)، وأن تكون الطوبولوجيا معطلة حالياً، وألا يكون التكوين مخصصاً أو مرتبطة بأي <span class="en">Asset Type</span>.
   </p>
 </section>
 
