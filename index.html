@@ -3043,30 +3043,94 @@
 </section>
 
   <section id="sec38">
-    <span class="num">38</span>
-    <h2>استيراد وتصدير عناصر التحكم في الشبكات الفرعية</h2>
-    <p>بدل ما تحدد كل <span class="en">Subnetwork Controller</span> يدويًا واحد واحد، تقدر تستورد قائمة كاملة منهم دفعة واحدة من ملف <span class="en">CSV</span>.</p>
-    <div class="grid2" style="margin-top:24px;">
-      <div class="card">
-        <h3><span class="en">Import Subnetwork Controllers</span></h3>
-        <ol class="steps-compact" style="margin-top:14px;">
-          <li><h4>1-2</h4><p>افتح الأداة، حدد <span class="en">Input Utility Network</span>.</p></li>
-          <li><h4>3</h4><p>حدد ملف الـ <span class="en">CSV</span> في <span class="en">Input File</span>.</p></li>
-          <li><h4>4</h4><p><span class="en">Run</span>.</p></li>
-        </ol>
-        <p style="font-size:13.5px; margin-top:10px;">الصفوف بتتكتب في <span class="en">Subnetworks Table</span> وتتحدد كـ <span class="en">Dirty</span> — لما تفعّل الطوبولوجيا، العناصر دي بتتثبت كـ <span class="en">Controllers</span> فعليًا. لازم بعدها تشغّل <span class="en">Update Subnetwork</span> عشان اسم الشبكة الفرعية ينتشر على العناصر المتصلة.</p>
-      </div>
-      <div class="card">
-        <h3><span class="en">Export Subnetwork Controllers</span></h3>
-        <ol class="steps-compact" style="margin-top:14px;">
-          <li><h4>1-2</h4><p>افتح الأداة، حدد <span class="en">Utility Network</span>.</p></li>
-          <li><h4>3</h4><p>حدد اسم ومكان <span class="en">Output .csv File</span>.</p></li>
-          <li><h4>4</h4><p><span class="en">Run</span>.</p></li>
-        </ol>
+  <span class="num">38</span>
+  <h2>استيراد وتصدير متحكمات الشبكات الفرعية <span class="en">(Subnetwork Controllers)</span></h2>
+  <p>بدلاً من إعداد كل متحكم شبكة فرعية (<span class="en">Subnetwork Controller</span>) تعييناً يدوياً حبة بحبة، تتيح أدوات الـ <span class="en">Geoprocessing</span> إمكانية تصدير كافة المتحكمات المعرفة أو استيراد قائمة كاملة دفعة واحدة من ملف بصيغة <span class="en">CSV</span>.</p>
+
+  <p style="margin-top:18px;"><b>متطلبات التشغيل القياسية (Requirements):</b></p>
+  <div class="grid3" style="margin-top:12px;">
+    <div class="card">
+      <h3>تنسيق ملف الـ CSV</h3>
+      <p>يجب أن يلتزم ملف الـ <span class="en">CSV</span> بالتنسيق الهيكلي والأعمدة الإجبارية المحددة في توثيق ArcGIS Pro الرسمية.</p>
+    </div>
+    <div class="card">
+      <h3>جاهزية العناصر والأطراف</h3>
+      <p>يجب أن تكون المعالم المكانية أو الكائنات والـ <span class="en">Terminals</span> المحددة بالملف موجودة بالفعل بالشبكة ومؤهلة كـ <span class="en">Controllers</span>.</p>
+    </div>
+    <div class="card">
+      <h3>ملكية قاعدة البيانات</h3>
+      <p>في بيئة المؤسسات (<span class="en">Enterprise</span>)، يجب أن يتم الاتصال مباشرة باسم الحساب المالك للشبكة (<span class="en">Database UN Owner</span>).</p>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:24px;">
+    <!-- Import Tool -->
+    <div class="card">
+      <h3>استيراد المتحكمات <span class="en">(Import Subnetwork Controllers)</span></h3>
+      <ol class="steps-compact" style="margin-top:14px;">
+        <li>
+          <h4>1. افتح الأداة</h4>
+          <p>من مجموعة <span class="en">Geoprocessing</span>، ابحث عن أداة <span class="en">Import Subnetwork Controllers</span>.</p>
+        </li>
+        <li>
+          <h4>2. حدد الشبكة</h4>
+          <p>اختر الـ <span class="en">Input Utility Network</span> الخاصة بالمشروع (سواء بيئة خادم أو قاعدة بيانات أحادية).</p>
+        </li>
+        <li>
+          <h4>3. اختر الملف</h4>
+          <p>حدد مسار ملف الـ <span class="en">CSV</span> في معامل <span class="en">Input File</span>.</p>
+        </li>
+        <li>
+          <h4>4. التنفيذ</h4>
+          <p>اضغط <span class="en">Run</span> لإتمام التصدير والاستيراد.</p>
+        </li>
+      </ol>
+
+      <div style="margin-top:14px; padding:10px; background:rgba(0,0,0,0.15); border-radius:4px; font-size:13px; border-right:3px solid var(--gold);">
+        <b>ملاحظة الآثر الميداني:</b> تُكتب السجلات مباشرة داخل جدول الـ <span class="en">Subnetworks Table</span> وتُعلم الحالة كـ <span class="en">Dirty</span>. بمجرد تفعيل الطوبولوجيا (<span class="en">Enable Network Topology</span>)، تتثبت العناصر رسمياً كـ <span class="en">Subnetwork Controllers</span>. بعدها يلزم تشغيل أداة <span class="en">Update Subnetwork</span> لنشر اسم الشبكة الفرعية على كافة المعالم المتصلة.
       </div>
     </div>
-    <div class="example-box" style="margin-top:20px;"><span class="label en">FTTH EXAMPLE</span><p>عندك 40 محطة <span class="en">OLT</span> جديدة اتنشرت في مشروع توسعة. بدل ما تدخل تحدد كل <span class="en">Port</span> يدويًا كـ <span class="en">Subnetwork Controller</span>، تجهز ملف <span class="en">CSV</span> بالأربعين محطة وتستوردهم دفعة واحدة.</p></div>
-  </section>
+
+    <!-- Export Tool -->
+    <div class="card">
+      <h3>تصدير المتحكمات <span class="en">(Export Subnetwork Controllers)</span></h3>
+      <p style="font-size:13px; color:var(--text-dim); margin-bottom:10px;">تُستخدم لإنشاء نسخة أصلية احتياطية أو نقل إعدادات المتحكمات بين قواعد البيانات المختبرية والإنتاجية.</p>
+      <ol class="steps-compact" style="margin-top:14px;">
+        <li>
+          <h4>1. افتح الأداة</h4>
+          <p>ابحث عن أداة <span class="en">Export Subnetwork Controllers</span> بداخل مجلد الأدوات.</p>
+        </li>
+        <li>
+          <h4>2. حدد الشبكة</h4>
+          <p>في معامل <span class="en">Utility Network</span> اختر الشبكة التي تحتوي على المتحكمات المعرفة.</p>
+        </li>
+        <li>
+          <h4>3. حدد المسار والاسم</h4>
+          <p>حدد مسار التصدير واسم الملف في <span class="en">Output .csv File</span>.</p>
+        </li>
+        <li>
+          <h4>4. التنفيذ</h4>
+          <p>اضغط <span class="en">Run</span> ليستخرج النظام ملف الـ <span class="en">CSV</span> شاملاً بيانات الأطراف وأسماء الشبكات الفرعية.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- مثال تطبيقي عملي مدمج -->
+  <div class="example-box" style="margin-top:20px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 16px; border-radius: 6px;">
+    <span class="label en" style="font-weight: bold; color: var(--gold);">مثال تطبيقي عملي: مشروع توسعة ألياف ضوئية (FTTH Expansion)</span>
+    <p style="margin-top: 8px;"><b>السيناريو الميداني:</b> عند تدشين مركز بيانات رئيسي جديد يحوي 40 أسطوانة/محطة <span class="en">OLT</span> جديدة، يتطلب كل جهاز تخصيص منفذ مخرج (<span class="en">Upstream/Out Port</span>) كمتحكم شبكة فرعية (<span class="en">Subnetwork Controller</span>) لشبكة التغذية الضوئية.</p>
+
+    <div style="margin-top: 10px; font-size: 14px;">
+      <p><b>خطوات العمل الدقيقة:</b></p>
+      <ol style="padding-right: 20px; margin-top: 4px;">
+        <li>تستخرج بيانات الـ <span class="en">Asset ID</span> والـ <span class="en">Terminal Name</span> لجميع المنافذ من مخططات شبكة الألياف الهندسية إلى ملف <code class="en">OLT_Controllers.csv</code>.</li>
+        <li>يُنفذ استيراد البيانات دفعة واحدة بأداة <span class="en">Import Subnetwork Controllers</span> بدلاً من إدخال 40 سجل يدوياً من شريط الأدوات.</li>
+        <li>بعد تفعيل الطوبولوجيا، تُشغل أداة <span class="en">Update Subnetwork</span> ليتولى محرك نظم المعلومات الجغرافية ربط كافة الموزعات (<span class="en">Splitters</span>) وكابلات الألياف الفرعية بأسماء الـ <span class="en">Subnetworks</span> المنسوبة لـ 40 محطة دفعة واحدة.</li>
+      </ol>
+    </div>
+  </div>
+</section>
 
   <section id="sec39">
     <span class="num">39</span>
