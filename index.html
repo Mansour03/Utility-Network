@@ -2915,71 +2915,132 @@
 </section>
 
   <section id="sec37">
-    <span class="num">37</span>
-    <h2>تعريف <span class="en">Tiers</span> وضبط تعريف الشبكة الفرعية</h2>
-    <p>الشبكة النطاقية بتتكون من <span class="en">Tier</span> واحدة أو أكتر، بتشكّل إما تسلسل هرمي أو مجموعات مقسّمة. الـ <span class="en">Tier</span> الواحدة بتمثل مجموعة شبكات فرعية كلها ليها نفس التعريف.</p>
+  <span class="num">37</span>
+  <h2>تعريف المستويات <span class="en">(Tiers)</span> وضبط تعريف الشبكة الفرعية</h2>
+  <p>تتكون الشبكة النطاقية (<span class="en">Domain Network</span>) من مستوى واحد أو أكثر من الـ <span class="en">Tiers</span> لتشكل إما تسلسلاً هرمياً (<span class="en">Hierarchical</span>) أو مجموعات مقسمة (<span class="en">Partitioned</span>). يمثل الـ <span class="en">Tier</span> الواحد تجميعة لشبكات فرعية تشترك في نفس قواعد التتبع والقوانين.</p>
 
-    <p style="margin-top:24px;">خطوات <span class="en">Add Tier</span>:</p>
-    <ol class="steps" style="margin-top:16px;">
-      <li><h4>1-3</h4><p>افتح الأداة، حدد الشبكة، ثم <span class="en">Domain Network</span>.</p></li>
-      <li><h4>4</h4><p>للشبكات <span class="en">Hierarchical</span>: حدد <span class="en">Tier Group Name</span> موجودة (أو أنشئ واحدة جديدة أولًا بأداة <span class="en">Add Tier Group</span>).</p></li>
-      <li><h4>5</h4><p>اكتب اسم فريد للـ <span class="en">Tier</span> — حد أقصى 64 حرف، وممنوع فيه رموز خاصة زي: <span class="en">` ~ @ $ % ^ * + = | \ &lt; &gt; ? { } . ! ' [ ] ;</span>.</p></li>
-      <li><h4>6</h4><p>حدد <span class="en">Rank</span> (ترتيب الأولوية في التتبع).</p></li>
-      <li><h4>7</h4><p>اختار <span class="en">Topology Type</span>: الشبكات <span class="en">Hierarchical</span> بتاخد <span class="en">Mesh</span> تلقائيًا، والـ <span class="en">Partitioned</span> تقدر تختار <span class="en">Mesh</span> أو <span class="en">Radial</span>.</p></li>
-      <li><h4>8</h4><p>للشبكات <span class="en">Hierarchical</span>: حدد <span class="en">Subnetwork Field Name</span> — اسم حقل جديد لأول مرة، أو حقل موجود لو الـ <span class="en">Tier</span> بتمثل نفس التجميعة المنطقية لجزء من النظام.</p></li>
-      <li><h4>9</h4><p><span class="en">Run</span>.</p></li>
-    </ol>
-    <div class="card" style="margin-top:16px; border-color:var(--gold);">
-      <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">شرط حرج</span>الفئات لازم تكون فاضية</h3>
-      <p>أداة <span class="en">Add Tier</span> بتضيف حقل اسم الشبكة الفرعية <span class="en">(nonnullable)</span> لكل فئات الشبكة النطاقية — العملية دي ممكنة بس لو الفئات فاضية تمامًا. لازم تخلّص كل إعدادات الشبكة الأول، قبل ما تحمّل أي بيانات فعلية.</p>
+  <p style="margin-top:18px;"><b>متطلبات التشغيل القياسية (Requirements):</b></p>
+  <div class="grid3" style="margin-top:12px;">
+    <div class="card">
+      <h3>تعطيل الطوبولوجيا</h3>
+      <p>يلزم إيقاف طوبولوجيا الشبكة (<span class="en">Disable Network Topology</span>) تماماً قبل إضافة أي <span class="en">Tier</span> أو تعديل تعريفه.</p>
     </div>
-
-    <p style="margin-top:28px;">بعد تعريف الـ <span class="en">Tier</span>، الخطوة التالية <span class="en">Set Subnetwork Definition</span> — دي أكبر أداة إعدادات في الشبكة كلها، فخلينا نقسمها لأجزاء:</p>
-
-    <div class="grid2" style="margin-top:20px;">
-      <div class="card">
-        <h3>الإعدادات الأساسية</h3>
-        <ul class="deflist">
-          <li>حدد الشبكة، <b class="en">Domain Network</b>، <b class="en">Tier Name</b>.</li>
-          <li><b class="en">Support Disjoint Subnetwork</b> — اختياري، متاح بس للـ <span class="en">Partitioned Tiers</span>؛ يخلي الشبكة الفرعية الواحدة تدعم أجزاء منفصلة جغرافيًا.</li>
-          <li><b class="en">Subnetwork Diagram Templates</b> — اختياري؛ لتوليد مخطط تلقائي لكل شبكة فرعية.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3><span class="en">Valid Features and Objects</span></h3>
-        <p style="margin-bottom:10px;">تحدد بالظبط مين مسموحله يشارك في شبكات الـ <span class="en">Tier</span> دي:</p>
-        <ul class="deflist">
-          <li><b class="en">Valid Devices</b> — الأجهزة المسموح لها بالمشاركة.</li>
-          <li><b class="en">Valid Device Subnetwork Controllers</b> — لازم يكون معاهم فئة <span class="en">Subnetwork Controller</span>.</li>
-          <li><b class="en">Valid Lines</b> و<b class="en">Aggregated Lines</b> — الخطوط المسموحة، وتوليد فئة <span class="en">SubnetLine</span>.</li>
-          <li><b class="en">Valid Junctions</b> و<b class="en">Valid Junction Objects</b> — وكذلك <span class="en">Controllers</span> بتاعتها.</li>
-          <li><b class="en">Valid Edge Objects</b> — الكائنات الخطية غير المكانية المسموحة.</li>
-        </ul>
-      </div>
+    <div class="card">
+      <h3>ملكية المؤسسة</h3>
+      <p>في قواعد بيانات المؤسسات (<span class="en">Enterprise</span>)، يجب الاتصال كـ <span class="en">Database UN Owner</span> وبحساب <span class="en">Portal Owner</span>.</p>
     </div>
+    <div class="card">
+      <h3>خلو الجداول تماماً</h3>
+      <p>يجب أن تكون جميع فئات الأصول والجداول في الشبكة **فارغة تماماً** من البيانات وقت تشغيل أداة <span class="en">Add Tier</span>.</p>
+    </div>
+  </div>
 
-    <div class="card" style="margin-top:16px;">
-      <h3><span class="en">Subnetwork Trace Configuration</span></h3>
-      <p style="margin-bottom:10px;">إعدادات بتتحدد مرة واحدة وتتحكم في سلوك 3 عمليات مع بعض: <span class="en">Trace</span> اليدوي، <span class="en">Update Subnetwork</span>، و<span class="en">Export Subnetwork</span>. من أهمها:</p>
+  <!-- Add Tier Section -->
+  <p style="margin-top:26px;"><b>1. إضافة مستوى جديد (<span class="en">Add Tier</span>):</b></p>
+  <ol class="steps" style="margin-top:14px;">
+    <li>
+      <h4>1-3. افتح الأداة وحدد الشبكة</h4>
+      <p>افتح أداة <span class="en">Add Tier</span>، حدد الـ <span class="en">Utility Network</span>، ثم اختار الـ <span class="en">Domain Network</span> المستهدفة.</p>
+    </li>
+    <li>
+      <h4>4. تحديد مجموعة المستويات (للشبكات الهرمية)</h4>
+      <p>إذا كانت الشبكة هرمية (<span class="en">Hierarchical</span>)، حدد <span class="en">Tier Group Name</span> موجودة (أو قم بإنشائها أولاً بأداة <span class="en">Add Tier Group</span>).</p>
+    </li>
+    <li>
+      <h4>5. اسم المستوى (Tier Name)</h4>
+      <p>اكتب اسماً فريداً للمستوى (بحد أقصى 64 حرفاً). **يمنع استخدام الرموز الخاصة:** <code class="en">` ~ @ $ % ^ * + = | \ &lt; &gt; ? { } . ! ' [ ] ; \r \n ::</code>.</p>
+    </li>
+    <li>
+      <h4>6-7. الرتبة ونمط الطوبولوجيا (Rank &amp; Topology Type)</h4>
+      <p>حدد الـ <span class="en">Rank</span> (ترتيب الأولوية الهرمي). اختر الـ <span class="en">Topology Type</span>: الشبكات الهرمية تأخذ <span class="en">Mesh</span> تلقائياً، بينما الشبكات المقسمة (<span class="en">Partitioned</span>) تقبل <span class="en">Radial</span> أو <span class="en">Mesh</span>.</p>
+    </li>
+    <li>
+      <h4>8. حقل اسم الشبكة الفرعية (Subnetwork Field Name)</h4>
+      <p>للشبكات الهرمية، حدد اسم الحقل الذي سيتم إنشاؤه تلقائياً في كافة فئات البيانات لتعقب اسم الشبكة الفرعية. لو كانت الـ <span class="en">Tier Group</span> متعددة، يمكن إعادة استخدام حقل تم إنشاؤه سابقاً بنفس الأداة.</p>
+    </li>
+    <li>
+      <h4>9. التنفيذ</h4>
+      <p>اضغط <span class="en">Run</span> لإنشاء المستوى.</p>
+    </li>
+  </ol>
+
+  <div class="card" style="margin-top:16px; border-color:var(--gold);">
+    <h3><span class="tag" style="background:var(--gold-soft); color:var(--gold); border-color:rgba(232,168,61,0.35);">تحذير صارم</span>شرط خلو البيانات من الفئات</h3>
+    <p>ت تقوم أداة <span class="en">Add Tier</span> بإنشاء حقل لاسم الشبكة الفرعية بخاصية <span class="en">Non-Nullable</span> (نوع <span class="en">String</span> بطول 2000 وسلسلة افتراضية <code class="en">"Unknown"</code>) داخل كافة جداول وفئات أصول الشبكة. **هذه العملية تفشل تماماً إذا كانت الفئات تحتوي على أي معالم مكانية أو سجلات جدولية.**</p>
+  </div>
+
+  <!-- Set Subnetwork Definition Section -->
+  <p style="margin-top:28px;"><b>2. ضبط تعريف الشبكة الفرعية (<span class="en">Set Subnetwork Definition</span>):</b></p>
+
+  <div class="grid2" style="margin-top:16px;">
+    <div class="card">
+      <h3>الإعدادات الأساسية</h3>
       <ul class="deflist">
-        <li><b class="en">Include Containers/Content/Structures</b> — هل الحاويات ومحتوياتها والهياكل تدخل ضمن التتبع.</li>
-        <li><b class="en">Include Barrier Features</b> — تضمين النقاط/الخطوط اللي بتوقف الاجتياز.</li>
-        <li><b class="en">Validate Locatability</b> — يرجع خطأ لو فيه كائن غير مكاني تايه.</li>
-        <li><b class="en">Summaries</b> — حساب معلومات إحصائية تتخزن في <span class="en">SubnetLine</span>.</li>
-        <li><b class="en">Condition/Function Barriers</b> — نقاط توقف بناءً على خصائص أو دوال.</li>
-        <li><b class="en">Apply Traversability To</b> — تطبيق قيود الاجتياز على النقاط بس، الخطوط بس، أو الاتنين.</li>
+        <li><b><span class="en">Input Parameters</span>:</b> حدد الشبكة، الـ <span class="en">Domain Network</span>، والـ <span class="en">Tier Name</span>.</li>
+        <li><b><span class="en">Support Disjoint Subnetwork</span>:</b> متاح فقط لشبكات الـ <span class="en">Partitioned</span> للسماح لشبكة فرعية واحدة بالوجود في أجزاء جغرافية منفصلة غير متصلة.</li>
+        <li><b><span class="en">Subnetwork Diagram Templates</span>:</b> ربط نماذج المخططات لتوليد <span class="en">System Diagrams</span> تلقائياً لكل شبكة فرعية.</li>
       </ul>
     </div>
-
-    <div class="card" style="margin-top:16px;">
-      <h3><span class="en">Update Subnetwork Policy</span></h3>
+    <div class="card">
+      <h3>العناصر المسموحة <span class="en">(Valid Features &amp; Objects)</span></h3>
+      <p style="margin-bottom:10px;">تحديد الفئات والأنواع المصرح لها بالمشاركة في هذا المستوى:</p>
       <ul class="deflist">
-        <li><b class="en">Manage IsDirty</b> — لو مفعّلة، عملية التحقق من الطوبولوجيا بتحدد تلقائيًا أي شبكات فرعية بقت "متسخة" وتحتاج تحديث، وده بيأثر على اتساق مخططات الشبكة.</li>
-        <li><b class="en">Update Structure/Domain Network Containers</b> — هل حقل اسم الشبكة الفرعية بتاع الحاويات (الهيكلية أو النطاقية) يتحدث تلقائيًا مع كل عملية تحديث.</li>
-        <li><b class="en">Edit Mode</b> — <span class="en">Without Eventing</span> (الافتراضي، أسرع بس مش بيفعّل قواعد الـ <span class="en">Attribute Rules</span> أو تتبع المحرر) مقابل <span class="en">With Eventing</span> (بيحترم كل عقود الـ <span class="en">Geodatabase</span> لكنه أبطأ بكتير مع الشبكات الفرعية الكبيرة).</li>
+        <li><b><span class="en">Valid Devices &amp; Junctions</span>:</b> تحديد أجهزة ونقاط التوصيل المسموحة.</li>
+        <li><b><span class="en">Valid Controllers</span>:</b> تحديد أنواع الأجهزة المصرح لها بأن تكون متحكمات (<span class="en">Subnetwork Controllers</span>) بشرط امتلاكها فئة النظام المخصصة.</li>
+        <li><b><span class="en">Valid Lines &amp; Aggregated Lines</span>:</b> تحديد الخطوط والمسارات المجمعة لتوليد طبقة الـ <span class="en">SubnetLine</span>.</li>
+        <li><b><span class="en">Valid Objects</span>:</b> تحديد كائنات الحواف والنقاط اللامكانية (<span class="en">Non-spatial Junction/Edge Objects</span>).</li>
       </ul>
     </div>
-  </section>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>إعدادات التتبع الفرعي <span class="en">(Subnetwork Trace Configuration)</span></h3>
+    <p style="margin-bottom:10px;">تحدد القواعد التشغيلية الموحدة لثلاث عمليات: التتبع الميداني (<span class="en">Trace</span>)، والتحديث (<span class="en">Update Subnetwork</span>)، والتصدير (<span class="en">Export Subnetwork</span>):</p>
+    <ul class="deflist">
+      <li><b>تضمين الحاويات والهياكل:</b> خيارات <span class="en">Include Containers / Content / Structures / Barrier Features</span>.</li>
+      <li><b><span class="en">Validate Locatability</span>:</b> إرجاع خطأ تشغيلي في حال وجود كائنات غير مكانية غير مرتبطة بهيكل مكاني (<span class="en">Unlocatable Objects</span>).</li>
+      <li><b><span class="en">Summaries</span>:</b> حساب ملخصات وحسابات إحصائية آلية تتخزن مباشرة داخل فئة <span class="en">SubnetLine</span>.</li>
+      <li><b>حواجز الشروط والدوال:</b> تحديد <span class="en">Condition Barriers</span> و <span class="en">Function Barriers</span> لإيقاف التتبع بناءً على قيم الحقول أو المعادلات.</li>
+      <li><b>نطاق الاجتياز:</b> تحديد تطبيق القيود عبر <span class="en">Apply Traversability To</span> (على النقاط فقط، الخطوط فقط، أو كلاهما).</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3>سياسة التحديث والتحرير <span class="en">(Update Subnetwork Policy)</span></h3>
+    <ul class="deflist">
+      <li><b><span class="en">Manage IsDirty</span>:</b> عند تفعيلها، تقوم عملية التحقق من الطوبولوجيا بتحديد الشبكات الفرعية المتأثرة بالتعديلات وتعديل حالتها إلى <span class="en">Dirty</span> لضمان الاتساق.</li>
+      <li><b><span class="en">Update Containers</span>:</b> تحديث اسم الشبكة الفرعية تلقائياً للحاويات النطاقية والهيكلية (<span class="en">Domain &amp; Structure Containers</span>).</li>
+      <li><b>أنماط التحرير (<span class="en">Edit Mode</span>):</b>
+        <br>&bull; <b class="en">Without Eventing</b> (الافتراضي): أداء فائق وسريع، ولكنه لا يفعل قواعد الـ <span class="en">Attribute Rules</span> أو تتبع المحرر (<span class="en">Editor Tracking</span>) ولا يكتب سجل التغييرات التاريخية.
+        <br>&bull; <b class="en">With Eventing</b>: ينفذ كافة العقود الهندسية وقواعد البيانات ويطلق الـ <span class="en">Attribute Rules</span>، ولكنه أبطأ ويحجز قفلاً مشتركاً (<span class="en">Shared Lock</span>) على النسخة الرئيسية.</li>
+    </ul>
+  </div>
+
+  <!-- مثال تطبيقي عملي مدمج -->
+  <div class="example-box" style="margin-top:20px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 16px; border-radius: 6px;">
+    <span class="label en" style="font-weight: bold; color: var(--gold);">مثال تطبيقي عملي: شبكة توزيع الكهرباء (Electric Distribution Tier)</span>
+    <p style="margin-top: 8px;"><b>الهدف:</b> إنشاء مستوى الجهد المنخفض (<span class="en">Low Voltage Tier</span>) وتحديد المحولات كـ <span class="en">Subnetwork Controllers</span> وتأمين التتبع لخدمة المشتركين.</p>
+
+    <div style="margin-top: 10px; font-size: 14px;">
+      <p><b>1. إضافة المستوى بأداة <span class="en">Add Tier</span>:</b></p>
+      <ul style="padding-right: 20px; margin-top: 4px;">
+        <li><b><span class="en">Domain Network</span>:</b> <code class="en">ElectricDistribution</code></li>
+        <li><b><span class="en">Tier Name</span>:</b> <code class="en">Low Voltage</code> | <b><span class="en">Rank</span>:</b> <code class="en">2</code> (بعد مستوى Medium Voltage)</li>
+        <li><b><span class="en">Topology Type</span>:</b> <code class="en">Radial</code> (شبكة شجرية تبدأ من المحول وتتفرع للعملاء).</li>
+      </ul>
+
+      <p style="margin-top: 10px;"><b>2. ضبط التعريف بأداة <span class="en">Set Subnetwork Definition</span>:</b></p>
+      <ul style="padding-right: 20px; margin-top: 4px;">
+        <li><b><span class="en">Valid Devices</span>:</b> اختيار أجهزة الجهد المنخفض (<code class="en">Low Voltage Meter, Low Voltage Switch</code>).</li>
+        <li><b><span class="en">Valid Device Controllers</span>:</b> تحديد محولات التوزيع (<code class="en">Distribution Transformer</code>) كـ <span class="en">Controller</span> يغذي الشبكة.</li>
+        <li><b><span class="en">Valid Lines</span>:</b> كابلات الجهد المنخفض هوائية وأرضية (<code class="en">Low Voltage Overhead &amp; Underground Lines</code>).</li>
+        <li><b><span class="en">Edit Mode</span>:</b> استخدام <code class="en">Without Eventing</code> لضمان سرعة التحديث عند تنفيذ عمليات <span class="en">Update Subnetwork</span> على آلاف المشتركين.</li>
+      </ul>
+
+      <p style="margin-top: 8px; color: var(--text-dim); font-size: 13px;"><b>النتيجة الميدانية:</b> عند تغذية أي حومة منزلية من محول كهرباء، يتم التعرف تلقائياً على المحول كـ <span class="en">Subnetwork Controller</span>، وتتحدد حدود شبكة الجهد المنخفض بدقة لتسري كافة التحليلات وتتبع انقطاعات التيار الكهربائي حتى عداد المشترك النهائي.</p>
+    </div>
+  </div>
+</section>
 
   <section id="sec38">
     <span class="num">38</span>
