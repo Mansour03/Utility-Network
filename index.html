@@ -3159,6 +3159,10 @@
     <h3>1. مكتبة الألوان الموحدة <span class="en">(Add Color Set)</span></h3>
     <p>تُمثل لوحة الألوان المعتمدة (<span class="en">Color Palette</span>) داخل الشبكة. تُعرف كل لون باسم فريد (<span class="en">Name</span>)، وتسمية (<span class="en">Label</span>)، وكود سداسي عشر (<span class="en">HexCode</span> من 6 أرقام مثل <code class="en">0000FF</code>). يُمكن استخدام عدة أكواد مفصولة بفاصلة لتمثيل الشعيرات ذات الألوان المركبة (مثال: أزرق بشريط أسود <code class="en">0000FF,000000</code>).</p>
     
+    <div style="text-align: center; margin: 16px 0;">
+      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-a-color-set-ex1.png" alt="Add Color Set Example" style="max-width: 100%; border-radius: 4px; border: 1px solid var(--border-color, #444);" />
+    </div>
+
     <p style="margin-top:12px;"><b>خطوات الأداة:</b></p>
     <ol class="steps-compact" style="margin-top:8px;">
       <li>
@@ -3174,6 +3178,12 @@
         <p>اضغط <span class="en">Run</span> لحفظ المكتبة لاستخدامها لاحقاً في إنشاء أنظمة الألوان.</p>
       </li>
     </ol>
+
+    <!-- مثال تطبيقي للألوان -->
+    <div class="example-box" style="margin-top:14px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 12px; border-radius: 6px;">
+      <span class="label en" style="font-weight: bold; color: var(--gold);">سيناريو عملي: إنشاء مكتبة ألوان لكابلات الفايبر (Fiber Colors)</span>
+      <p style="margin-top: 6px; font-size: 13.5px;">تم إنشاء <span class="en">Color Set</span> باسم <code class="en">Fiber colors</code> لتحديد الألوان القياسية المتاحة لجميع شعيرات الفايبر بالمشروع. تم تعريف كل لون بكوده الخاص، مثل الأزرق الصافي (<code class="en">0000FF</code>)، والأزرق المخطط بالأسود (<code class="en">0000FF,000000</code>)، لتسهيل مطابقتها ميدانياً أثناء أعمال اللحام (<span class="en">Splicing</span>).</p>
+    </div>
   </div>
 
   <!-- Color Schemes Section -->
@@ -3181,15 +3191,25 @@
     <h3>2. أنظمة هيكلة الألوان <span class="en">(Add &amp; Delete Color Scheme)</span></h3>
     <p>تستخدم المخططات الهيكلية لتوصيف ترتيب وتسلسل السعات الميكانيكية للأنبوب والشعيرة بناءً على المستويات الهرمية (<span class="en">Groups &amp; Levels</span>) وتوزيع المعرفات الرقمية (<span class="en">Unit Identifiers</span>).</p>
 
+    <!-- صورة مثال 3x2x6 -->
+    <div style="text-align: center; margin: 16px 0;">
+      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/3x2x6-Fiber-Cable-Ex-9FA28.png" alt="3x2x6 Fiber Cable Structure" style="max-width: 100%; border-radius: 4px; border: 1px solid var(--border-color, #444);" />
+    </div>
+
     <div style="margin-top:14px; padding:12px; background:rgba(0,0,0,0.15); border-radius:6px;">
       <b>مثال تطبيقي معتمد: كابل ألياف ضوئية <span class="en">3×2×6</span></b>
       <p style="margin-top:6px; font-size:13.5px;">كابل يتكون من 3 مستويات هرمية مع محدد مجموعة (<span class="en">Group Delimiter</span>) برمز <code class="en">%</code>:</p>
       <ul class="deflist" style="margin-top:8px;">
         <li><b>المستوى 1 (Buffer Tube):</b> التسميات: <code class="en">BL, OR, GR_BK</code> | السعة: <code class="en">2</code> | المحدد الداخلي: <code class="en">#</code>.</li>
         <li><b>المستوى 2 (Ribbon):</b> التسميات: <code class="en">1, 2</code> | السعة: <code class="en">3, 6</code> ألياف على التوالي | المحدد الداخلي: <code class="en">#</code>.</li>
-        <li><b>المستوى 3 (Fiber):</b> التسميات: <code class="en">BL, OR, GR, BL_BK, OR_YL, GR_BK</code> | السعة: <i>تترك فارغة تماماً</i> (المستوى الأدنى دائماً بلا سعة) | المحدد الداخلي: <code class="en">#</code>.</li>
+        <li><b>المستوى 3 (Fiber):</b> التسميات: <code class="en">BL, OR, GR, BL_BK, OR_YL, GR_BK</code> | السعة: <i>تترك فارغة تماماً</i> (المستوى الأدنى دائماً بلا سعة) | المحدد الداخلي: <code class="en">#</code>. أول 3 ألوان بتخص الشريط رقم 1، والستة كلهم بيخصوا الشريط رقم 2.</li>
       </ul>
       <p style="font-size:12.5px; color:var(--text-dim); margin-top:6px;">* تنبيه: للرموز الخاصة كالـ <code class="en">#</code> يُمكن استخدام <code class="en">$#</code> ليتم تقييمها حرفياً أثناء التشغيل.</p>
+    </div>
+
+    <!-- صورة إعداد الأداة -->
+    <div style="text-align: center; margin: 16px 0;">
+      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-Color-Scheme-GP-example-F4C58.png" alt="Add Color Scheme GP Example" style="max-width: 100%; border-radius: 4px; border: 1px solid var(--border-color, #444);" />
     </div>
 
     <div class="grid2" style="margin-top:16px;">
@@ -3199,7 +3219,7 @@
           <li><h4>1-2</h4><p>افتح الأداة، اختر الشبكة ومجال الـ <span class="en">Telecom</span>.</p></li>
           <li><h4>3</h4><p>حدد الـ <span class="en">Color Set Name</span> المعتمدة للمخطط واسم النظام <span class="en">Color Scheme Name</span>.</p></li>
           <li><h4>4</h4><p>حدد <span class="en">Group Delimiter</span> والبيانات لكل مستوى (<span class="en">Name, Labels, Capacity, Delimiter</span>).</p></li>
-          <li><h4>5</h4><p><span class="en">Run</span> — يتم حفظ النظام في نطاق القيم المعنون <code class="en">Network_&lt;ID&gt;_ColorScheme</code> للتطبيق المباشر على طبقات الخطوط والكائنات اللامكانية.</p></li>
+          <li><h4>5</h4><p><span class="en">Run</span> — يتم حفظ النظام في نطاق القيم المعنون <code class="en">Network_&lt;ID&gt;_ColorScheme</code> للتطبيق المباشر على حقل <span class="en">Color scheme</span> في الخطوط والكائنات اللامكانية.</p></li>
         </ol>
       </div>
 
@@ -3211,6 +3231,11 @@
         </div>
       </div>
     </div>
+
+    <!-- صورة تطبيق الخاصية على Attribute -->
+    <div style="text-align: center; margin: 16px 0;">
+      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Color-scheme-attribute-ex.-E2DB6.png" alt="Color Scheme Attribute Example" style="max-width: 100%; border-radius: 4px; border: 1px solid var(--border-color, #444);" />
+    </div>
   </div>
 
   <!-- Wavelength Schemes Section -->
@@ -3221,6 +3246,17 @@
       <li><b>اسم القناة (<span class="en">Wavelength Name</span>):</b> نص أبجدي رقيمي لا يتجاوز 10 أسطر (مثال: <code class="en">1270nm</code> أو <code class="en">Channel 1</code>).</li>
       <li><b>طول الموجة (<span class="en">Wavelength Length</span>):</b> قيمة عددية موجبة بالنانومتر (مثال: <code class="en">1270</code> أو <code class="en">1550.00</code>).</li>
     </ul>
+
+    <!-- صورة Wavelength Scheme GP -->
+    <div style="text-align: center; margin: 16px 0;">
+      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-wavelength-scheme-gp-example1.png" alt="Add Wavelength Scheme GP Example" style="max-width: 100%; border-radius: 4px; border: 1px solid var(--border-color, #444);" />
+    </div>
+
+    <div class="example-box" style="margin-top:14px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 12px; border-radius: 6px;">
+      <span class="label en" style="font-weight: bold; color: var(--gold);">سيناريو عملي: تتبع مسارات DWG/CWDM</span>
+      <p style="margin-top: 6px; font-size: 13.5px;">عند نمذجة شبكة ألياف تعتمد تقنية <span class="en">CWDM Multiplexing</span>، يتم إنشاء مخطط أطوال موجية يضم القنوات من <code class="en">1270nm</code> حتى <code class="en">1610nm</code>. عند إجراء تحليلات التتبع (<span class="en">Wavelength Propagation Trace</span>)، يستخدم المحرك هذه المخططات لتحديد كيفية انتقال الإشارة عبر الكابلات المدمجة ودق التحقق من المسارات.</p>
+    </div>
+
     <p style="font-size:13px; margin-top:8px; color:var(--text-dim);">عند تنفيذ الأداة، يتم تسجيل البيانات في نطاق القيم المكوّدة <code class="en">Network_&lt;ID&gt;_WavelengthScheme</code>. يُرجى إعادة تشغيل خدمة المعالم (<span class="en">Feature Service</span>) لتطبيق التحديثات في حال كانت الطوبولوجيا مفعلة.</p>
   </div>
 
@@ -3263,6 +3299,12 @@
         <p>اضغط <span class="en">Run</span>. لمراجعة الإعدادات المسجلة، افتح خصائص الطبقة <span class="en">Layer Properties</span> وافحص تبويب <span class="en">Network Properties</span>.</p>
       </li>
     </ol>
+
+    <!-- سيناريو عملي للدوائر -->
+    <div class="example-box" style="margin-top:14px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 12px; border-radius: 6px;">
+      <span class="label en" style="font-weight: bold; color: var(--gold);">سيناريو عملي: إعداد مسارات الدوائر المباشرة (Point-to-Point Circuits)</span>
+      <p style="margin-top: 6px; font-size: 13.5px;">عند ربط برجين للاتصالات بدائرة ضوئية مخصصة (<span class="en">Dedicated Circuit</span>)، نقوم بتفعيل خيار <code class="en">Share Circuit Locations</code> إذا كانت نقطة النهاية بالبرج تُغذي أيضاً دوائر فرعية أخرى. ثم نحدد <code class="en">Max Hops = 50</code> لمنع التتبع من التمدد المفرط داخل المقاسم في حال وجود حلقات غير مغلقة.</p>
+    </div>
   </div>
 </section>
   <section id="sec40">
