@@ -3133,49 +3133,138 @@
 </section>
 
   <section id="sec39">
-    <span class="num">39</span>
-    <h2>أنظمة الألوان <span class="en">(Color Schemes)</span> وخصائص الدوائر</h2>
-    <p>خاصة بشبكات الاتصالات — بتُستخدم لتمييز خيوط الفايبر، الأنابيب المصغّرة، والموصلات بناءً على ألوان الغلاف اللي بيغطيها، بدل الاعتماد على أرقام مجردة بس.</p>
+  <span class="num">39</span>
+  <h2>أنظمة الألوان والدوائر الضوئية في شبكات الاتصالات <span class="en">(Telecom Domain)</span></h2>
+  <p>في شبكات الألياف الضوئية (<span class="en">Telecom</span>)، تُستخدم مكتبات وأنظمة الألوان لتحديد وتمييز الشعيرات (<span class="en">Fiber Strands</span>)، الأنابيب (<span class="en">Buffer Tubes</span>)، والأغلفة الخارجية للروافد والموصلات هندسياً، مع إمكانية ضبط مخططات الطول الموجي (<span class="en">Wavelength Schemes</span>) وإدارة خصائص الدوائر الضوئية المستقلة (<span class="en">Circuits</span>).</p>
 
-    <div class="card" style="margin-top:24px;">
-      <h3>مثال كامل من الدوك: كابل <span class="en">3×2×6</span></h3>
-      <p>كابل فيه 3 أنابيب <span class="en">(Buffer Tubes)</span>، كل أنبوب فيه 2 شريط <span class="en">(Ribbon)</span>، وكل شريط بيستوعب سعة مختلفة من الألياف. النظام بيتكون من 3 مستويات <span class="en">(Groups)</span>:</p>
-      <ul class="deflist" style="margin-top:12px;">
-        <li><b>المستوى 1 — Buffer Tube:</b> تسميات <span class="en">BL, OR, GR_BK</span>، كل واحد سعته 2 شريط، فاصل <span class="en">#</span>.</li>
-        <li><b>المستوى 2 — Ribbon:</b> تسميات <span class="en">1, 2</span>، بسعة 3 و6 ألياف على الترتيب، فاصل <span class="en">#</span>.</li>
-        <li><b>المستوى 3 — Fiber:</b> تسميات <span class="en">BL, OR, GR, BL_BK, OR_YL, GR_BK</span> (بدون سعة — دايمًا آخر مستوى من غير <span class="en">Capacity</span>)، فاصل <span class="en">#</span>. أول 3 ألوان بتخص الشريط رقم 1، والستة كلهم بيخصوا الشريط رقم 2.</li>
+  <!-- Requirements Overview -->
+  <p style="margin-top:18px;"><b>متطلبات التشغيل الأساسية (Requirements):</b></p>
+  <div class="grid3" style="margin-top:12px;">
+    <div class="card">
+      <h3>إصدار الشبكة والمجال</h3>
+      <p>يجب أن تكون الشبكة إصدار **UN v8** أو أحدث، وأن تطبق الأدوات حصراً على شبكة الاتصالات (<span class="en">Telecom Domain Network</span>).</p>
+    </div>
+    <div class="card">
+      <h3>ملكية قاعدة البيانات</h3>
+      <p>تتطلب الأدوات الاتصال ببيئة المؤسسة كـ <span class="en">Database UN Owner</span> وحساب Portal رئيسي للمؤسسة <span class="en">Portal UN Owner</span>.</p>
+    </div>
+    <div class="card">
+      <h3>الترخيص المطلوب</h3>
+      <p>يلزم توفر ترخيص من نوع <span class="en">ArcGIS Advanced Editing</span> لتعديل وإنشاء هذه المعايير داخل قاعدة البيانات.</p>
+    </div>
+  </div>
+
+  <!-- Color Sets Section -->
+  <div class="card" style="margin-top:24px; border-right: 4px solid var(--gold);">
+    <h3>1. مكتبة الألوان الموحدة <span class="en">(Add Color Set)</span></h3>
+    <p>تُمثل لوحة الألوان المعتمدة (<span class="en">Color Palette</span>) داخل الشبكة. تُعرف كل لون باسم فريد (<span class="en">Name</span>)، وتسمية (<span class="en">Label</span>)، وكود سداسي عشر (<span class="en">HexCode</span> من 6 أرقام مثل <code class="en">0000FF</code>). يُمكن استخدام عدة أكواد مفصولة بفاصلة لتمثيل الشعيرات ذات الألوان المركبة (مثال: أزرق بشريط أسود <code class="en">0000FF,000000</code>).</p>
+    
+    <p style="margin-top:12px;"><b>خطوات الأداة:</b></p>
+    <ol class="steps-compact" style="margin-top:8px;">
+      <li>
+        <h4>1-2. افتح الأداة</h4>
+        <p>اختر أداة <span class="en">Add Color Set</span> وحدد الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p>
+      </li>
+      <li>
+        <h4>3. تحديد الاسم والأكواد</h4>
+        <p>اكتب <span class="en">Color Set Name</span> (حتى 256 حرفاً)، ثم أدرج عناصر الألوان بخصائص الـ <span class="en">Name, Label, HexCode</span> لكل لون.</p>
+      </li>
+      <li>
+        <h4>4. التنفيذ</h4>
+        <p>اضغط <span class="en">Run</span> لحفظ المكتبة لاستخدامها لاحقاً في إنشاء أنظمة الألوان.</p>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Color Schemes Section -->
+  <div class="card" style="margin-top:20px;">
+    <h3>2. أنظمة هيكلة الألوان <span class="en">(Add &amp; Delete Color Scheme)</span></h3>
+    <p>تستخدم المخططات الهيكلية لتوصيف ترتيب وتسلسل السعات الميكانيكية للأنبوب والشعيرة بناءً على المستويات الهرمية (<span class="en">Groups &amp; Levels</span>) وتوزيع المعرفات الرقمية (<span class="en">Unit Identifiers</span>).</p>
+
+    <div style="margin-top:14px; padding:12px; background:rgba(0,0,0,0.15); border-radius:6px;">
+      <b>مثال تطبيقي معتمد: كابل ألياف ضوئية <span class="en">3×2×6</span></b>
+      <p style="margin-top:6px; font-size:13.5px;">كابل يتكون من 3 مستويات هرمية مع محدد مجموعة (<span class="en">Group Delimiter</span>) برمز <code class="en">%</code>:</p>
+      <ul class="deflist" style="margin-top:8px;">
+        <li><b>المستوى 1 (Buffer Tube):</b> التسميات: <code class="en">BL, OR, GR_BK</code> | السعة: <code class="en">2</code> | المحدد الداخلي: <code class="en">#</code>.</li>
+        <li><b>المستوى 2 (Ribbon):</b> التسميات: <code class="en">1, 2</code> | السعة: <code class="en">3, 6</code> ألياف على التوالي | المحدد الداخلي: <code class="en">#</code>.</li>
+        <li><b>المستوى 3 (Fiber):</b> التسميات: <code class="en">BL, OR, GR, BL_BK, OR_YL, GR_BK</code> | السعة: <i>تترك فارغة تماماً</i> (المستوى الأدنى دائماً بلا سعة) | المحدد الداخلي: <code class="en">#</code>.</li>
       </ul>
+      <p style="font-size:12.5px; color:var(--text-dim); margin-top:6px;">* تنبيه: للرموز الخاصة كالـ <code class="en">#</code> يُمكن استخدام <code class="en">$#</code> ليتم تقييمها حرفياً أثناء التشغيل.</p>
     </div>
 
-    <p style="margin-top:24px;">خطوات <span class="en">Add Color Scheme</span>:</p>
-    <ol class="steps" style="margin-top:16px;">
-      <li><h4>1-2</h4><p>افتح الأداة، حدد <span class="en">Input Utility Network</span>.</p></li>
-      <li><h4>3</h4><p>حدد <span class="en">Domain Network</span> — لازم تكون <span class="en">Telecom</span>، ونسخة الشبكة 8 أو أحدث.</p></li>
-      <li><h4>4</h4><p>اكتب <span class="en">Color Scheme Name</span>.</p></li>
-      <li><h4>5</h4><p>حدد <span class="en">Group Delimiter</span> — الفاصل العام بين المستويات (حرف أو حرفين).</p></li>
-      <li><h4>6</h4><p>لكل مستوى: <span class="en">Level</span> (بيزيد تلقائيًا من 1)، <span class="en">Name</span>، <span class="en">Labels</span> (قائمة بفاصلة)، <span class="en">Capacity</span> لكل تسمية، و<span class="en">Delimiter</span> الخاص بالمستوى.</p></li>
-      <li><h4>7</h4><p>كرر لكل مستوى — عدد التسميات لازم يطابق أقصى سعة للمستوى الأعلى، والمستوى الأخير مفيهوش <span class="en">Capacity</span> خالص.</p></li>
-      <li><h4>8</h4><p><span class="en">Run</span> — النظام بيتضاف لدومين قيم <span class="en">Network_&lt;ID&gt;_ColorScheme</span> وبيبقى جاهز يتطبق على حقل <span class="en">Color Scheme</span> في الخطوط والكائنات غير المكانية.</p></li>
-    </ol>
+    <div class="grid2" style="margin-top:16px;">
+      <div>
+        <b>خطوات الإضافة (<span class="en">Add Color Scheme</span>):</b>
+        <ol class="steps-compact" style="margin-top:8px;">
+          <li><h4>1-2</h4><p>افتح الأداة، اختر الشبكة ومجال الـ <span class="en">Telecom</span>.</p></li>
+          <li><h4>3</h4><p>حدد الـ <span class="en">Color Set Name</span> المعتمدة للمخطط واسم النظام <span class="en">Color Scheme Name</span>.</p></li>
+          <li><h4>4</h4><p>حدد <span class="en">Group Delimiter</span> والبيانات لكل مستوى (<span class="en">Name, Labels, Capacity, Delimiter</span>).</p></li>
+          <li><h4>5</h4><p><span class="en">Run</span> — يتم حفظ النظام في نطاق القيم المعنون <code class="en">Network_&lt;ID&gt;_ColorScheme</code> للتطبيق المباشر على طبقات الخطوط والكائنات اللامكانية.</p></li>
+        </ol>
+      </div>
 
-    <div class="card" style="margin-top:20px;">
-      <h3><span class="en">Delete Color Scheme</span></h3>
-      <p>أنظمة الألوان <b>مينفعش تتعدل</b> بعد إضافتها — لو عايز تغيّر حاجة، لازم تمسح النظام بالكامل بأداة <span class="en">Delete Color Scheme</span> (حدد الشبكة، الشبكة النطاقية، اسم النظام، ثم <span class="en">Run</span>) وتعيد إنشاءه من جديد. أي عنصر كان مستخدم النظام المحذوف بيرجع تلقائيًا لقيمة <span class="en">Unknown</span>.</p>
+      <div>
+        <b>حذف أنظمة الألوان (<span class="en">Delete Color Scheme</span>):</b>
+        <p style="font-size:13px; margin-top:8px;">أنظمة الألوان <b>غير قابلة للتعديل المباشر</b> بعد إنشائها. في حال الحاجة لتعديل مخطط، يلزم حذفه نهائياً بأداة <span class="en">Delete Color Scheme</span> ثم إعادة إنشائه.</p>
+        <div style="margin-top:10px; font-size:12.5px; padding:8px; background:rgba(232,168,61,0.1); border-right:3px solid var(--gold);">
+          <b>أثر الحذف:</b> كافة المعالم المرتبطة بالنظام المحذوف تتغير قيمة حقل الـ <span class="en">Color scheme</span> فيها تلقائياً إلى القيمة الافتراضية <code class="en">Unknown</code>.
+        </div>
+      </div>
     </div>
+  </div>
 
-    <p style="margin-top:26px;">خطوات <span class="en">Set Circuit Properties</span> (خصائص الدوائر لكامل الشبكة النطاقية):</p>
-    <ol class="steps" style="margin-top:16px;">
-      <li><h4>1-3</h4><p>افتح الأداة، حدد الشبكة، ثم <span class="en">Telecom Domain Network</span>.</p></li>
-      <li><h4>4</h4><p><span class="en">Share Circuit Locations</span> — لو مفعّلة، نقطة البداية/النهاية تقدر تُستخدم لأكتر من دائرة في نفس الوقت (الافتراضي: غير مفعّلة، يعني نقطة واحدة = دائرة واحدة بس).</p></li>
-      <li><h4>5</h4><p><span class="en">Import Circuits As Clean</span> — يتحكم في قيمة <span class="en">Status</span> الابتدائية للدوائر المستوردة (<span class="en">Clean</span> أو <span class="en">Dirty</span>).</p></li>
-      <li><h4>6</h4><p><span class="en">Num Paths</span> — أقصى عدد مسارات ترجع بين نقطتين (افتراضي 2).</p></li>
-      <li><h4>7</h4><p><span class="en">Max Hops</span> — أقصى عدد قفزات بين الخطوط في المسار (افتراضي 100). كل خط أو ارتباط = وحدة طول 1، وأجهزة الأطراف = وحدة طول 2.</p></li>
-      <li><h4>8</h4><p><span class="en">Circuit Trace Configuration</span> — نفس منطق إعدادات التتبع بتاعة الـ <span class="en">Subnetwork</span> (Barriers، Locatability، Summaries، Traversability) بس مطبقة على الدوائر بدل الشبكات الفرعية.</p></li>
-      <li><h4>9</h4><p><span class="en">Run</span>.</p></li>
+  <!-- Wavelength Schemes Section -->
+  <div class="card" style="margin-top:20px;">
+    <h3>3. مخططات الطول الموجي <span class="en">(Add Wavelength Scheme)</span></h3>
+    <p>تستخدم لتمثيل وتتبع ترددات الألياف الضوئية المقسمة وفق معايير التجميع الموجي مثل (<span class="en">CWDM</span>). يتيح كل مخطط إضافة حتى <b>48 طولاً موجياً فريداً</b> بشروط محددة:</p>
+    <ul class="deflist" style="margin-top:8px;">
+      <li><b>اسم القناة (<span class="en">Wavelength Name</span>):</b> نص أبجدي رقيمي لا يتجاوز 10 أسطر (مثال: <code class="en">1270nm</code> أو <code class="en">Channel 1</code>).</li>
+      <li><b>طول الموجة (<span class="en">Wavelength Length</span>):</b> قيمة عددية موجبة بالنانومتر (مثال: <code class="en">1270</code> أو <code class="en">1550.00</code>).</li>
+    </ul>
+    <p style="font-size:13px; margin-top:8px; color:var(--text-dim);">عند تنفيذ الأداة، يتم تسجيل البيانات في نطاق القيم المكوّدة <code class="en">Network_&lt;ID&gt;_WavelengthScheme</code>. يُرجى إعادة تشغيل خدمة المعالم (<span class="en">Feature Service</span>) لتطبيق التحديثات في حال كانت الطوبولوجيا مفعلة.</p>
+  </div>
+
+  <!-- Set Circuit Properties Section -->
+  <div class="card" style="margin-top:20px;">
+    <h3>4. خصائص الدوائر الضوئية <span class="en">(Set Circuit Properties)</span></h3>
+    <p>تُستخدم لضبط وإدارة القواعد التشغيلية والإعدادات المسبقة لتتبع الدوائر المخصصة (<span class="en">Circuits</span>) في شبكة الاتصالات.</p>
+    <p style="font-size:13px; color:var(--gold); margin-top:4px;"><b>شرط إجباري:</b> يجب أن تكون طوبولوجيا الشبكة **معطلة بالكامل (<span class="en">Topology Disabled</span>)** قبل تشغيل هذه الأداة.</p>
+
+    <ol class="steps" style="margin-top:14px;">
+      <li>
+        <h4>1. حدد الشبكة والمجال</h4>
+        <p>افتح الأداة واختر الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom Domain Network</span>.</p>
+      </li>
+      <li>
+        <h4>2. مشاركة مواقع البداية والنهاية (Share Circuit Locations)</h4>
+        <p><b>مفعلة (Checked):</b> تسمح بنقطة بداية أو نهاية واحدة لتعريف أكثر من دائرة ضوئية.
+        <br><b>غير مفعلة (Unchecked - الافتراضي):</b> النقطة الواحدة تُخصص للدائرة الواحدة فقط.</p>
+      </li>
+      <li>
+        <h4>3. حالة الدوائر المستوردة (Import Circuits As Clean)</h4>
+        <p>تحدد حالة الاستيراد لحقل الـ <span class="en">Status</span> بجدول الدوائر: إما حُكمية نابعة كـ <code class="en">Clean</code> مباشرة، أو حُكمية متأثرة بـ <code class="en">Dirty</code> لفرض التحقق الميداني.</p>
+      </li>
+      <li>
+        <h4>4. إعدادات تتبع الدائرة (Circuit Trace Configuration)</h4>
+        <p>ضبط القيود الافتراضية للتحقق والتتبع (<span class="en">Verify, Trace &amp; Export</span>):</p>
+        <ul class="deflist" style="margin-top:6px;">
+          <li><b><span class="en">Max Hops</span>:</b> أقصى عدد قفزات مسموح بين الخطوط في المسار (الافتراضي 100).</li>
+          <li><b>تضمين العناصر:</b> خيارات <span class="en">Include Containers / Content / Structures / Barrier Features</span>.</li>
+          <li><b>حواجز الشروط والدوال:</b> تحديد <span class="en">Condition Barriers</span> و <span class="en">Function Barriers</span> ومجال النطاق عبر <span class="en">Apply Traversability To</span>.</li>
+          <li><b>الممررات (<span class="en">Propagators</span>):</b> إعداد ممررات الخصائص لمعالجة نشر الطول الموجي وتمريره عبر المسار.</li>
+        </ul>
+      </li>
+      <li>
+        <h4>5. العلب والمجالات المسببة للـ Dirty</h4>
+        <p>تحديد الحقول العائدة للمستخدم في جداول إدارة الدوائر عبر <span class="en">User Attributes Marking Circuits Dirty</span> لتنبيه النظام وتغيير حالة الدائرة إلى <span class="en">Dirty</span> فور تعديلها.</p>
+      </li>
+      <li>
+        <h4>6. التنفيذ</h4>
+        <p>اضغط <span class="en">Run</span>. لمراجعة الإعدادات المسجلة، افتح خصائص الطبقة <span class="en">Layer Properties</span> وافحص تبويب <span class="en">Network Properties</span>.</p>
+      </li>
     </ol>
-    <p style="font-size:13px; color:var(--text-dim); margin-top:14px;">تذكير: <span class="en">Telecom Domain Network</span> لسه <span class="en">Beta</span> عبر <span class="en">Early Adopter Community</span>.</p>
-  </section>
-
+  </div>
+</section>
   <section id="sec40">
     <span class="num">40</span>
     <h2>مصطلحات الفصل الرابع</h2>
