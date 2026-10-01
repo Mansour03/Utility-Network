@@ -3134,48 +3134,48 @@
 
   <section id="sec39">
   <span class="num">39</span>
-  <h2>أنظمة الألوان والدوائر الضوئية في شبكات الاتصالات <span class="en">(Telecom Domain)</span></h2>
-  <p>في شبكات الألياف الضوئية (<span class="en">Telecom</span>)، تُستخدم مكتبات وأنظمة الألوان لتحديد وتمييز الشعيرات (<span class="en">Fiber Strands</span>)، الأنابيب (<span class="en">Buffer Tubes</span>)، والأغلفة الخارجية للروافد والموصلات هندسياً، مع إمكانية ضبط مخططات الطول الموجي (<span class="en">Wavelength Schemes</span>) وإدارة خصائص الدوائر الضوئية المستقلة (<span class="en">Circuits</span>).</p>
+  <h2>إدارة الألوان والدوائر الضوئية في شبكات الاتصالات <span class="en">(Telecom Domain)</span></h2>
+  <p>في شبكات الفايبر، الألوان مش مجرد شكل؛ دي الطريقة الوحيدة لتحديد وترقيم الشعيرات (<span class="en">Strands</span>) والأنابيب (<span class="en">Buffer Tubes</span>) داخل الكابلات. في هذا الجزء، بنشرح إزاي بنظبط مكتبات الألوان، المخططات التجميعية، وقواعد تتبع الدوائر الضوئية (<span class="en">Circuits</span>) جوة الـ Utility Network.</p>
 
   <!-- Requirements Overview -->
-  <p style="margin-top:18px;"><b>متطلبات التشغيل الأساسية (Requirements):</b></p>
+  <p style="margin-top:18px;"><b>قبل ما تبدأ (متطلبات أساسية):</b></p>
   <div class="grid3" style="margin-top:12px;">
     <div class="card">
       <h3>إصدار الشبكة والمجال</h3>
-      <p>يجب أن تكون الشبكة إصدار **UN v8** أو أحدث، وأن تطبق الأدوات حصراً على شبكة الاتصالات (<span class="en">Telecom Domain Network</span>).</p>
+      <p>لازم يكون إصدار الـ UN عندك **UN v8** أو أحدث، وبنطبق الأدوات دي حصراً على مجال الاتصالات (<span class="en">Telecom Domain</span>).</p>
     </div>
     <div class="card">
-      <h3>ملكية قاعدة البيانات</h3>
-      <p>تتطلب الأدوات الاتصال ببيئة المؤسسة كـ <span class="en">Database UN Owner</span> وحساب Portal رئيسي للمؤسسة <span class="en">Portal UN Owner</span>.</p>
+      <h3>صلاحيات قاعدة البيانات</h3>
+      <p>محتاج تتصل ببيئة المؤسسة بصلاحية المالك <span class="en">Database UN Owner</span> وحساب بورتال رئيسي للمؤسسة <span class="en">Portal UN Owner</span>.</p>
     </div>
     <div class="card">
       <h3>الترخيص المطلوب</h3>
-      <p>يلزم توفر ترخيص من نوع <span class="en">ArcGIS Advanced Editing</span> لتعديل وإنشاء هذه المعايير داخل قاعدة البيانات.</p>
+      <p>محتاج ترخيص من نوع <span class="en">ArcGIS Advanced Editing</span> عشان تقدر تتعدل وتضيف القواعد دي جوة قاعدة البيانات.</p>
     </div>
   </div>
 
   <!-- Color Sets Section -->
   <div class="card" style="margin-top:24px; border-right: 4px solid var(--gold);">
     <h3>1. مكتبة الألوان الموحدة <span class="en">(Add Color Set)</span></h3>
-    <p>تُمثل لوحة الألوان المعتمدة (<span class="en">Color Palette</span>) داخل الشبكة. تُعرف كل لون باسم فريد (<span class="en">Name</span>)، وتسمية (<span class="en">Label</span>)، وكود سداسي عشر (<span class="en">HexCode</span> من 6 أرقام مثل <code class="en">0000FF</code>). يُمكن استخدام عدة أكواد مفصولة بفاصلة لتمثيل الشعيرات ذات الألوان المركبة (مثال: أزرق بشريط أسود <code class="en">0000FF,000000</code>).</p>
+    <p>دي عبارة عن "باليتة الألوان" المعتمدة للمشروع ككل. بدل ما كل مهندس يكتب لون على مزاجه، بنعرف كل لون باسم وتسمية وكود Hex سداسي (زي <code class="en">0000FF</code> للأزرق). ولو الشعيرة فيها لونين مع بعض (مثلاً أزرق وفيها خط أسود)، بنكتب الأكواد وبينهم فاصلة (<code class="en">0000FF,000000</code>).</p>
     
     <div style="text-align: center; margin: 16px 0;">
       <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-a-color-set-ex1.png" alt="Add Color Set Example" style="max-width: 100%; border-radius: 4px; border: 1px solid var(--border-color, #444);" />
     </div>
 
-    <p style="margin-top:12px;"><b>خطوات الأداة:</b></p>
+    <p style="margin-top:12px;"><b>إزاي بتشغل الأداة؟</b></p>
     <ol class="steps-compact" style="margin-top:8px;">
       <li>
-        <h4>1-2. افتح الأداة</h4>
-        <p>اختر أداة <span class="en">Add Color Set</span> وحدد الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p>
+        <h4>1. افتح الأداة</h4>
+        <p>اختر أداة <span class="en">Add Color Set</span> وحدد شبكة الـ <span class="en">Utility Network</span> ومجال الـ <span class="en">Telecom</span>.</p>
       </li>
       <li>
-        <h4>3. تحديد الاسم والأكواد</h4>
-        <p>اكتب <span class="en">Color Set Name</span> (حتى 256 حرفاً)، ثم أدرج عناصر الألوان بخصائص الـ <span class="en">Name, Label, HexCode</span> لكل لون.</p>
+        <h4>2. اكتب الاسم ودخل الأكواد</h4>
+        <p>اكتب اسماً للمجموعة في <span class="en">Color Set Name</span>، وبعدين ضيف قائمة الألوان بكود كل لون واسمه.</p>
       </li>
       <li>
-        <h4>4. التنفيذ</h4>
-        <p>اضغط <span class="en">Run</span> لحفظ المكتبة لاستخدامها لاحقاً في إنشاء أنظمة الألوان.</p>
+        <h4>3. نفذ الأداة</h4>
+        <p>اضغط <span class="en">Run</span>، والمكتبة هتتحفظ عشان تستخدمها بعد كده في تركيب هيكلة الكابلات.</p>
       </li>
     </ol>
 
@@ -3184,14 +3184,14 @@
       <div style="text-align: left; direction: ltr; margin-bottom: 6px;">
         <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Scenario: Fiber Colors Palette</span>
       </div>
-      <p style="margin-top: 6px; font-size: 13.5px; text-align: right; direction: rtl;">تم إنشاء <span class="en">Color Set</span> باسم <code class="en">Fiber colors</code> لتحديد الألوان القياسية المتاحة لجميع شعيرات الفايبر بالمشروع. تم تعريف كل لون بكوده الخاص، مثل الأزرق الصافي (<code class="en">0000FF</code>)، والأزرق المخطط بالأسود (<code class="en">0000FF,000000</code>)، لتسهيل مطابقتها ميدانياً أثناء أعمال اللحام (<span class="en">Splicing</span>).</p>
+      <p style="margin-top: 6px; font-size: 13.5px; text-align: right; direction: rtl;">عملنا مجموعة ألوان باسم <code class="en">Fiber colors</code> عشان نلزم كل الفنيين في الميدان بنفس الترتيب والألوان القياسية للشعيرات، وبالتالي لما الفني يجي يلحم الفايبر (<span class="en">Splicing</span>) يلقى البيانات متطابقة تماماً بين الخريطة والميدان.</p>
     </div>
   </div>
 
   <!-- Color Schemes Section -->
   <div class="card" style="margin-top:20px;">
-    <h3>2. أنظمة هيكلة الألوان <span class="en">(Add &amp; Delete Color Scheme)</span></h3>
-    <p>تستخدم المخططات الهيكلية لتوصيف ترتيب وتسلسل السعات الميكانيكية للأنبوب والشعيرة بناءً على المستويات الهرمية (<span class="en">Groups &amp; Levels</span>) وتوزيع المعرفات الرقمية (<span class="en">Unit Identifiers</span>).</p>
+    <h3>2. أنظمة هيكلة ألوان الكابلات <span class="en">(Add &amp; Delete Color Scheme)</span></h3>
+    <p>الكابل مش مجرد ألوان عشوائية؛ الكابل جواه مستويات (مثلاً: أنبوب جواه شريط وجواه شعيرات). النمط ده بيفهم البرنامج ترتيب السعات الميكانيكية وتجميعة الكابل بالظبط.</p>
 
     <!-- صورة مثال 3x2x6 -->
     <div style="text-align: center; margin: 16px 0;">
@@ -3199,14 +3199,14 @@
     </div>
 
     <div style="margin-top:14px; padding:12px; background:rgba(0,0,0,0.15); border-radius:6px;">
-      <b>مثال تطبيقي معتمد: كابل ألياف ضوئية <span class="en">3×2×6</span></b>
-      <p style="margin-top:6px; font-size:13.5px;">كابل يتكون من 3 مستويات هرمية مع محدد مجموعة (<span class="en">Group Delimiter</span>) برمز <code class="en">%</code>:</p>
+      <b>مثال عملي يفهمك الفكرة: كابل فايبر بتجميعة <span class="en">3×2×6</span></b>
+      <p style="margin-top:6px; font-size:13.5px;">ده كابل مقسم لـ 3 مستويات جوه بعض، وبنستخدم علامة <code class="en">%</code> للتقسيم بين المجموعات:</p>
       <ul class="deflist" style="margin-top:8px;">
-        <li><b>المستوى 1 (Buffer Tube):</b> التسميات: <code class="en">BL, OR, GR_BK</code> | السعة: <code class="en">2</code> | المحدد الداخلي: <code class="en">#</code>.</li>
-        <li><b>المستوى 2 (Ribbon):</b> التسميات: <code class="en">1, 2</code> | السعة: <code class="en">3, 6</code> ألياف على التوالي | المحدد الداخلي: <code class="en">#</code>.</li>
-        <li><b>المستوى 3 (Fiber):</b> التسميات: <code class="en">BL, OR, GR, BL_BK, OR_YL, GR_BK</code> | السعة: <i>تترك فارغة تماماً</i> (المستوى الأدنى دائماً بلا سعة) | المحدد الداخلي: <code class="en">#</code>. أول 3 ألوان بتخص الشريط رقم 1، والستة كلهم بيخصوا الشريط رقم 2.</li>
+        <li><b>المستوى الأكبر (Buffer Tube - الأنابيب):</b> تسميات الأنابيب هي: <code class="en">BL, OR, GR_BK</code> وسعتها الكلية <code class="en">2</code>.</li>
+        <li><b>المستوى الأوسط (Ribbon - الشرائط):</b> تسميات الشرائط: <code class="en">1, 2</code> وسعتها <code class="en">3, 6</code> ألياف بالترتيب.</li>
+        <li><b>المستوى الأصغر (Fiber - الشعيرات):</b> ألوان الشعيرات نفسها (<code class="en">BL, OR, GR...</code>)، وده المستوى الأخير عشان كده بنسيب خانة السعة بتاعته <i>فارغة تماماً</i>. أول 3 ألوان بتخص الشريط الأول، والـ 6 التانيين بتخص الشريط التاني.</li>
       </ul>
-      <p style="font-size:12.5px; color:var(--text-dim); margin-top:6px;">* تنبيه: للرموز الخاصة كالـ <code class="en">#</code> يُمكن استخدام <code class="en">$#</code> ليتم تقييمها حرفياً أثناء التشغيل.</p>
+      <p style="font-size:12.5px; color:var(--text-dim); margin-top:6px;">* ملحوظة: لو حابب تستخدم رموز خاصة زي <code class="en">#</code> جوه التسميات، اكتب قبلها علامة دولار زي كده <code class="en">$#</code> عشان السيستم يقرأها كرمز عالي مش كأمر.</p>
     </div>
 
     <!-- صورة إعداد الأداة -->
@@ -3216,20 +3216,20 @@
 
     <div class="grid2" style="margin-top:16px;">
       <div>
-        <b>خطوات الإضافة (<span class="en">Add Color Scheme</span>):</b>
+        <b>إزاي تضيف المخطط (<span class="en">Add Color Scheme</span>):</b>
         <ol class="steps-compact" style="margin-top:8px;">
-          <li><h4>1-2</h4><p>افتح الأداة، اختر الشبكة ومجال الـ <span class="en">Telecom</span>.</p></li>
-          <li><h4>3</h4><p>حدد الـ <span class="en">Color Set Name</span> المعتمدة للمخطط واسم النظام <span class="en">Color Scheme Name</span>.</p></li>
-          <li><h4>4</h4><p>حدد <span class="en">Group Delimiter</span> والبيانات لكل مستوى (<span class="en">Name, Labels, Capacity, Delimiter</span>).</p></li>
-          <li><h4>5</h4><p><span class="en">Run</span> — يتم حفظ النظام في نطاق القيم المعنون <code class="en">Network_&lt;ID&gt;_ColorScheme</code> للتطبيق المباشر على حقل <span class="en">Color scheme</span> في الخطوط والكائنات اللامكانية.</p></li>
+          <li><h4>1</h4><p>افتح الأداة واختر شبكة الـ <span class="en">Utility Network</span> ومجال الـ <span class="en">Telecom</span>.</p></li>
+          <li><h4>2</h4><p>اختر اسم باليتة الألوان اللي عملتها قبل كده، واكتب اسماً جديداً للمخطط ده.</p></li>
+          <li><h4>3</h4><p>حدد رمز التقسيم ودخل بيانات كل مستوى (الاسم، التسميات، السعة).</p></li>
+          <li><h4>4</h4><p>اضغط <span class="en">Run</span>، والمخطط ده هينزل في القوائم المنسدلة للطبقات عشان تقدر تختاره مباشرة لخصائص الكابلات.</p></li>
         </ol>
       </div>
 
       <div>
-        <b>حذف أنظمة الألوان (<span class="en">Delete Color Scheme</span>):</b>
-        <p style="font-size:13px; margin-top:8px;">أنظمة الألوان <b>غير قابلة للتعديل المباشر</b> بعد إنشائها. في حال الحاجة لتعديل مخطط، يلزم حذفه نهائياً بأداة <span class="en">Delete Color Scheme</span> ثم إعادة إنشائه.</p>
+        <b>تنبيه هام عند التعديل أو الحذف (<span class="en">Delete Color Scheme</span>):</b>
+        <p style="font-size:13px; margin-top:8px;">مخططات الألوان <b>ما ينفعش تتعدل بشكل مباشر</b> بعد إنشائها! لو اكتشفت غلطة، الحل الوحيد إنك تحذف المخطط بأداة <span class="en">Delete Color Scheme</span> وترجع تبنيه من الأول.</p>
         <div style="margin-top:10px; font-size:12.5px; padding:8px; background:rgba(232,168,61,0.1); border-right:3px solid var(--gold);">
-          <b>أثر الحذف:</b> كافة المعالم المرتبطة بالنظام المحذوف تتغير قيمة حقل الـ <span class="en">Color scheme</span> فيها تلقائياً إلى القيمة الافتراضية <code class="en">Unknown</code>.
+          <b>إيه اللي بيحصل لما تحذف؟</b> أي كابل أو عنصر كان واخد المخطط المحذوف ده، قيمته بتقلّب أوتوماتيك لـ <code class="en">Unknown</code> لحد ما تعيد ربطه بالمخطط الجديد.
         </div>
       </div>
     </div>
@@ -3243,10 +3243,10 @@
   <!-- Wavelength Schemes Section -->
   <div class="card" style="margin-top:20px;">
     <h3>3. مخططات الطول الموجي <span class="en">(Add Wavelength Scheme)</span></h3>
-    <p>تستخدم لتمثيل وتتبع ترددات الألياف الضوئية المقسمة وفق معايير التجميع الموجي مثل (<span class="en">CWDM</span>). يتيح كل مخطط إضافة حتى <b>48 طولاً موجياً فريداً</b> بشروط محددة:</p>
+    <p>دي بنستخدمها لو شغالين بتقنيات مقسمات الأطوال الموجية زي (<span class="en">CWDM / DWDM</span>)، حيث الشعيرة الواحدة بتكون ماشية فيها كذا تردد/قناة ضوئية في نفس الوقت. المخطط بيسمحلك تضيف لحد <b>48 طولاً موجياً فريداً</b>:</p>
     <ul class="deflist" style="margin-top:8px;">
-      <li><b>اسم القناة (<span class="en">Wavelength Name</span>):</b> نص أبجدي رقيمي لا يتجاوز 10 أسطر (مثال: <code class="en">1270nm</code> أو <code class="en">Channel 1</code>).</li>
-      <li><b>طول الموجة (<span class="en">Wavelength Length</span>):</b> قيمة عددية موجبة بالنانومتر (مثال: <code class="en">1270</code> أو <code class="en">1550.00</code>).</li>
+      <li><b>اسم القناة (<span class="en">Wavelength Name</span>):</b> اسم مختصر للقناة (زي <code class="en">1270nm</code> أو <code class="en">Channel 1</code>).</li>
+      <li><b>طول الموجة (<span class="en">Wavelength Length</span>):</b> الرقم الفعلي للتردد بالنانومتر (زي <code class="en">1270</code> أو <code class="en">1550</code>).</li>
     </ul>
 
     <!-- صورة Wavelength Scheme GP -->
@@ -3258,49 +3258,48 @@
       <div style="text-align: left; direction: ltr; margin-bottom: 6px;">
         <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Scenario: DWG/CWDM Tracing</span>
       </div>
-      <p style="margin-top: 6px; font-size: 13.5px; text-align: right; direction: rtl;">عند نمذجة شبكة ألياف تعتمد تقنية <span class="en">CWDM Multiplexing</span>، يتم إنشاء مخطط أطوال موجية يضم القنوات من <code class="en">1270nm</code> حتى <code class="en">1610nm</code>. عند إجراء تحليلات التتبع (<span class="en">Wavelength Propagation Trace</span>)، يستخدم المحرك هذه المخططات لتحديد كيفية انتقال الإشارة عبر الكابلات المدمجة ودق التحقق من المسارات.</p>
+      <p style="margin-top: 6px; font-size: 13.5px; text-align: right; direction: rtl;">لما بنعمل نمذجة لشبكة فيها <span class="en">CWDM Multiplexing</span>، بنعرف القنوات من <code class="en">1270nm</code> لحد <code class="en">1610nm</code>. الفائدة هنا إنك لما تعمل تحليل تتبع للإشارة (<span class="en">Wavelength Propagation Trace</span>)، محرك الـ UN بيقدر يتبع الإشارة الضوئية بناءً على ترددها بالظبط واصل لفين وماشي جوه أنهي كابل.</p>
     </div>
 
-    <p style="font-size:13px; margin-top:8px; color:var(--text-dim);">عند تنفيذ الأداة، يتم تسجيل البيانات في نطاق القيم المكوّدة <code class="en">Network_&lt;ID&gt;_WavelengthScheme</code>. يُرجى إعادة تشغيل خدمة المعالم (<span class="en">Feature Service</span>) لتطبيق التحديثات في حال كانت الطوبولوجيا مفعلة.</p>
+    <p style="font-size:13px; margin-top:8px; color:var(--text-dim);">تنبيه: بعد ما تشغل الأداة، يفضل تعمل إعادة تشغيل لخدمة الـ <span class="en">Feature Service</span> على السيرفر عشان التحديثات تظهر علطول.</p>
   </div>
 
   <!-- Set Circuit Properties Section -->
   <div class="card" style="margin-top:20px;">
-    <h3>4. خصائص الدوائر الضوئية <span class="en">(Set Circuit Properties)</span></h3>
-    <p>تُستخدم لضبط وإدارة القواعد التشغيلية والإعدادات المسبقة لتتبع الدوائر المخصصة (<span class="en">Circuits</span>) في شبكة الاتصالات.</p>
-    <p style="font-size:13px; color:var(--gold); margin-top:4px;"><b>شرط إجباري:</b> يجب أن تكون طوبولوجيا الشبكة **معطلة بالكامل (<span class="en">Topology Disabled</span>)** قبل تشغيل هذه الأداة.</p>
+    <h3>4. إعدادات وقواعد الدوائر الضوئية <span class="en">(Set Circuit Properties)</span></h3>
+    <p>الأداة دي هي العقل المدبر اللي بيحدد قواعد تتبع الدوائر الضوئية المخصصة (<span class="en">Circuits</span>) والسلوك بتاعها أثناء عمليات التتبع الميداني.</p>
+    <p style="font-size:13px; color:var(--gold); margin-top:4px;"><b>شرط أساسي وقاطع:</b> لازم تقفل الطوبولوجيا تماماً (<span class="en">Topology Disabled</span>) قبل ما تشغل الأداة دي، وإلا مش هتشتغل.</p>
 
     <ol class="steps" style="margin-top:14px;">
       <li>
-        <h4>1. حدد الشبكة والمجال</h4>
-        <p>افتح الأداة واختر الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom Domain Network</span>.</p>
+        <h4>1. حدد الشبكة</h4>
+        <p>اختر الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p>
       </li>
       <li>
-        <h4>2. مشاركة مواقع البداية والنهاية (Share Circuit Locations)</h4>
-        <p><b>مفعلة (Checked):</b> تسمح بنقطة بداية أو نهاية واحدة لتعريف أكثر من دائرة ضوئية.
-        <br><b>غير مفعلة (Unchecked - الافتراضي):</b> النقطة الواحدة تُخصص للدائرة الواحدة فقط.</p>
+        <h4>2. مشاركة نقاط البداية والنهاية (Share Circuit Locations)</h4>
+        <p><b>لو فعلتها (Checked):</b> بتسمح إن نفس نقطة البداية أو النهاية تكون مشتركة بين أكثر من دائرة ضوئية.
+        <br><b>لو سبتها مقفولة (Unchecked):</b> النقطة الواحدة بتتحجز لدائرة ضوئية واحدة فقط.</p>
       </li>
       <li>
-        <h4>3. حالة الدوائر المستوردة (Import Circuits As Clean)</h4>
-        <p>تحدد حالة الاستيراد لحقل الـ <span class="en">Status</span> بجدول الدوائر: إما حُكمية نابعة كـ <code class="en">Clean</code> مباشرة، أو حُكمية متأثرة بـ <code class="en">Dirty</code> لفرض التحقق الميداني.</p>
+        <h4>3. حالة الاستيراد (Import Circuits As Clean)</h4>
+        <p>بتحدد لما تستورد دوائر ضوئية جاهزة، هل تنزل بحالة "سليمة" (<code class="en">Clean</code>) فوراً، ولا تنزل بحالة "تحتاج مراجعة" (<code class="en">Dirty</code>) عشان تفحصها الأول بنفسك.</p>
       </li>
       <li>
-        <h4>4. إعدادات تتبع الدائرة (Circuit Trace Configuration)</h4>
-        <p>ضبط القيود الافتراضية للتحقق والتتبع (<span class="en">Verify, Trace &amp; Export</span>):</p>
+        <h4>4. ضبط قيود التتبع (Circuit Trace Configuration)</h4>
+        <p>هنا بتحدد شروط التتبع أثناء الفحص:</p>
         <ul class="deflist" style="margin-top:6px;">
-          <li><b><span class="en">Max Hops</span>:</b> أقصى عدد قفزات مسموح بين الخطوط في المسار (الافتراضي 100).</li>
-          <li><b>تضمين العناصر:</b> خيارات <span class="en">Include Containers / Content / Structures / Barrier Features</span>.</li>
-          <li><b>حواجز الشروط والدوال:</b> تحديد <span class="en">Condition Barriers</span> و <span class="en">Function Barriers</span> ومجال النطاق عبر <span class="en">Apply Traversability To</span>.</li>
-          <li><b>الممررات (<span class="en">Propagators</span>):</b> إعداد ممررات الخصائص لمعالجة نشر الطول الموجي وتمريره عبر المسار.</li>
+          <li><b>أقصى عدد قفزات (<span class="en">Max Hops</span>):</b> أقصى عدد خطوات أو كابلات يمشيهم التتبع (الافتراضي 100).</li>
+          <li><b>تضمين الحاويات والمباني:</b> خيارات لتحديد هل التتبع يدخل جوه الكبائن والمباني والمسارات الهيكلية ولا يتخطاها.</li>
+          <li><b>موانع التتبع والممررات (<span class="en">Barriers &amp; Propagators</span>):</b> لو عاوز التتبع يقف عند شرط معين، أو يمرر تردد موجي محدد عبر المسار.</li>
         </ul>
       </li>
       <li>
-        <h4>5. العلب والمجالات المسببة للـ Dirty</h4>
-        <p>تحديد الحقول العائدة للمستخدم في جداول إدارة الدوائر عبر <span class="en">User Attributes Marking Circuits Dirty</span> لتنبيه النظام وتغيير حالة الدائرة إلى <span class="en">Dirty</span> فور تعديلها.</p>
+        <h4>5. الحقول المؤثرة على حالة الدائرة</h4>
+        <p>تقدر تختار حقولاً معينة، بحيث لو أي حد عدل في قيم الحقول دي مستقبلاً، السيستم يقلب حالة الدائرة أوتوماتيك لـ <span class="en">Dirty</span> عشان ينبهك تراجعها.</p>
       </li>
       <li>
-        <h4>6. التنفيذ</h4>
-        <p>اضغط <span class="en">Run</span>. لمراجعة الإعدادات المسجلة، افتح خصائص الطبقة <span class="en">Layer Properties</span> وافحص تبويب <span class="en">Network Properties</span>.</p>
+        <h4>6. التشغيل والتأكد</h4>
+        <p>اضغط <span class="en">Run</span>. وعشان تتأكد إن كل الإعدادات اتطبقت صح، افتح خصائص الطبقة <span class="en">Layer Properties</span> وافحص تبويب <span class="en">Network Properties</span>.</p>
       </li>
     </ol>
 
@@ -3309,7 +3308,7 @@
       <div style="text-align: left; direction: ltr; margin-bottom: 6px;">
         <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Scenario: Point-to-Point Circuits</span>
       </div>
-      <p style="margin-top: 6px; font-size: 13.5px; text-align: right; direction: rtl;">عند ربط برجين للاتصالات بدائرة ضوئية مخصصة (<span class="en">Dedicated Circuit</span>)، نقوم بتفعيل خيار <code class="en">Share Circuit Locations</code> إذا كانت نقطة النهاية بالبرج تُغذي أيضاً دوائر فرعية أخرى. ثم نحدد <code class="en">Max Hops = 50</code> لمنع التتبع من التمدد المفرط داخل المقاسم في حال وجود حلقات غير مغلقة.</p>
+      <p style="margin-top: 6px; font-size: 13.5px; text-align: right; direction: rtl;">لو بنربط برجين اتصالات بدائرة ضوئية خاصة (<span class="en">Dedicated Circuit</span>)، بنفعل <code class="en">Share Circuit Locations</code> لو نفس البرج طالع منه دوائر تانية لباقي الشبكة. وبنحدد <code class="en">Max Hops = 50</code> عشان لو فيه مسار مغلق أو دائري (Loop) غير مكتمل جوه المقسم، التتبع ما يفضلش يلف للما لا نهاية ويكرش البرنامج.</p>
     </div>
   </div>
 </section>
