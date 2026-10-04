@@ -3224,34 +3224,38 @@
   </div>
 
   <!-- 2. المثال التطبيقي (3x2x6) -->
-  <div class="example-box" style="margin-top:16px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 14px; border-radius: 6px;">
-    <div style="text-align: left; direction: ltr; margin-bottom: 8px;">
-      <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Example: Cable Hierarchy (3x2x6)</span>
+<div class="example-box" style="margin-top:16px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 14px; border-radius: 6px;">
+  <div style="text-align: left; direction: ltr; margin-bottom: 8px;">
+    <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Example: Cable Hierarchy (3x2x6)</span>
+  </div>
+  
+  <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 280px;">
+      <b>مثال تطبيقي: كابل ألياف ضوئية بسعة هرمية <span class="en">3×2×6</span> (إجمالي 36 شعيرة)</b>
+      <p style="margin-top:6px; font-size:13px; line-height: 1.5;">يتكون الكابل من 3 مستويات تراتبية مفصولة بالرمز <code class="en">%</code>:</p>
+      
+      <ul class="deflist" style="margin-top:8px; line-height: 1.7; font-size: 13px;">
+        <li>
+          <b>المستوى الأول — الأنابيب (<span class="en">Buffer Tubes</span>):</b><br>
+          التسميات: <code class="en">BL, OR, GR_BK</code> (أزرق - برتقالي - أخضر/أسود) | السعة المحددة: <code class="en">2</code> أنبوب مفعلين.
+        </li>
+        <li style="margin-top: 4px;">
+          <b>المستوى الثاني — الشرائط (<span class="en">Ribbons</span>):</b><br>
+          التسميات: <code class="en">1, 2</code> (أرقام الشرائط) | السعة المقابلة: <code class="en">3, 6</code> (3 شرائط بالأنبوب الأول و 6 بالثاني).
+        </li>
+        <li style="margin-top: 4px;">
+          <b>المستوى الثالث — الشعيرات (<span class="en">Fibers</span>):</b><br>
+          التسميات: ألوان الشعيرات الفردية (<code class="en">BL, OR, GR...</code>) | السعة: تُترك <i>فارغة</i> لأنه المستوى الأخير بالتراتبية.
+        </li>
+      </ul>
     </div>
-    
-    <b>مثال تطبيقي: كابل ألياف ضوئية بسعة هرمية <span class="en">3×2×6</span> (إجمالي 36 شعيرة)</b>
-    <p style="margin-top:6px; font-size:13px; line-height: 1.5;">يتكون الكابل من 3 مستويات تراتبية مفصولة بالرمز <code class="en">%</code>:</p>
-    
-    <ul class="deflist" style="margin-top:8px; line-height: 1.7; font-size: 13px;">
-      <li>
-        <b>المستوى الأول — الأنابيب (<span class="en">Buffer Tubes</span>):</b><br>
-        التسميات: <code class="en">BL, OR, GR_BK</code> (أزرق - برتقالي - أخضر/أسود) | السعة المحددة: <code class="en">2</code> أنبوب مفعلين.
-      </li>
-      <li style="margin-top: 4px;">
-        <b>المستوى الثاني — الشرائط (<span class="en">Ribbons</span>):</b><br>
-        التسميات: <code class="en">1, 2</code> (أرقام الشرائط) | السعة المقابلة: <code class="en">3, 6</code> (3 شرائط بالأنبوب الأول و 6 بالثاني).
-      </li>
-      <li style="margin-top: 4px;">
-        <b>المستوى الثالث — الشعيرات (<span class="en">Fibers</span>):</b><br>
-        التسميات: ألوان الشعيرات الفردية (<code class="en">BL, OR, GR...</code>) | السعة: تُترك <i>فارغة</i> لأنه المستوى الأخير بالتراتبية.
-      </li>
-    </ul>
 
     <!-- صورة مثال 3x2x6 -->
-    <div style="text-align: center; margin-top: 14px;">
-      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/3x2x6-Fiber-Cable-Ex-9FA28.png" alt="3x2x6 Fiber Cable Structure" style="width: 340px; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); display: block;" />
+    <div style="flex-shrink: 0; text-align: center;">
+      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/3x2x6-Fiber-Cable-Ex-9FA28.png" alt="3x2x6 Fiber Cable Structure" style="width: 260px; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); display: block;" />
     </div>
   </div>
+</div>
 
   <!-- 3. الخطوات والأدوات (Add & Delete GP Tools) -->
   <div style="display: flex; gap: 24px; align-items: flex-start; margin-top: 20px; flex-wrap: wrap; direction: rtl;">
