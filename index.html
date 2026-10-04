@@ -3244,6 +3244,7 @@
   </div>
 
   <!-- الجزء الثاني: المثال التطبيقي (3x2x6) مع صورة هيكل الكابل -->
+<!-- الجزء الثاني: المثال التطبيقي (3x2x6) مع صورة هيكل الكابل -->
 <div class="example-box" style="margin-top:20px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 14px; border-radius: 6px;">
   <div style="text-align: left; direction: ltr; margin-bottom: 8px;">
     <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Example: Cable Hierarchy (3x2x6)</span>
@@ -3262,29 +3263,61 @@
       </ul>
       <p style="font-size:12px; color:var(--gold); margin-top:8px;">* ملاحظة: لاستخدام الرموز الخاصة كـ <code class="en">#</code> في التسميات، يسبق الرمز بـ <code class="en">$#</code> لتقييمه حرفياً.</p>
 
-      <!-- الشرح التفصيلي لآلية عمل الكود والتوليد الهرمي -->
-      <div style="margin-top: 15px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 12px; font-size: 13px;">
-        <b>الشرح التفصيلي للتراتبية وكيفية التوليد المباشر:</b>
-        <ol style="margin-top: 8px; padding-right: 20px; line-height: 1.6;">
+      <!-- الشرح التفصيلي الشامل والمبسط -->
+      <div style="margin-top: 15px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 12px; font-size: 13.5px; line-height: 1.7;">
+        
+        <b style="color: var(--gold); font-size: 14px;">1. ما هو "المخطط الهيكلي للألوان" (Color Scheme)؟</b>
+        <p style="margin-top: 4px; margin-bottom: 10px;">
+          كابل الفايبر ليس مجرد خيط واحد، بل هو عبارة عن شجرة ذات طبقات ومستويات:
+        </p>
+        <ul style="margin-bottom: 12px; padding-right: 20px;">
+          <li><b>المستوى 1:</b> أنابيب حماية خارجية (<span class="en">Buffer Tubes</span>).</li>
+          <li><b>المستوى 2:</b> حزم أو شرائط داخل كل أنبوب (<span class="en">Ribbons</span>).</li>
+          <li><b>المستوى 3:</b> الشعيرات الزجاجية الدقيقة داخل كل شريطة (<span class="en">Fibers</span>).</li>
+        </ul>
+        <p style="margin-bottom: 12px; font-size: 13px; opacity: 0.9;">
+          أداة <span class="en">Color Scheme</span> وظيفتها تعريف هذا الترتيب الهرمي للنظام ليفهم كيف تخرج الشعيرات من الأنابيب بالترتيب والألوان الصحيحة.
+        </p>
+
+        <b style="color: var(--gold); font-size: 14px;">2. شرح المثال التطبيقي (كابل بسعة 3×2×6):</b>
+        <p style="margin-top: 4px; margin-bottom: 8px;">
+          معنى <span class="en">3 × 2 × 6</span> أنه كابل يحتوي على إجمالي 36 شعيرة فايبر مقسمة كالتالي:
+        </p>
+        <ul style="margin-bottom: 12px; padding-right: 20px;">
           <li>
-            <b>حساب إجمالي الألياف الكلية (Total Capacity):</b>
-            <br>
-            المعادلة: $3 \times 2 \times 6 = 36$ ألياف ضوئية داخل الكابل.
+            <b>المستوى الأول: الأنابيب (<span class="en">Buffer Tubes</span>)</b><br>
+            • <i>العدد/السعة:</i> 2 أنبوب مفعلين (مع أنبوب إضافي).<br>
+            • <i>التسميات:</i> <code class="en">BL, OR, GR_BK</code> (أزرق - برتقالي - أخضر مع خط أسود).<br>
+            • <i>الفكرة:</i> الأداة تسمي الأنابيب بألوانها المعتمدة وتحدد عددها.
           </li>
+          <li style="margin-top: 6px;">
+            <b>المستوى الثاني: الشرائط (<span class="en">Ribbons</span>)</b><br>
+            • <i>العدد/السعة:</i> داخل الأنبوب الأول توجد 3 شرائط، وداخل الثاني 6 شرائط.<br>
+            • <i>التسميات:</i> <code class="en">1, 2</code> (أرقام الشرائط داخل الأنبوب).<br>
+            • <i>الفكرة:</i> تقسيم الأنبوب إلى مجموعات أصغر.
+          </li>
+          <li style="margin-top: 6px;">
+            <b>المستوى الثالث: الشعيرات (<span class="en">Fibers</span>)</b><br>
+            • <i>العدد/السعة:</i> تُترك السعة فارغة، لأنها أخر مستوى (النهاية) ولا توجد تفرعات أعمق منها.<br>
+            • <i>التسميات:</i> ألوان الشعيرات الفردية <code class="en">BL, OR, GR...</code> (أزرق، برتقالي، أخضر...).
+          </li>
+        </ul>
+
+        <b style="color: var(--gold); font-size: 14px;">3. ما هي رموز الفواصل (%) و ($#)؟</b>
+        <ul style="margin-top: 6px; margin-bottom: 12px; padding-right: 20px;">
           <li>
-            <b>آلية التجميع الهرمي بالمستويات (Hierarchy Parsing):</b>
-            <ul>
-              <li><b>المستوى 1 (Buffer Tubes):</b> يحتوي الكابل على 3 أنابيب حماية بتشفير ألوان (<code class="en">BL</code> أزرق، <code class="en">OR</code> برتقالي، <code class="en">GR_BK</code> أخضر/أسود). السعة <code class="en">2</code> تعني أن كل أنبوب يحوي دائمًا شريطين (<code class="en">2 Ribbons</code>).</li>
-              <li><b>المستوى 2 (Ribbons):</b> يتكون كل أنبوب من شريطين تسمياتهما (<code class="en">1, 2</code>). السعة <code class="en">3, 6</code> تعني أن الشريط رقم 1 يحوي 3 ألياف والشريط رقم 2 يحوي 6 ألياف.</li>
-              <li><b>المستوى 3 (Fibers):</b> هو المستوى النهائي للنوى الفردية (<code class="en">BL, OR, GR...</code>)، ونظرًا لعدم وجود تقسيمات فرعية بعدها، تُترك خانة السعة فارغة تلقائيًا.</li>
-            </ul>
+            <b>رمز الفاصل (<code class="en">%</code>):</b> يُستخدم ليفصل بين مستويات الكابل أثناء إدخال البيانات في الأداة.<br>
+            <i style="font-size: 12px; color: #a0aec0;">مثال: [مستوى الأنابيب] % [مستوى الشرائط] % [مستوى الشعيرات]</i>
           </li>
-          <li>
-            <b>التعامل مع الرموز الخاصة (<span class="en">Escape Character $#</span>):</b>
-            <br>
-            يُستخدم رمز الدولار <code class="en">$</code> كرمز هروب (<span class="en">Escape Character</span>) لمنع النظام من تفسير محرف الحاشية <code class="en">#</code> كرمز ترقيم وتوليد آلي، وإجباره على طباعته كـ نص ثابت دقيق داخل التسمية.
+          <li style="margin-top: 6px;">
+            <b>رمز الإلغاء (<code class="en">$#</code>):</b> في البرمجة والنظام، بعض الرموز مثل <code class="en">#</code> تعتبر رموزاً خاصة (<span class="en">Special Characters</span>). إذا أردت أن تجعل النظام يقرأ <code class="en">#</code> كحرف عادي مكتوب ضمن اسم الشعيرة أو الأنبوب (مثلاً: <span class="en">Tube #1</span>)، تضع قبله <code class="en">$#</code> حتى يفهم النظام أنك تقصد كتابة الرمز حرفياً ولا تدعو لأمر برمجي.
           </li>
-        </ol>
+        </ul>
+
+        <div style="background-color: rgba(214, 158, 46, 0.1); border-right: 3px solid var(--gold); padding: 8px 12px; border-radius: 4px; font-size: 12.5px; margin-top: 10px;">
+          <b>باختصار:</b> المخطط الهيكلي هو "خريطة المعمارية الداخلية للكابل"، تخبر النظام كيف تتفرع الشعيرات الملونة من الأنابيب الرئيسية، وذلك باستخدام رموز مثل <code class="en">%</code> للتنقل بين الطبقات.
+        </div>
+
       </div>
     </div>
 
