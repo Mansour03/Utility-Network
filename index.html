@@ -3224,30 +3224,39 @@
       <p style="font-size:12.5px; color:var(--text-dim); margin-top:6px;">* ملاحظة: لاستخدام الرموز الخاصة كـ <code class="en">#</code> في التسميات، يسبق الرمز بـ <code class="en">$#</code> لتقييمه حرفياً.</p>
     </div>
 
-    <!-- صورة إعداد الأداة -->
-    <div style="text-align: center; margin: 16px 0;">
-      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-Color-Scheme-GP-example-F4C58.png" alt="Add Color Scheme GP Example" style="max-width: 100%; border-radius: 4px; border: 1px solid var(--border-color, #444);" />
+<div style="display: flex; gap: 24px; align-items: flex-start; margin-top: 16px; flex-wrap: wrap; direction: rtl;">
+  
+  <!-- قسم الشرح والخطوات على اليمين -->
+  <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 16px;">
+    
+    <!-- إضافة المخطط الهيكلي -->
+    <div>
+      <b>إضافة المخطط الهيكلي (<span class="en">Add Color Scheme</span>):</b>
+      <ol class="steps-compact" style="margin-top:8px;">
+        <li><h4>1</h4><p>افتح الأداة واختر شبكة الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p></li>
+        <li><h4>2</h4><p>حدد اسم مجموعة الألوان المعتمدة، وأدخل اسماً معبراً للمخطط الهيكلي.</p></li>
+        <li><h4>3</h4><p>حدد الفواصل وبنية المستويات (التسميات والسعات).</p></li>
+        <li><h4>4</h4><p>اضغط <span class="en">Run</span>؛ يُسجل المخطط في القوائم المنسدلة للطبقات لتطبيقه المباشر على معالم الشبكة.</p></li>
+      </ol>
     </div>
 
-    <div class="grid2" style="margin-top:16px;">
-      <div>
-        <b>إضافة المخطط الهيكلي (<span class="en">Add Color Scheme</span>):</b>
-        <ol class="steps-compact" style="margin-top:8px;">
-          <li><h4>1</h4><p>افتح الأداة واختر شبكة الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p></li>
-          <li><h4>2</h4><p>حدد اسم مجموعة الألوان المعتمدة، وأدخل اسماً معبراً للمخطط الهيكلي.</p></li>
-          <li><h4>3</h4><p>حدد الفواصل وبنية المستويات (التسميات والسعات).</p></li>
-          <li><h4>4</h4><p>اضغط <span class="en">Run</span>؛ يُسجل المخطط في القوائم المنسدلة للطبقات لتطبيقه المباشر على معالم الشبكة.</p></li>
-        </ol>
-      </div>
-
-      <div>
-        <b>حذف المخطط الهيكلي (<span class="en">Delete Color Scheme</span>):</b>
-        <p style="font-size:13px; margin-top:8px;">تُعد المخططات الهيكلية <b>غير قابلة للتعديل المباشر</b> بعد إنشائها. عند الحاجة لتعديل المخطط، يلزم إزالته بأداة <span class="en">Delete Color Scheme</span> وإعادة إنشائه.</p>
-        <div style="margin-top:10px; font-size:12.5px; padding:8px; background:rgba(232,168,61,0.1); border-right:3px solid var(--gold);">
-          <b>الأثر الهندسي الحذف:</b> تتحول قيم الحقول المرتبطة بالمخطط المحذوف تلقائياً إلى <code class="en">Unknown</code> لحين إعادة تخصيص المخطط الجديد.
-        </div>
+    <!-- حذف المخطط الهيكلي -->
+    <div>
+      <b>حذف المخطط الهيكلي (<span class="en">Delete Color Scheme</span>):</b>
+      <p style="font-size:13px; margin-top:8px; line-height: 1.5;">تُعد المخططات الهيكلية <b>غير قابلة للتعديل المباشر</b> بعد إنشائها. عند الحاجة لتعديل المخطط، يلزم إزالته بأداة <span class="en">Delete Color Scheme</span> وإعادة إنشائه.</p>
+      <div style="margin-top:10px; font-size:12.5px; padding:10px; background:rgba(232,168,61,0.1); border-right:3px solid var(--gold); border-radius: 4px;">
+        <b>الأثر الهندسي للحذف:</b> تتحول قيم الحقول المرتبطة بالمخطط المحذوف تلقائياً إلى <code class="en">Unknown</code> لحين إعادة تخصيص المخطط الجديد.
       </div>
     </div>
+
+  </div>
+
+  <!-- الصورة على اليسار (الشمال) -->
+  <div style="flex: 0 0 auto; text-align: center;">
+    <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-Color-Scheme-GP-example-F4C58.png" alt="Add Color Scheme GP Example" style="width: 380px; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); display: block;" />
+  </div>
+
+</div>
 
     <!-- صورة تطبيق الخاصية على Attribute -->
     <div style="text-align: center; margin: 16px 0;">
