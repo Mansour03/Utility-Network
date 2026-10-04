@@ -3203,57 +3203,72 @@
   </div>
 </div>
 
-  <!-- Color Schemes Section -->
-  <div class="card" style="margin-top:20px;">
-    <h3>2. المخططات الهيكلية للألوان <span class="en">(Add &amp; Delete Color Scheme)</span></h3>
-    <p>تُستخدم المخططات الهيكلية لتمثيل التراتبية الهندسية الداخلية للكابلات (الأنابيب الحامية، الشرائط، والشعيرات) وتوزيع السعات الميكانيكية بدقة.</p>
+ <!-- Color Schemes Section -->
+<div class="card" style="margin-top:20px; border-right: 4px solid var(--gold);">
+  <h3>2. المخططات الهيكلية للألوان <span class="en">(Add & Delete Color Scheme)</span></h3>
+  <p>تُستخدم المخططات الهيكلية لتحديد **الهيكل الداخلي لكابل الفايبر**؛ فالكابل عبارة عن شجرة ذات طبقات ومستويات (أنابيب حامية $\leftarrow$ شرائط $\leftarrow$ شعيرات زجاجية)، وتحدد هذه الأداة كيفية توزيع وتفرع الشعيرات الملونة بالداخل.</p>
 
-    <!-- صورة مثال 3x2x6 -->
-    <div style="text-align: center; margin: 16px 0;">
-      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/3x2x6-Fiber-Cable-Ex-9FA28.png" alt="3x2x6 Fiber Cable Structure" style="max-width: 100%; border-radius: 4px; border: 1px solid var(--border-color, #444);" />
-    </div>
-
-    <div style="margin-top:14px; padding:12px; background:rgba(0,0,0,0.15); border-radius:6px;">
-      <b>مثال تطبيقي: كابل ألياف ضوئية بسعة هرمية <span class="en">3×2×6</span></b>
-      <p style="margin-top:6px; font-size:13.5px;">يتكون الكابل من 3 مستويات تراتبية باستخدام الفاصل <code class="en">%</code> بين المجموعات:</p>
-      <ul class="deflist" style="margin-top:8px;">
-        <li><b>المستوى الأول (Buffer Tube):</b> التسميات: <code class="en">BL, OR, GR_BK</code> والسعة المحددة: <code class="en">2</code>.</li>
-        <li><b>المستوى الثاني (Ribbon):</b> التسميات: <code class="en">1, 2</code> والسعة المقابلة: <code class="en">3, 6</code> ألياف.</li>
-        <li><b>المستوى الثالث (Fiber):</b> تسميات الشعيرات (<code class="en">BL, OR, GR...</code>)، وتُترك السعة <i>فارغة</i> لكونه المستوى الأخير بالتراتبية.</li>
-      </ul>
-      <p style="font-size:12.5px; color:var(--text-dim); margin-top:6px;">* ملاحظة: لاستخدام الرموز الخاصة كـ <code class="en">#</code> في التسميات، يسبق الرمز بـ <code class="en">$#</code> لتقييمه حرفياً.</p>
-    </div>
-
-<div style="display: flex; gap: 24px; align-items: flex-start; margin-top: 16px; flex-wrap: wrap; direction: rtl;">
-  
-  <!-- قسم الشرح والخطوات على اليمين -->
-  <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 16px;">
+  <!-- الجزء الأول: أدوات Add & Delete Color Scheme مع صورة الأداة -->
+  <div style="display: flex; gap: 24px; align-items: flex-start; margin-top: 16px; flex-wrap: wrap; direction: rtl;">
     
-    <!-- إضافة المخطط الهيكلي -->
-    <div>
-      <b>إضافة المخطط الهيكلي (<span class="en">Add Color Scheme</span>):</b>
-      <ol class="steps-compact" style="margin-top:8px;">
-        <li><h4>1</h4><p>افتح الأداة واختر شبكة الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p></li>
-        <li><h4>2</h4><p>حدد اسم مجموعة الألوان المعتمدة، وأدخل اسماً معبراً للمخطط الهيكلي.</p></li>
-        <li><h4>3</h4><p>حدد الفواصل وبنية المستويات (التسميات والسعات).</p></li>
-        <li><h4>4</h4><p>اضغط <span class="en">Run</span>؛ يُسجل المخطط في القوائم المنسدلة للطبقات لتطبيقه المباشر على معالم الشبكة.</p></li>
-      </ol>
+    <!-- قسم الخطوات والشرح على اليمين -->
+    <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 16px;">
+      
+      <!-- إضافة المخطط الهيكلي -->
+      <div>
+        <b>إضافة المخطط الهيكلي (<span class="en">Add Color Scheme</span>):</b>
+        <ol class="steps-compact" style="margin-top:8px;">
+          <li><h4>1</h4><p>افتح الأداة واختر شبكة الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p></li>
+          <li><h4>2</h4><p>حدد اسم مجموعة الألوان المعتمدة، وأدخل اسماً معبراً للمخطط الهيكلي.</p></li>
+          <li><h4>3</h4><p>حدد الفواصل وبنية المستويات (التسميات والسعات).</p></li>
+          <li><h4>4</h4><p>اضغط <span class="en">Run</span>؛ يُسجل المخطط في القوائم المنسدلة للطبقات لتطبيقه المباشر على معالم الشبكة.</p></li>
+        </ol>
+      </div>
+
+      <!-- حذف المخطط الهيكلي -->
+      <div>
+        <b>حذف المخطط الهيكلي (<span class="en">Delete Color Scheme</span>):</b>
+        <p style="font-size:13px; margin-top:8px; line-height: 1.5;">تُعد المخططات الهيكلية <b>غير قابلة للتعديل المباشر</b> بعد إنشائها. عند الحاجة لتعديل المخطط، يلزم إزالته بأداة <span class="en">Delete Color Scheme</span> وإعادة إنشائه.</p>
+        <div style="margin-top:10px; font-size:12.5px; padding:10px; background:rgba(232,168,61,0.1); border-right:3px solid var(--gold); border-radius: 4px;">
+          <b>الأثر الهندسي للحذف:</b> تتحول قيم الحقول المرتبطة بالمخطط المحذوف تلقائياً إلى <code class="en">Unknown</code> لحين إعادة تخصيص المخطط الجديد.
+        </div>
+      </div>
+
     </div>
 
-    <!-- حذف المخطط الهيكلي -->
-    <div>
-      <b>حذف المخطط الهيكلي (<span class="en">Delete Color Scheme</span>):</b>
-      <p style="font-size:13px; margin-top:8px; line-height: 1.5;">تُعد المخططات الهيكلية <b>غير قابلة للتعديل المباشر</b> بعد إنشائها. عند الحاجة لتعديل المخطط، يلزم إزالته بأداة <span class="en">Delete Color Scheme</span> وإعادة إنشائه.</p>
-      <div style="margin-top:10px; font-size:12.5px; padding:10px; background:rgba(232,168,61,0.1); border-right:3px solid var(--gold); border-radius: 4px;">
-        <b>الأثر الهندسي للحذف:</b> تتحول قيم الحقول المرتبطة بالمخطط المحذوف تلقائياً إلى <code class="en">Unknown</code> لحين إعادة تخصيص المخطط الجديد.
-      </div>
+    <!-- صورة أداة Add Color Scheme على اليسار -->
+    <div style="flex: 0 0 auto; text-align: center;">
+      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-Color-Scheme-GP-example-F4C58.png" alt="Add Color Scheme GP Example" style="width: 380px; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); display: block;" />
     </div>
 
   </div>
 
-  <!-- الصورة على اليسار (الشمال) -->
-  <div style="flex: 0 0 auto; text-align: center;">
-    <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-Color-Scheme-GP-example-F4C58.png" alt="Add Color Scheme GP Example" style="width: 380px; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); display: block;" />
+  <!-- الجزء الثاني: المثال التطبيقي (3x2x6) مع صورة هيكل الكابل -->
+  <div class="example-box" style="margin-top:20px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 14px; border-radius: 6px;">
+    <div style="text-align: left; direction: ltr; margin-bottom: 8px;">
+      <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Example: Cable Hierarchy (3x2x6)</span>
+    </div>
+    
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; direction: rtl;">
+      
+      <!-- نص الشرح والمثال -->
+      <div style="flex: 1; min-width: 260px;">
+        <b>مثال تطبيقي: كابل ألياف ضوئية بسعة هرمية <span class="en">3×2×6</span></b>
+        <p style="margin-top:6px; font-size:13.5px; line-height: 1.5;">يتكون الكابل من 3 مستويات تراتبية باستخدام الفاصل <code class="en">%</code> بين المجموعات:</p>
+        <ul class="deflist" style="margin-top:8px; line-height: 1.7; font-size: 13px;">
+          <li><b>المستوى الأول (Buffer Tube):</b> التسميات: <code class="en">BL, OR, GR_BK</code> والسعة المحددة: <code class="en">2</code>.</li>
+          <li><b>المستوى الثاني (Ribbon):</b> التسميات: <code class="en">1, 2</code> والسعة المقابلة: <code class="en">3, 6</code> ألياف.</li>
+          <li><b>المستوى الثالث (Fiber):</b> تسميات الشعيرات (<code class="en">BL, OR, GR...</code>)، وتُترك السعة <i>فارغة</i> لكونه المستوى الأخير بالتراتبية.</li>
+        </ul>
+        <p style="font-size:12px; color:var(--gold); margin-top:8px;">* ملاحظة: لاستخدام الرموز الخاصة كـ <code class="en">#</code> في التسميات، يسبق الرمز بـ <code class="en">$#</code> لتقييمه حرفياً.</p>
+      </div>
+
+      <!-- صورة مثال 3x2x6 -->
+      <div style="flex: 0 0 auto; text-align: center;">
+        <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/3x2x6-Fiber-Cable-Ex-9FA28.png" alt="3x2x6 Fiber Cable Structure" style="width: 340px; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); display: block;" />
+      </div>
+
+    </div>
   </div>
 
 </div>
