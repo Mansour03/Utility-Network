@@ -3452,69 +3452,85 @@
   </div>
 
   <p style="margin-top:24px;"><b>الأقسام التفصيلية لتبويب خصائص الشبكة <span class="en">(Network Properties Tab):</span></b></p>
-  
-  <div class="grid3" style="margin-top:14px;">
-    <!-- Card 1 -->
-    <div class="card">
-      <h3>1. العام والطوبولوجيا <span class="en">(General &amp; Topology)</span></h3>
-      <ul class="deflist">
-        <li><b><span class="en">General</span>:</b> تاريخ الإنشاء، تاريخ آخر تعديل، إصدار الشبكة والبرنامج، مفاتيح التجميع (<span class="en">Cluster Keys</span>)، مالك الشبكة على البوابة (<span class="en">Portal Owner</span>)، وتفاصيل حجم الـ <span class="en">Partition ID Size</span> وطول الموجة لشبكات الاتصالات.</li>
-        <li><b><span class="en">Network Topology</span>:</b> حالة التفعيل، عدد المناطق المتسخة (<span class="en">Dirty Areas</span>)، جدول الأهداف المتسخة (<span class="en">Dirty Objects</span>)، تعداد أخطاء النقاط والخطوط والمضلعات للكائنات اللامكانية، وأزمنة ومدد تنفيذ عمليات التفعيل والتحقق وإيقاف الطوبولوجيا.</li>
-      </ul>
+
+<!-- Flexbox Container for Main Layout -->
+<div style="display: flex; gap: 16px; align-items: stretch; margin-top: 14px; flex-wrap: wrap;">
+
+  <!-- Right Side: 2 Columns for Cards 1 to 6 -->
+  <div style="flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 16px;">
+    
+    <!-- Row 1: Cards 1 & 2 -->
+    <div class="grid2">
+      <!-- Card 1 -->
+      <div class="card">
+        <h3>1. العام والطوبولوجيا <span class="en">(General &amp; Topology)</span></h3>
+        <ul class="deflist">
+          <li><b><span class="en">General</span>:</b> تاريخ الإنشاء، تاريخ آخر تعديل، إصدار الشبكة والبرنامج، مفاتيح التجميع (<span class="en">Cluster Keys</span>)، مالك الشبكة على البوابة (<span class="en">Portal Owner</span>)، وتفاصيل حجم الـ <span class="en">Partition ID Size</span> وطول الموجة لشبكات الاتصالات.</li>
+          <li><b><span class="en">Network Topology</span>:</b> حالة التفعيل، عدد المناطق المتسخة (<span class="en">Dirty Areas</span>)، جدول الأهداف المتسخة (<span class="en">Dirty Objects</span>)، تعداد أخطاء النقاط والخطوط والمضلعات للكائنات اللامكانية، وأزمنة ومدد تنفيذ عمليات التفعيل والتحقق وإيقاف الطوبولوجيا.</li>
+        </ul>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <h3>2. شبكات الهياكل والنطاقات <span class="en">(Structure &amp; Domain)</span></h3>
+        <ul class="deflist">
+          <li><b><span class="en">Structure Network</span>:</b> تفاصيل طبقات الهياكل الجغرافية والجدولية (<span class="en">Junction, Line, Boundary, Objects</span>) مع تحديد <span class="en">Asset Groups</span> و<span class="en">Asset Types</span> وسلوك حذف العلاقات.</li>
+          <li><b><span class="en">Domain Network</span>:</b> إعدادات النطاقات الخدمية (كهرباء، مياه، اتصالات)، مستويات الشبكة (<span class="en">Tiers</span>)، متحكمات الشبكات الفرعية (<span class="en">Subnetwork Controllers</span>)، وقواعد تحديث الأسطح والحاويات.</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Card 2 -->
-    <div class="card">
-      <h3>2. شبكات الهياكل والنطاقات <span class="en">(Structure &amp; Domain)</span></h3>
-      <ul class="deflist">
-        <li><b><span class="en">Structure Network</span>:</b> تفاصيل طبقات الهياكل الجغرافية والجدولية (<span class="en">Junction, Line, Boundary, Objects</span>) مع تحديد <span class="en">Asset Groups</span> و<span class="en">Asset Types</span> وسلوك حذف العلاقات.</li>
-        <li><b><span class="en">Domain Network</span>:</b> إعدادات النطاقات الخدمية (كهرباء، مياه، اتصالات)، مستويات الشبكة (<span class="en">Tiers</span>)، متحكمات الشبكات الفرعية (<span class="en">Subnetwork Controllers</span>)، وقواعد تحديث الأسطح والحاويات.</li>
-      </ul>
+    <!-- Row 2: Cards 3 & 4 -->
+    <div class="grid2">
+      <!-- Card 3 -->
+      <div class="card">
+        <h3>3. تكوينات الأطراف والتصنيفات</h3>
+        <ul class="deflist">
+          <li><b><span class="en">Terminal Configurations</span>:</b> نماذج الاتجاهات والمسارات المسموحة داخل الأجهزة والوصلات الجدولية (مثل المحولات والموزعات).</li>
+          <li><b><span class="en">Categories</span>:</b> تصنيفات الشبكة المعتمدة (مثل المعالم الواقية أو العازلة) المستخدمة في تحليلات التتبع.</li>
+        </ul>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <h3>4. التتبع والمخططات <span class="en">(Trace &amp; Diagrams)</span></h3>
+        <ul class="deflist">
+          <li><b><span class="en">Trace Configurations</span>:</b> إعدادات وتكاوين التتبع المحددة مسبقاً والمحفوظة داخل قاعدة البيانات للاستخدام المشترك.</li>
+          <li><b><span class="en">Network Diagrams</span>:</b> جداول نماذج المخططات المتاحة (<span class="en">Diagram Templates</span>) وخصائص كل نموذج.</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Card 3: Image -->
-    <div class="card" style="display: flex; align-items: center; justify-content: center; padding: 12px; min-height: 100%;">
-      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/UN-Network-Properties-dialog-box-v6-6D643.png" alt="Utility Network Properties Dialog Box" style="width: 100%; height: auto; object-fit: contain; border-radius: 6px;" />
+    <!-- Row 3: Cards 5 & 6 -->
+    <div class="grid2">
+      <!-- Card 5 -->
+      <div class="card">
+        <h3>5. القواعد والخصائص <span class="en">(Rules &amp; Attributes)</span></h3>
+        <ul class="deflist">
+          <li><b><span class="en">Rules</span>:</b> الفهرس الكامل لقواعد الاتصال بين العقد والوصلات (<span class="en">Connectivity</span>)، الاحتواء (<span class="en">Containment</span>)، والتعليق الهيكلي (<span class="en">Structural Attachment</span>) مع خيارات الترتيب والفلترة.</li>
+          <li><b><span class="en">Attributes &amp; Assignments</span>:</b> جدول سمات الشبكة المعرفة وشروط تعيينها على الحقول وفئات المعالم، ويمكن الاستعلام عنها برمجياً عبر <code class="en">ArcPy.Describe</code>.</li>
+        </ul>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <h3>6. خصائص شبكات الاتصالات المتقدمة</h3>
+        <ul class="deflist">
+          <li><b>طقم الألوان ومخططاتها:</b> إعدادات ترميز كابلات الألياف الضوئية والأنابيب (<span class="en">Color Sets &amp; Schemes</span>).</li>
+          <li><b>خصائص الدوائر والموجات:</b> قواعد إنشاء وتتبع الدوائر الضوئية (<span class="en">Circuits</span>) ومخططات أطوال الموجات (<span class="en">Wavelength Schemes</span>).</li>
+          <li><b>سياسات الدمج والتقسيم:</b> سياسات <span class="en">Divide &amp; Combine Policies</span> المطبقة على الكائنات الجدولية المجمعة.</li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Card 4 -->
-    <div class="card">
-      <h3>3. تكوينات الأطراف والتصنيفات</h3>
-      <ul class="deflist">
-        <li><b><span class="en">Terminal Configurations</span>:</b> نماذج الاتجاهات والمسارات المسموحة داخل الأجهزة والوصلات الجدولية (مثل المحولات والموزعات).</li>
-        <li><b><span class="en">Categories</span>:</b> تصنيفات الشبكة المعتمدة (مثل المعالم الواقية أو العازلة) المستخدمة في تحليلات التتبع.</li>
-      </ul>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="card">
-      <h3>4. التتبع والمخططات <span class="en">(Trace &amp; Diagrams)</span></h3>
-      <ul class="deflist">
-        <li><b><span class="en">Trace Configurations</span>:</b> إعدادات وتكاوين التتبع المحددة مسبقاً والمحفوظة داخل قاعدة البيانات للاستخدام المشترك.</li>
-        <li><b><span class="en">Network Diagrams</span>:</b> جداول نماذج المخططات المتاحة (<span class="en">Diagram Templates</span>) وخصائص كل نموذج.</li>
-      </ul>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="card">
-      <h3>5. القواعد والخصائص <span class="en">(Rules &amp; Attributes)</span></h3>
-      <ul class="deflist">
-        <li><b><span class="en">Rules</span>:</b> الفهرس الكامل لقواعد الاتصال بين العقد والوصلات (<span class="en">Connectivity</span>)، الاحتواء (<span class="en">Containment</span>)، والتعليق الهيكلي (<span class="en">Structural Attachment</span>) مع خيارات الترتيب والفلترة.</li>
-        <li><b><span class="en">Attributes &amp; Assignments</span>:</b> جدول سمات الشبكة المعرفة وشروط تعيينها على الحقول وفئات المعالم، ويمكن الاستعلام عنها برمجياً عبر <code class="en">ArcPy.Describe</code>.</li>
-      </ul>
-    </div>
   </div>
 
-  <!-- Red Card / Full width Telecom Card at bottom -->
-  <div class="card" style="margin-top:16px;">
-    <h3>6. خصائص شبكات الاتصالات المتقدمة</h3>
-    <ul class="deflist" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
-      <li><b>طقم الألوان ومخططاتها:</b> إعدادات ترميز كابلات الألياف الضوئية والأنابيب (<span class="en">Color Sets &amp; Schemes</span>).</li>
-      <li><b>خصائص الدوائر والموجات:</b> قواعد إنشاء وتتبع الدوائر الضوئية (<span class="en">Circuits</span>) ومخططات أطوال الموجات (<span class="en">Wavelength Schemes</span>).</li>
-      <li><b>سياسات الدمج والتقسيم:</b> سياسات <span class="en">Divide &amp; Combine Policies</span> المطبقة على الكائنات الجدولية المجمعة.</li>
-    </ul>
+  <!-- Left Side: Image Side-Card -->
+  <div class="card" style="flex: 1; min-width: 260px; display: flex; align-items: center; justify-content: center; padding: 12px;">
+    <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/UN-Network-Properties-dialog-box-v6-6D643.png" alt="Utility Network Properties Dialog Box" style="width: 100%; height: auto; max-height: 100%; object-fit: contain; border-radius: 6px;" />
   </div>
 
+</div>
   <!-- مثال تطبيقي عملي مدمج -->
   <div class="example-box" style="margin-top:20px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 16px; border-radius: 6px;">
     <span class="label en" style="font-weight: bold; color: var(--gold);">مثال تطبيقي عملي: مراجعة قواعد الأمان وإعدادات التتبع لشبكة توزيع الكهرباء</span>
