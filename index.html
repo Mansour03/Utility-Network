@@ -3409,56 +3409,123 @@
   </section>
 
   <section id="sec41">
-    <span class="num">41</span>
-    <h2>الوصول للشبكة وخصائصها</h2>
-    <p>قبل أي حاجة تانية، لازم تعرف منين تدخل على الشبكة، وإزاي تشوف كل تفاصيلها وإعداداتها الحالية.</p>
+  <span class="num">41</span>
+  <h2>الوصول للشبكة وإدارة خصائصها التشغيلية <span class="en">(Access & Utility Network Properties)</span></h2>
+  <p>يوفر نظام نظم المعلومات الجغرافية بيئة متكاملة لاستعراض، إدارة، وتحليل شبكات المرافق. للبدء في تنفيذ أي عمليات هندسية أو تحليلات مكانية، يجب أولاً فهم كيفية الوصول المباشر للشبكة والتعرف على خصائصها وإعداداتها الهيكلية المتقدمة.</p>
 
-    <div class="grid3" style="margin-top:20px;">
-      <div class="card">
-        <h3>مسارات الوصول</h3>
-        <ul class="deflist">
-          <li><b class="en">Portal tab</b> — لما الشبكة منشورة من <span class="en">Enterprise Geodatabase</span>؛ للإضافة على خريطة شغالة للتحرير أو التحليل.</li>
-          <li><b class="en">Project tab</b> — للوصول المباشر عبر اتصال قاعدة بيانات؛ ده المسار المستخدم لمهام الإدارة والتهيئة.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>تفعيل <span class="en">Utility Network Tab</span></h3>
-        <p>لازم الشبكة تكون مضافة على خريطة شغالة. لو <span class="en">Enterprise Geodatabase</span>، لازم الشبكة تكون منشورة كـ <span class="en">Feature Service</span> الأول.</p>
-      </div>
-      <div class="card">
-        <h3>مجموعات الأدوات في التبويب</h3>
-        <ul class="deflist">
-          <li><b class="en">Network Topology</b> — Validate، Error Inspector، Terminal Paths/Connections.</li>
-          <li><b class="en">Associations</b> — Modify، Enter/Exit Containment، Display Content، View.</li>
-          <li><b class="en">Tools</b> — Trace/Clear All، معرض أنواع التتبع.</li>
-          <li><b class="en">Diagram</b> و<b class="en">Subnetwork</b> — إدارة المخططات والشبكات الفرعية.</li>
-        </ul>
-      </div>
+  <p style="margin-top:18px;"><b>متطلبات الترخيص والوصول القياسية (Licensing Requirements):</b></p>
+  <div class="card" style="margin-top:10px;">
+    <p>يتطلب إنشاء، نشر، أو تحرير قواعد بيانات الشبكات في البيئات المؤسسية (<span class="en">Enterprise Geodatabase</span>) تفعيل ترخيص الحساب المباشر بنوع <span class="en">ArcGIS Advanced Editing User Type Extension</span>. بينما لا تتطلب عمليات الاستعلام (<span class="en">Query</span>) والتحليل والتتبع الميداني (<span class="en">Trace</span>) هذا الامتداد المتقدم.</p>
+  </div>
+
+  <p style="margin-top:20px;"><b>مسارات الوصول ومستويات عرض الخصائص:</b></p>
+  <div class="grid2" style="margin-top:12px;">
+    <div class="card">
+      <h3>الوصول من لوحة المحتويات <span class="en">(Contents Pane)</span></h3>
+      <p>عند كليك يمين على طبقة الشبكة ثم <span class="en">Properties</span>، تظهر نافذة <span class="en">Layer Properties</span> التي تدمج خصائص الخريطة العامة (<span class="en">General, Metadata, Source, Time</span>) إلى جانب خصائص الشبكة والمخططات الهندسية (<span class="en">Network Properties, Network Diagrams</span>).</p>
     </div>
-
-    <p style="margin-top:24px;">الوصول للمناطق الحساسة داخل طبقة الشبكة نفسها:</p>
-    <div class="grid2" style="margin-top:14px;">
-      <div class="card">
-        <h3><span class="en">Dirty Areas</span> و<span class="en">Dirty Objects</span></h3>
-        <p>وسّع طبقة الشبكة في <span class="en">Contents</span> pane تلاقي طبقة <span class="en">Dirty Areas</span> الفرعية دايمًا، وجدول <span class="en">Dirty Objects</span> لو الشبكة فيها <span class="en">Telecom Domain Network</span> (لسه <span class="en">Beta</span>).</p>
-      </div>
-      <div class="card">
-        <h3><span class="en">Layer Properties</span></h3>
-        <p>من <span class="en">Contents</span> pane، كليك يمين على طبقة الشبكة ← <span class="en">Properties</span> ← تبويب <span class="en">Network Properties</span>. ده المرجع الشامل لأي إعداد اتعمل في الشبكة.</p>
-      </div>
+    <div class="card">
+      <h3>الوصول من لوحة الكتالوج <span class="en">(Catalog Pane)</span></h3>
+      <p>عند كليك يمين على كائن الشبكة بداخل قاعدة البيانات ثم <span class="en">Properties</span> تحت تبويب <span class="en">Project / Databases</span>، تفتح نافذة <span class="en">Utility Network Properties</span> مقتصرة على عرض خصائص وقواعد قاعدة البيانات المكانية فقط (<span class="en">Network Properties, Network Diagrams</span>).</p>
     </div>
+  </div>
 
-    <div class="card" style="margin-top:16px;">
-      <h3>أقسام <span class="en">Network Properties</span></h3>
+  <p style="margin-top:24px;"><b>تفعيل تبويب <span class="en">Utility Network Tab</span> والمجموعات الرئيسية:</b></p>
+  <div class="grid2" style="margin-top:14px;">
+    <div class="card">
+      <h3>مجموعات الأدوات القياسية</h3>
       <ul class="deflist">
-        <li><b class="en">General</b> — تاريخ الإنشاء، إصدار الشبكة، آخر تعديل، <span class="en">Cluster Keys</span>.</li>
-        <li><b class="en">Network Topology</b> — هل مفعّلة، عدد المناطق المتسخة، عدد الأخطاء.</li>
-        <li><b class="en">Structure Network</b> و<b class="en">Domain Network</b> — تفاصيل كل فئة وتصنيفاتها.</li>
-        <li><b class="en">Rules</b> — كل قواعد الاتصال والاحتواء والتعليق الحالية.</li>
-        <li><b class="en">Attributes and Assignments</b>، <b class="en">Terminal Configurations</b>، <b class="en">Categories</b>، <b class="en">Trace Configurations</b>.</li>
+        <li><b><span class="en">Network Topology</span>:</b> أدوات <span class="en">Validate</span>، ونافذة إدارة الأخطاء <span class="en">Error Inspector</span>، وتعديل مسارات وأتصال الأطراف (<span class="en">Terminal Paths &amp; Connections</span>).</li>
+        <li><b><span class="en">Associations</span>:</b> إدارة علاقات الاتصال والتركيب الهيكلي والاحتواء عبر <span class="en">Modify</span>، والتحكم في وضع التحرير المباشر للحاويات (<span class="en">Enter/Exit Containment</span>)، وعرض المكونات المخفية (<span class="en">Display Content &amp; View</span>).</li>
+        <li><b><span class="en">Tools</span>:</b> أداة التتبع الشاملة <span class="en">Trace/Clear All</span>، ومعرض أدوات التتبع المسبقة (<span class="en">Connected, Subnetwork, Upstream, Downstream, Isolation, Shortest Path</span>).</li>
       </ul>
     </div>
-  </section>
+    <div class="card">
+      <h3>مجموعات التحديد والمخططات والاتصالات</h3>
+      <ul class="deflist">
+        <li><b><span class="en">Selection</span>:</b> نقل ومزامنة التحديد المكاني بين الخرائط والمخططات الهندسية (<span class="en">Apply To Diagrams / Maps</span>).</li>
+        <li><b><span class="en">Diagram</span>:</b> إنشاء واستعلام المخططات الهندسية والتخطيطية الآلية للشبكة (<span class="en">New, Find, Overwrite, Append</span>).</li>
+        <li><b><span class="en">Subnetwork</span>:</b> إدارة الشبكات الفرعية ومتحكماتها والبحث فيها (<span class="en">Find, View, Modify Controller</span>).</li>
+        <li><b><span class="en">Telecom Circuits</span>:</b> مجموعة مخصصة لشبكات الاتصالات والألياف الضوئية لإدارة الدوائر ووحدات المعدات (<span class="en">Find Circuits, Create Circuit, Manage Unit IDs</span>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="margin-top:24px;"><b>الأقسام التفصيلية لتبويب خصائص الشبكة <span class="en">(Network Properties Tab):</span></b></p>
+  <div class="grid3" style="margin-top:14px;">
+    <!-- General & Topology -->
+    <div class="card">
+      <h3>1. العام والطوبولوجيا <span class="en">(General & Topology)</span></h3>
+      <ul class="deflist">
+        <li><b><span class="en">General</span>:</b> تاريخ الإنشاء، تاريخ آخر تعديل، إصدار الشبكة والبرنامج، مفاتيح التجميع (<span class="en">Cluster Keys</span>)، مالك الشبكة على البوابة (<span class="en">Portal Owner</span>)، وتفاصيل حجم الـ <span class="en">Partition ID Size</span> وطول الموجة لشبكات الاتصالات.</li>
+        <li><b><span class="en">Network Topology</span>:</b> حالة التفعيل، عدد المناطق المتسخة (<span class="en">Dirty Areas</span>)، جدول الأهداف المتسخة (<span class="en">Dirty Objects</span>)، تعداد أخطاء النقاط والخطوط والمضلعات والكائنات اللامكانية، وأزمنة ومدد تنفيذ عمليات التفعيل والتحقق وإيقاف الطوبولوجيا.</li>
+      </ul>
+    </div>
+
+    <!-- Structure & Domain Networks -->
+    <div class="card">
+      <h3>2. شبكات الهياكل والنطاقات <span class="en">(Structure & Domain)</span></h3>
+      <ul class="deflist">
+        <li><b><span class="en">Structure Network</span>:</b> تفاصيل طبقات الهياكل الجغرافية والجدولية (<span class="en">Junction, Line, Boundary, Objects</span>) مع تحديد <span class="en">Asset Groups</span> و<span class="en">Asset Types</span> وسلوك حذف العلاقات.</li>
+        <li><b><span class="en">Domain Network</span>:</b> إعدادات النطاقات الخدمية (كهرباء، مياه، اتصالات)، مستويات الشبكة (<span class="en">Tiers</span>)، متحكمات الشبكات الفرعية (<span class="en">Subnetwork Controllers</span>)، وقواعد تحديث الأسطح والحاويات.</li>
+      </ul>
+    </div>
+
+    <!-- Rules & Attributes -->
+    <div class="card">
+      <h3>3. القواعد والخصائص <span class="en">(Rules & Attributes)</span></h3>
+      <ul class="deflist">
+        <li><b><span class="en">Rules</span>:</b> الفهرس الكامل لقواعد الاتصال بين العقد والوصلات (<span class="en">Connectivity</span>)، الاحتواء (<span class="en">Containment</span>)، والتعليق الهيكلي (<span class="en">Structural Attachment</span>) مع خيارات الترتيب والفلترة.</li>
+        <li><b><span class="en">Attributes & Assignments</span>:</b> جدول سمات الشبكة المعرفة وشروط تعيينها على الحقول وفئات المعالم، ويمكن الاستعلام عنها برمجياً عبر <code class="en">ArcPy.Describe</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid3" style="margin-top:16px;">
+    <!-- Terminals & Categories -->
+    <div class="card">
+      <h3>4. تكوينات الأطراف والتصنيفات</h3>
+      <ul class="deflist">
+        <li><b><span class="en">Terminal Configurations</span>:</b> نماذج الاتجاهات والمسارات المسموحة داخل الأجهزة والوصلات الجدولية (مثل المحولات والموزعات).</li>
+        <li><b><span class="en">Categories</span>:</b> تصنيفات الشبكة المعتمدة (مثل المعالم الواقية أو العازلة) المستخدمة في تحليلات التتبع.</li>
+      </ul>
+    </div>
+
+    <!-- Trace & Diagrams -->
+    <div class="card">
+      <h3>5. التتبع والمخططات <span class="en">(Trace & Diagrams)</span></h3>
+      <ul class="deflist">
+        <li><b><span class="en">Trace Configurations</span>:</b> إعدادات وتكاوين التتبع المحددة مسبقاً والمحفوظة داخل قاعدة البيانات للاستخدام المشترك.</li>
+        <li><b><span class="en">Network Diagrams</span>:</b> جداول نماذج المخططات المتاحة (<span class="en">Diagram Templates</span>) وخصائص كل نموذج.</li>
+      </ul>
+    </div>
+
+    <!-- Telecom Specific Properties -->
+    <div class="card">
+      <h3>6. خصائص شبكات الاتصالات المتقدمة</h3>
+      <ul class="deflist">
+        <li><b>طقم الألوان ومخططاتها:</b> إعدادات ترميز كابلات الألياف الضوئية والأنابيب (<span class="en">Color Sets & Schemes</span>).</li>
+        <li><b>خصائص الدوائر والموجات:</b> قواعد إنشاء وتتبع الدوائر الضوئية (<span class="en">Circuits</span>) ومخططات أطوال الموجات (<span class="en">Wavelength Schemes</span>).</li>
+        <li><b>سياسات الدمج والتقسيم:</b> سياسات <span class="en">Divide & Combine Policies</span> المطبقة على الكائنات الجدولية المجمعة.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- مثال تطبيقي عملي مدمج -->
+  <div class="example-box" style="margin-top:20px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 16px; border-radius: 6px;">
+    <span class="label en" style="font-weight: bold; color: var(--gold);">مثال تطبيقي عملي: مراجعة قواعد الأمان وإعدادات التتبع لشبكة توزيع الكهرباء</span>
+    <p style="margin-top: 8px;"><b>السيناريو الميداني:</b> أراد مهندس الجودة والتخطيط التأكد من أن جميع أجهزة الحماية (<span class="en">Protective Devices</span>) معرفة بشكل صحيح لضمان نجاح تتبع العزل (<span class="en">Isolation Trace</span>) عند حدوث عطل طارئ.</p>
+
+    <div style="margin-top: 10px; font-size: 14px;">
+      <p><b>خطوات التحقق التشغيلية:</b></p>
+      <ol style="padding-right: 20px; margin-top: 4px;">
+        <li>فتح نافذة <span class="en">Network Properties</span> لشبكة الكهرباء وانتقل إلى قسم <span class="en">Categories</span> للتحقق من وجود الفئة المخصصة <code class="en">Protective Device</code>.</li>
+        <li>انتقل إلى قسم <span class="en">ElectricDistribution Device</span> تحت الـ <span class="en">Domain Network</span> لتأكيد تعيين الفئة بشكل صحيح على أجهزة القواطع الكهربائية (<span class="en">Circuit Breakers</span>).</li>
+        <li>راجع قسم <span class="en">Trace Configurations</span> للتأكد من أن نماذج التتبع المعرفة تعتمد على هذه الفئة كحاجز حتمي عند حساب نطاق العزل الكهربائي.</li>
+      </ol>
+    </div>
+  </div>
+</section>
 
   <section id="sec42">
     <span class="num">42</span>
