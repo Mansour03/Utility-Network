@@ -3205,32 +3205,71 @@
 </div>
 
  <!-- Color Schemes Section -->
-<div class="card" style="margin-top:20px; border-right: 4px solid var(--gold);">
-  <h3>2. المخططات الهيكلية للألوان <span class="en">(Add & Delete Color Scheme)</span></h3>
-  <p>تُستخدم المخططات الهيكلية لتحديد **الهيكل الداخلي لكابل الفايبر**؛ فالكابل عبارة عن شجرة ذات طبقات ومستويات (أنابيب حامية $\leftarrow$ شرائط $\leftarrow$ شعيرات زجاجية)، وتحدد هذه الأداة كيفية توزيع وتفرع الشعيرات الملونة بالداخل.</p>
+<div class="card" style="margin-top:20px; border-right: 4px solid var(--gold); box-sizing: border-box;">
+  <h3>2. المخططات الهيكلية للألوان <span class="en">(Color Schemes: Add & Delete)</span></h3>
+  
+  <!-- 1. المفهوم والقواعد الأساسية أولاً -->
+  <p>
+    <b>ما هو المخطط الهيكلي للألوان؟</b><br>
+    كابل الفايبر ليس مجرد خيط واحد، بل هو شجرة ذات طبقات ومستويات تراتبية (أنابيب حامية $\leftarrow$ شرائط $\leftarrow$ شعيرات زجاجية). وتكمن وظيفة أداة <span class="en">Color Scheme</span> في تعريف هذه المعمارية للنظام ليفهم كيفية توزيع وتفرع الشعيرات الملونة بالداخل بالترتيب الصحيح.
+  </p>
 
-  <!-- الجزء الأول: أدوات Add & Delete Color Scheme مع صورة الأداة -->
-  <div style="display: flex; gap: 24px; align-items: flex-start; margin-top: 16px; flex-wrap: wrap; direction: rtl;">
+  <!-- رموز الفواصل والقواعد -->
+  <div style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color, #333); padding: 12px; border-radius: 6px; margin-top: 12px; font-size: 13px; line-height: 1.6;">
+    <b style="color: var(--gold);">الرموز القواعدية لإدخال البيانات:</b>
+    <ul style="margin-top: 6px; padding-right: 20px;">
+      <li><b>رمز الفاصل (<code class="en">%</code>):</b> يُستخدم للفصل بين مستويات الكابل أثناء إدخال البيانات (مثال: <code class="en">[الأنابيب] % [الشرائط] % [الشعيرات]</code>).</li>
+      <li><b>رمز الإلغاء (<code class="en">$#</code>):</b> يُستخدم قبل الرموز الخاصة كـ <code class="en">#</code> حتى يقرأها النظام كحرف عادي (مثلاً: <span class="en">Tube $#1</span>) دون اعتبارها أمراً برمجياً.</li>
+    </ul>
+  </div>
+
+  <!-- 2. المثال التطبيقي (3x2x6) -->
+  <div class="example-box" style="margin-top:16px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 14px; border-radius: 6px;">
+    <div style="text-align: left; direction: ltr; margin-bottom: 8px;">
+      <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Example: Cable Hierarchy (3x2x6)</span>
+    </div>
+    
+    <b>مثال تطبيقي: كابل ألياف ضوئية بسعة هرمية <span class="en">3×2×6</span> (إجمالي 36 شعيرة)</b>
+    <p style="margin-top:6px; font-size:13px; line-height: 1.5;">يتكون الكابل من 3 مستويات تراتبية مفصولة بالرمز <code class="en">%</code>:</p>
+    
+    <ul class="deflist" style="margin-top:8px; line-height: 1.7; font-size: 13px;">
+      <li>
+        <b>المستوى الأول — الأنابيب (<span class="en">Buffer Tubes</span>):</b><br>
+        التسميات: <code class="en">BL, OR, GR_BK</code> (أزرق - برتقالي - أخضر/أسود) | السعة المحددة: <code class="en">2</code> أنبوب مفعلين.
+      </li>
+      <li style="margin-top: 4px;">
+        <b>المستوى الثاني — الشرائط (<span class="en">Ribbons</span>):</b><br>
+        التسميات: <code class="en">1, 2</code> (أرقام الشرائط) | السعة المقابلة: <code class="en">3, 6</code> (3 شرائط بالأنبوب الأول و 6 بالثاني).
+      </li>
+      <li style="margin-top: 4px;">
+        <b>المستوى الثالث — الشعيرات (<span class="en">Fibers</span>):</b><br>
+        التسميات: ألوان الشعيرات الفردية (<code class="en">BL, OR, GR...</code>) | السعة: تُترك <i>فارغة</i> لأنه المستوى الأخير بالتراتبية.
+      </li>
+    </ul>
+  </div>
+
+  <!-- 3. الخطوات والأدوات (Add & Delete GP Tools) -->
+  <div style="display: flex; gap: 24px; align-items: flex-start; margin-top: 20px; flex-wrap: wrap; direction: rtl;">
     
     <!-- قسم الخطوات والشرح على اليمين -->
     <div style="flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 16px;">
       
       <!-- إضافة المخطط الهيكلي -->
       <div>
-        <b>إضافة المخطط الهيكلي (<span class="en">Add Color Scheme</span>):</b>
+        <b style="color: var(--gold);">خطوات إضافة المخطط الهيكلي (<span class="en">Add Color Scheme</span>):</b>
         <ol class="steps-compact" style="margin-top:8px;">
           <li><h4>1</h4><p>افتح الأداة واختر شبكة الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p></li>
           <li><h4>2</h4><p>حدد اسم مجموعة الألوان المعتمدة، وأدخل اسماً معبراً للمخطط الهيكلي.</p></li>
-          <li><h4>3</h4><p>حدد الفواصل وبنية المستويات (التسميات والسعات).</p></li>
-          <li><h4>4</h4><p>اضغط <span class="en">Run</span>؛ يُسجل المخطط في القوائم المنسدلة للطبقات لتطبيقه المباشر على معالم الشبكة.</p></li>
+          <li><h4>3</h4><p>حدد الفواصل وبنية المستويات (التسميات والسعات الموضحة في المثال أعلاه).</p></li>
+          <li><h4>4</h4><p>اضغط <span class="en">Run</span>؛ يُسجل المخطط في القوائم المنسدلة لتطبيقه المباشر على معالم الشبكة.</p></li>
         </ol>
       </div>
 
       <!-- حذف المخطط الهيكلي -->
       <div>
-        <b>حذف المخطط الهيكلي (<span class="en">Delete Color Scheme</span>):</b>
-        <p style="font-size:13px; margin-top:8px; line-height: 1.5;">تُعد المخططات الهيكلية <b>غير قابلة للتعديل المباشر</b> بعد إنشائها. عند الحاجة لتعديل المخطط، يلزم إزالته بأداة <span class="en">Delete Color Scheme</span> وإعادة إنشائه.</p>
-        <div style="margin-top:10px; font-size:12.5px; padding:10px; background:rgba(232,168,61,0.1); border-right:3px solid var(--gold); border-radius: 4px;">
+        <b style="color: var(--gold);">حذف المخطط الهيكلي (<span class="en">Delete Color Scheme</span>):</b>
+        <p style="font-size:13px; margin-top:6px; line-height: 1.5;">المخططات الهيكلية <b>غير قابلة للتعديل المباشر</b> بعد إنشائها. عند الحاجة لتعديل أي مخطط، يلزم إزالته بأداة <span class="en">Delete Color Scheme</span> ثم إعادة إنشائه.</p>
+        <div style="margin-top:8px; font-size:12.5px; padding:8px 12px; background:rgba(232,168,61,0.1); border-right:3px solid var(--gold); border-radius: 4px;">
           <b>الأثر الهندسي للحذف:</b> تتحول قيم الحقول المرتبطة بالمخطط المحذوف تلقائياً إلى <code class="en">Unknown</code> لحين إعادة تخصيص المخطط الجديد.
         </div>
       </div>
@@ -3239,88 +3278,12 @@
 
     <!-- صورة أداة Add Color Scheme على اليسار -->
     <div style="flex: 0 0 auto; text-align: center;">
-      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-Color-Scheme-GP-example-F4C58.png" alt="Add Color Scheme GP Example" style="width: 380px; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); display: block;" />
+      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-Color-Scheme-GP-example-F4C58.png" alt="Add Color Scheme GP Example" style="width: 340px; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); display: block;" />
     </div>
 
   </div>
 
-  <!-- الجزء الثاني: المثال التطبيقي (3x2x6) مع صورة هيكل الكابل -->
-<!-- الجزء الثاني: المثال التطبيقي (3x2x6) مع صورة هيكل الكابل -->
-<div class="example-box" style="margin-top:20px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 14px; border-radius: 6px;">
-  <div style="text-align: left; direction: ltr; margin-bottom: 8px;">
-    <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Example: Cable Hierarchy (3x2x6)</span>
-  </div>
-  
-  <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; direction: rtl;">
-    
-    <!-- نص الشرح والمثال -->
-    <div style="flex: 1; min-width: 260px;">
-      <b>مثال تطبيقي: كابل ألياف ضوئية بسعة هرمية <span class="en">3×2×6</span></b>
-      <p style="margin-top:6px; font-size:13.5px; line-height: 1.5;">يتكون الكابل من 3 مستويات تراتبية باستخدام الفاصل <code class="en">%</code> بين المجموعات:</p>
-      <ul class="deflist" style="margin-top:8px; line-height: 1.7; font-size: 13px;">
-        <li><b>المستوى الأول (Buffer Tube):</b> التسميات: <code class="en">BL, OR, GR_BK</code> والسعة المحددة: <code class="en">2</code>.</li>
-        <li><b>المستوى الثاني (Ribbon):</b> التسميات: <code class="en">1, 2</code> والسعة المقابلة: <code class="en">3, 6</code> ألياف.</li>
-        <li><b>المستوى الثالث (Fiber):</b> تسميات الشعيرات (<code class="en">BL, OR, GR...</code>)، وتُترك السعة <i>فارغة</i> لكونه المستوى الأخير بالتراتبية.</li>
-      </ul>
-      <p style="font-size:12px; color:var(--gold); margin-top:8px;">* ملاحظة: لاستخدام الرموز الخاصة كـ <code class="en">#</code> في التسميات، يسبق الرمز بـ <code class="en">$#</code> لتقييمه حرفياً.</p>
-
-      <!-- الشرح التفصيلي الشامل والمبسط -->
-      <div style="margin-top: 15px; border-top: 1px dashed rgba(255,255,255,0.15); padding-top: 12px; font-size: 13.5px; line-height: 1.7;">
-        
-        <b style="color: var(--gold); font-size: 14px;">1. ما هو "المخطط الهيكلي للألوان" (Color Scheme)؟</b>
-        <p style="margin-top: 4px; margin-bottom: 10px;">
-          كابل الفايبر ليس مجرد خيط واحد، بل هو عبارة عن شجرة ذات طبقات ومستويات:
-        </p>
-        <ul style="margin-bottom: 12px; padding-right: 20px;">
-          <li><b>المستوى 1:</b> أنابيب حماية خارجية (<span class="en">Buffer Tubes</span>).</li>
-          <li><b>المستوى 2:</b> حزم أو شرائط داخل كل أنبوب (<span class="en">Ribbons</span>).</li>
-          <li><b>المستوى 3:</b> الشعيرات الزجاجية الدقيقة داخل كل شريطة (<span class="en">Fibers</span>).</li>
-        </ul>
-        <p style="margin-bottom: 12px; font-size: 13px; opacity: 0.9;">
-          أداة <span class="en">Color Scheme</span> وظيفتها تعريف هذا الترتيب الهرمي للنظام ليفهم كيف تخرج الشعيرات من الأنابيب بالترتيب والألوان الصحيحة.
-        </p>
-
-        <b style="color: var(--gold); font-size: 14px;">2. شرح المثال التطبيقي (كابل بسعة 3×2×6):</b>
-        <p style="margin-top: 4px; margin-bottom: 8px;">
-          معنى <span class="en">3 × 2 × 6</span> أنه كابل يحتوي على إجمالي 36 شعيرة فايبر مقسمة كالتالي:
-        </p>
-        <ul style="margin-bottom: 12px; padding-right: 20px;">
-          <li>
-            <b>المستوى الأول: الأنابيب (<span class="en">Buffer Tubes</span>)</b><br>
-            • <i>العدد/السعة:</i> 2 أنبوب مفعلين (مع أنبوب إضافي).<br>
-            • <i>التسميات:</i> <code class="en">BL, OR, GR_BK</code> (أزرق - برتقالي - أخضر مع خط أسود).<br>
-            • <i>الفكرة:</i> الأداة تسمي الأنابيب بألوانها المعتمدة وتحدد عددها.
-          </li>
-          <li style="margin-top: 6px;">
-            <b>المستوى الثاني: الشرائط (<span class="en">Ribbons</span>)</b><br>
-            • <i>العدد/السعة:</i> داخل الأنبوب الأول توجد 3 شرائط، وداخل الثاني 6 شرائط.<br>
-            • <i>التسميات:</i> <code class="en">1, 2</code> (أرقام الشرائط داخل الأنبوب).<br>
-            • <i>الفكرة:</i> تقسيم الأنبوب إلى مجموعات أصغر.
-          </li>
-          <li style="margin-top: 6px;">
-            <b>المستوى الثالث: الشعيرات (<span class="en">Fibers</span>)</b><br>
-            • <i>العدد/السعة:</i> تُترك السعة فارغة، لأنها أخر مستوى (النهاية) ولا توجد تفرعات أعمق منها.<br>
-            • <i>التسميات:</i> ألوان الشعيرات الفردية <code class="en">BL, OR, GR...</code> (أزرق، برتقالي، أخضر...).
-          </li>
-        </ul>
-
-        <b style="color: var(--gold); font-size: 14px;">3. ما هي رموز الفواصل (%) و ($#)؟</b>
-        <ul style="margin-top: 6px; margin-bottom: 12px; padding-right: 20px;">
-          <li>
-            <b>رمز الفاصل (<code class="en">%</code>):</b> يُستخدم ليفصل بين مستويات الكابل أثناء إدخال البيانات في الأداة.<br>
-            <i style="font-size: 12px; color: #a0aec0;">مثال: [مستوى الأنابيب] % [مستوى الشرائط] % [مستوى الشعيرات]</i>
-          </li>
-          <li style="margin-top: 6px;">
-            <b>رمز الإلغاء (<code class="en">$#</code>):</b> في البرمجة والنظام، بعض الرموز مثل <code class="en">#</code> تعتبر رموزاً خاصة (<span class="en">Special Characters</span>). إذا أردت أن تجعل النظام يقرأ <code class="en">#</code> كحرف عادي مكتوب ضمن اسم الشعيرة أو الأنبوب (مثلاً: <span class="en">Tube #1</span>)، تضع قبله <code class="en">$#</code> حتى يفهم النظام أنك تقصد كتابة الرمز حرفياً ولا تدعو لأمر برمجي.
-          </li>
-        </ul>
-
-        <div style="background-color: rgba(214, 158, 46, 0.1); border-right: 3px solid var(--gold); padding: 8px 12px; border-radius: 4px; font-size: 12.5px; margin-top: 10px;">
-          <b>باختصار:</b> المخطط الهيكلي هو "خريطة المعمارية الداخلية للكابل"، تخبر النظام كيف تتفرع الشعيرات الملونة من الأنابيب الرئيسية، وذلك باستخدام رموز مثل <code class="en">%</code> للتنقل بين الطبقات.
-        </div>
-
-      </div>
-    </div>
+</div>
 
 
       <!-- صورة مثال 3x2x6 -->
