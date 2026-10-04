@@ -3159,28 +3159,40 @@
   <h3>1. مكتبة الألوان الموحدة <span class="en">(Add Color Set)</span></h3>
   <p>تُعرف هذه الأداة "لوحة الألوان المعتمدة" للمشروع. تُحدد كل قيمة برمز سداسي عشر (<span class="en">Hex Code</span>) مثل (<code class="en">0000FF</code>) للون الأزرق. وفي حال الشعيرات ذات الألوان المركبة، تُدرج الأكواد تفصيلياً مع الفصل بينها بفاصلة (<code class="en">0000FF,000000</code>).</p>
   
-  <div style="text-align: center; margin: 16px 0;">
-    <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-a-color-set-ex1.png" alt="Add Color Set Example" style="max-width: 320px; width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); display: inline-block;" />
+  <!-- حاوية تجمع الصورة والخطوات بجانب بعضهما -->
+  <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 16px; flex-wrap: wrap;">
+    
+    <!-- الصورة على الجانب مع إمكانية التكبير عند الضغط -->
+    <div style="flex: 0 0 auto; text-align: center;">
+      <a href="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-a-color-set-ex1.png" target="_blank" title="اضغط لتكبير الصورة">
+        <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-a-color-set-ex1.png" alt="Add Color Set Example" style="width: 280px; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border-color, #444); cursor: pointer; transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" />
+      </a>
+      <div style="font-size: 11px; color: #aaa; margin-top: 4px;">(اضغط على الصورة لتكبيرها)</div>
+    </div>
+
+    <!-- المحتوى والخطوات بجانب الصورة -->
+    <div style="flex: 1; min-width: 260px;">
+      <p style="margin: 0;"><b>خطوات التنفيذ:</b></p>
+      <ol class="steps-compact" style="margin-top:8px;">
+        <li>
+          <h4>1. فتح الأداة</h4>
+          <p>اختر أداة <span class="en">Add Color Set</span> وحدد شبكة الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p>
+        </li>
+        <li>
+          <h4>2. إدخال البيانات</h4>
+          <p>حدد اسماً للمجموعة في <span class="en">Color Set Name</span>، ثم أدرج عناصر الألوان بخصائص التسمية والأكواد المناسبة.</p>
+        </li>
+        <li>
+          <h4>3. معالجة البيانات</h4>
+          <p>اضغط <span class="en">Run</span> للحفظ، لتصبح المكتبة متاحة للاستخدام أثناء بناء المخططات الهيكلية للكابلات.</p>
+        </li>
+      </ol>
+    </div>
+
   </div>
 
-  <p style="margin-top:12px;"><b>خطوات التنفيذ:</b></p>
-  <ol class="steps-compact" style="margin-top:8px;">
-    <li>
-      <h4>1. فتح الأداة</h4>
-      <p>اختر أداة <span class="en">Add Color Set</span> وحدد شبكة الـ <span class="en">Utility Network</span> ومجال الاتصالات <span class="en">Telecom</span>.</p>
-    </li>
-    <li>
-      <h4>2. إدخال البيانات</h4>
-      <p>حدد اسماً للمجموعة في <span class="en">Color Set Name</span>، ثم أدرج عناصر الألوان بخصائص التسمية والأكواد المناسبة.</p>
-    </li>
-    <li>
-      <h4>3. معالجة البيانات</h4>
-      <p>اضغط <span class="en">Run</span> للحفظ، لتصبح المكتبة متاحة للاستخدام أثناء بناء المخططات الهيكلية للكابلات.</p>
-    </li>
-  </ol>
-
   <!-- مثال تطبيقي للألوان -->
-  <div class="example-box" style="margin-top:14px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 12px; border-radius: 6px;">
+  <div class="example-box" style="margin-top:16px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 12px; border-radius: 6px;">
     <div style="text-align: left; direction: ltr; margin-bottom: 6px;">
       <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Scenario: Fiber Colors Palette</span>
     </div>
