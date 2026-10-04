@@ -3339,28 +3339,39 @@
   </div>
 
   <!-- Wavelength Schemes Section -->
-  <div class="card" style="margin-top:20px;">
+  <div class="card" style="margin-top:20px; box-sizing: border-box;">
     <h3>3. مخططات الطول الموجي <span class="en">(Add Wavelength Scheme)</span></h3>
     <p>تُستخدم لمُحاكاة وتتبع الترددات الضوئية المقسمة وفق تقنيات التجميع الموجي مثل (<span class="en">CWDM / DWDM</span>). يتيح المخطط إضافة حتى <b>48 طولاً موجياً فريداً</b>:</p>
-    <ul class="deflist" style="margin-top:8px;">
-      <li><b>اسم القناة (<span class="en">Wavelength Name</span>):</b> التسمية التعريفية للقناة (مثل: <code class="en">1270nm</code> أو <code class="en">Channel 1</code>).</li>
-      <li><b>طول الموجة (<span class="en">Wavelength Length</span>):</b> القيمة العددية للتردد مقاسة بالنانومتر (مثل: <code class="en">1270</code> أو <code class="en">1550</code>).</li>
-    </ul>
 
-    <!-- صورة Wavelength Scheme GP -->
-    <div style="text-align: center; margin: 16px 0;">
-      <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-wavelength-scheme-gp-example1.png" alt="Add Wavelength Scheme GP Example" style="max-width: 100%; border-radius: 4px; border: 1px solid var(--border-color, #444);" />
-    </div>
+    <!-- حاوية جانبية تجمع النص والصورة جنباً إلى جنب -->
+    <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; direction: rtl; margin: 16px 0;">
+      
+      <!-- قسم النص والقائمة على اليمين -->
+      <div style="flex: 1; min-width: 280px; box-sizing: border-box;">
+        <ul class="deflist" style="margin-top: 0; padding-right: 20px;">
+          <li><b>اسم القناة (<span class="en">Wavelength Name</span>):</b> التسمية التعريفية للقناة (مثل: <code class="en">1270nm</code> أو <code class="en">Channel 1</code>).</li>
+          <li><b>طول الموجة (<span class="en">Wavelength Length</span>):</b> القيمة العددية للتردد مقاسة بالنانومتر (مثل: <code class="en">1270</code> أو <code class="en">1550</code>).</li>
+        </ul>
 
-    <div class="example-box" style="margin-top:14px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 12px; border-radius: 6px;">
-      <div style="text-align: left; direction: ltr; margin-bottom: 6px;">
-        <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Scenario: DWG/CWDM Tracing</span>
+        <div class="example-box" style="margin-top:14px; background-color: rgba(255, 255, 255, 0.03); border-right: 4px solid var(--gold); padding: 12px; border-radius: 6px;">
+          <div style="text-align: left; direction: ltr; margin-bottom: 6px;">
+            <span class="label en" style="font-weight: bold; color: var(--gold);">Practical Scenario: DWG/CWDM Tracing</span>
+          </div>
+          <p style="margin-top: 6px; font-size: 13.5px; text-align: right; direction: rtl;">عند نمذجة الشبكات التي تعتمد تقنية <span class="en">CWDM Multiplexing</span>، تُحدد القنوات في النطاق من <code class="en">1270nm</code> إلى <code class="en">1610nm</code>. يُمكن محرك النظام عند إجراء تحليل التتبع (<span class="en">Wavelength Propagation Trace</span>) من تتبع مسار كل تردد ضوئي بدقة عبر المسارات المدمجة.</p>
+        </div>
       </div>
-      <p style="margin-top: 6px; font-size: 13.5px; text-align: right; direction: rtl;">عند نمذجة الشبكات التي تعتمد تقنية <span class="en">CWDM Multiplexing</span>، تُحدد القنوات في النطاق من <code class="en">1270nm</code> إلى <code class="en">1610nm</code>. يُمكن محرك النظام عند إجراء تحليل التتبع (<span class="en">Wavelength Propagation Trace</span>) من تتبع مسار كل تردد ضوئي بدقة عبر المسارات المدمجة.</p>
+
+      <!-- قسم الصورة المصغرة والمضبوطة على اليسار -->
+      <div style="width: 320px; max-width: 100%; flex-shrink: 0; box-sizing: border-box;">
+        <img src="https://doc.esri.com/en/arcgis-pro/latest/help/data/utility-network/images/Add-wavelength-scheme-gp-example1.png" 
+             alt="Add Wavelength Scheme GP Example" 
+             style="width: 100%; height: auto; display: block; border-radius: 4px; border: 1px solid var(--border-color, #444); box-shadow: 0 2px 8px rgba(0,0,0,0.2);" />
+      </div>
+
     </div>
 
     <p style="font-size:13px; margin-top:8px; color:var(--text-dim);">ملاحظة: يُوصى بإعادة تشغيل خدمة المعالم (<span class="en">Feature Service</span>) بعد التنفيذ لتحديث البيانات لدى المستخدمين.</p>
-  </div>
+</div>
 
   <!-- Set Circuit Properties Section -->
   <div class="card" style="margin-top:20px;">
