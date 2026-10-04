@@ -547,7 +547,7 @@
         <a href="#sec44"><span class="dot"></span><span class="nav-text"><span class="nav-ar">الطوبولوجيا الشبكية</span><span class="nav-en">Network Topology</span></span></a>
         <a href="#sec45"><span class="dot"></span><span class="nav-text"><span class="nav-ar">تفعيل، تحقق، وتعطيل الطوبولوجيا</span><span class="nav-en">Enable / Validate / Disable</span></span></a>
         <a href="#sec46"><span class="dot"></span><span class="nav-text"><span class="nav-ar">مفاتيح التجميع</span><span class="nav-en">Cluster Keys</span></span></a>
-        <a href="#sec47"><span class="dot"></span><span class="nav-text"><span class="nav-ar">التلاصق والمناطق المتسخة</span><span class="nav-en">Coincidence & Dirty Areas</span></span></a>
+        <a href="#sec47"><span class="dot"></span><span class="nav-text"><span class="nav-ar">التلاصق والمناطق المعدّلة</span><span class="nav-en">Coincidence & Dirty Areas</span></span></a>
         <a href="#sec48"><span class="dot"></span><span class="nav-text"><span class="nav-ar">الأخطاء: اكتشاف وفحص وإدارة</span><span class="nav-en">Errors</span></span></a>
         <a href="#sec49"><span class="dot"></span><span class="nav-text"><span class="nav-ar">أساسيات الاتصال والعلاقات</span><span class="nav-en">Connectivity & Associations</span></span></a>
         <a href="#sec50"><span class="dot"></span><span class="nav-text"><span class="nav-ar">أنواع العلاقات الثلاثة</span><span class="nav-en">Association Types</span></span></a>
@@ -3466,7 +3466,7 @@
         <h3>1. العام والطوبولوجيا <span class="en">(General &amp; Topology)</span></h3>
         <ul class="deflist">
           <li><b><span class="en">General</span>:</b> تاريخ الإنشاء، تاريخ آخر تعديل، إصدار الشبكة والبرنامج، مفاتيح التجميع (<span class="en">Cluster Keys</span>)، مالك الشبكة على البوابة (<span class="en">Portal Owner</span>)، وتفاصيل حجم الـ <span class="en">Partition ID Size</span> وطول الموجة لشبكات الاتصالات.</li>
-          <li><b><span class="en">Network Topology</span>:</b> حالة التفعيل، عدد المناطق المتسخة (<span class="en">Dirty Areas</span>)، جدول الأهداف المتسخة (<span class="en">Dirty Objects</span>)، تعداد أخطاء النقاط والخطوط والمضلعات للكائنات اللامكانية، وأزمنة ومدد تنفيذ عمليات التفعيل والتحقق وإيقاف الطوبولوجيا.</li>
+          <li><b><span class="en">Network Topology</span>:</b> حالة التفعيل، عدد المناطق المعدّلة (<span class="en">Dirty Areas</span>)، جدول الأهداف المعدّلة (<span class="en">Dirty Objects</span>)، تعداد أخطاء النقاط والخطوط والمضلعات للكائنات اللامكانية، وأزمنة ومدد تنفيذ عمليات التفعيل والتحقق وإيقاف الطوبولوجيا.</li>
         </ul>
       </div>
 
@@ -3632,13 +3632,13 @@
 
     <div class="card" style="margin-top:16px;">
       <h3>إعادة البناء <span class="en">(Rebuild)</span></h3>
-      <p>مختلفة عن التحقق <span class="en">(Validate)</span>: التحقق بيتعامل بس مع المناطق المتسخة، أما إعادة البناء فبتعيد بناء الطوبولوجيا لكل العناصر في نطاق معين بغض النظر عن وجود مناطق متسخة من عدمه. تُستخدم بس لما التحقق العادي يفشل في حل عدم اتساق معين.</p>
+      <p>مختلفة عن التحقق <span class="en">(Validate)</span>: التحقق بيتعامل بس مع المناطق المعدّلة، أما إعادة البناء فبتعيد بناء الطوبولوجيا لكل العناصر في نطاق معين بغض النظر عن وجود مناطق متسخة من عدمه. تُستخدم بس لما التحقق العادي يفشل في حل عدم اتساق معين.</p>
     </div>
 
     <div class="grid3" style="margin-top:16px;">
       <div class="card"><h3><span class="en">Verify</span></h3><p>فحص اتساق الطوبولوجيا وإنتاج ملف سجل بالمشاكل، من غير ما يعدّل حاجة.</p></div>
       <div class="card"><h3><span class="en">Repair</span></h3><p>فحص وإصلاح فعلي لعدم الاتساق، مع سجل بالمشاكل اللي اتصلحت.</p></div>
-      <div class="card"><h3><span class="en">Rebuild</span></h3><p>إعادة بناء كاملة لنطاق محدد، بغض النظر عن المناطق المتسخة.</p></div>
+      <div class="card"><h3><span class="en">Rebuild</span></h3><p>إعادة بناء كاملة لنطاق محدد، بغض النظر عن المناطق المعدّلة.</p></div>
     </div>
   </section>
 
@@ -3662,7 +3662,7 @@
         <li>بيتحقق بس من العناصر اللي عليها مناطق متسخة — مش عملية شاملة تلقائية بعد كل تعديل.</li>
         <li>خياران للنطاق: <b class="en">Current Extent</b> (الأشيع، للتعديلات المحلية) أو <b class="en">Entire Extent</b> (لتعديلات متفرقة على كل الشبكة، وأداة <span class="en">Validate Network Topology</span> الجيوبروسيسنج تُفضّل هنا للمعالجة اللامتزامنة).</li>
         <li>عند التحقق، بيتقيّم قواعد الاتصال وسياسات <span class="en">Edge Connectivity</span>؛ أي مخالفة بتتحول لخطأ <span class="en">(Error)</span>.</li>
-        <li>المناطق المتسخة المرتبطة بخطأ بتفضل موجودة لحد ما الخطأ يتصلّح فعليًا.</li>
+        <li>المناطق المعدّلة المرتبطة بخطأ بتفضل موجودة لحد ما الخطأ يتصلّح فعليًا.</li>
       </ul>
     </div>
 
@@ -3698,8 +3698,8 @@
 
   <section id="sec47">
     <span class="num">47</span>
-    <h2>التلاصق الجغرافي والمناطق المتسخة</h2>
-    <p>مش كل نقطتين متلاصقتين مسموح ليهم يبقوا في نفس المكان — والشبكة بتتتبّع أي تعديل لسه محتاج يتحقّق منه عبر "المناطق المتسخة".</p>
+    <h2>التلاصق الجغرافي والمناطق المعدّلة</h2>
+    <p>مش كل نقطتين متلاصقتين مسموح ليهم يبقوا في نفس المكان — والشبكة بتتتبّع أي تعديل لسه محتاج يتحقّق منه عبر "المناطق المعدّلة".</p>
 
     <div class="grid2" style="margin-top:18px;">
       <div class="card">
@@ -3721,7 +3721,7 @@
       </div>
     </div>
 
-    <p style="margin-top:22px;"><b>المناطق المتسخة <span class="en">(Dirty Areas)</span></b> — بتتولد لتتبع أي تعديل لسه مش منعكس في الطوبولوجيا:</p>
+    <p style="margin-top:22px;"><b>المناطق المعدّلة <span class="en">(Dirty Areas)</span></b> — بتتولد لتتبع أي تعديل لسه مش منعكس في الطوبولوجيا:</p>
     <div class="grid2" style="margin-top:14px;">
       <div class="card">
         <h3>مناطق تعديل <span class="en">(Edit)</span></h3>
