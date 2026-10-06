@@ -3547,135 +3547,542 @@
   </div>
 </section>
 
-  <section id="sec42">
-    <span class="num">42</span>
-    <h2>إدارة النطاق والصلاحيات: مين يقدر يعمل إيه وإمتى</h2>
-    <p>كل عملية إعداد أو تعديل في الشبكة ليها شروط: حالة الطوبولوجيا (مفعّلة/معطّلة)، نوع الاتصال (خدمة أو اتصال قاعدة بيانات)، وهل محتاج صلاحية <span class="en">Owner</span>.</p>
+ <section id="sec42">
+  <span class="num">42</span>
+  <h2>إدارة النطاق والصلاحيات: التبعيات ومتطلبات التنفيذ</h2>
+  <p>تعتمد مهام التكوين والإدارة داخل شبكة المرافق (<span class="en">Utility Network</span>) على عدة عوامل رئيسية: نوع اتصال مساحة العمل (<span class="en">Workspace Connection</span>)، مستوى الصلاحيات، حالة طوبولوجيا الشبكة (<span class="en">Network Topology State</span>)، والإصدار المرجعي للمخطط.</p>
 
-    <div class="grid2" style="margin-top:20px;">
-      <div class="card">
-        <h3>القاعدة العامة</h3>
-        <ul class="deflist">
-          <li>التحرير اليومي والتتبع (<span class="en">Trace</span>) — الطوبولوجيا لازم تكون <span class="en">Enabled</span>، والاتصال عبر <span class="en">Service</span>.</li>
-          <li>إعدادات البنية (قواعد، Tiers، إعدادات أطراف، فئات) — الطوبولوجيا لازم تكون <span class="en">Disabled</span>، والاتصال عبر <span class="en">Database Connection</span> بصلاحية <span class="en">Owner</span>.</li>
-          <li>استيراد/تصدير كميات كبيرة (ارتباطات، Controllers) — يُفضّل والطوبولوجيا معطّلة لتحسين الأداء.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>مهام إدارة قاعدة البيانات</h3>
-        <ul class="deflist">
-          <li><b class="en">Transfer</b> — نسخ ولصق الـ Feature Dataset، أو عبر <span class="en">Utility Network Package Tools</span>، أو <span class="en">XML Workspace Document</span> (السكيمة فقط أو مع البيانات).</li>
-          <li><b class="en">Upgrade</b> — لازم تحفظ التعديلات، تاخد قفل حصري، وتعطّل الطوبولوجيا؛ الترقيات تراكمية بين الإصدارات.</li>
-          <li><b class="en">Update Portal Owner</b> — مالك قاعدة البيانات مينفعش يتغير، بس مالك البورتال (Portal Owner) ممكن يتحدّث لو ترك المنظمة.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="example-box" style="margin-top:16px;">
-      <span class="label en">FTTH EXAMPLE</span>
-      <p>محتاج تضيف قاعدة اتصال جديدة أو تعدّل <span class="en">Tier</span> لشبكة الفايبر؟ لازم تعطّل الطوبولوجيا الأول، تدخل عبر اتصال قاعدة بيانات بصلاحية <span class="en">Owner</span>، تعمل التعديل، وبعدها تفعّل الطوبولوجيا تاني عشان يتصلّح الوضع.</p>
-    </div>
-  </section>
-
-  <section id="sec43">
-    <span class="num">43</span>
-    <h2>العمل أوفلاين وتوافق الإصدارات</h2>
-    <p>نموذج الشبكة الكامل بيتدعم أوفلاين، وكمان مهم تعرف إزاي التوافق بين إصدارات <span class="en">ArcGIS Pro</span> و<span class="en">Enterprise</span> وإصدار الشبكة نفسه بيشتغل.</p>
-
-    <div class="grid2" style="margin-top:18px;">
-      <div class="card">
-        <h3>أخذ الشبكة أوفلاين</h3>
-        <ul class="deflist">
-          <li>محتاج <span class="en">ArcGIS Enterprise 11.3</span> فأكتر لدعم التحرير والتتبع أوفلاين.</li>
-          <li>طبقة <span class="en">Service Territory</span> وكل فئات الشبكة لازم تكون في الخريطة وقت النشر أو التحميل.</li>
-          <li><span class="en">Preplanned Map Areas</span> أفضل من التحميل عند الطلب لعدد كبير من الفرق الميدانية.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>ماذا يحدث أوفلاين</h3>
-        <p>الشبكة والطبقات المرتبطة بتتنزل في <span class="en">Mobile Geodatabase</span> جديدة، وبتاخد توسعة تلقائية عشان تجيب أي كائن غير مكاني محتاج للشبكة تفضل شغالة. تقدر تعدّل، تتبّع، وتولّد مخططات زي الاتصال أونلاين تمامًا، وبعدين تعمل <span class="en">Sync</span>.</p>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:16px;">
-      <h3>إصدار الشبكة <span class="en">(Utility Network Version)</span></h3>
-      <p style="margin-bottom:10px;">كل إصدار من <span class="en">ArcGIS Pro</span> و<span class="en">Enterprise</span> بيحدد أقصى إصدار شبكة ممكن تتنشأ أو تترقّى ليه:</p>
+  <!-- القواعد العامة وأمثلة العمل -->
+  <div class="grid2" style="margin-top:20px;">
+    <div class="card">
+      <h3>المبادئ الأساسية للإدارة والتعديل</h3>
       <ul class="deflist">
-        <li><b class="en">Version 4</b> — <span class="en">Pro 2.6+</span> / <span class="en">Enterprise 10.8.1+</span></li>
-        <li><b class="en">Version 5</b> — <span class="en">Pro 2.7+</span> / <span class="en">Enterprise 10.9+</span></li>
-        <li><b class="en">Version 6</b> — <span class="en">Pro 3.0+</span> / <span class="en">Enterprise 11.0+</span></li>
-        <li><b class="en">Version 7</b> — <span class="en">Pro 3.3+</span> / <span class="en">Enterprise 11.3+</span> (يدعم حقول <span class="en">Big Integer</span> و<span class="en">64-bit Object ID</span>)</li>
+        <li><b>التحرير اليومي والتشغيل:</b> تعديل المعالم، العلاقات، والتتبع ينفذ عبر **الخدمات (<span class="en">Feature Service</span>)** وطوبولوجيا الشبكة في حالة **تفعيل (<span class="en">Enabled</span>)**.</li>
+        <li><b>تعديلات الهيكل والتكوين:</b> إضافة القواعد (<span class="en">Rules</span>)، المستويات (<span class="en">Tiers</span>)، التكاوين الشجرية للأطراف (<span class="en">Terminals</span>)، وفئات الشبكة تطلب **تعطيل الطوبولوجيا (<span class="en">Disabled</span>)** والاتصال المباشر بقاعدة البيانات.</li>
+        <li><b>صلاحيات المالك:</b> تتطلب معظم التغييرات الهيكلية الاتصال كـ **مالك قاعدة البيانات (<span class="en">Database Owner</span>)** و**مالك البورتال (<span class="en">Portal Owner</span>)** في نفس الوقت.</li>
       </ul>
-      <p style="margin-top:10px; font-size:13.5px; color:var(--text-dim);">القاعدة العامة: إصدارات <span class="en">Pro</span> الأحدث بتقدر دايمًا تفتح وتعدّل إصدارات شبكة أقدم (توافق خلفي) — لكن العكس مش صحيح، خصوصًا في نشر أحادي المستخدم.</p>
     </div>
-  </section>
-
-  <section id="sec44">
-    <span class="num">44</span>
-    <h2>الطوبولوجيا الشبكية: محرك الشبكة الفعلي</h2>
-    <p>كل شبكة مرافق ليها <b>طوبولوجيا شبكية</b> — دي المسؤولة عن إدارة معلومات الاتصال بين العناصر، ومخزّنة كـ <span class="en">Graph</span> بصيغة ثنائية بتسمح بالتتبع والمخططات بكفاءة عالية، من غير ما ترجع للقاعدة الأساسية في كل استعلام.</p>
-
-    <div class="grid2" style="margin-top:18px;">
-      <div class="card">
-        <h3>حالتان بس</h3>
-        <ul class="deflist">
-          <li><b class="en">Enabled</b> — الحالة المطلوبة للتتبع والمخططات؛ التعديلات بتتحول لمناطق متسخة تحتاج تحقّق.</li>
-          <li><b class="en">Disabled</b> — الحالة المطلوبة لمهام الإدارة (قواعد، Tiers، إعدادات أطراف) وتحميل بيانات ضخمة.</li>
-        </ul>
-        <p style="margin-top:10px; font-size:13.5px; color:var(--text-dim);">بس مالك الشبكة <span class="en">(Owner)</span> يقدر يغيّر الحالة دي.</p>
-      </div>
-      <div class="card">
-        <h3>لما تتعطّل</h3>
-        <p>منطقة متسخة واحدة بتغطي الشبكة كلها بتتعمل تلقائيًا. أي تعديل وقت التعطيل مش متتبّع بمناطق متسخة تفصيلية — لما تتفعّل تاني، كل التعديلات المعلّقة بتتحقّق دفعة واحدة.</p>
-      </div>
+    <div class="card">
+      <h3>إدارة وترقية قاعدة البيانات الجغرافية</h3>
+      <ul class="deflist">
+        <li><b>الأنواع والتفرع:</b> يلزم تسجيل البيانات بنظام التفرع النسخي (<span class="en">Branch Versioning</span>) لجميع عمليات المؤسسات.</li>
+        <li><b>نقل البيانات (<span class="en">Transfer</span>):</b> عبر أدوات النسخ واللصق المباشر preserve للـ <span class="en">Dirty Areas</span>، أو استخدام <span class="en">Utility Network Package Tools</span>، أو مستندات <span class="en">XML Workspace</span>.</li>
+        <li><b>ترقية الإصدار (<span class="en">Upgrade</span>):</b> عمليات الترقية تراكمية، وتستلزم قفل حصري للبيانات (<span class="en">Exclusive Lock</span>)، وحفظ كافة التحريرات، وتعطيل الطوبولوجيا قبل التنفيذ.</li>
+      </ul>
     </div>
+  </div>
 
-    <div class="card" style="margin-top:16px;">
-      <h3>إعادة البناء <span class="en">(Rebuild)</span></h3>
-      <p>مختلفة عن التحقق <span class="en">(Validate)</span>: التحقق بيتعامل بس مع المناطق المعدّلة، أما إعادة البناء فبتعيد بناء الطوبولوجيا لكل العناصر في نطاق معين بغض النظر عن وجود مناطق متسخة من عدمه. تُستخدم بس لما التحقق العادي يفشل في حل عدم اتساق معين.</p>
+  <!-- جداول تفصيلية تتبع عمليات الشبكة -->
+  <div style="margin-top:24px;">
+    <h3>1. العمليات العامة وطوبولوجيا الشبكة <span class="en">(General Operations)</span></h3>
+    <div style="overflow-x:auto;">
+      <table class="data-table" style="width:100%; text-align:right; border-collapse:collapse; margin-top:8px;">
+        <thead>
+          <tr style="background-color:rgba(255,255,255,0.05);">
+            <th style="padding:8px; border:1px solid #444;">العملية / الأداة (<span class="en">Action</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">مساحة العمل (<span class="en">Workspace</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">حالة الطوبولوجيا (<span class="en">Topology State</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">الإصدار الافتراضي فقط؟</th>
+            <th style="padding:8px; border:1px solid #444;">تتطلب بيانات مفرعة؟</th>
+            <th style="padding:8px; border:1px solid #444;">تتطلب مالك DB &amp; Portal؟</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="en">Create Utility Network</span></td>
+            <td><span class="en">Database Connection</span></td>
+            <td><span class="en">Disabled</span></td>
+            <td>نعم</td>
+            <td>لا</td>
+            <td>نعم</td>
+          </tr>
+          <tr>
+            <td><span class="en">Enable Network Topology</span></td>
+            <td><span class="en">DB Connection / Service</span></td>
+            <td><span class="en">Disabled</span></td>
+            <td>نعم</td>
+            <td>نعم</td>
+            <td>نعم</td>
+          </tr>
+          <tr>
+            <td><span class="en">Disable Network Topology</span></td>
+            <td><span class="en">DB Connection / Service</span></td>
+            <td><span class="en">Enabled</span></td>
+            <td>لا</td>
+            <td>لا</td>
+            <td>نعم</td>
+          </tr>
+          <tr>
+            <td><span class="en">Validate Network Topology</span></td>
+            <td><span class="en">Service</span></td>
+            <td><span class="en">Enabled</span></td>
+            <td>لا</td>
+            <td>نعم</td>
+            <td>لا</td>
+          </tr>
+          <tr>
+            <td><span class="en">Rebuild Network Topology</span></td>
+            <td><span class="en">Service</span></td>
+            <td><span class="en">Enabled</span></td>
+            <td>لا</td>
+            <td>نعم</td>
+            <td>لا</td>
+          </tr>
+          <tr>
+            <td><span class="en">Update Portal Dataset Owner</span></td>
+            <td><span class="en">Database Connection</span></td>
+            <td><span class="en">Enabled / Disabled</span></td>
+            <td>لا</td>
+            <td>نعم</td>
+            <td>يتطلب مالك DB فقط</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 
-    <div class="grid3" style="margin-top:16px;">
-      <div class="card"><h3><span class="en">Verify</span></h3><p>فحص اتساق الطوبولوجيا وإنتاج ملف سجل بالمشاكل، من غير ما يعدّل حاجة.</p></div>
-      <div class="card"><h3><span class="en">Repair</span></h3><p>فحص وإصلاح فعلي لعدم الاتساق، مع سجل بالمشاكل اللي اتصلحت.</p></div>
-      <div class="card"><h3><span class="en">Rebuild</span></h3><p>إعادة بناء كاملة لنطاق محدد، بغض النظر عن المناطق المعدّلة.</p></div>
+  <div style="margin-top:24px;">
+    <h3>2. عمليات التحرير والتعديل على الشبكة <span class="en">(Editing &amp; Modifications)</span></h3>
+    <div style="overflow-x:auto;">
+      <table class="data-table" style="width:100%; text-align:right; border-collapse:collapse; margin-top:8px;">
+        <thead>
+          <tr style="background-color:rgba(255,255,255,0.05);">
+            <th style="padding:8px; border:1px solid #444;">العملية / الأداة (<span class="en">Action</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">مساحة العمل (<span class="en">Workspace</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">حالة الطوبولوجيا (<span class="en">Topology State</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">تتطلب بيانات مفرعة؟</th>
+            <th style="padding:8px; border:1px solid #444;">تتطلب مالك الشبكة؟</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="en">Edit network features &amp; attributes</span></td>
+            <td><span class="en">Service</span></td>
+            <td><span class="en">Enabled</span></td>
+            <td>نعم</td>
+            <td>لا</td>
+          </tr>
+          <tr>
+            <td><span class="en">Modify associations</span></td>
+            <td><span class="en">Service</span></td>
+            <td><span class="en">Enabled / Disabled</span></td>
+            <td>نعم</td>
+            <td>لا</td>
+          </tr>
+          <tr>
+            <td><span class="en">Create or modify subnetwork controller</span></td>
+            <td><span class="en">Service</span></td>
+            <td><span class="en">Enabled / Disabled</span></td>
+            <td>نعم</td>
+            <td>لا</td>
+          </tr>
+          <tr>
+            <td><span class="en">Update Subnetwork</span></td>
+            <td><span class="en">Service</span></td>
+            <td><span class="en">Enabled</span></td>
+            <td>نعم</td>
+            <td>لا</td>
+          </tr>
+          <tr>
+            <td><span class="en">Modify terminal connections</span></td>
+            <td><span class="en">DB Connection / Service</span></td>
+            <td><span class="en">Enabled / Disabled</span></td>
+            <td>عبر خدمة (إذا كانت مفعلة نسخة)</td>
+            <td>نعم</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </section>
+  </div>
 
-  <section id="sec45">
-    <span class="num">45</span>
-    <h2>تفعيل، تحقق، وتعطيل الطوبولوجيا: الخطوات العملية</h2>
+  <div style="margin-top:24px;">
+    <h3>3. تغييرات التكوين والهيكل البنائي <span class="en">(Configuration Changes)</span></h3>
+    <div style="overflow-x:auto;">
+      <table class="data-table" style="width:100%; text-align:right; border-collapse:collapse; margin-top:8px;">
+        <thead>
+          <tr style="background-color:rgba(255,255,255,0.05);">
+            <th style="padding:8px; border:1px solid #444;">العملية / الأداة (<span class="en">Action</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">مساحة العمل (<span class="en">Workspace</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">حالة الطوبولوجيا (<span class="en">Topology State</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">الإصدار الافتراضي فقط؟</th>
+            <th style="padding:8px; border:1px solid #444;">تتطلب مالك DB &amp; Portal؟</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="en">Add Domain Network / Tier / Tier Group</span></td>
+            <td><span class="en">Database Connection</span></td>
+            <td><span class="en">Disabled</span></td>
+            <td>نعم</td>
+            <td>نعم</td>
+          </tr>
+          <tr>
+            <td><span class="en">Add Rule / Delete Rule</span></td>
+            <td><span class="en">Database Connection</span></td>
+            <td><span class="en">Disabled</span></td>
+            <td>نعم</td>
+            <td>نعم</td>
+          </tr>
+          <tr>
+            <td><span class="en">Add Terminal Configuration / Set Network Category</span></td>
+            <td><span class="en">Database Connection</span></td>
+            <td><span class="en">Disabled</span></td>
+            <td>نعم</td>
+            <td>نعم</td>
+          </tr>
+          <tr>
+            <td><span class="en">Delete Terminal Configuration / Unassign Association Role</span></td>
+            <td><span class="en">Database Connection</span></td>
+            <td><span class="en">Disabled (قبل أول تفعيل للطوبولوجيا)</span></td>
+            <td>نعم</td>
+            <td>نعم</td>
+          </tr>
+          <tr>
+            <td><span class="en">Add/Edit Subtypes / Asset Types / Asset Groups</span></td>
+            <td><span class="en">Database Connection</span></td>
+            <td><span class="en">Enabled / Disabled</span></td>
+            <td>نعم</td>
+            <td>نعم</td>
+          </tr>
+          <tr>
+            <td><span class="en">Add Trace Configuration / Delete Trace Configuration</span></td>
+            <td><span class="en">Service</span></td>
+            <td><span class="en">Enabled / Disabled</span></td>
+            <td>لا</td>
+            <td>لا</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- تفاصيل إدارة قاعدة البيانات والتصدير/الترقية -->
+  <div class="grid2" style="margin-top:24px;">
+    <div class="card">
+      <h3>نقل قاعدة البيانات واستخدام XML Workspace</h3>
+      <ul class="deflist">
+        <li>عند تصدير واستيراد ملفات <span class="en">XML Workspace Document</span>:
+          <ul>
+            <li>تُحفظ إصدارة شبكة المرافق في الناتج.</li>
+            <li>تتحول طوبولوجيا الشبكة الناتجة تلقائياً إلى حالة **تعطيل (<span class="en">Disabled</span>)**.</li>
+            <li>تتغير جميع الشبكات الفرعية (<span class="en">Subnetworks</span>) إلى مناطق معدّلة (<span class="en">Dirty Areas</span>).</li>
+            <li>يتم تحويل حالة اتساق المخططات الشجرية (<span class="en">Diagrams</span>) إلى غير متسقة (<span class="en">Inconsistent</span>).</li>
+          </ul>
+        </li>
+        <li><b>توصية مهمة:</b> يُفضل تصدير الهيكل فقط (<span class="en">Schema Only</span>) واستخدام أداة <span class="en">Append</span> لنقل البيانات الضخمة بدلاً من تصدير البيانات الكاملة المباشرة عبر XML.</li>
+      </ul>
+    </div>
 
     <div class="card">
-      <h3><span class="en">Enable Network Topology</span></h3>
+      <h3>شروط تحديث ترقية الشبكة <span class="en">(Dataset Upgrade)</span></h3>
       <ul class="deflist">
-        <li>لازم قفل حصري <span class="en">(Exclusive Lock)</span>، وفهرسة مكانية على كل فئات الشبكة.</li>
-        <li>لازم كل فئة تكون مربوطة بـ <span class="en">Attribute Domain</span> على حقل <span class="en">Asset Type</span>، ووجود قاعدة واحدة على الأقل.</li>
-        <li>خيار <b class="en">Only generate errors</b> — يكتشف الأخطاء بس من غير ما يفعّل الطوبولوجيا فعليًا؛ مفيد لمراجعة جودة البيانات قبل ترقية القاعدة لـ <span class="en">Versioned</span>.</li>
-        <li>لو الطوبولوجيا كانت مفعّلة قبل كده، أي أخطاء قديمة بتتمسح وتتولد من جديد.</li>
+        <li><b>المتطلبات الأساسية قبل الترقية عبر أداة <span class="en">Upgrade Dataset</span>:</b>
+          <ul>
+            <li>حفظ جميع التعديلات المعلقة (<span class="en">Save Edits</span>).</li>
+            <li>إنهاء كافة الاتصالات النشطة على الخدمة والحصول على قفل حصري (<span class="en">Exclusive Lock</span>).</li>
+            <li>تعطيل طوبولوجيا الشبكة (<span class="en">Disable Network Topology</span>).</li>
+            <li>أن يكون الاتصال كـ مالك قاعدة البيانات ومسجل في تفرع نسخ الخدمة (<span class="en">Branch Versioned</span>)، ويكون حساب البورتال النشط هو مالك الشبكة على البورتال.</li>
+            <li>للإصدارات <span class="en">Utility Network V7</span> وما بعد، يلزم استخدام قاعدة بيانات مؤسسية إصدار 11.2.0 فأحدث لدعم المعرفات ذات 64 بت (<span class="en">64-bit Object IDs</span>).</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- مثال تطبيقي عملي -->
+  <div class="example-box" style="margin-top:20px;">
+    <span class="label en">FTTH &amp; UTILITY EXAMPLE</span>
+    <p>عند الرغبة في إضافة أطراف توصيل جيدة أو ضبط قواعد الـ <span class="en">Connectivity Rules</span> لشبكة الفايبر أو الكهرباء:</p>
+    <ol style="margin-right: 20px; margin-top: 8px;">
+      <li>تأكد من عدم وجود محرريين نشطين وحفظ التحريرات الحالية.</li>
+      <li>قم بتعطيل طوبولوجيا الشبكة (<span class="en">Disable Network Topology</span>).</li>
+      <li>اتصل بقاعدة البيانات مباشرة (<span class="en">Database Connection</span>) بحساب المالك الخاص بالـ DB والـ Portal.</li>
+      <li>نفّذ التعديل الهيكلي أو إضافة القواعد المطلوبة ثم أعد تفعيل الطوبولوجيا (<span class="en">Enable Network Topology</span>) وقم بإجراء عمليات التحقق (<span class="en">Validate</span>).</li>
+    </ol>
+  </div>
+</section>
+
+<section id="sec43">
+  <span class="num">43</span>
+  <h2>العمل بدون اتصال بالشبكة (Offline) وتوافق الإصدارات</h2>
+  <p>يُدعم نموذج شبكة المرافق الكامل أوفلاين عبر خدمات المعالم المجهزة بخاصية التزامن (<span class="en">Sync-Enabled Feature Service</span>). يتيح ذلك تنفيذ عمليات التحرير والتتبع (<span class="en">Trace</span>) والتحليلات في البيئات غير المتصلة عبر <span class="en">ArcGIS Pro</span> أو التطبيقات المطورة عبر <span class="en">ArcGIS Maps SDKs</span>.</p>
+
+  <!-- آليات ودعم العمل أوفلاين -->
+  <div class="grid2" style="margin-top:20px;">
+    <div class="card">
+      <h3>آليات إعداد مناطق الخرائط أوفلاين</h3>
+      <ul class="deflist">
+        <li><b>المناطق المجهزة مسبقاً (<span class="en">Preplanned Map Areas</span>):</b> الخيار الأفضل والأكثر كفاءة للمؤسسات والفرق الميدانية الكبيرة؛ حيث يُعد ناشر الخريطة نطاقات محددة ومجهزة مسبقاً تُحفظ على <span class="en">ArcGIS Enterprise</span> للتحميل السريع.</li>
+        <li><b>التحميل عند الطلب (<span class="en">On-Demand Map Areas</span>):</b> توفر مرونة للمستخدم لتحديد نطاق جغرافي مخصص عبر زر (<span class="en">Download Map</span>)، ولكنها تستهلك موارد أكبر من السيرفر ولا تُوصى للنطاقات الضخمة.</li>
+        <li><b>المتطلبات الأساسية:</b>
+          <ul>
+            <li>تتطلب هذه الخاصية <span class="en">ArcGIS Enterprise 11.3</span> أو أحدث.</li>
+            <li>تضمين طبقة نطاق الخدمة (<span class="en">Service Territory</span>) وجميع طبقات المعالم المشاركة في الشبكة بالخريطة.</li>
+            <li>تفعيل خاصية التزامن (<span class="en">Sync</span>) لجميع الطبقات في الخدمة.</li>
+          </ul>
+        </li>
       </ul>
     </div>
 
-    <div class="card" style="margin-top:14px;">
-      <h3><span class="en">Validate Network Topology</span></h3>
+    <div class="card">
+      <h3>سلوك البيانات الميدانية والتزامن</h3>
       <ul class="deflist">
-        <li>بيتحقق بس من العناصر اللي عليها مناطق متسخة — مش عملية شاملة تلقائية بعد كل تعديل.</li>
-        <li>خياران للنطاق: <b class="en">Current Extent</b> (الأشيع، للتعديلات المحلية) أو <b class="en">Entire Extent</b> (لتعديلات متفرقة على كل الشبكة، وأداة <span class="en">Validate Network Topology</span> الجيوبروسيسنج تُفضّل هنا للمعالجة اللامتزامنة).</li>
-        <li>عند التحقق، بيتقيّم قواعد الاتصال وسياسات <span class="en">Edge Connectivity</span>؛ أي مخالفة بتتحول لخطأ <span class="en">(Error)</span>.</li>
-        <li>المناطق المعدّلة المرتبطة بخطأ بتفضل موجودة لحد ما الخطأ يتصلّح فعليًا.</li>
+        <li><b>التنزيل الذكي:</b> تُحفظ البيانات في قاعدة بيانات جغرافية جديدة للهواتف المحمولة (<span class="en">Mobile Geodatabase</span>). تقام عملية توسعة تلقائية (<span class="en">Expansion</span>) لتنزيل الكائنات والعناصر غير المكانية المرتبطة بالشبكة حتى لو كانت خارج النطاق الجغرافي.</li>
+        <li><b>بيئة العمل والتتبع:</b> تتوفر الأدوات الكاملة للتراجع والإعادة، إنشاء وتحقيق المناطق المعدلة (<span class="en">Dirty Areas</span>)، تنفيذ التتبع، وتوليد المخططات.</li>
+        <li><b>قواعد السمات (<span class="en">Attribute Rules</span>):</b> تُحمل قواعد الحساب الفوري والقيود أوفلاين تلقائياً.</li>
+        <li><b>التزامن (<span class="en">Sync</span>):</b> بمجرد توفر اتصال بالإنترنت، تنقل التحريرات الميدانية للبوابة وتُحدث الخريطة بالتعديلات الأخيرة.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- جداول وتوافق الإصدارات -->
+  <div style="margin-top:24px;">
+    <h3>توافق إصدارات شبكة المرافق مع البرامج <span class="en">(Utility Network Version Compatibility)</span></h3>
+    <p style="margin-bottom:12px;">يحدد إصدار البرامج المعتمد إصدار مخطط الشبكة المتوافق عند الإنشاء أو الترقية:</p>
+    
+    <div style="overflow-x:auto;">
+      <table class="data-table" style="width:100%; text-align:right; border-collapse:collapse; margin-top:8px;">
+        <thead>
+          <tr style="background-color:rgba(255,255,255,0.05);">
+            <th style="padding:8px; border:1px solid #444;">إصدار الشبكة (<span class="en">UN Version</span>)</th>
+            <th style="padding:8px; border:1px solid #444;">إصدار <span class="en">ArcGIS Pro</span> المتوافق</th>
+            <th style="padding:8px; border:1px solid #444;">إصدار <span class="en">ArcGIS Enterprise</span> المتوافق</th>
+            <th style="padding:8px; border:1px solid #444;">ملاحظات ونطاق الدعم</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="en">Version 4</span></td>
+            <td><span class="en">2.6</span> فأحدث</td>
+            <td><span class="en">10.8.1</span> فأحدث</td>
+            <td>إصدارات الأساس للبيئات المؤسسية المتقدمة.</td>
+          </tr>
+          <tr>
+            <td><span class="en">Version 5</span></td>
+            <td><span class="en">2.7</span> فأحدث</td>
+            <td><span class="en">10.9</span> فأحدث</td>
+            <td>دعم المحاكاة المتقدمة للشبكات الفرعية.</td>
+          </tr>
+          <tr>
+            <td><span class="en">Version 6</span></td>
+            <td><span class="en">3.0</span> فأحدث</td>
+            <td><span class="en">11.0</span> فأحدث</td>
+            <td>دعم البنية الجيل الثالث من أدوات إدارة الشبكة.</td>
+          </tr>
+          <tr>
+            <td><span class="en">Version 7</span></td>
+            <td><span class="en">3.3</span> فأحدث</td>
+            <td><span class="en">11.3</span> فأحدث</td>
+            <td>دعم الحقول الكبيرة <span class="en">Big Integer</span> و<span class="en">64-bit Object IDs</span> والعمل أوفلاين.</td>
+          </tr>
+          <tr>
+            <td><span class="en">Version 8</span></td>
+            <td><span class="en">3.7</span> فأحدث</td>
+            <td><span class="en">12.1</span> فأحدث</td>
+            <td>مخصص أساساً لشبكات الاتصالات والألياف الضوئية (<span class="en">Telecom</span>).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- قواعد التوافق الأمامي والخلفي -->
+  <div class="grid2" style="margin-top:24px;">
+    <div class="card">
+      <h3>التوافق الخلفي <span class="en">(Backward Compatibility)</span></h3>
+      <p>الإصدارات الأحدث من <span class="en">ArcGIS Pro</span> و<span class="en">Enterprise</span> تستطيع دائماً فتح واستعراض وتعديل ومشاركة الإصدارات الأقدم من شبكة المرافق.</p>
+      <ul class="deflist" style="margin-top:8px;">
+        <li>مثال: <span class="en">ArcGIS Pro 3.7</span> يمكنه فتح وتعديل <span class="en">UN Version 4</span> أو <span class="en">5</span> أو <span class="en">7</span> بدون مشاكل.</li>
       </ul>
     </div>
 
-    <div class="card" style="margin-top:14px;">
-      <h3><span class="en">Disable Network Topology</span></h3>
-      <p>مطلوبة لأي مهمة إدارية (قواعد، أدوار علاقات، إعدادات أطراف)، ومنصوح بيها كمان قبل تحميل بيانات ضخمة لتحسين الأداء. التعديلات وقت التعطيل مش متتبعة بمناطق متسخة تفصيلية.</p>
+    <div class="card">
+      <h3>التوافق الأمامي والتطبيقات الخارجية <span class="en">(Forward Compatibility)</span></h3>
+      <p>الإصدارات القديمة من العملاء يمكنها الوصول للشبكات الحديثة عبر **الخدمات (<span class="en">Services</span>)** فقط وبشرط عدم استخدام وظائف جديدة لا يدعمها العميل:</p>
+      <ul class="deflist" style="margin-top:8px;">
+        <li>البيانات ذات النشر أحادي المستخدم (<span class="en">Single-User / File GDB</span>) **لا تدعم** التوافق الأمامي نهائياً (مثلاً: <span class="en">Pro 3.1</span> لا يستطيع فتح <span class="en">Version 7</span>).</li>
+        <li>تطبيقات الهواتف مثل <span class="en">ArcGIS Field Maps</span> لا تدعم حالياً <span class="en">UN Version 8</span> مع <span class="en">Enterprise 12.1</span>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="example-box" style="margin-top:20px;">
+    <span class="label en">OFFLINE &amp; HYBRID WORKFLOW EXAMPLE</span>
+    <p>عند بناء حل للمهندسين الميدانيين لشبكات الألياف والكهرباء بدون اتصال بالإنترنت:</p>
+    <ol style="margin-right: 20px; margin-top: 8px;">
+      <li>تأكد من إعداد البيئة على <span class="en">ArcGIS Enterprise 11.3+</span> وتجهيز خرائط <span class="en">Preplanned Map Areas</span> محددة بنطاقات التغطية.</li>
+      <li>تأكد أن إصدار قاعدة البيانات هو <span class="en">Utility Network Version 7</span> لضمان التوافق مع تطبيقات <span class="en">Field Maps</span> والأجهزة الذكية.</li>
+      <li>يقوم الفني بتنزيل الخريطة محلياً، إجراء التعديلات والتتبع ميدانياً، ثم رفع التعديلات فور الاتصال بالشبكة المركزية عبر زر التزامن.</li>
+    </ol>
+  </div>
+</section>
+
+  <section id="sec44">
+  <span class="num">44</span>
+  <h2>الطوبولوجيا الشبكية: المحرك الفعلي للشبكة والتحقق</h2>
+  <p>تتمتع كل شبكة مرافق بـ **طوبولوجيا شبكية (<span class="en">Network Topology</span>)** خفيفة وسريعة، وظيفتها إدارة الاتصال الهيكلي بين المعالم. تُخزن الطوبولوجيا على هيئة رسم بياني (<span class="en">Graph</span>) في صفحات ثنائية (<span class="en">Binary Pages</span>)، مما يتيح لأدوات التتبع والمخططات قراءة البيانات وتخزين الأجزاء المقطوعة مؤقتاً (<span class="en">Caching with Timestamps</span>) دون الحاجة للاستعلام المباشر من الجداول المكانية الرئيسية عند كل عملية.</p>
+
+  <!-- حالتا الطوبولوجيا وصلاحيات الإدارة -->
+  <div class="grid2" style="margin-top:20px;">
+    <div class="card">
+      <h3>حالات طوبولوجيا الشبكة <span class="en">(Topology States)</span></h3>
+      <ul class="deflist">
+        <li><b>التفعيل (<span class="en">Enabled</span>):</b> الحالة المطلوبة لتنفيذ أدوات التتبع (<span class="en">Trace</span>) والمخططات (<span class="en">Diagrams</span>). يُنشئ النظام مناطق معدّلة (<span class="en">Dirty Areas</span>) تلقائياً لتتبع أي تعديل مكاني أو وصفي.</li>
+        <li><b>التعطيل (<span class="en">Disabled</span>):</b> الحالة المطلوبة لإضافة القواعد (<span class="en">Rules</span>)، تعيين أدوار الارتباط، واستيراد البيانات الضخمة لتنسيق الأداء. عند التعطيل، تُنشأ منطقة معدّلة واحدة تغطي كامل نطاق الشبكة.</li>
+        <li><b>ملاحظة الصلاحية:</b> مالك شبكة المرافق (<span class="en">Utility Network Owner</span>) هو الوحيد المخول بالتحكم في تفعيل أو تعطيل الطوبولوجيا.</li>
+      </ul>
     </div>
 
-    <div class="example-box" style="margin-top:16px;">
-      <span class="label en">FTTH EXAMPLE</span>
-      <p>بعد ما فريق التصميم يضيف حي جديد من الكابلات، الخطوة الطبيعية إنهم يشغّلوا <span class="en">Validate</span> على <span class="en">Current Extent</span> بس (منطقة الحي)، بدل ما يشغّلوا <span class="en">Entire Extent</span> على شبكة الدولة كلها.</p>
+    <div class="card">
+      <h3>التحقق والتأكد من جودة البيانات <span class="en">(QA &amp; Errors)</span></h3>
+      <ul class="deflist">
+        <li><b>أداة التفعيل لتقييم الأخطاء فقط (<span class="en">Only Generate Errors</span>):</b> تُستخدم قبل تسجيل البيانات بنظام النسخ الفرعي (<span class="en">Branch Versioning</span>) لفحص سلامة البيانات واكتشاف الأخطاء وتصحيحها مبكراً.</li>
+        <li><b>إدارة الأخطاء:</b> الأخطاء الناجمة عن مخالفة قواعد الشبكة تظل معلمة بمناطق معدّلة ولا يمكن إزالتها إلا بعد تصحيح المعلم أو تعديل قاعدة التكوين (والذي يستلزم تعطيل الطوبولوجيا).</li>
+        <li><b>المعالم غير المكانية:</b> العقد والوصلات غير المكانية (<span class="en">Unlocatable Junctions &amp; Edges</span>) تستلزم تعطيل ثم إعادة تفعيل الطوبولوجيا لتعكس التغيرات التي طرأت عليها.</li>
+      </ul>
     </div>
-  </section>
+  </div>
+
+  <!-- التحقق مقابل إعادة البناء وسلوك المناطق المعدلة -->
+  <div style="margin-top:24px;">
+    <h3>عمليات التحقق وإعادة البناء <span class="en">(Validate vs Rebuild)</span></h3>
+    <div class="grid2" style="margin-top:8px;">
+      <div class="card">
+        <h3>خيارات نطاق التحقق <span class="en">(Validate)</span></h3>
+        <p>لا يتم التحقق تلقائياً فور التحرير. يمكن تشغيله عبر خيارين أساسيين:</p>
+        <ul class="deflist" style="margin-top:6px;">
+          <li><b>النطاق الحالي (<span class="en">Current Extent</span>):</b> يتحقق فقط من المناطق المعدّلة في الشاشة الحالية. وهو الخيار الأنسب والموصى به عند التحرير المحلي.</li>
+          <li><b>النطاق الكامل (<span class="en">Entire Extent</span>):</b> يفحص الشبكة بالكامل. يُنصح ببدء أدوات الجيوبروسيسنج للتنفيذ اللازم لخاصية المعالجة غير المتزامنة (<span class="en">Asynchronous</span>) في قواعد البيانات المؤسسية.</li>
+        <li><b>قص المناطق المعدّلة:</b> التحقق في نطاق معين يقوم بقص (<span class="en">Clip</span>) المناطق المعدّلة الواقعة داخله، مع إبقاء أجزاء المنطقة المتبقية خارج النطاق، أو إعادة إظهارها إن استمر وجود الأخطاء.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>إعادة البناء <span class="en">(Rebuild Topology)</span></h3>
+        <p>تختلف عن التحقق العادي بأنها **تعيد معالجة وبناء الطوبولوجيا لكل المعالم داخل النطاق المحدد بغض النظر عن وجود مناطق معدّلة من عدمه**.</p>
+        <ul class="deflist" style="margin-top:6px;">
+          <li>تُشبه في سلوكها أداة التفعيل (<span class="en">Enable</span>)، لكنها تُطبق على **نطاق محدد (<span class="en">Specific Extent</span>)** فقط بدلاً من الشبكة بالكامل.</li>
+          <li>يتم اللجوء إليها فقط عند مواجهة مشكلات غير متوقعة في نتائج التحليل أو عندما يفشل التحقق العادي في حل عدم الاتساق.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- أدوات الفحص والإصلاح والصيانة -->
+  <div style="margin-top:24px;">
+    <h3>أدوات صيانة الاتساق المتقدمة <span class="en">(Maintenance Tools)</span></h3>
+    <div class="grid3" style="margin-top:12px;">
+      <div class="card">
+        <h3><span class="en">Verify Network Topology</span></h3>
+        <p>فحص اتساق الطوبولوجيا وتحديد المشاكل مع استخراج ملف سجل (<span class="en">Log File</span>) تفصيلي دون إجراء أي تعديل فعلي على البيانات.</p>
+      </div>
+      <div class="card">
+        <h3><span class="en">Repair Network Topology</span></h3>
+        <p>فحص وإصلاح التناقضات الهيكلية للطوبولوجيا تلقائياً مع توثيق التعديلات في ملف سجل. يُستخدم لإصلاح المشكلات التي تعطل التحقق.</p>
+      </div>
+      <div class="card">
+        <h3><span class="en">Rebuild Network Topology</span></h3>
+        <p>إعادة إنشاء شاملة للرسم البياني للطوبولوجيا داخل نطاق محدد لمعالجة القضايا البرمجية والتجميعية المستعصية.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- الدعم الزمني وتتبع المحررين -->
+  <div class="card" style="margin-top:20px;">
+    <h3>التتبع الزمني والإصدارات التفرعية <span class="en">(Temporal Awareness &amp; Branch Versioning)</span></h3>
+    <p>بفضل استخدام نظام التفرع النسخي (<span class="en">Branch Versioning</span>)، تدعم شبكة المرافق الأرشفة وتتبع المحررين (<span class="en">Editor Tracking</span>)، مما يجعل الطوبولوجيا والتعديلات **واعية بالزمن (<span class="en">Temporally Aware</span>)**. يتيح ذلك للمحلل إجراء تحليلات الشبكة والتتبع ليس فقط في الوقت الحالي، ولكن أيضاً في أي لحظة زمنية سابقة بدقة (<span class="en">Historical Moments</span>) بشرط تفعيل الطوبولوجيا لتلك اللحظة.</p>
+  </div>
+
+  <!-- مثال تطبيقي -->
+  <div class="example-box" style="margin-top:20px;">
+    <span class="label en">QA &amp; VALIDATION WORKFLOW EXAMPLE</span>
+    <p>عند تنفيذ تعديلات على خطوط أو كابلات في منطقة معينة داخل المشروع:</p>
+    <ol style="margin-right: 20px; margin-top: 8px;">
+      <li>تظهر مناطق معدّلة (<span class="en">Dirty Areas</span>) ملونة حول العناصر المحررة أو المضافة حديثاً.</li>
+      <li>قم بتشغيل خيار التحقق على النطاق الحالي (<span class="en">Validate - Current Extent</span>) لتحديث الرسم البياني.</li>
+      <li>إذا ظهرت أخطاء عدم تطابق القواعد، صحح المعلم أو اضبط القواعد (بعد تعطيل الطوبولوجيا مؤقتاً) ثم أعد التحقق.</li>
+      <li>عند التأكد من إزالة المناطق المعدّلة بالكامل، قم بتحديث الشبكة الفرعية (<span class="en">Update Subnetwork</span>) لضمان اتساق البيانات والمخططات.</li>
+    </ol>
+  </div>
+</section>
+
+  <section id="sec45">
+  <span class="num">45</span>
+  <h2>تفعيل، تحقق، وتعطيل الطوبولوجيا: الخطوات والاشتراطات العملية</h2>
+  <p>تتم إدارة طوبولوجيا الشبكة عبر ثلاث عمليات رئيسية تفاعلية: التفعيل لتجهيز الشبكة للتحليلات والتتبع، التحقق لتحديث الرسم البياني بعد التعديلات المكانية والوصفية، والتعطيل لإجراء التكوينات الهيكلية واستيراد البيانات الضخمة.</p>
+
+  <div class="grid2" style="margin-top:20px;">
+    <!-- 1. التفعيل Discover & Enable -->
+    <div class="card">
+      <h3>1. تفعيل الطوبولوجيا <span class="en">(Enable Network Topology)</span></h3>
+      <ul class="deflist">
+        <li><b>أداة فحص الأخطاء المبكر (<span class="en">Only Generate Errors</span>):</b> تُشغيل مع إلغاء تفعيل الطوبولوجيا الفعلي لاكتشاف جودة البيانات وتصدير الأخطاء لجدول المناطق المعدّلة. تشترط أن تكون البيانات **غير مفرعة نسخة (<span class="en">Non-Versioned</span>)** ويجب أن تنفذ عبر مالك قاعدة البيانات والبورتال.</li>
+        <li><b>المتطلبات التقنية للتفعيل:</b>
+          <ul>
+            <li>قفل حصري للهيكل (<span class="en">Exclusive Schema Lock</span>).</li>
+            <li>وجود فهرس مكاني (<span class="en">Spatial Index</span>) على كافة فئات المعالم.</li>
+            <li>ربط كافة الأنواع الفرعية نطاقات وصفيّة (<span class="en">Domains</span>) على حقل <span class="en">Asset Type</span>.</li>
+            <li>وجود قاعدة شبكية (<span class="en">Network Rule</span>) واحدة على الأقل.</li>
+            <li>تسجيل البيانات بنظام التفرع النسخي (<span class="en">Branch Versioned</span>) وأن يكون الاتصال بالإصدار الافتراضي (<span class="en">Default Version</span>).</li>
+          </ul>
+        </li>
+        <li><b>الحد الأقصى للأخطاء (<span class="en">Maximum Number of Errors</span>):</b> القيمة الافتراضية هي 10,000؛ عند الوصول للحد تتوقف الأداة عن المعالجة وتكتب الأخطاء المكتشفة. القيمة (-1) تعني فحص بلا حدود.</li>
+      </ul>
+    </div>
+
+    <!-- 2. التحقق Validate -->
+    <div class="card">
+      <h3>2. التحقق من الطوبولوجيا <span class="en">(Validate Network Topology)</span></h3>
+      <ul class="deflist">
+        <li><b>الهدف:</b> تحديث الرسم البياني للشبكة (<span class="en">Graph</span>) بناءً على المناطق المعدّلة (<span class="en">Dirty Areas</span>) الناجمة عن عمليات التحرير والتعديل.</li>
+        <li><b>الآليات والأداء:</b>
+          <ul>
+            <li><b>الأمر المباشر من الشريط (<span class="en">Validate Command</span>):</b> معالجة متزامنة (<span class="en">Synchronous</span>) تناسب النطاق الحالي للشاشة (<span class="en">Current Extent</span>) للتعديلات المحلية السريعة.</li>
+            <li><b>أداة الجيوبروسيسنج (<span class="en">Validate Geoprocessing Tool</span>):</b> معالجة لامتزامنة (<span class="en">Asynchronous</span>) تعتمد على خدمة <span class="en">UtilityNetworkTools</span> الجاهزة على السيرفر، وتناسب النطاقات الكبيرة (<span class="en">Entire Extent</span>).</li>
+          </ul>
+        </li>
+        <li><b>تحديث الشبكات الفرعية (<span class="en">IsDirty Subnetworks</span>):</b> عند تحقق منطقة معدّلة، توضع نقاط بدء تلقائية ويتم تتبع التجهيزات لتحديد المتحكمات وإعادة ترميز الشبكة الفرعية كـ غير نظيفة (<span class="en">Dirty</span>) تمهيداً لتحديثها عبر أداة <span class="en">Update Subnetwork</span>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- دورة العمل والتوفيق والتعطيل -->
+  <div class="grid2" style="margin-top:20px;">
+    <div class="card">
+      <h3>دورة التحرير داخل النسخ المسمات <span class="en">(Named Version Editing Workflow)</span></h3>
+      <ol style="margin-right:20px; margin-top:8px;" class="deflist">
+        <li>إنشاء نسخة مسمات من النسخة الافتراضية (<span class="en">Default Version</span>) والبدء في التحرير المكانى أو الوصفي.</li>
+        <li>تنفيذ عملية التحقق (<span class="en">Validate</span>) للنطاق لمعالجة المناطق المعدّلة وتحديث طوبولوجيا النسخة.</li>
+        <li>إجراء عمليات التوفيق (<span class="en">Reconcile</span>) لجلب التغيرات الحديثة من النسخة الافتراضية.</li>
+        <li>حل أي تعارضات (<span class="en">Conflicts</span>) متبقية.</li>
+        <li>إجراء عملية النشر (<span class="en">Post</span>) لإرسال التحريرات إلى النسخة الافتراضية.
+          <br><small style="color:var(--text-dim);">* تنبيه: يُنشئ النشر مناطق معدّلة جديدة في النسخة الافتراضية تتطلب تحققاً إضافياً بها.</small>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>3. تعطيل الطوبولوجيا <span class="en">(Disable Network Topology)</span></h3>
+      <ul class="deflist">
+        <li><b>الاستخدام الرئيسي:</b> تنفيذ مهام التكوين والإدارة (إضافة قواعد، تعديل المستويات <span class="en">Tiers</span>، تغيير إعدادات الأطراف <span class="en">Terminals</span>) أو رفع كميات ضخمة من البيانات.</li>
+        <li><b>السلوك التقني:</b> عند التعطيل، ينشئ النظام منطقة معدّلة واحدة كبرى تُغطي كامل نطاق الخدمة (<span class="en">Service Territory</span>) مع الإبقاء على مناطق الأخطاء السابقة.</li>
+        <li><b>تنبيه أداء:</b> لا يُنصح بالتحرير العادي أثناء تعطيل الطوبولوجيا حيث لا يتم تتبع التعديلات الفردية بمناطق معدّلة تفصيلية، بل ستُفحص الشبكة بالكامل دفعة واحدة عند إعادة التفعيل.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- مثال تطبيقي -->
+  <div class="example-box" style="margin-top:20px;">
+    <span class="label en">PRACTICAL WORKFLOW EXAMPLE</span>
+    <p>عند دمج خطوط تغذية جديدة في شبكة المرافق عبر أداة التحرير الميداني:</p>
+    <ol style="margin-right: 20px; margin-top: 8px;">
+      <li>يتم إجراء التحرير داخل نسخة مسمات (<span class="en">Named Version</span>) فتظهر مناطق معدّلة تفصيلية حول المعالم الجديدة.</li>
+      <li>يُشغل التحقق على النطاق الحالي (<span class="en">Validate - Current Extent</span>)؛ إذا اكتُشف خطأ عدم وجود قاعدة توصيل (<span class="en">Connectivity Rule Error</span>)، يتوقف الاعتماد.</li>
+      <li>يقوم مسؤول الشبكة بتعطيل الطوبولوجيا مؤقتاً (<span class="en">Disable</span>)، إضافة القاعدة الجديدة عبر أداة <span class="en">Add Rule</span>، ثم إعادة التفعيل (<span class="en">Enable</span>).</li>
+      <li>يتم التحقق مجدداً من النسخة الفرعية ثم التوفيق بالنشر (<span class="en">Reconcile &amp; Post</span>) مع النسخة الافتراضية بنجاح.</li>
+    </ol>
+  </div>
+</section>
 
   <section id="sec46">
     <span class="num">46</span>
